@@ -476,6 +476,193 @@
   <!-- container-scroller -->
 
 
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title text-primary" id="modal-register-label">¿Listo para partir?</h3>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <i class="fas fa-times" class="element-white"></i>
+                </button>
+            </div> 
+            <div class="modal-body">
+                <div class="card-body">
+                    <p class="card-description">Seleccione "Cerrar sesión" a continuación si está list@ para finalizar su sesión actual.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
+                <a class="btn-crud btn-primary text-bold">Cerrar Sesión</a>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- Create Modal-->
+  <div class="modal fade modal-crud" id="modalCrudAgregar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h3 class="modal-title text-white" id="modal-register-label">Agregar Software</h3>
+                <p class="modal">Ingrese los datos del Usuario:</p>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <i class="fas fa-times" class="element-white"></i>
+                </button>
+            </div> 
+            <form class="forms-sample">
+            <div class="modal-body">
+                <div class="grid-margin-modal">          
+                    <div class="card-body">
+                        <p class="card-description">Por favor, complete los siguientes campos para agregar un nuevo software al sistema:</p>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="Dni" class="text-bold">Proveedor</label>
+                                <input type="text" class="form-control" id="Proveedor" placeholder="Proveedor" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="Name" class="text-bold">Nombre</label>
+                                <input type="text" class="form-control" id="Name" placeholder="Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                            <label for="activo" class="text-bold">Activo</label>
+                            <div class="form-check mx-4">
+                                <input class="form-check-input" type="radio" name="activo" id="si_activo" value="si" required>
+                                <label class="form-check-label" for="si_activo">
+                                    Sí
+                                </label>
+                            </div>
+                            <div class="form-check mx-4">
+                                <input class="form-check-input" type="radio" name="activo" id="no_activo" value="no" required>
+                                <label class="form-check-label" for="no_activo">
+                                    No
+                                </label>
+                            </div>
+                        </div>
+                            <div class="form-group col-md-6">
+                                <label for="role" class="text-bold">Tipo Licencia</label>
+                                <select class="form-control" id="licencia" required>
+                                    <option value="">Seleccione un Tipo</option>
+                                    <option value="publico">Dominio Público</option>
+                                    <option value="abierto">Codigo Abierto</option>
+                                    <option value="suscripcion">Suscripción</option>
+                                    <option value="propietario">Propietario</option>
+                                    <option value="gratuito">Gratuito</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
+                <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Software ">
+            </div>
+          </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalCrudEliminar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h3 class="modal-title text-white" id="modal-register-label">Eliminar Software </h3>
+                <p class="modal">Ingrese los datos del Usuario:</p>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <i class="fas fa-times" class="element-white"></i>
+                </button>
+            </div> 
+            <form class="forms-sample">
+            <div class="modal-body">
+                <div class="grid-margin-modal">          
+                    <div class="card-body">
+                        <p class="card-description">¿Está seguro de que desea eliminar el Software?</p>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <p class="text-danger"><small>Esta acción no se puede deshacer.</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
+                <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Software ">
+            </div>
+          </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalCrud" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h3 class="modal-title text-white" id="modal-register-label">Editar Software</h3>
+                <p class="modal">Ingrese los datos del Usuario:</p>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <i class="fas fa-times" class="element-white"></i>
+                </button>
+            </div> 
+            <form class="forms-sample">
+            <div class="modal-body">
+                <div class="grid-margin-modal">          
+                    <div class="card-body">
+                        <p class="card-description">Por favor, complete los siguientes campos para editar la información del software seleccionado:</p>
+                        <div class="form-row">
+                          <div class="form-group col-md-6">
+                              <label for="Dni" class="text-bold">Proveedor</label>
+                              <input type="text" class="form-control" id="Proveedor" placeholder="Proveedor" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                          </div>
+                          <div class="form-group col-md-6">
+                              <label for="Name" class="text-bold">Nombre</label>
+                              <input type="text" class="form-control" id="Name" placeholder="Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                          </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label for="activo" class="text-bold">Activo</label>
+                          <div class="form-check mx-4">
+                              <input class="form-check-input" type="radio" name="activo" id="si_activo" value="si" required>
+                              <label class="form-check-label" for="si_activo">
+                                  Sí
+                              </label>
+                          </div>
+                          <div class="form-check mx-4">
+                              <input class="form-check-input" type="radio" name="activo" id="no_activo" value="no" required>
+                              <label class="form-check-label" for="no_activo">
+                                  No
+                              </label>
+                          </div>
+                      </div>
+                          <div class="form-group col-md-6">
+                              <label for="licencia" class="text-bold">Tipo Licencia</label>
+                              <select class="form-control" id="licencia" required>
+                                  <option value="">Seleccione un Tipo</option>
+                                  <option value="publico">Dominio Público</option>
+                                  <option value="abierto">Codigo Abierto</option>
+                                  <option value="suscripcion">Suscripción</option>
+                                  <option value="propietario">Propietario</option>
+                                  <option value="gratuito">Gratuito</option>
+                              </select>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
+                <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Software ">
+            </div>
+          </form>
+        </div>
+    </div>
+</div>
   
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>
