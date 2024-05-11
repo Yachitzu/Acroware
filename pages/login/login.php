@@ -3,7 +3,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-revisionLogeo();
+revisionLogueo();
 
 if (isset($_SESSION['email'])) {
     if ($_SESSION['rol'] == 'admin') {
@@ -125,7 +125,7 @@ if (isset($_SESSION['email'])) {
 </html>
 
 <?php
-function revisionLogeo()
+function revisionLogueo()
 {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
