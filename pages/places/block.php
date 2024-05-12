@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Gestión - Facultades</title>
+  <title>Gestión - Bloques</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="../../resources/vendors/feather/feather.css">
   <link rel="stylesheet" href="../../resources/vendors/ti-icons/css/themify-icons.css">
@@ -35,10 +35,12 @@
         id = fila.find('td:eq(0)').text();
         nombre = fila.find('td:eq(1)').text();
         descripcion = fila.find('td:eq(2)').text();
-        campus = fila.find('td:eq(3)').text();
+        facultad = fila.find('td:eq(3)').text();
+        pisos = fila.find('td:eq(4)').text();
         $("#nombreE").val(nombre);
         $("#descripcionE").val(descripcion);
-        $("#campusE").val(campus);
+        $("#facultadE").val(facultad);
+        $("#pisosE").val(pisos);
         $("#modalCrudEditar").modal('show');
       });
 
@@ -47,8 +49,10 @@
         id;
         nombre = $("#nombreE").val();
         descripcion = $("#descripcionE").val();
-        campus = $("#campusE").val();
-        opcion = 2;
+        id_facultad_per = $("#facultadE").val();
+        pisos = $("#pisosE").val();
+        alert(id_facultad_per);
+        opcion = 5;
         $.ajax({
           url: "../../Acciones/Rest.php",
           type: "POST",
@@ -56,7 +60,8 @@
             id: id,
             nombre: nombre,
             descripcion: descripcion,
-            campus: campus,
+            id_facultad_per: id_facultad_per,
+            pisos, pisos,
             opcion: opcion
           }),
           error: function (error) {
@@ -77,7 +82,7 @@
       $("#formEliminar").submit(function (e) {
         e.preventDefault();
         id;
-        opcion = 3;
+        opcion = 6;
         $.ajax({
           url: "../../Acciones/Rest.php",
           type: "POST",
@@ -93,20 +98,22 @@
           }
         });
       });
-
+      
       $("#formAgregar").submit(function (e) {
         e.preventDefault();
         nombre = $("#nombreA").val();
         descripcion = $("#descripcionA").val();
-        campus = $("#campusA").val();
-        opcion = 1;
+        id_facultad_per = $("#facultadA").val();
+        pisos = $("#pisosA").val();
+        opcion = 4;
         $.ajax({
           url: "../../Acciones/Rest.php",
           type: "POST",
           data: JSON.stringify({
             nombre: nombre,
             descripcion: descripcion,
-            campus: campus,
+            id_facultad_per, id_facultad_per,
+            pisos, pisos,
             opcion: opcion
           }),
           error: function (error) {
@@ -271,7 +278,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="../../index.php">
+            <a class="nav-link" href="../../index.html">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -306,7 +313,7 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="faculty.php">Facultades</a></li>
+                <li class="nav-item"> <a class="nav-link" href="faculty.html">Facultades</a></li>
                 <li class="nav-item"> <a class="nav-link" href="block.html">Bloques</a></li>
                 <li class="nav-item"> <a class="nav-link" href="area.html">Áreas</a></li>
                 <li class="nav-item"> <a class="nav-link" href="location.html">Ubicaciones</a></li>
@@ -352,12 +359,11 @@
             <div class="col-md-12">
               <div class="profile">
                 <div class="cover-image-gest d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5">
-                  <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase titleMain font-berthold">Facultades
-                  </h1>
+                  <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase titleMain font-berthold">Bloques</h1>
                   <div class="d-inline-flex mb-lg-5">
                     <p class="m-0 text-white"><a class="text-white" href="../../index.html">Inicio</a></p>
                     <p class="m-0 text-white px-2">/</p>
-                    <p class="m-0 text-white">Gestor de Facultades</p>
+                    <p class="m-0 text-white">Gestor de Bloques</p>
                   </div>
                 </div>
               </div>
@@ -378,7 +384,7 @@
                   <span class="icon text-white-50">
                     <i class="fas fa-plus-circle"></i>
                   </span>
-                  <span class="text text-white">Agregar Facultad</span>
+                  <span class="text text-white">Agregar Bloque</span>
                 </button>
               </div>
               <div class="card-body bg-darkwhite">
@@ -390,14 +396,15 @@
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
-                        <th>Campus</th>
+                        <th>Facultad</th>
+                        <th>Pisos</th>
                         <th>Acciones</th>
                       </tr>
                     </thead>
                     <tbody>
                       <?php
-                      include_once ("../../Acciones/crudFacultades.php");
-                      $resultado = AccionesFacultades::listarFacultades();
+                      include_once ("../../Acciones/crudBloques.php");
+                      $resultado = AccionesBloques::listarBloques();
                       echo ($resultado['dato']);
                       ?>
                     </tbody>
@@ -406,7 +413,7 @@
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
-                        <th>Campus</th>
+                        <th>Facultad</th>
                         <th>Acciones</th>
                       </tr>
                     </tfoot>
@@ -438,8 +445,6 @@
   </div>
   <!-- container-scroller -->
 
-
-
   <!-- Logout Modal-->
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -466,14 +471,13 @@
     </div>
   </div>
 
-
   <!-- Create Modal-->
   <div class="modal fade modal-crud" id="modalCrudAgregar" tabindex="-1" role="dialog"
     aria-labelledby="modal-register-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
-          <h3 class="modal-title text-white" id="modal-register-label">Agregar Facultad</h3>
+          <h3 class="modal-title text-white" id="modal-register-label">Agregar Bloque</h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
@@ -483,8 +487,8 @@
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
-                <p class="card-description">Por favor, complete los siguientes campos para agregar una nueva facultad al
-                  sistema:</p>
+                <p class="card-description">Por favor, complete los siguientes campos para agregar un nuevo Bloque de
+                  Facultad al sistema:</p>
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="Name" class="text-bold">Nombre</label>
@@ -492,16 +496,21 @@
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="campus" class="text-bold">Campus Pertenece</label>
-                    <select class="form-control" id="campusA" required>
+                    <label for="campus" class="text-bold">Facultad Pertenece</label>
+                    <select class="form-control" id="facultadA" required>
                       <option value="">Seleccione un Campus</option>
-                      <option value="Huachi Chico">Huachi Chico</option>
-                      <option value="Ingahurco">Ingahurco</option>
-                      <option value="Querochaca">Querochaca</option>
+                      <?php
+                      $facultades = AccionesBloques::listarFacultadesInsertar();
+                      echo ($facultades['dato']);
+                      ?>
                     </select>
                   </div>
                 </div>
                 <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="pisos" class="text-bold">Pisos</label>
+                    <input type="number" class="form-control" id="pisosA" placeholder="Número Pisos" required>
+                  </div>
                   <div class="form-group col-md-12">
                     <label for="Name" class="text-bold">Descripción</label>
                     <textarea class="form-control" id="descripcionA" placeholder="Descripción"
@@ -514,7 +523,7 @@
           <div class="modal-footer">
             <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
-            <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Facultad ">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Bloque ">
           </div>
         </form>
       </div>
@@ -526,7 +535,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
-          <h3 class="modal-title text-white" id="modal-register-label">Eliminar Facultad </h3>
+          <h3 class="modal-title text-white" id="modal-register-label">Eliminar Bloque </h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
@@ -536,7 +545,7 @@
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
-                <p class="card-description">¿Está seguro de que desea eliminar la Facultad?</p>
+                <p class="card-description">¿Está seguro de que desea eliminar el Bloque?</p>
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <p class="text-danger"><small>Esta acción no se puede deshacer.</small></p>
@@ -548,7 +557,7 @@
           <div class="modal-footer">
             <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
-            <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Facultad ">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Bloque ">
           </div>
         </form>
       </div>
@@ -560,7 +569,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
-          <h3 class="modal-title text-white" id="modal-register-label">Editar Facultad</h3>
+          <h3 class="modal-title text-white" id="modal-register-label">Editar Bloque</h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
@@ -570,8 +579,8 @@
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
-                <p class="card-description">Por favor, complete los siguientes campos para editar la información de la
-                  facultad seleccionada:</p>
+                <p class="card-description">Por favor, complete los siguientes campos para editar la información del
+                  Bloque seleccionado:</p>
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="Name" class="text-bold">Nombre</label>
@@ -579,15 +588,20 @@
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="campus" class="text-bold">Campus Pertenece</label>
-                    <select class="form-control" id="campusE" required>
-                      <option value="Huachi Chico">Huachi Chico</option>
-                      <option value="Ingahurco">Ingahurco</option>
-                      <option value="Querochaca">Querochaca</option>
+                    <label for="facultad" class="text-bold">Facultad Pertenece</label>
+                    <select class="form-control" id="facultadE" required>
+                      <?php
+                      $facultades = AccionesBloques::listarFacultadesEditar();
+                      echo ($facultades['dato']);
+                      ?>
                     </select>
                   </div>
                 </div>
                 <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="pisos" class="text-bold">Pisos</label>
+                    <input type="number" class="form-control" id="pisosE" placeholder="Número Pisos" required>
+                  </div>
                   <div class="form-group col-md-12">
                     <label for="Name" class="text-bold">Descripción</label>
                     <textarea class="form-control" id="descripcionE" placeholder="Descripción"
@@ -600,7 +614,7 @@
           <div class="modal-footer">
             <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
-            <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Facultad ">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Bloque ">
           </div>
         </form>
       </div>
