@@ -1,5 +1,5 @@
 <?php
-    include_once("C:/xampp/htdocs/SOA/sistemas/DAS/Acroware/patrones/Strategy/Authenticator.php");
+    include_once ($_SERVER['DOCUMENT_ROOT'].'/Acroware/patrones/Strategy/Authenticator.php');
     $authenticator = new Authenticator();
     $authenticator-> closeSession();
 ?>

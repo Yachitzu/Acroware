@@ -228,7 +228,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/places/faculty.html">Facultades</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/places/faculty.php">Facultades</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/places/block.html">Bloques</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/places/area.html">Áreas</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/places/location.html">Ubicaciones</a></li>
@@ -861,9 +861,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       </div>
     </div>
   </div>
-  <!-- Start of HubSpot Embed Code -->
-  <script type="text/javascript" id="hs-script-loader" async defer src="//js-na1.hs-scripts.com/46114401.js"></script>
-<!-- End of HubSpot Embed Code -->
+
 
 
   <!-- plugins:js -->
