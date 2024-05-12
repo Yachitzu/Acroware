@@ -27,7 +27,37 @@
 </head>
 
 <body>
-
+  <script>
+    $(document).ready(function () {
+      $("#formAgregar").submit(function (e) {
+        e.preventDefault();
+        nombre = $("#nombreA").val();
+        descripcion = $("#descripcionA").val();
+        id_bloque_per = $("#bloqueA").val();
+        piso = $("#pisoA").val();
+        id_usu_encargado = $("#usuarioA").val();
+        opcion = 7;
+        $.ajax({
+          url: "../../Acciones/Rest.php",
+          type: "POST",
+          data: JSON.stringify({
+            nombre: nombre,
+            descripcion: descripcion,
+            id_bloque_per: id_bloque_per,
+            piso: piso,
+            id_usu_encargado: id_usu_encargado,
+            opcion: opcion
+          }),
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            location.reload();
+          }
+        });
+      });
+    })
+  </script>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -400,15 +430,7 @@
                     <input type="text" class="form-control" id="nombreA" placeholder="Nombre"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                   </div>
-                  <div class="form-group col-md-6">
-                    <label for="facultad" class="text-bold">Facultad Pertenece</label>
-                    <select class="form-control" id="facultadA" required>
-                      <option value="">Seleccione una Facultad</option>
-                      <option value="FISEI">FISEI </option>
-                      <option value="FDA">FDA</option>
-                      <option value="FCHE">FCHE</option>
-                    </select>
-                  </div>
+
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
@@ -425,9 +447,9 @@
                     <label for="piso" class="text-bold">Piso Pertenece</label>
                     <select class="form-control" id="pisoA" required>
                       <option value="">Seleccione un Piso</option>
-                      <option value="planta_baja">Planta Baja</option>
-                      <option value="primer_piso">Primer Piso</option>
-                      <option value="segundo_piso">Segundo Piso</option>
+                      <option value="Planta Baja">Planta Baja</option>
+                      <option value="Primer Piso">Primer Piso</option>
+                      <option value="Segundo Piso">Segundo Piso</option>
                     </select>
                   </div>
                   <div class="form-group col-md-12">

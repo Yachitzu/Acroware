@@ -1,5 +1,5 @@
 <?php
-include_once ("C:/xampp/htdocs/SOA/sistemas/DAS/Front/Acroware/patrones/Singleton/Conexion.php");
+include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php');
 
 class AccionesBloques
 {

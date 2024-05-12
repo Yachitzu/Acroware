@@ -115,7 +115,7 @@ class AccionesAreas
     }
 
 
-    public static function insertarAreas($nombre, $descripcion, $piso, $id_bloque_per, $id_usu_encargado, $id_facultad_per)
+    public static function insertarAreas($nombre, $descripcion, $piso, $id_bloque_per, $id_usu_encargado)
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
@@ -126,13 +126,12 @@ class AccionesAreas
                 echo ("El área ya existe.");
                 return 1;
             } else {
-                $consulta = $conexion->prepare("INSERT INTO areas(nombre,descripcion,piso,id_bloque_per,id_usu_encargado,id_facultad_per) values (:nombre,:descripcion,:piso,:id_bloque_per,:id_usu_encargado,:id_facultad_per)");
+                $consulta = $conexion->prepare("INSERT INTO areas(nombre,descripcion,piso,id_bloque_per,id_usu_encargado) values (:nombre,:descripcion,:piso,:id_bloque_per,:id_usu_encargado)");
                 $consulta->bindParam(":nombre", $nombre);
                 $consulta->bindParam(':descripcion', $descripcion);
                 $consulta->bindParam(':piso', $piso);
                 $consulta->bindParam(':id_bloque_per', $id_bloque_per);
                 $consulta->bindParam(':id_usu_encargado', $id_usu_encargado);
-                $consulta->bindParam(':id_facultad_per', $id_facultad_per);
                 $consulta->execute();
                 return 0;
             }
