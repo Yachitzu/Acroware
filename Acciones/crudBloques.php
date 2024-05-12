@@ -164,5 +164,19 @@ class AccionesBloques
             return 2;
         }
     }
+
+    public static function eliminarBloque($id)
+    {
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = $conexion->prepare("DELETE FROM bloques where id=:id");
+            $consulta->bindParam(':id', $id);
+            $consulta->execute();
+            return 0;
+        } catch (PDOException $e) {
+            error_log('Error en eliminarBloques: ' . $e->getMessage());
+            return 2;
+        }
+    }
 }
 ?>
