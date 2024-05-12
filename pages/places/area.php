@@ -572,10 +572,10 @@
                   <div class="form-group col-md-12">
                     <label for="usuario" class="text-bold">Laboratorista Encargado</label>
                     <select class="form-control" id="usuarioE" required>
-                      <option value="">Seleccione un Laboratorista</option>
-                      <option value="1">Christian López</option>
-                      <option value="2">Dallin Miranda</option>
-                      <option value="3">Esteban Cifuentes</option>
+                    <?php
+                      $bloques = AccionesAreas::listarUsuariosEditar();
+                      echo ($bloques['dato']);
+                      ?>
                     </select>
                   </div>
                 </div>

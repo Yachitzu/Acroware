@@ -6,11 +6,11 @@ class AccionesAreas
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = $conexion->prepare("SELECT areas.*, bloques.nombre AS nombre_bloque, facultades.nombre AS nombre_facultad 
+            $consulta = $conexion->prepare("SELECT areas.*, bloques.nombre AS nombre_bloque, facultades.nombre AS nombre_facultad, usuarios.nombre AS nombre_usuario 
             FROM areas 
             LEFT JOIN bloques ON areas.id_bloque_per = bloques.id
             LEFT JOIN facultades ON bloques.id_facultad_per = facultades.id
-            
+            LEFT JOIN usuarios ON areas.id_usu_encargado = usuarios.id
             ");
             /* FROM areas INNER JOIN facultades ON areas.id_facultad_per = facultades.id"); */
             $consulta->execute();
@@ -26,7 +26,7 @@ class AccionesAreas
                         <td ">' . htmlspecialchars($respuesta['nombre_facultad']) . '</td>
                         <td ">' . htmlspecialchars($respuesta['nombre_bloque']) . '</td>
                         <td ">' . htmlspecialchars($respuesta['piso']) . '</td>
-                        <td ">' . htmlspecialchars($respuesta['id_usu_encargado']) . '</td>
+                        <td ">' . htmlspecialchars($respuesta['nombre_usuario']) . '</td>
                         <td class="mdl-data-table__cell">
                             <center>
                             <button class="btn btn-warning btn-circle element-white editar" data-id="' . $respuesta['id'] . '" id="editar">
@@ -145,6 +145,34 @@ class AccionesAreas
         }
     }
 
+    public static function listarUsuariosEditar()
+    {
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = "SELECT * FROM usuarios";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+            $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            $dato;
+            $tabla = '';
+
+            foreach ($dato as $respuesta) {
+                $tabla .= '
+                    <option value="' . htmlspecialchars($respuesta['nombre']) . '">' . htmlspecialchars($respuesta['nombre']).'</option>
+                ';
+            }
+            return [
+                'codigo' => 0,
+                'dato' => $tabla,
+            ];
+        } catch (PDOException $e) {
+            error_log('Error al listar Facultades: ' . $e->getMessage());
+            return [
+                'codigo' => 1,
+                'mensaje' => 'Error al listar facultades: ' . $e->getMessage()
+            ];
+        }
+    }
 
     public static function insertarAreas($nombre, $descripcion, $piso, $id_bloque_per, $id_usu_encargado)
     {
