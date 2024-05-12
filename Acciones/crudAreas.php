@@ -98,5 +98,19 @@ class AccionesAreas
         }
 
     }
+
+    public static function eliminarArea($id)
+    {
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = $conexion->prepare("DELETE FROM areas WHERE id=:id");
+            $consulta->bindParam(":id", $id);
+            $consulta->execute();
+            return 0;
+        } catch (PDOException $e) {
+            error_log('Error en eliminarArea: ' . $e->getMessage());
+            return 2;
+        }
+    }
 }
 ?>
