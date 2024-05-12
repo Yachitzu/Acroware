@@ -22,9 +22,40 @@
   <!-- endinject -->
   <link rel="shortcut icon"
     href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
+  <script>
+    $(document).ready(function () {
+      $("#formAgregar").submit(function (e) {
+        e.preventDefault();
+        nombre = $("#nombreA").val();
+        descripcion = $("#descripcionA").val();
+        id_facultad_per = $("#facultadA").val();
+        pisos = $("#pisosA").val();
+        opcion = 4;
+        $.ajax({
+          url: "../../Acciones/Rest.php",
+          type: "POST",
+          data: JSON.stringify({
+            nombre: nombre,
+            descripcion: descripcion,
+            id_facultad_per, id_facultad_per,
+            pisos, pisos,
+            opcion: opcion
+          }),
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            location.reload();
+          }
+        });
+      });
+    })
+  </script>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -301,7 +332,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                    <?php
+                      <?php
                       include_once ("../../Acciones/crudBloques.php");
                       $resultado = AccionesBloques::listarBloques();
                       echo ($resultado['dato']);
@@ -344,7 +375,6 @@
   </div>
   <!-- container-scroller -->
 
-
   <!-- Logout Modal-->
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -383,7 +413,7 @@
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample">
+        <form class="forms-sample" id="formAgregar">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -392,27 +422,28 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="Name" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" id="Name" placeholder="Nombre"
+                    <input type="text" class="form-control" id="nombreA" placeholder="Nombre"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="campus" class="text-bold">Facultad Pertenece</label>
-                    <select class="form-control" id="campus" required>
-                      <option value="">Seleccione una Facultad</option>
-                      <option value="FISEI">Ingenieria en Sistemas Electronica e Industrial</option>
-                      <option value="FECHE">Ciencias de la Saludad</option>
-                      <option value="FDA">Diseño y Arquitectura</option>
+                    <select class="form-control" id="facultadA" required>
+                      <option value="">Seleccione un Campus</option>
+                      <?php
+                      $facultades = AccionesBloques::listarFacultadesInsertar();
+                      echo ($facultades['dato']);
+                      ?>
                     </select>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="pisos" class="text-bold">Pisos</label>
-                    <input type="number" class="form-control" id="pisos" placeholder="Número Pisos" required>
+                    <input type="number" class="form-control" id="pisosA" placeholder="Número Pisos" required>
                   </div>
                   <div class="form-group col-md-12">
                     <label for="Name" class="text-bold">Descripción</label>
-                    <textarea class="form-control" id="Description" placeholder="Descripción"
+                    <textarea class="form-control" id="descripcionA" placeholder="Descripción"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
                   </div>
                 </div>
@@ -440,7 +471,7 @@
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample">
+        <form class="forms-sample" id="formEliminar">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -463,7 +494,7 @@
     </div>
   </div>
 
-  <div class="modal fade" id="modalCrud" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
+  <div class="modal fade" id="modalCrudEditar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
     aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -474,7 +505,7 @@
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample">
+        <form class="forms-sample" id="formEditar">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -483,27 +514,27 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="Name" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" id="Name" placeholder="Nombre"
+                    <input type="text" class="form-control" id="nombreE" placeholder="Nombre"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="facultad" class="text-bold">Facultad Pertenece</label>
-                    <select class="form-control" id="facultad" required>
-                      <option value="">Seleccione una Facultad</option>
-                      <option value="FISEI">Ingenieria en Sistemas Electronica e Industrial</option>
-                      <option value="FECHE">Ciencias de la Saludad</option>
-                      <option value="FDA">Diseño y Arquitectura</option>
+                    <select class="form-control" id="facultadE" required>
+                      <?php
+                      $facultades = AccionesBloques::listarFacultadesEditar();
+                      echo ($facultades['dato']);
+                      ?>
                     </select>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="pisos" class="text-bold">Pisos</label>
-                    <input type="number" class="form-control" id="pisos" placeholder="Número Pisos" required>
+                    <input type="number" class="form-control" id="pisosE" placeholder="Número Pisos" required>
                   </div>
                   <div class="form-group col-md-12">
                     <label for="Name" class="text-bold">Descripción</label>
-                    <textarea class="form-control" id="Description" placeholder="Descripción"
+                    <textarea class="form-control" id="descripcionE" placeholder="Descripción"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
                   </div>
                 </div>
