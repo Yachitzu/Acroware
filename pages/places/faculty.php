@@ -22,9 +22,38 @@
   <!-- endinject -->
   <link rel="shortcut icon"
     href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
+  <script>
+    $(document).ready(function () {
+      $("#formAgregar").submit(function (e) {
+        e.preventDefault();
+        nombre = $("#nombreA").val();
+        descripcion = $("#descripcionA").val();
+        campus = $("#campusA").val();
+        opcion = 1;
+        $.ajax({
+          url: "../../Acciones/Rest.php",
+          type: "POST",
+          data: JSON.stringify({
+            nombre: nombre,
+            descripcion: descripcion,
+            campus: campus,
+            opcion: opcion
+          }),
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            location.reload();
+          }
+        });
+      });
+    })
+  </script>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -372,6 +401,7 @@
     </div>
   </div>
 
+
   <!-- Create Modal-->
   <div class="modal fade modal-crud" id="modalCrudAgregar" tabindex="-1" role="dialog"
     aria-labelledby="modal-register-label" aria-hidden="true">
@@ -384,7 +414,7 @@
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample">
+        <form class="forms-sample" id="formAgregar">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -393,23 +423,23 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="Name" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" id="Name" placeholder="Nombre"
+                    <input type="text" class="form-control" id="nombreA" placeholder="Nombre"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="campus" class="text-bold">Campus Pertenece</label>
-                    <select class="form-control" id="campus" required>
+                    <select class="form-control" id="campusA" required>
                       <option value="">Seleccione un Campus</option>
-                      <option value="huachi">Huachi Chico</option>
-                      <option value="ingahurco">Ingahurco</option>
-                      <option value="querochaca">Querochaca</option>
+                      <option value="Huachi Chico">Huachi Chico</option>
+                      <option value="Ingahurco">Ingahurco</option>
+                      <option value="Querochaca">Querochaca</option>
                     </select>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="Name" class="text-bold">Descripción</label>
-                    <textarea class="form-control" id="Description" placeholder="Descripción"
+                    <textarea class="form-control" id="descripcionA" placeholder="Descripción"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
                   </div>
                 </div>
@@ -437,7 +467,7 @@
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample">
+        <form class="forms-sample" id="formEliminar">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -460,7 +490,7 @@
     </div>
   </div>
 
-  <div class="modal fade" id="modalCrud" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
+  <div class="modal fade" id="modalCrudEditar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
     aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -471,7 +501,7 @@
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample">
+        <form class="forms-sample" id="formEditar">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -480,23 +510,22 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="Name" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" id="Name" placeholder="Nombre"
+                    <input type="text" class="form-control" id="nombreE" placeholder="Nombre"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="campus" class="text-bold">Campus Pertenece</label>
-                    <select class="form-control" id="campus" required>
-                      <option value="">Seleccione un Campus</option>
-                      <option value="huachi">Huachi Chico</option>
-                      <option value="ingahurco">Ingahurco</option>
-                      <option value="querochaca">Querochaca</option>
+                    <select class="form-control" id="campusE" required>
+                      <option value="Huachi Chico">Huachi Chico</option>
+                      <option value="Ingahurco">Ingahurco</option>
+                      <option value="Querochaca">Querochaca</option>
                     </select>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="Name" class="text-bold">Descripción</label>
-                    <textarea class="form-control" id="Description" placeholder="Descripción"
+                    <textarea class="form-control" id="descripcionE" placeholder="Descripción"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
                   </div>
                 </div>
