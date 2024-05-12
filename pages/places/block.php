@@ -20,15 +20,19 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="../../resources/css/vertical-layout-light/style.css">
   <!-- endinject -->
-  <link rel="shortcut icon" href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" /> 
+  <link rel="shortcut icon"
+    href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" />
 </head>
+
 <body>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="../../index.html"><img src="../../resources/images/logos/Acroware.png" class="mr-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="../../index.html"><img src="../../resources/images/logos/acroware-mini.png" alt="logo"/></a>
+        <a class="navbar-brand brand-logo mr-5" href="../../index.html"><img
+            src="../../resources/images/logos/Acroware.png" class="mr-2" alt="logo" /></a>
+        <a class="navbar-brand brand-logo-mini" href="../../index.html"><img
+            src="../../resources/images/logos/acroware-mini.png" alt="logo" /></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -37,17 +41,19 @@
         <ul class="navbar-nav mr-lg-2">
           <li class="nav-item nav-search d-none d-lg-block">
             <div class="input-group">
-              
+
             </div>
           </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
           <li class="nav-item dropdown">
-            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
+              data-toggle="dropdown">
               <i class="icon-bell mx-0"></i>
               <span class="count"></span>
             </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+              aria-labelledby="notificationDropdown">
               <p class="mb-0 font-weight-normal float-left dropdown-header">Notificaciones</p>
               <a class="dropdown-item preview-item">
                 <div class="preview-thumbnail">
@@ -66,14 +72,14 @@
           </li>
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="../../resources/images/faces/perfil1.png" alt="profile"/>
+              <img src="../../resources/images/faces/perfil1.png" alt="profile" />
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item"  href="../others/acount.html">
+              <a class="dropdown-item" href="../others/acount.html">
                 <i class="ti-settings text-primary"></i>
                 Editar Perfil
               </a>
-              <a class="dropdown-item"  href="#" data-toggle="modal" data-target="#logoutModal">
+              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                 <i class="ti-power-off text-primary"></i>
                 Cerrar Sesión
               </a>
@@ -85,7 +91,8 @@
             </a>
           </li>
         </ul>
-        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+          data-toggle="offcanvas">
           <span class="icon-menu"></span>
         </button>
       </div>
@@ -93,16 +100,18 @@
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:partials/_settings-panel.html -->
-      
+
       <div id="right-sidebar" class="settings-panel">
         <i class="settings-close ti-close"></i>
         <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">Recordatorio</a>
+            <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab"
+              aria-controls="todo-section" aria-expanded="true">Recordatorio</a>
           </li>
         </ul>
         <div class="tab-content" id="setting-content">
-          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
+          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel"
+            aria-labelledby="todo-section">
             <div class="add-items d-flex px-3 mb-0">
               <form class="form w-100">
                 <div class="form-group d-flex">
@@ -213,7 +222,7 @@
 
           <li class="nav-item">
             <a class="nav-link" href="../management/marca.html">
-                <i class="icon-bar-graph menu-icon"></i>
+              <i class="icon-bar-graph menu-icon"></i>
               <span class="menu-title">Marcas</span>
             </a>
           </li>
@@ -245,302 +254,272 @@
       <div class="main-panel">
         <div class="content-wrapper">
 
-            <div class="row user">
-                <div class="col-md-12">
-                    <div class="profile">
-                        <div class="cover-image-gest d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5">
-                            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase titleMain font-berthold">Bloques</h1>
-                            <div class="d-inline-flex mb-lg-5">
-                                <p class="m-0 text-white"><a class="text-white" href="../../index.html">Inicio</a></p>
-                                <p class="m-0 text-white px-2">/</p>
-                                <p class="m-0 text-white">Gestor de Bloques</p>
-                            </div>
-                        </div>
-                    </div>
+          <div class="row user">
+            <div class="col-md-12">
+              <div class="profile">
+                <div class="cover-image-gest d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5">
+                  <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase titleMain font-berthold">Bloques</h1>
+                  <div class="d-inline-flex mb-lg-5">
+                    <p class="m-0 text-white"><a class="text-white" href="../../index.html">Inicio</a></p>
+                    <p class="m-0 text-white px-2">/</p>
+                    <p class="m-0 text-white">Gestor de Bloques</p>
+                  </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="tile p-0">
-                    </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="tile p-0">
+              </div>
+            </div>
+          </div>
+
+
+          <div class="container-fluid py-4">
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <button class="btn-crud btn-secondary btn-icon-split" id="agregar">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-plus-circle"></i>
+                  </span>
+                  <span class="text text-white">Agregar Bloque</span>
+                </button>
+              </div>
+              <div class="card-body bg-darkwhite">
+                <div class="table-responsive">
+                  <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%"
+                    cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Facultad</th>
+                        <th>Pisos</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                      include_once ("../../Acciones/crudBloques.php");
+                      $resultado = AccionesBloques::listarBloques();
+                      echo ($resultado['dato']);
+                      ?>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Facultad</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </tfoot>
+                    <tbody>
+
+                    </tbody>
+                  </table>
                 </div>
+              </div>
             </div>
 
-          
-            <div class="container-fluid py-4">
-            
-                <!-- DataTales Example -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <button class="btn-crud btn-secondary btn-icon-split" id="agregar">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-plus-circle"></i> 
-                            </span>
-                            <span class="text text-white">Agregar Bloque</span>
-                        </button>
-                    </div>
-                    <div class="card-body bg-darkwhite">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nombre</th>
-                                        <th>Descripción</th>
-                                        <th>Facultad</th>
-                                        <th>Pisos</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Ciencias Sociales</td>
-                                            <td>Facultad dedicada al estudio de las ciencias sociales.</td>
-                                            <td>Valle</td>
-                                            <td>4</td>
-                                            <td>
-                                                <center>          
-                                                    <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                        <i class="fas fa-edit"></i>
-                                                    </button>
-                                                    <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                </center>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Humanidades</td>
-                                            <td>Facultad dedicada al estudio de las humanidades.</td>
-                                            <td>Bosque</td>
-                                            <td>4</td>
-                                            <td>
-                                                <center>          
-                                                    <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                        <i class="fas fa-edit"></i>
-                                                    </button>
-                                                    <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                </center>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Artes</td>
-                                            <td>Facultad dedicada al estudio y práctica de las artes.</td>
-                                            <td>Río</td>
-                                            <td>4</td>
-                                            <td>
-                                                <center>          
-                                                    <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                        <i class="fas fa-edit"></i>
-                                                    </button>
-                                                    <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                </center>
-                                            </td>
-                                        </tr>
-                                    </tbody>                              
-                                <tfoot>
-                                    <tr>
-                                      <th>ID</th>
-                                      <th>Nombre</th>
-                                      <th>Descripción</th>
-                                      <th>Facultad</th>
-                                      <th>Acciones</th>
-                                  </tr>
-                                </tfoot>
-                                <tbody>
-                                    
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <!-- /.container-fluid -->
+          </div>
+          <!-- /.container-fluid -->
 
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
         <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Acroware © 2024. Todos los derechos reservados.</span>
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Acroware © 2024. Todos los
+              derechos reservados.</span>
           </div>
-        </footer> 
+        </footer>
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
-    </div>   
+    </div>
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
 
-  
+
   <!-- Logout Modal-->
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title text-primary" id="modal-register-label">¿Listo para partir?</h3>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <i class="fas fa-times" class="element-white"></i>
-                </button>
-            </div> 
-            <div class="modal-body">
-                <div class="card-body">
-                    <p class="card-description">Seleccione "Cerrar sesión" a continuación si está list@ para finalizar su sesión actual.</p>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
-                <a class="btn-crud btn-primary text-bold">Cerrar Sesión</a>
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title text-primary" id="modal-register-label">¿Listo para partir?</h3>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
         </div>
+        <div class="modal-body">
+          <div class="card-body">
+            <p class="card-description">Seleccione "Cerrar sesión" a continuación si está list@ para finalizar su sesión
+              actual.</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+            aria-label="Close" value="Cancelar" id="cancelButton">
+          <a class="btn-crud btn-primary text-bold">Cerrar Sesión</a>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Create Modal-->
-  <div class="modal fade modal-crud" id="modalCrudAgregar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
+  <div class="modal fade modal-crud" id="modalCrudAgregar" tabindex="-1" role="dialog"
+    aria-labelledby="modal-register-label" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header bg-primary">
-                <h3 class="modal-title text-white" id="modal-register-label">Agregar Bloque</h3>
-                <p class="modal">Ingrese los datos del Usuario:</p>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <i class="fas fa-times" class="element-white"></i>
-                </button>
-            </div> 
-            <form class="forms-sample">
-            <div class="modal-body">
-                <div class="grid-margin-modal">          
-                    <div class="card-body">
-                        <p class="card-description">Por favor, complete los siguientes campos para agregar un nuevo Bloque de Facultad al sistema:</p>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="Name" class="text-bold">Nombre</label>
-                                <input type="text" class="form-control" id="Name" placeholder="Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="campus" class="text-bold">Facultad Pertenece</label>
-                                <select class="form-control" id="campus" required>
-                                    <option value="">Seleccione una Facultad</option>
-                                    <option value="FISEI">Ingenieria en Sistemas Electronica e Industrial</option>
-                                    <option value="FECHE">Ciencias de la Saludad</option>
-                                    <option value="FDA">Diseño y Arquitectura</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <label for="pisos" class="text-bold">Pisos</label>
-                                <input type="number" class="form-control" id="pisos" placeholder="Número Pisos" required>
-                            </div>
-                          <div class="form-group col-md-12">
-                            <label for="Name" class="text-bold">Descripción</label>
-                            <textarea class="form-control" id="Description" placeholder="Descripción" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
-                <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Bloque ">
-            </div>
-          </form>
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h3 class="modal-title text-white" id="modal-register-label">Agregar Bloque</h3>
+          <p class="modal">Ingrese los datos del Usuario:</p>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
         </div>
+        <form class="forms-sample">
+          <div class="modal-body">
+            <div class="grid-margin-modal">
+              <div class="card-body">
+                <p class="card-description">Por favor, complete los siguientes campos para agregar un nuevo Bloque de
+                  Facultad al sistema:</p>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="Name" class="text-bold">Nombre</label>
+                    <input type="text" class="form-control" id="Name" placeholder="Nombre"
+                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="campus" class="text-bold">Facultad Pertenece</label>
+                    <select class="form-control" id="campus" required>
+                      <option value="">Seleccione una Facultad</option>
+                      <option value="FISEI">Ingenieria en Sistemas Electronica e Industrial</option>
+                      <option value="FECHE">Ciencias de la Saludad</option>
+                      <option value="FDA">Diseño y Arquitectura</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="pisos" class="text-bold">Pisos</label>
+                    <input type="number" class="form-control" id="pisos" placeholder="Número Pisos" required>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <label for="Name" class="text-bold">Descripción</label>
+                    <textarea class="form-control" id="Description" placeholder="Descripción"
+                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Bloque ">
+          </div>
+        </form>
+      </div>
     </div>
-</div>
+  </div>
 
-<div class="modal fade" id="modalCrudEliminar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
+  <div class="modal fade" id="modalCrudEliminar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
+    aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header bg-primary">
-                <h3 class="modal-title text-white" id="modal-register-label">Eliminar Bloque </h3>
-                <p class="modal">Ingrese los datos del Usuario:</p>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <i class="fas fa-times" class="element-white"></i>
-                </button>
-            </div> 
-            <form class="forms-sample">
-            <div class="modal-body">
-                <div class="grid-margin-modal">          
-                    <div class="card-body">
-                        <p class="card-description">¿Está seguro de que desea eliminar el Bloque?</p>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <p class="text-danger"><small>Esta acción no se puede deshacer.</small></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
-                <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Bloque ">
-            </div>
-          </form>
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h3 class="modal-title text-white" id="modal-register-label">Eliminar Bloque </h3>
+          <p class="modal">Ingrese los datos del Usuario:</p>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
         </div>
+        <form class="forms-sample">
+          <div class="modal-body">
+            <div class="grid-margin-modal">
+              <div class="card-body">
+                <p class="card-description">¿Está seguro de que desea eliminar el Bloque?</p>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <p class="text-danger"><small>Esta acción no se puede deshacer.</small></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Bloque ">
+          </div>
+        </form>
+      </div>
     </div>
-</div>
+  </div>
 
-<div class="modal fade" id="modalCrud" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
+  <div class="modal fade" id="modalCrud" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
+    aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header bg-primary">
-                <h3 class="modal-title text-white" id="modal-register-label">Editar Bloque</h3>
-                <p class="modal">Ingrese los datos del Usuario:</p>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <i class="fas fa-times" class="element-white"></i>
-                </button>
-            </div> 
-            <form class="forms-sample">
-            <div class="modal-body">
-                <div class="grid-margin-modal">          
-                    <div class="card-body">
-                        <p class="card-description">Por favor, complete los siguientes campos para editar la información del Bloque seleccionado:</p>
-                        <div class="form-row">
-                          <div class="form-group col-md-6">
-                              <label for="Name" class="text-bold">Nombre</label>
-                              <input type="text" class="form-control" id="Name" placeholder="Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
-                          </div>
-                            <div class="form-group col-md-6">
-                                <label for="facultad" class="text-bold">Facultad Pertenece</label>
-                                <select class="form-control" id="facultad" required>
-                                    <option value="">Seleccione una Facultad</option>
-                                    <option value="FISEI">Ingenieria en Sistemas Electronica e Industrial</option>
-                                    <option value="FECHE">Ciencias de la Saludad</option>
-                                    <option value="FDA">Diseño y Arquitectura</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <label for="pisos" class="text-bold">Pisos</label>
-                                <input type="number" class="form-control" id="pisos" placeholder="Número Pisos" required>
-                            </div>
-                          <div class="form-group col-md-12">
-                            <label for="Name" class="text-bold">Descripción</label>
-                            <textarea class="form-control" id="Description" placeholder="Descripción" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
-                <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Bloque ">
-            </div>
-          </form>
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h3 class="modal-title text-white" id="modal-register-label">Editar Bloque</h3>
+          <p class="modal">Ingrese los datos del Usuario:</p>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
         </div>
+        <form class="forms-sample">
+          <div class="modal-body">
+            <div class="grid-margin-modal">
+              <div class="card-body">
+                <p class="card-description">Por favor, complete los siguientes campos para editar la información del
+                  Bloque seleccionado:</p>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="Name" class="text-bold">Nombre</label>
+                    <input type="text" class="form-control" id="Name" placeholder="Nombre"
+                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="facultad" class="text-bold">Facultad Pertenece</label>
+                    <select class="form-control" id="facultad" required>
+                      <option value="">Seleccione una Facultad</option>
+                      <option value="FISEI">Ingenieria en Sistemas Electronica e Industrial</option>
+                      <option value="FECHE">Ciencias de la Saludad</option>
+                      <option value="FDA">Diseño y Arquitectura</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="pisos" class="text-bold">Pisos</label>
+                    <input type="number" class="form-control" id="pisos" placeholder="Número Pisos" required>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <label for="Name" class="text-bold">Descripción</label>
+                    <textarea class="form-control" id="Description" placeholder="Descripción"
+                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Bloque ">
+          </div>
+        </form>
+      </div>
     </div>
-</div>
-  
+  </div>
+
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
@@ -565,13 +544,12 @@
   <script src="../../resources/js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
 
-    <!-- Page level plugins -->
-    <script src="../../resources/vendors/datatables/jquery.dataTables.min.js"></script>
-    <script src="../../resources/vendors/datatables/dataTables.bootstrap4.min.js"></script>
+  <!-- Page level plugins -->
+  <script src="../../resources/vendors/datatables/jquery.dataTables.min.js"></script>
+  <script src="../../resources/vendors/datatables/dataTables.bootstrap4.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="../../resources/js/datatables-demo.js"></script>
+  <!-- Page level custom scripts -->
+  <script src="../../resources/js/datatables-demo.js"></script>
 </body>
 
 </html>
-
