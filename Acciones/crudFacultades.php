@@ -46,6 +46,31 @@ class AccionesFacultades
         }
     }
 
+    public static function insertarFacultades($nombre, $descripcion, $campus)
+    {
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = "SELECT * FROM facultades where nombre = :nombre";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->bindParam(':nombre', $nombre);
+            $resultado->execute();
+            if ($resultado->fetch()) {
+                echo ("La facultad ya existe");
+                return 1;
+            } else {
+                $consulta = $conexion->prepare("INSERT INTO facultades (nombre, descripcion, campus) values (:nombre, :descripcion, :campus)");
+                $consulta->bindParam(':nombre', $nombre);
+                $consulta->bindParam(':descripcion', $descripcion);
+                $consulta->bindParam(':campus', $campus);
+                $consulta->execute();
+                return 0;
+            }
+        } catch (PDOException $e) {
+            error_log('Error en insertarFacultades: ' . $e->getMessage());
+            return 2;
+        }
+    }
+
 
 
 
