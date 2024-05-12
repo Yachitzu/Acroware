@@ -42,6 +42,19 @@ switch ($accion) {
                     echo json_encode(["message" => "No se pudo actualizar la facultad."]);
                 }
                 break;
+            case 3:
+                $json_input = file_get_contents('php://input');
+                $data = json_decode($json_input, true);
+                $id = filter_var($data['id'], FILTER_SANITIZE_STRING);
+                $resultado = AccionesFacultades::EliminarFacultad($id);
+                if ($resultado === 0) {
+                    http_response_code(200);
+                    echo json_encode(["message" => "Facultad eliminada con éxito."]);
+                } else {
+                    http_response_code(400);
+                    echo json_encode(["message" => "No se pudo eliminar la facultad."]);
+                }
+                break;
             default:
                 break;
         }
