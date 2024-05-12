@@ -73,6 +73,31 @@
         });
       });
 
+      $(".eliminar").click(function () {
+        fila = $(this).closest("tr");
+        id = fila.find('td:eq(0)').text();
+        $("#modalCrudEliminar").modal('show');
+      });
+
+      $("#formEliminar").submit(function (e) {
+        e.preventDefault();
+        id;
+        opcion = 6;
+        $.ajax({
+          url: "../../Acciones/Rest.php",
+          type: "POST",
+          data: JSON.stringify({
+            id: id,
+            opcion: opcion
+          }),
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            location.reload();
+          }
+        });
+      });
       
       $("#formAgregar").submit(function (e) {
         e.preventDefault();
