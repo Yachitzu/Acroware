@@ -71,7 +71,32 @@ class AccionesFacultades
         }
     }
 
-
+    public static function actualizarFacultades($id, $nombre, $descripcion, $campus)
+    {
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = "SELECT * FROM facultades where nombre = :nombre AND id != :id";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->bindParam(':nombre', $nombre);
+            $resultado->bindParam(':id', $id);
+            $resultado->execute();
+            if ($resultado->fetch()) {
+                echo ("La facultad ya existe");
+                return 1;
+            } else {
+                $consulta = $conexion->prepare("UPDATE facultades  set nombre= :nombre, descripcion= :descripcion , campus=:campus where id=:id");
+                $consulta->bindParam(':id', $id);
+                $consulta->bindParam(':nombre', $nombre);
+                $consulta->bindParam(':descripcion', $descripcion);
+                $consulta->bindParam(':campus', $campus);
+                $consulta->execute();
+                return 0;
+            }
+        } catch (PDOException $e) {
+            error_log('Error en actualizarFacultades: ' . $e->getMessage());
+            return 2;
+        }
+    }
 
 
 }
