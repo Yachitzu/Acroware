@@ -132,5 +132,37 @@ class AccionesBloques
             return 2;
         }
     }
+
+    public static function actualizarBloques($id, $nombre, $descripcion, $id_facultad_per, $pisos)
+    {
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = "SELECT * FROM bloques where nombre = :nombre AND id != :id";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->bindParam(':nombre', $nombre);
+            $resultado->bindParam(':id', $id);
+            $resultado->execute();
+            if ($resultado->fetch()) {
+                echo ("El bloque ya existe");
+                return 1;
+            } else {
+                $facultad = $conexion->prepare("SELECT id FROM facultades WHERE nombre= :nombre_facultad");
+                $facultad->bindParam(':nombre_facultad', $id_facultad_per);
+                $facultad->execute();
+                $dato = $facultad->fetch(PDO::FETCH_ASSOC);
+                $consulta = $conexion->prepare("UPDATE bloques  set nombre= :nombre, descripcion= :descripcion, id_facultad_per= :id_facultad_per, pisos= :pisos where id=:id");
+                $consulta->bindParam(':id', $id);
+                $consulta->bindParam(':nombre', $nombre);
+                $consulta->bindParam(':descripcion', $descripcion);
+                $consulta->bindParam(':id_facultad_per', $dato['id']);
+                $consulta->bindParam(':pisos', $pisos);
+                $consulta->execute();
+                return 0;
+            }
+        } catch (PDOException $e) {
+            error_log('Error en actualizarBloques: ' . $e->getMessage());
+            return 2;
+        }
+    }
 }
 ?>
