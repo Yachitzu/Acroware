@@ -1,5 +1,6 @@
 <?php
 include_once ("crudFacultades.php");
+include_once ("crudBloques.php");
 $accion = $_SERVER['REQUEST_METHOD'];
 switch ($accion) {
     case 'POST':
