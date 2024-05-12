@@ -1,5 +1,5 @@
 <?php
-include_once ("../patrones/Singleton/Conexion.php");
+include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php');
 class AccionesAreas
 {
     public static function listarAreas()
@@ -35,7 +35,7 @@ class AccionesAreas
             }
             return [
                 'codigo' => 0,
-                'dato' => $dato,
+                'dato' => $tabla,
             ];
         } catch (PDOException $e) {
             error_log('Error al listar Areas: ' . $e->getMessage());

@@ -292,96 +292,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Administrativa</td>
-                                        <td>Área dedicada al manejo de informes.</td>
-                                        <td>Bloque 1</td>
-                                        <td>Planta Baja</td>
-                                        <td>María Pérez</td>
-                                        <td>
-                                            <center>
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Aula 01</td>
-                                        <td>Área dedicada al estudio</td>
-                                        <td>Bloque 2</td>
-                                        <td>Primer Piso</td>
-                                        <td>María Pérez</td>
-                                        <td>
-                                            <center>
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>Aula 02</td>
-                                        <td>Área dedicada al estudio</td>
-                                        <td>Bloque 2</td>
-                                        <td>Primer Piso</td>
-                                        <td>María Pérez</td>
-                                        <td>
-                                            <center>
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>Aula 03</td>
-                                        <td>Área dedicada al estudio</td>
-                                        <td>Bloque 2</td>
-                                        <td>Primer Piso</td>
-                                        <td>María Pérez</td>
-                                        <td>
-                                            <center>
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>7</td>
-                                        <td>Laboratorio 01</td>
-                                        <td>Área dedicada al estudio y manejo con computadores</td>
-                                        <td>Bloque 1</td>
-                                        <td>Primer Piso</td>
-                                        <td>María Pérez</td>
-                                        <td>
-                                            <center>
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
+                                    <?php
+                                    include_once("../../Acciones/crudAreas.php");
+                                    $resultado=AccionesAreas::listarAreas();
+                                    echo ($resultado['dato']);
+                                    ?>
                                 </tbody>              
                                 <tfoot>
                                     <tr>
