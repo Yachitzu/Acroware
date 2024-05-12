@@ -228,7 +228,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/places/faculty.html">Facultades</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/places/faculty.php">Facultades</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/places/block.html">Bloques</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/places/area.html">Áreas</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/places/location.html">Ubicaciones</a></li>
