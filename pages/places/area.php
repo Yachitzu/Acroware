@@ -27,7 +27,7 @@
 </head>
 
 <body>
-  
+
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -416,7 +416,6 @@
                     <select class="form-control" id="bloqueA" required>
                       <option value="">Seleccione un Bloque</option>
                       <?php
-                      include_once("../../Acciones/crudAreas.php");
                       $bloques = AccionesAreas::listarBloquesInsertar();
                       echo ($bloques['dato']);
                       ?>
@@ -435,9 +434,10 @@
                     <label for="usuario" class="text-bold">Laboratorista Encargado</label>
                     <select class="form-control" id="usuarioA" required>
                       <option value="">Seleccione un Laboratorista</option>
-                      <option value="1">Christian López</option>
-                      <option value="2">Dallin Miranda</option>
-                      <option value="3">Esteban Cifuentes</option>
+                      <?php
+                      $bloques = AccionesAreas::listarUsuariosInsertar();
+                      echo ($bloques['dato']);
+                      ?>
                     </select>
                   </div>
                 </div>
