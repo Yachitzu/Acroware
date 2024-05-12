@@ -1,7 +1,7 @@
 <?php
 
     include_once("IStrategy.php");
-    include_once("C:/xampp/htdocs/SOA/sistemas/DAS/Acroware/patrones/Singleton/Sesion.php");
+    include_once($_SERVER['DOCUMENT_ROOT'].'/Acroware/patrones/Singleton/Sesion.php');
 
     class Authenticator
     {
