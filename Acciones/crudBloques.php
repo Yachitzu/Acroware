@@ -107,6 +107,30 @@ class AccionesBloques
         }
     }
 
-    
+    public static function insertarbloques($nombre, $descripcion, $id_facultad_per, $pisos)
+    {
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = "SELECT * FROM bloques where nombre = :nombre";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->bindParam(':nombre', $nombre);
+            $resultado->execute();
+            if ($resultado->fetch()) {
+                echo ("El bloque ya existe");
+                return 1;
+            } else {
+                $consulta = $conexion->prepare("INSERT INTO bloques (nombre, descripcion, id_facultad_per, pisos) values (:nombre, :descripcion, :id_facultad_per, :pisos)");
+                $consulta->bindParam(':nombre', $nombre);
+                $consulta->bindParam(':id_facultad_per', $id_facultad_per);
+                $consulta->bindParam(':descripcion', $descripcion);
+                $consulta->bindParam(':pisos', $pisos);
+                $consulta->execute();
+                return 0;
+            }
+        } catch (PDOException $e) {
+            error_log('Error en insertarbloques: ' . $e->getMessage());
+            return 2;
+        }
+    }
 }
 ?>
