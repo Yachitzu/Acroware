@@ -46,5 +46,32 @@ class AccionesAreas
         }
 
     }
+
+    public static function insertarAreas($nombre, $piso, $id_bloque_per, $id_usu_encargado)
+    {
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = $conexion->prepare("SELECT * FROM areas WHERE nombre= :nombre");
+            $consulta->bindParam(":nombre", $nombre);
+            $consulta->execute();
+            if ($consulta->fetch()) {
+                echo ("El área ya existe.");
+                return 1;
+            } else {
+                $consulta = $conexion->prepare("INSERT INTO areas(nombre,piso,id_bloque_per,id_usu_encargado) values (:nombre,:piso,:id_bloque_per,:id_usu_encargado)");
+                $consulta->bindParam(":nombre", $nombre);
+                $consulta->bindParam(':piso', $piso);
+                $consulta->bindParam(':id_bloque_per', $id_bloque_per);
+                $consulta->bindParam(':id_usu_encargado', $id_usu_encargado);
+                $consulta->execute();
+                return 0;
+            }
+        } catch (PDOException $e) {
+            error_log('Error en insertarAreas: ' . $e->getMessage());
+            return 2;
+        }
+    }
+
+    
 }
 ?>
