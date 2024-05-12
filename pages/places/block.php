@@ -29,6 +29,51 @@
 <body>
   <script>
     $(document).ready(function () {
+      id = "";
+      $(".editar").click(function () {
+        fila = $(this).closest("tr");
+        id = fila.find('td:eq(0)').text();
+        nombre = fila.find('td:eq(1)').text();
+        descripcion = fila.find('td:eq(2)').text();
+        facultad = fila.find('td:eq(3)').text();
+        pisos = fila.find('td:eq(4)').text();
+        $("#nombreE").val(nombre);
+        $("#descripcionE").val(descripcion);
+        $("#facultadE").val(facultad);
+        $("#pisosE").val(pisos);
+        $("#modalCrudEditar").modal('show');
+      });
+
+      $("#formEditar").submit(function (e) {
+        e.preventDefault();
+        id;
+        nombre = $("#nombreE").val();
+        descripcion = $("#descripcionE").val();
+        id_facultad_per = $("#facultadE").val();
+        pisos = $("#pisosE").val();
+        alert(id_facultad_per);
+        opcion = 5;
+        $.ajax({
+          url: "../../Acciones/Rest.php",
+          type: "POST",
+          data: JSON.stringify({
+            id: id,
+            nombre: nombre,
+            descripcion: descripcion,
+            id_facultad_per: id_facultad_per,
+            pisos, pisos,
+            opcion: opcion
+          }),
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            location.reload();
+          }
+        });
+      });
+
+      
       $("#formAgregar").submit(function (e) {
         e.preventDefault();
         nombre = $("#nombreA").val();
