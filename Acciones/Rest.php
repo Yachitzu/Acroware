@@ -1,6 +1,8 @@
 <?php
 include_once ("crudFacultades.php");
 include_once ("crudBloques.php");
+include_once ("crudAreas.php");
+
 $accion = $_SERVER['REQUEST_METHOD'];
 switch ($accion) {
     case 'POST':
@@ -104,6 +106,28 @@ switch ($accion) {
                     echo json_encode(["message" => "No se pudo eliminar el bloque."]);
                 }
                 break;
+
+            //AREAS
+            case 7:
+                $json_input = file_get_contents('php://input');
+                $data = json_decode($json_input, true);
+                $nombre = filter_var($data['nombre'], FILTER_SANITIZE_STRING);
+                $descripcion = filter_var($data['descripcion'], FILTER_SANITIZE_STRING);
+                $piso = filter_var($data['piso'], FILTER_SANITIZE_STRING);
+                $id_bloque_per = filter_var($data['id_bloque_per'], FILTER_SANITIZE_STRING);
+                $id_usu_encargado =  filter_var($data['id_usu_encargado'], FILTER_SANITIZE_STRING);
+                $resultado = AccionesAreas::insertarAreas($nombre, $descripcion, $piso, $id_bloque_per, $id_usu_encargado);
+                if ($resultado === 0) {
+                    http_response_code(200);
+                    echo json_encode(["message" => "Área insertada con éxito."]);
+                } else {
+                    http_response_code(400);
+                    echo json_encode(["message" => "No se pudo insertar la área."]);
+                }
+                break;
+
+                
+
             default:
                 break;
         }
