@@ -85,6 +85,37 @@ class AccionesAreas
         }
     }
 
+    public static function listarBloquesEditar()
+    {
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = "SELECT bloques.*, facultades.nombre AS nombre_facultad 
+            FROM bloques 
+            INNER JOIN facultades ON bloques.id_facultad_per = facultades.id";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+            $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            $dato;
+            $tabla = '';
+
+            foreach ($dato as $respuesta) {
+                $tabla .= '
+                    <option value="' . htmlspecialchars($respuesta['nombre']) . '">' . htmlspecialchars($respuesta['nombre']).'-'.htmlspecialchars($respuesta['nombre_facultad']).'</option>
+                ';
+            }
+            return [
+                'codigo' => 0,
+                'dato' => $tabla,
+            ];
+        } catch (PDOException $e) {
+            error_log('Error al listar Facultades: ' . $e->getMessage());
+            return [
+                'codigo' => 1,
+                'mensaje' => 'Error al listar facultades: ' . $e->getMessage()
+            ];
+        }
+    }
+
     public static function listarUsuariosInsertar()
     {
         try {

@@ -29,6 +29,7 @@
 <body>
   <script>
     $(document).ready(function () {
+      
       $("#formAgregar").submit(function (e) {
         e.preventDefault();
         nombre = $("#nombreA").val();
@@ -554,19 +555,18 @@
                   <div class="form-group col-md-6">
                     <label for="bloque" class="text-bold">Bloque Pertenece</label>
                     <select class="form-control" id="bloqueE" required>
-                      <option value="">Seleccione un Bloque</option>
-                      <option value="bloque1">Bloque 1</option>
-                      <option value="bloque2">Bloque 2</option>
-                      <option value="talleres">Talleres Tecnológicos</option>
+                    <?php
+                      $bloques = AccionesAreas::listarBloquesEditar();
+                      echo ($bloques['dato']);
+                      ?>
                     </select>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="piso" class="text-bold">Piso Pertenece</label>
                     <select class="form-control" id="pisoE" required>
-                      <option value="">Seleccione un Piso</option>
-                      <option value="planta_baja">Planta Baja</option>
-                      <option value="primer_piso">Primer Piso</option>
-                      <option value="segundo_piso">Segundo Piso</option>
+                      <option value="Planta Baja">Planta Baja</option>
+                      <option value="Primer Piso">Primer Piso</option>
+                      <option value="Segundo Piso">Segundo Piso</option>
                     </select>
                   </div>
                   <div class="form-group col-md-12">

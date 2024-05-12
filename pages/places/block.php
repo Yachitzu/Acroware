@@ -51,7 +51,6 @@
         descripcion = $("#descripcionE").val();
         id_facultad_per = $("#facultadE").val();
         pisos = $("#pisosE").val();
-        alert(id_facultad_per);
         opcion = 5;
         $.ajax({
           url: "../../Acciones/Rest.php",
@@ -61,7 +60,7 @@
             nombre: nombre,
             descripcion: descripcion,
             id_facultad_per: id_facultad_per,
-            pisos, pisos,
+            pisos: pisos,
             opcion: opcion
           }),
           error: function (error) {
@@ -113,7 +112,7 @@
             nombre: nombre,
             descripcion: descripcion,
             id_facultad_per, id_facultad_per,
-            pisos, pisos,
+            pisos: pisos,
             opcion: opcion
           }),
           error: function (error) {
