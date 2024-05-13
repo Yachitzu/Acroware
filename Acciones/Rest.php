@@ -191,6 +191,20 @@ switch ($accion) {
                     echo json_encode(["message" => "No se pudo actualizar la ubicación."]);
                 }
                 break;
+
+            case 12:
+                $json_input = file_get_contents('php://input');
+                $data = json_decode($json_input, true);
+                $id = filter_var($data['id'], FILTER_SANITIZE_STRING) : null;
+                $resultado = AccionesUbicaciones::eliminarUbicacion($id);
+                if ($resultado === 0) {
+                    http_response_code(200);
+                    echo json_encode(["message" => "Ubicación eliminada."]);
+                } else {
+                    http_response_code(400);
+                    echo json_encode(["message" => "No se puedo eliminar la ubicación."]);
+                }
+                break;
             default:
                 break;
         }
