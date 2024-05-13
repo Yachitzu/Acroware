@@ -1,5 +1,6 @@
 <?php
 include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php');
+
 class AccionesBloques
 {
     public static function listarBloques()
@@ -9,6 +10,7 @@ class AccionesBloques
             $consulta = "SELECT bloques.*, facultades.nombre AS nombre_facultad 
             FROM bloques 
             INNER JOIN facultades ON bloques.id_facultad_per = facultades.id";
+            /* LEFT JOIN facultades ON bloques.id_facultad_per = facultades.id"; */
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
             $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -107,6 +109,7 @@ class AccionesBloques
         }
     }
 
+
     public static function insertarbloques($nombre, $descripcion, $id_facultad_per, $pisos)
     {
         try {
@@ -132,6 +135,7 @@ class AccionesBloques
             return 2;
         }
     }
+
 
     public static function actualizarBloques($id, $nombre, $descripcion, $id_facultad_per, $pisos)
     {

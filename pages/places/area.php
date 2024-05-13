@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Gestión - Bloques</title>
+  <title>Gestión - Áreas</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="../../resources/vendors/feather/feather.css">
   <link rel="stylesheet" href="../../resources/vendors/ti-icons/css/themify-icons.css">
@@ -35,12 +35,14 @@
         id = fila.find('td:eq(0)').text();
         nombre = fila.find('td:eq(1)').text();
         descripcion = fila.find('td:eq(2)').text();
-        facultad = fila.find('td:eq(3)').text();
-        pisos = fila.find('td:eq(4)').text();
+        id_bloque_per = fila.find('td:eq(4)').text();
+        piso = fila.find('td:eq(5)').text();
+        id_usu_encargado = fila.find('td:eq(6)').text();
         $("#nombreE").val(nombre);
         $("#descripcionE").val(descripcion);
-        $("#facultadE").val(facultad);
-        $("#pisosE").val(pisos);
+        $("#bloqueE").val(id_bloque_per);
+        $("#pisoE").val(piso);
+        $("#usuarioE").val(id_usu_encargado);
         $("#modalCrudEditar").modal('show');
       });
 
@@ -49,18 +51,20 @@
         id;
         nombre = $("#nombreE").val();
         descripcion = $("#descripcionE").val();
-        id_facultad_per = $("#facultadE").val();
-        pisos = $("#pisosE").val();
-        opcion = 5;
+        id_bloque_per = $("#bloqueE").val();
+        piso = $("#pisoE").val();
+        id_usu_encargado = $("#usuarioE").val();
+        opcion = 8;
         $.ajax({
           url: "../../Acciones/Rest.php",
           type: "POST",
           data: JSON.stringify({
-            id: id,
+            id:id,
             nombre: nombre,
             descripcion: descripcion,
-            id_facultad_per: id_facultad_per,
-            pisos: pisos,
+            piso: piso,
+            id_bloque_per: id_bloque_per,
+            id_usu_encargado: id_usu_encargado,
             opcion: opcion
           }),
           error: function (error) {
@@ -81,7 +85,7 @@
       $("#formEliminar").submit(function (e) {
         e.preventDefault();
         id;
-        opcion = 6;
+        opcion = 9;
         $.ajax({
           url: "../../Acciones/Rest.php",
           type: "POST",
@@ -97,22 +101,24 @@
           }
         });
       });
-      
+
       $("#formAgregar").submit(function (e) {
         e.preventDefault();
         nombre = $("#nombreA").val();
         descripcion = $("#descripcionA").val();
-        id_facultad_per = $("#facultadA").val();
-        pisos = $("#pisosA").val();
-        opcion = 4;
+        id_bloque_per = $("#bloqueA").val();
+        piso = $("#pisoA").val();
+        id_usu_encargado = $("#usuarioA").val();
+        opcion = 7;
         $.ajax({
           url: "../../Acciones/Rest.php",
           type: "POST",
           data: JSON.stringify({
             nombre: nombre,
             descripcion: descripcion,
-            id_facultad_per, id_facultad_per,
-            pisos: pisos,
+            id_bloque_per: id_bloque_per,
+            piso: piso,
+            id_usu_encargado: id_usu_encargado,
             opcion: opcion
           }),
           error: function (error) {
@@ -358,11 +364,11 @@
             <div class="col-md-12">
               <div class="profile">
                 <div class="cover-image-gest d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5">
-                  <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase titleMain font-berthold">Bloques</h1>
+                  <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase titleMain font-berthold">Áreas</h1>
                   <div class="d-inline-flex mb-lg-5">
                     <p class="m-0 text-white"><a class="text-white" href="../../index.html">Inicio</a></p>
                     <p class="m-0 text-white px-2">/</p>
-                    <p class="m-0 text-white">Gestor de Bloques</p>
+                    <p class="m-0 text-white">Gestor de Áreas</p>
                   </div>
                 </div>
               </div>
@@ -383,7 +389,7 @@
                   <span class="icon text-white-50">
                     <i class="fas fa-plus-circle"></i>
                   </span>
-                  <span class="text text-white">Agregar Bloque</span>
+                  <span class="text text-white">Agregar Área</span>
                 </button>
               </div>
               <div class="card-body bg-darkwhite">
@@ -395,15 +401,17 @@
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
-                        <th>Facultad</th>
-                        <th>Pisos</th>
+                        <th>Facultad Pertenece</th>
+                        <th>Bloque Pertenece</th>
+                        <th>Piso</th>
+                        <th>Laboratorista Encargado</th>
                         <th>Acciones</th>
                       </tr>
                     </thead>
                     <tbody>
                       <?php
-                      include_once ("../../Acciones/crudBloques.php");
-                      $resultado = AccionesBloques::listarBloques();
+                      include_once ("../../Acciones/crudAreas.php");
+                      $resultado = AccionesAreas::listarAreas();
                       echo ($resultado['dato']);
                       ?>
                     </tbody>
@@ -412,13 +420,13 @@
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
-                        <th>Facultad</th>
+                        <th>Facultad Pertenece</th>
+                        <th>Bloque Pertenece</th>
+                        <th>Piso</th>
+                        <th>Laboratorista Encargado</th>
                         <th>Acciones</th>
                       </tr>
                     </tfoot>
-                    <tbody>
-
-                    </tbody>
                   </table>
                 </div>
               </div>
@@ -443,6 +451,7 @@
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
+
 
   <!-- Logout Modal-->
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -476,7 +485,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
-          <h3 class="modal-title text-white" id="modal-register-label">Agregar Bloque</h3>
+          <h3 class="modal-title text-white" id="modal-register-label">Agregar Área</h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
@@ -486,30 +495,48 @@
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
-                <p class="card-description">Por favor, complete los siguientes campos para agregar un nuevo Bloque de
-                  Facultad al sistema:</p>
+                <p class="card-description">Por favor, complete los siguientes campos para agregar una nueva Área de un
+                  Bloque al sistema:</p>
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="Name" class="text-bold">Nombre</label>
                     <input type="text" class="form-control" id="nombreA" placeholder="Nombre"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                   </div>
+
+                </div>
+                <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="campus" class="text-bold">Facultad Pertenece</label>
-                    <select class="form-control" id="facultadA" required>
-                      <option value="">Seleccione un Campus</option>
+                    <label for="bloque" class="text-bold">Bloque Pertenece</label>
+                    <select class="form-control" id="bloqueA" required>
+                      <option value="">Seleccione un Bloque</option>
                       <?php
-                      $facultades = AccionesBloques::listarFacultadesInsertar();
-                      echo ($facultades['dato']);
+                      $bloques = AccionesAreas::listarBloquesInsertar();
+                      echo ($bloques['dato']);
+                      ?>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="piso" class="text-bold">Piso Pertenece</label>
+                    <select class="form-control" id="pisoA" required>
+                      <option value="">Seleccione un Piso</option>
+                      <option value="Planta Baja">Planta Baja</option>
+                      <option value="Primer Piso">Primer Piso</option>
+                      <option value="Segundo Piso">Segundo Piso</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <label for="usuario" class="text-bold">Laboratorista Encargado</label>
+                    <select class="form-control" id="usuarioA" required>
+                      <option value="">Seleccione un Laboratorista</option>
+                      <?php
+                      $bloques = AccionesAreas::listarUsuariosInsertar();
+                      echo ($bloques['dato']);
                       ?>
                     </select>
                   </div>
                 </div>
                 <div class="form-row">
-                  <div class="form-group col-md-12">
-                    <label for="pisos" class="text-bold">Pisos</label>
-                    <input type="number" class="form-control" id="pisosA" placeholder="Número Pisos" required>
-                  </div>
                   <div class="form-group col-md-12">
                     <label for="Name" class="text-bold">Descripción</label>
                     <textarea class="form-control" id="descripcionA" placeholder="Descripción"
@@ -522,7 +549,7 @@
           <div class="modal-footer">
             <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
-            <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Bloque ">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Área ">
           </div>
         </form>
       </div>
@@ -534,7 +561,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
-          <h3 class="modal-title text-white" id="modal-register-label">Eliminar Bloque </h3>
+          <h3 class="modal-title text-white" id="modal-register-label">Eliminar Área </h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
@@ -544,7 +571,7 @@
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
-                <p class="card-description">¿Está seguro de que desea eliminar el Bloque?</p>
+                <p class="card-description">¿Está seguro de que desea eliminar el Área?</p>
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <p class="text-danger"><small>Esta acción no se puede deshacer.</small></p>
@@ -556,7 +583,7 @@
           <div class="modal-footer">
             <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
-            <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Bloque ">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Área ">
           </div>
         </form>
       </div>
@@ -568,7 +595,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
-          <h3 class="modal-title text-white" id="modal-register-label">Editar Bloque</h3>
+          <h3 class="modal-title text-white" id="modal-register-label">Editar Área</h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
@@ -579,28 +606,43 @@
             <div class="grid-margin-modal">
               <div class="card-body">
                 <p class="card-description">Por favor, complete los siguientes campos para editar la información del
-                  Bloque seleccionado:</p>
+                  Área seleccionada:</p>
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="Name" class="text-bold">Nombre</label>
                     <input type="text" class="form-control" id="nombreE" placeholder="Nombre"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                   </div>
+                </div>
+                <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="facultad" class="text-bold">Facultad Pertenece</label>
-                    <select class="form-control" id="facultadE" required>
+                    <label for="bloque" class="text-bold">Bloque Pertenece</label>
+                    <select class="form-control" id="bloqueE" required>
                       <?php
-                      $facultades = AccionesBloques::listarFacultadesEditar();
-                      echo ($facultades['dato']);
+                      $bloques = AccionesAreas::listarBloquesEditar();
+                      echo ($bloques['dato']);
+                      ?>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="piso" class="text-bold">Piso Pertenece</label>
+                    <select class="form-control" id="pisoE" required>
+                      <option value="Planta Baja">Planta Baja</option>
+                      <option value="Primer Piso">Primer Piso</option>
+                      <option value="Segundo Piso">Segundo Piso</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <label for="usuario" class="text-bold">Laboratorista Encargado</label>
+                    <select class="form-control" id="usuarioE" required>
+                      <?php
+                      $bloques = AccionesAreas::listarUsuariosEditar();
+                      echo ($bloques['dato']);
                       ?>
                     </select>
                   </div>
                 </div>
                 <div class="form-row">
-                  <div class="form-group col-md-12">
-                    <label for="pisos" class="text-bold">Pisos</label>
-                    <input type="number" class="form-control" id="pisosE" placeholder="Número Pisos" required>
-                  </div>
                   <div class="form-group col-md-12">
                     <label for="Name" class="text-bold">Descripción</label>
                     <textarea class="form-control" id="descripcionE" placeholder="Descripción"
@@ -613,7 +655,7 @@
           <div class="modal-footer">
             <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
-            <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Bloque ">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Área ">
           </div>
         </form>
       </div>
