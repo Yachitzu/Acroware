@@ -98,8 +98,19 @@ class AccionesUbicaciones
         }
     }
 
-    
-
+    public static function eliminarUbicacion($id)
+    {
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = $conexion->prepare("DELETE FROM ubicaciones where id= :id");
+            $consulta->bindParam(':id', $id);
+            $consulta->execute();
+            return 0;
+        } catch (PDOException $e) {
+            error_log('Error en eliminarUbicaciones: ' . $e->getMessage());
+            return 2;
+        }
+    }
 
 }
 ?>
