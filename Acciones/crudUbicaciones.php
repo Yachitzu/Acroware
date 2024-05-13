@@ -45,5 +45,32 @@ class AccionesUbicaciones
         }
     }
 
+    public static function insertarUbicaciones($nombre, $descripcion, $id_area_per)
+    {
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = "SELECT * FROM ubicaciones where BINARY nombre= :nombre";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->bindParam(':nombre', $nombre);
+            $resultado->execute();
+            if ($resultado->fetch()) {
+                echo ("La ubicacion ya existe.");
+                return 1;
+            } else {
+                $consulta = $conexion->prepare("INSERT INTO ubicaciones (nombre, descripcion, id_area_per) values (:nombre, :descripcion, :id_area_per)");
+                $consulta->bindParam(':nombre', $nombre);
+                $consulta->bindParam(':descripcion', $descripcion);
+                $consulta->bindParam(':id_area_per', $id_area_per);
+                $consulta->execute();
+                return 0;
+            }
+        } catch (PDOException $e) {
+            error_log('Error en insertarUbicaciones: ' . $e->getMessage());
+            return 2;
+        }
+    }
+
+    
+
 }
 ?>
