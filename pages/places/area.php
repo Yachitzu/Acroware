@@ -29,7 +29,53 @@
 <body>
   <script>
     $(document).ready(function () {
-      
+      id = "";
+      $(".editar").click(function () {
+        fila = $(this).closest("tr");
+        id = fila.find('td:eq(0)').text();
+        nombre = fila.find('td:eq(1)').text();
+        descripcion = fila.find('td:eq(2)').text();
+        id_bloque_per = fila.find('td:eq(4)').text();
+        piso = fila.find('td:eq(5)').text();
+        id_usu_encargado = fila.find('td:eq(6)').text();
+        $("#nombreE").val(nombre);
+        $("#descripcionE").val(descripcion);
+        $("#bloqueE").val(id_bloque_per);
+        $("#pisoE").val(piso);
+        $("#usuarioE").val(id_usu_encargado);
+        $("#modalCrudEditar").modal('show');
+      });
+
+      $("#formEditar").submit(function (e) {
+        e.preventDefault();
+        id;
+        nombre = $("#nombreE").val();
+        descripcion = $("#descripcionE").val();
+        id_bloque_per = $("#bloqueE").val();
+        piso = $("#pisoE").val();
+        id_usu_encargado = $("#usuarioE").val();
+        opcion = 8;
+        $.ajax({
+          url: "../../Acciones/Rest.php",
+          type: "POST",
+          data: JSON.stringify({
+            id:id,
+            nombre: nombre,
+            descripcion: descripcion,
+            piso: piso,
+            id_bloque_per: id_bloque_per,
+            id_usu_encargado: id_usu_encargado,
+            opcion: opcion
+          }),
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            location.reload();
+          }
+        });
+      });
+
       $("#formAgregar").submit(function (e) {
         e.preventDefault();
         nombre = $("#nombreA").val();
@@ -541,21 +587,12 @@
                     <input type="text" class="form-control" id="nombreE" placeholder="Nombre"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                   </div>
-                  <div class="form-group col-md-6">
-                    <label for="facultad" class="text-bold">Facultad Pertenece</label>
-                    <select class="form-control" id="facultadE" required>
-                      <option value="">Seleccione una Facultad</option>
-                      <option value="FISEI">FISEI </option>
-                      <option value="FDA">FDA</option>
-                      <option value="FCHE">FCHE</option>
-                    </select>
-                  </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="bloque" class="text-bold">Bloque Pertenece</label>
                     <select class="form-control" id="bloqueE" required>
-                    <?php
+                      <?php
                       $bloques = AccionesAreas::listarBloquesEditar();
                       echo ($bloques['dato']);
                       ?>
@@ -572,7 +609,7 @@
                   <div class="form-group col-md-12">
                     <label for="usuario" class="text-bold">Laboratorista Encargado</label>
                     <select class="form-control" id="usuarioE" required>
-                    <?php
+                      <?php
                       $bloques = AccionesAreas::listarUsuariosEditar();
                       echo ($bloques['dato']);
                       ?>

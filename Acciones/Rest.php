@@ -134,7 +134,6 @@ switch ($accion) {
                 $piso = filter_var($data['piso'], FILTER_SANITIZE_STRING);
                 $id_bloque_per = filter_var($data['id_bloque_per'], FILTER_SANITIZE_STRING);
                 $id_usu_encargado = filter_var($data['id_usu_encargado'], FILTER_SANITIZE_STRING);
-                $id_facultad_per = filter_var($data['$id_facultad_per'], FILTER_SANITIZE_STRING);
                 $resultado = AccionesAreas::actualizarArea($id, $nombre, $descripcion, $piso, $id_bloque_per, $id_usu_encargado);
                 if ($resultado === 0) {
                     http_response_code(200);
