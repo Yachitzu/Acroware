@@ -46,4 +46,16 @@ Class Obtener{
             $conectar->commit();
         }
     }
+    class Actualizar{
+        public static function ActualizarUsuario($cedula,$nombre,$apellido,$password){
+            $conectar = Conexion::getInstance()->getConexion();
+            $updatesql = "UPDATE usuarios  set nombre= '$nombre',apellido= '$apellido', 
+            password= '$password' Where cedula='$cedula'";
+            $resultado = $conectar->prepare($updatesql);
+            $resultado->execute();
+            echo json_encode($resultado);
+            $conectar->commit();    
+        }
+    }  
+
 ?>
