@@ -30,7 +30,45 @@
 
   <script>
     $(document).ready(function () {
-      
+      id = "";
+      $(".editar").click(function () {
+        fila = $(this).closest("tr");
+        id = fila.find('td:eq(0)').text();
+        nombre = fila.find('td:eq(1)').text();
+        descripcion = fila.find('td:eq(2)').text();
+        id_area_per = fila.find('td:eq(3)').text();
+        $("#nombreE").val(nombre);
+        $("#descripcionE").val(descripcion);
+        $("#areaE").val(id_area_per);
+        $("#modalCrudEditar").modal('show');
+      });
+
+      $("#formEditar").submit(function (e) {
+        e.preventDefault();
+        id;
+        nombre = $("#nombreE").val();
+        descripcion = $("#descripcionE").val();
+        id_area_per = $("#areaE").val();
+        opcion = 11;
+        $.ajax({
+          url: "../../Acciones/Rest.php",
+          type: "POST",
+          data: JSON.stringify({
+            id: id,
+            nombre: nombre,
+            descripcion: descripcion,
+            id_area_per: id_area_per,
+            opcion: opcion
+          }),
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            location.reload();
+          }
+        });
+      });
+
       $("#formAgregar").submit(function (e) {
         e.preventDefault();
         nombre = $("#nombreA").val();

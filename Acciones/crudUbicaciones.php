@@ -144,11 +144,16 @@ class AccionesUbicaciones
                 echo ("No se pudo actualizar la ubicación.");
                 return 1;
             } else {
+                $areas = $conexion->prepare("SELECT id FROM areas WHERE nombre= :nombre_area");
+                $areas->bindParam(':nombre_area', $id_area_per);
+                $areas->execute();
+                $dato = $areas->fetch(PDO::FETCH_ASSOC);
+
                 $consulta = $conexion->prepare("UPDATE ubicaciones SET nombre= :nombre, descripcion= :descripcion, id_area_per= :id_area_per Where id= :id");
                 $consulta->bindParam(':id', $id);
                 $consulta->bindParam(':nombre', $nombre);
                 $consulta->bindParam(':descripcion', $descripcion);
-                $consulta->bindParam(':id_area_per', $id_area_per);
+                $consulta->bindParam(':id_area_per', $dato['id']);
                 $consulta->execute();
                 $consulta;
                 return 0;
