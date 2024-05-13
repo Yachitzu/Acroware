@@ -2,7 +2,7 @@
 include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php');
 Class Obtener{
         public static function ObtenerUsuarios(){            
-            $objeto=new Conexion();
+            $objeto = Conexion::getInstance()->getConexion();
             $conectar=$objeto->conectar();
             $select="SELECT * FROM usuarios";
             $resultado=$conectar->prepare($select);
@@ -11,7 +11,7 @@ Class Obtener{
             echo(json_encode($data));
         }
         public static function ObtenerById($cedula){
-            $bd = new Conexion();
+            $bd = Conexion::getInstance()->getConexion();
             $bd = $bd->conectar();
             $id = $cedula;
             $array = array();
@@ -31,4 +31,5 @@ Class Obtener{
             echo json_encode($array);
         }
     }
+
 ?>
