@@ -195,7 +195,7 @@ switch ($accion) {
             case 12:
                 $json_input = file_get_contents('php://input');
                 $data = json_decode($json_input, true);
-                $id = filter_var($data['id'], FILTER_SANITIZE_STRING) : null;
+                $id = filter_var($data['id'], FILTER_SANITIZE_STRING);
                 $resultado = AccionesUbicaciones::eliminarUbicacion($id);
                 if ($resultado === 0) {
                     http_response_code(200);

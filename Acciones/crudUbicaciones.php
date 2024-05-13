@@ -6,7 +6,9 @@ class AccionesUbicaciones
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = "SELECT * FROM ubicaciones";
+            $consulta = "SELECT ubicaciones.*, areas.nombre AS nombre_area from ubicaciones
+            INNER JOIN areas ON ubicaciones.id_area_per=areas.id";
+            
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
             $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -18,7 +20,7 @@ class AccionesUbicaciones
                         <td ">' . htmlspecialchars($respuesta['id']) . '</td>
                         <td ">' . htmlspecialchars($respuesta['nombre']) . '</td>
                         <td ">' . htmlspecialchars($respuesta['descripcion']) . '</td>
-                        <td ">' . htmlspecialchars($respuesta['id_area_per']) . '</td>
+                        <td ">' . htmlspecialchars($respuesta['nombre_area']) . '</td>
                         <td class="mdl-data-table__cell">
                             <center>
                             <button class="btn btn-warning btn-circle element-white editar" data-id="' . $respuesta['id'] . '" id="editar">
