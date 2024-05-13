@@ -30,6 +30,7 @@
 
   <script>
     $(document).ready(function () {
+      
       $("#formAgregar").submit(function (e) {
         e.preventDefault();
         nombre = $("#nombreA").val();
@@ -513,10 +514,10 @@
                   <div class="form-group col-md-6">
                     <label for="area" class="text-bold">Área Pertenece</label>
                     <select class="form-control" id="areaE" required>
-                      <option value="">Seleccione una Área</option>
-                      <option value="aula1">Aula 01</option>
-                      <option value="aula2">Aula 02</option>
-                      <option value="aula3">Aula 03</option>
+                      <?php
+                      $resultado = AccionesUbicaciones::listarAreasEditar();
+                      echo ($resultado['dato']);
+                      ?>
                     </select>
                   </div>
                 </div>
