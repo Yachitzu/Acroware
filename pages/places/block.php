@@ -129,9 +129,9 @@
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="../../index.html"><img
+        <a class="navbar-brand brand-logo mr-5" href="../../index.php"><img
             src="../../resources/images/logos/Acroware.png" class="mr-2" alt="logo" /></a>
-        <a class="navbar-brand brand-logo-mini" href="../../index.html"><img
+        <a class="navbar-brand brand-logo-mini" href="../../index.php"><img
             src="../../resources/images/logos/acroware-mini.png" alt="logo" /></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
@@ -277,7 +277,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="../../index.html">
+            <a class="nav-link" href="../../index.php">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -312,10 +312,10 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="faculty.html">Facultades</a></li>
-                <li class="nav-item"> <a class="nav-link" href="block.html">Bloques</a></li>
-                <li class="nav-item"> <a class="nav-link" href="area.html">Áreas</a></li>
-                <li class="nav-item"> <a class="nav-link" href="location.html">Ubicaciones</a></li>
+                <li class="nav-item"> <a class="nav-link" href="faculty.php">Facultades</a></li>
+                <li class="nav-item"> <a class="nav-link" href="block.php">Bloques</a></li>
+                <li class="nav-item"> <a class="nav-link" href="area.php">Áreas</a></li>
+                <li class="nav-item"> <a class="nav-link" href="location.php">Ubicaciones</a></li>
               </ul>
             </div>
           </li>
@@ -360,7 +360,7 @@
                 <div class="cover-image-gest d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5">
                   <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase titleMain font-berthold">Bloques</h1>
                   <div class="d-inline-flex mb-lg-5">
-                    <p class="m-0 text-white"><a class="text-white" href="../../index.html">Inicio</a></p>
+                    <p class="m-0 text-white"><a class="text-white" href="../../index.php">Inicio</a></p>
                     <p class="m-0 text-white px-2">/</p>
                     <p class="m-0 text-white">Gestor de Bloques</p>
                   </div>
