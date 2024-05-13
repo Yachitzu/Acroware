@@ -2,6 +2,7 @@
 include_once ("crudFacultades.php");
 include_once ("crudBloques.php");
 include_once ("crudAreas.php");
+include_once ("crudUbicaciones.php");
 
 $accion = $_SERVER['REQUEST_METHOD'];
 switch ($accion) {

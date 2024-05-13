@@ -51,7 +51,7 @@ class AccionesUbicaciones
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = "SELECT * FROM facultades";
+            $consulta = "SELECT * FROM areas";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
             $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);

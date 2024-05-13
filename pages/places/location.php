@@ -27,6 +27,35 @@
 </head>
 
 <body>
+
+  <script>
+    $(document).ready(function () {
+      $("#formAgregar").submit(function (e) {
+        e.preventDefault();
+        nombre = $("#nombreA").val();
+        descripcion = $("#descripcionA").val();
+        id_area_per = $("#areaA").val();
+        opcion = 10;
+        $.ajax({
+          url: "../../Acciones/Rest.php",
+          type: "POST",
+          data: JSON.stringify({
+            nombre: nombre,
+            descripcion: descripcion,
+            id_area_per: id_area_per,
+            opcion: opcion
+          }),
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            location.reload();
+          }
+        });
+      });
+    })
+  </script>
+
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -390,12 +419,12 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="Name" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" id="Name" placeholder="Nombre"
+                    <input type="text" class="form-control" id="nombreA" placeholder="Nombre"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="area" class="text-bold">Área Pertenece</label>
-                    <select class="form-control" id="area" required>
+                    <select class="form-control" id="areaA" required>
                       <option value="">Seleccione una Área</option>
                       <?php
                       $resultado = AccionesUbicaciones::listarAreasInsertar();
@@ -407,7 +436,7 @@
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="Name" class="text-bold">Descripción</label>
-                    <textarea class="form-control" id="Description" placeholder="Descripción"
+                    <textarea class="form-control" id="descripcionA" placeholder="Descripción"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
                   </div>
                 </div>
@@ -478,12 +507,12 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="Name" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" id="Name" placeholder="Nombre"
+                    <input type="text" class="form-control" id="nombreE" placeholder="Nombre"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="area" class="text-bold">Área Pertenece</label>
-                    <select class="form-control" id="area" required>
+                    <select class="form-control" id="areaE" required>
                       <option value="">Seleccione una Área</option>
                       <option value="aula1">Aula 01</option>
                       <option value="aula2">Aula 02</option>
@@ -494,7 +523,7 @@
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="Name" class="text-bold">Descripción</label>
-                    <textarea class="form-control" id="Description" placeholder="Descripción"
+                    <textarea class="form-control" id="descripcionE" placeholder="Descripción"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
                   </div>
                 </div>
