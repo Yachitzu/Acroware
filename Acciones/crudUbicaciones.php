@@ -70,7 +70,36 @@ class AccionesUbicaciones
         }
     }
 
+    public static function actualizarUbicacion($id, $nombre, $descripcion, $id_area_per)
+    {
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = "SELECT * FROM ubicaciones where nombre= :nombre AND id != :id";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->bindParam(':nombre', $nombre);
+            $resultado->bindParam(':id', $id);
+            $resultado->execute();
+            if ($resultado->fetch()) {
+                echo ("No se pudo actualizar la ubicación.");
+                return 1;
+            } else {
+                $consulta = $conexion->prepare("UPDATE ubicaciones SET nombre= :nombre, descripcion= :descripcion, id_area_per= :id_area_per Where id= :id");
+                $consulta->bindParam(':id', $id);
+                $consulta->bindParam(':nombre', $nombre);
+                $consulta->bindParam(':descripcion', $descripcion);
+                $consulta->bindParam(':id_area_per', $id_area_per);
+                $consulta->execute();
+                $consulta;
+                return 0;
+            }
+        } catch (PDOException $e) {
+            error_log('Error en actualizarUbicaciones: ' . $e->getMessage());
+            return 2;
+        }
+    }
+
     
+
 
 }
 ?>
