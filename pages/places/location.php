@@ -22,6 +22,8 @@
   <!-- endinject -->
   <link rel="shortcut icon"
     href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
@@ -379,7 +381,7 @@
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample">
+        <form class="forms-sample" id="formAgregar">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -395,9 +397,10 @@
                     <label for="area" class="text-bold">Área Pertenece</label>
                     <select class="form-control" id="area" required>
                       <option value="">Seleccione una Área</option>
-                      <option value="aula1">Aula 01</option>
-                      <option value="aula2">Aula 02</option>
-                      <option value="aula3">Aula 03</option>
+                      <?php
+                      $resultado = AccionesUbicaciones::listarAreasInsertar();
+                      echo ($resultado['dato']);
+                      ?>
                     </select>
                   </div>
                 </div>
@@ -432,7 +435,7 @@
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample">
+        <form class="forms-sample" id="formEliminar">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -455,7 +458,7 @@
     </div>
   </div>
 
-  <div class="modal fade" id="modalCrud" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
+  <div class="modal fade" id="modalCrudEditar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
     aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -466,7 +469,7 @@
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample">
+        <form class="forms-sample" id="formEditar">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
