@@ -57,5 +57,18 @@ Class Obtener{
             $conectar->commit();    
         }
     }  
-
+    class Eliminar{
+        public static function BorrarEstudiantes($cedula){
+            $conectar = Conexion::getInstance()->getConexion();
+            $borrarSQL = "DELETE FROM usuarios WHERE cedula='$cedula'";
+            $resultado = $conectar->prepare($borrarSQL);
+            $resultado->execute();
+            $conectar->commit();
+            if ($resultado->rowCount() > 0) {
+                echo json_encode("Se eliminaron: " . $resultado->rowCount() . " registros");
+            } else {
+                echo json_encode(false);
+            }
+        }
+    }
 ?>
