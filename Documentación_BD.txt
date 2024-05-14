@@ -1,0 +1,286 @@
+-- Crear las tablas relacionadas con los usuarios
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) DEFAULT NULL,
+  `apellido` varchar(50) DEFAULT NULL,
+  `cedula` varchar(10) DEFAULT NULL,
+  `email` varchar(40) DEFAULT NULL,
+  `password` varchar(20) DEFAULT NULL,
+  `rol` varchar(30) DEFAULT NULL,
+  `fecha_ingreso` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Crear las tablas relacionadas con las facultades y bloques
+CREATE TABLE `facultades` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) DEFAULT NULL,
+  `descripcion` varchar(600) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `bloques` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) DEFAULT NULL,
+  `id_facultad_per` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_facultad_per` (`id_facultad_per`),
+  CONSTRAINT `fk_bloque_facultad` FOREIGN KEY (`id_facultad_per`) REFERENCES `facultades` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Crear las tablas relacionadas con las áreas y ubicaciones
+CREATE TABLE `areas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(60) DEFAULT NULL,
+  `piso` int(11) DEFAULT NULL,
+  `id_bloque_per` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_bloque_per` (`id_bloque_per`),
+  CONSTRAINT `fk_area_bloque` FOREIGN KEY (`id_bloque_per`) REFERENCES `bloques` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `ubicaciones` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) DEFAULT NULL,
+  `descripcion` varchar(100) DEFAULT NULL,
+  `id_area_per` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_area_per` (`id_area_per`),
+  CONSTRAINT `fk_ubicacion_area` FOREIGN KEY (`id_area_per`) REFERENCES `areas` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Crear la tabla de marcas
+CREATE TABLE `marcas` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(30) DEFAULT NULL,
+  `pais` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Crear las tablas relacionadas con los bienes informáticos y generales
+CREATE TABLE `bienes_informaticos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo_uta` varchar(30) DEFAULT NULL,
+  `nombre` varchar(60) DEFAULT NULL,
+  `serie` varchar(20) DEFAULT NULL,
+  `id_marca` int(11) DEFAULT NULL,
+  `modelo` varchar(50) DEFAULT NULL,
+  `ip` varchar(20) DEFAULT NULL,
+  `fecha_ingreso` date DEFAULT current_timestamp(),
+  `id_ubi_per` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_marca` (`id_marca`),
+  KEY `id_ubi_per` (`id_ubi_per`),
+  CONSTRAINT `fk_inf_marca` FOREIGN KEY (`id_marca`) REFERENCES `marcas` (`id`),
+  CONSTRAINT `fk_inf_ubicacion` FOREIGN KEY (`id_ubi_per`) REFERENCES `ubicaciones` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `bienes_general` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `codigo_uta` varchar(30) DEFAULT NULL,
+  `bld_o_bca` varchar(3) DEFAULT NULL,
+  `nombre` varchar(60) DEFAULT NULL,
+  `tipo` varchar(20) DEFAULT NULL,
+  `serie` varchar(20) DEFAULT NULL,
+  `id_marca` int(11) DEFAULT NULL,
+  `modelo` varchar(50) DEFAULT NULL,
+  `color` varchar(30) DEFAULT NULL,
+  `material` varchar(30) DEFAULT NULL,
+  `dimensiones` varchar(70) DEFAULT NULL,
+  `condicion` varchar(30) DEFAULT NULL,
+  `custodio_actual` varchar(250) DEFAULT NULL,
+  `fecha_ingreso` date DEFAULT current_timestamp(),
+  `valor_contable` float DEFAULT NULL,
+  `id_ubi_per` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_marca` (`id_marca`),
+  KEY `id_ubi_per` (`id_ubi_per`),
+  CONSTRAINT `fk_gen_marca` FOREIGN KEY (`id_marca`) REFERENCES `marcas` (`id`),
+  CONSTRAINT `fk_gen_ubicacion` FOREIGN KEY (`id_ubi_per`) REFERENCES `ubicaciones` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Crear las tablas relacionadas con los componentes y repotenciaciones
+CREATE TABLE `componentes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(70) DEFAULT NULL,
+  `descripcion` varchar(100) DEFAULT NULL,
+  `serie` varchar(20) DEFAULT NULL,
+  `codigo_adi_uta` varchar(20) DEFAULT NULL,
+  `id_bien_infor_per` int(11) DEFAULT NULL,
+  `repotenciado` varchar(2) DEFAULT NULL CHECK (`repotenciado` in ('si','no')),
+  PRIMARY KEY (`id`),
+  KEY `id_bien_infor_per` (`id_bien_infor_per`),
+  CONSTRAINT `fk_comp_bienes_inf` FOREIGN KEY (`id_bien_infor_per`) REFERENCES `bienes_informaticos` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `repotenciaciones` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_componente` int(11) DEFAULT NULL,
+  `nombre` varchar(70) DEFAULT NULL,
+  `serie` varchar(20) DEFAULT NULL,
+  `codigo_adi_uta` varchar(20) DEFAULT NULL,
+  `detalle_repotenciacion` varchar(300) DEFAULT NULL,
+  `fecha_repotenciacion` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `id_componente` (`id_componente`),
+  CONSTRAINT `fk_repot_componente` FOREIGN KEY (`id_componente`) REFERENCES `componentes` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Crear la tabla de actividades y su relación con usuarios y bienes informáticos
+CREATE TABLE `actividades` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usu_asig` int(11) DEFAULT NULL,
+  `nombre_actividad` varchar(50) DEFAULT NULL,
+  `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
+  `plazo` int(11) DEFAULT NULL,
+  `fecha_finalizacion` date DEFAULT NULL,
+  `id_bien_info` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_usu_asig` (`id_usu_asig`),
+  KEY `id_bien_info` (`id_bien_info`),
+  CONSTRAINT `fk_act_usuarios` FOREIGN KEY (`id_usu_asig`) REFERENCES `usuarios` (`id`),
+  CONSTRAINT `fk_act_bienes_inf` FOREIGN KEY (`id_bien_info`) REFERENCES `bienes_informaticos` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Crear la tabla de software
+CREATE TABLE `software` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre_software` varchar(50) DEFAULT NULL,
+  `proveedor` varchar(30) DEFAULT NULL,
+  `tipo_licencia` varchar(50) DEFAULT NULL,
+  `activado` varchar(2) DEFAULT NULL CHECK (`activado` in ('si','no')),
+  `fecha_adqui` date DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+para el diagramador
+
+
+Table usuarios as U {
+  id int [pk, increment]
+  nombre varchar(50)
+  apellido varchar(50)
+  cedula varchar(10)
+  email varchar(40)
+  password varchar(20)
+  rol varchar(30)
+  fecha_ingreso timestamp [not null]
+}
+
+Table facultades {
+  id int [pk, increment]
+  nombre varchar(100)
+  descripcion varchar(600)
+}
+
+Table bloques {
+  id int [pk, increment]
+  nombre varchar(50)
+  id_facultad_per int
+}
+
+Table areas {
+  id int [pk, increment]
+  nombre varchar(60)
+  piso int
+  id_bloque_per int
+}
+
+Table ubicaciones {
+  id int [pk, increment]
+  nombre varchar(50)
+  descripcion varchar(100)
+  id_area_per int
+}
+
+Table marcas {
+  id int [pk, increment]
+  nombre varchar(30)
+  pais varchar(30)
+}
+
+Table bienes_informaticos {
+  id int [pk, increment]
+  codigo_uta varchar(30)
+  nombre varchar(60)
+  serie varchar(20)
+  id_marca int
+  modelo varchar(50)
+  ip varchar(20)
+  fecha_ingreso date
+  id_ubi_per int
+}
+
+Table bienes_general {
+  id int [pk, increment]
+  codigo_uta varchar(30)
+  bld_o_bca varchar(3)
+  nombre varchar(60)
+  tipo varchar(20)
+  serie varchar(20)
+  id_marca int
+  modelo varchar(50)
+  color varchar(30)
+  material varchar(30)
+  dimensiones varchar(70)
+  condicion varchar(30)
+  custodio_actual varchar(250)
+  fecha_ingreso date
+  valor_contable float
+  id_ubi_per int
+}
+
+Table componentes {
+  id int [pk, increment]
+  nombre varchar(70)
+  descripcion varchar(100)
+  serie varchar(20)
+  codigo_adi_uta varchar(20)
+  id_bien_infor_per int
+  repotenciado varchar(2)
+}
+
+Table repotenciaciones {
+  id int [pk, increment]
+  id_componente int
+  nombre varchar(70)
+  serie varchar(20)
+  codigo_adi_uta varchar(20)
+  detalle_repotenciacion varchar(300)
+  fecha_repotenciacion timestamp [not null]
+}
+
+Table actividades {
+  id int [pk, increment]
+  id_usu_asig int
+  nombre_actividad varchar(50)
+  fecha_creacion timestamp [not null]
+  plazo int
+  fecha_finalizacion date
+  id_bien_info int
+}
+
+Table software {
+  id int [pk, increment]
+  nombre_software varchar(50)
+  proveedor varchar(30)
+  tipo_licencia varchar(50)
+  activado varchar(2)
+  fecha_adqui date
+}
+
+Ref: bloques.id_facultad_per > facultades.id
+Ref: areas.id_bloque_per > bloques.id
+Ref: ubicaciones.id_area_per > areas.id
+Ref: bienes_informaticos.id_marca > marcas.id
+Ref: bienes_informaticos.id_ubi_per > ubicaciones.id
+Ref: bienes_general.id_marca > marcas.id
+Ref: bienes_general.id_ubi_per > ubicaciones.id
+Ref: componentes.id_bien_infor_per > bienes_informaticos.id
+Ref: repotenciaciones.id_componente > componentes.id
+Ref: actividades.id_usu_asig > usuarios.id
+Ref: actividades.id_bien_info > bienes_informaticos.id
+
