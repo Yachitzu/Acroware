@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Gestión - Áreas</title>
+  <title>Gestión - Marcas</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="../../resources/vendors/feather/feather.css">
   <link rel="stylesheet" href="../../resources/vendors/ti-icons/css/themify-icons.css">
@@ -22,115 +22,9 @@
   <!-- endinject -->
   <link rel="shortcut icon"
     href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" />
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
-  <script>
-    $(document).ready(function () {
-      id = "";
-      $(".editar").click(function () {
-        fila = $(this).closest("tr");
-        id = fila.find('td:eq(0)').text();
-        nombre = fila.find('td:eq(1)').text();
-        descripcion = fila.find('td:eq(2)').text();
-        id_bloque_per = fila.find('td:eq(4)').text();
-        piso = fila.find('td:eq(5)').text();
-        id_usu_encargado = fila.find('td:eq(6)').text();
-        $("#nombreE").val(nombre);
-        $("#descripcionE").val(descripcion);
-        $("#bloqueE").val(id_bloque_per);
-        $("#pisoE").val(piso);
-        $("#usuarioE").val(id_usu_encargado);
-        $("#modalCrudEditar").modal('show');
-      });
-
-      $("#formEditar").submit(function (e) {
-        e.preventDefault();
-        id;
-        nombre = $("#nombreE").val();
-        descripcion = $("#descripcionE").val();
-        id_bloque_per = $("#bloqueE").val();
-        piso = $("#pisoE").val();
-        id_usu_encargado = $("#usuarioE").val();
-        opcion = 8;
-        $.ajax({
-          url: "../../Acciones/Rest.php",
-          type: "POST",
-          data: JSON.stringify({
-            id:id,
-            nombre: nombre,
-            descripcion: descripcion,
-            piso: piso,
-            id_bloque_per: id_bloque_per,
-            id_usu_encargado: id_usu_encargado,
-            opcion: opcion
-          }),
-          error: function (error) {
-            console.error("Error en la solicitud AJAX", error);
-          },
-          complete: function () {
-            location.reload();
-          }
-        });
-      });
-
-      $(".eliminar").click(function () {
-        fila = $(this).closest("tr");
-        id = fila.find('td:eq(0)').text();
-        $("#modalCrudEliminar").modal('show');
-      });
-
-      $("#formEliminar").submit(function (e) {
-        e.preventDefault();
-        id;
-        opcion = 9;
-        $.ajax({
-          url: "../../Acciones/Rest.php",
-          type: "POST",
-          data: JSON.stringify({
-            id: id,
-            opcion: opcion
-          }),
-          error: function (error) {
-            console.error("Error en la solicitud AJAX", error);
-          },
-          complete: function () {
-            location.reload();
-          }
-        });
-      });
-
-      $("#formAgregar").submit(function (e) {
-        e.preventDefault();
-        nombre = $("#nombreA").val();
-        descripcion = $("#descripcionA").val();
-        id_bloque_per = $("#bloqueA").val();
-        piso = $("#pisoA").val();
-        id_usu_encargado = $("#usuarioA").val();
-        opcion = 7;
-        $.ajax({
-          url: "../../Acciones/Rest.php",
-          type: "POST",
-          data: JSON.stringify({
-            nombre: nombre,
-            descripcion: descripcion,
-            id_bloque_per: id_bloque_per,
-            piso: piso,
-            id_usu_encargado: id_usu_encargado,
-            opcion: opcion
-          }),
-          error: function (error) {
-            console.error("Error en la solicitud AJAX", error);
-          },
-          complete: function () {
-            location.reload();
-          }
-        });
-      });
-    })
-  </script>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.php -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -290,7 +184,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="../management/users.php">
+            <a class="nav-link" href="users.php">
               <i class="icon-head menu-icon"></i>
               <span class="menu-title">Usuarios</span>
             </a>
@@ -318,16 +212,16 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="faculty.php">Facultades</a></li>
-                <li class="nav-item"> <a class="nav-link" href="block.php">Bloques</a></li>
-                <li class="nav-item"> <a class="nav-link" href="area.php">Áreas</a></li>
-                <li class="nav-item"> <a class="nav-link" href="location.php">Ubicaciones</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../places/faculty.php">Facultades</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../places/block.php">Bloques</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../places/area.php">Áreas</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../places/location.php">Ubicaciones</a></li>
               </ul>
             </div>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="../management/marca.php">
+            <a class="nav-link" href="marca.php">
               <i class="icon-bar-graph menu-icon"></i>
               <span class="menu-title">Marcas</span>
             </a>
@@ -341,7 +235,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="../management/software.php">
+            <a class="nav-link" href="software.php">
               <i class="icon-grid-2 menu-icon"></i>
               <span class="menu-title">Software</span>
             </a>
@@ -364,11 +258,11 @@
             <div class="col-md-12">
               <div class="profile">
                 <div class="cover-image-gest d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5">
-                  <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase titleMain font-berthold">Áreas</h1>
+                  <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase titleMain font-berthold">Marcas</h1>
                   <div class="d-inline-flex mb-lg-5">
                     <p class="m-0 text-white"><a class="text-white" href="../../index.php">Inicio</a></p>
                     <p class="m-0 text-white px-2">/</p>
-                    <p class="m-0 text-white">Gestor de Áreas</p>
+                    <p class="m-0 text-white">Gestor de Marcas</p>
                   </div>
                 </div>
               </div>
@@ -389,7 +283,7 @@
                   <span class="icon text-white-50">
                     <i class="fas fa-plus-circle"></i>
                   </span>
-                  <span class="text text-white">Agregar Área</span>
+                  <span class="text text-white">Agregar Marca</span>
                 </button>
               </div>
               <div class="card-body bg-darkwhite">
@@ -401,32 +295,95 @@
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
-                        <th>Facultad Pertenece</th>
-                        <th>Bloque Pertenece</th>
-                        <th>Piso</th>
-                        <th>Laboratorista Encargado</th>
+                        <th>País Origen</th>
+                        <th>Área</th>
                         <th>Acciones</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <?php
-                      include_once ("../../Acciones/crudAreas.php");
-                      $resultado = AccionesAreas::listarAreas();
-                      echo ($resultado['dato']);
-                      ?>
+                      <tr>
+                        <td>2</td>
+                        <td>Apple</td>
+                        <td>Empresa tecnológica conocida por sus productos como el iPhone, iPad y Mac.</td>
+                        <td>Estados Unidos</td>
+                        <td>Tecnológico</td>
+                        <td>
+                          <center>
+                            <button class="btn btn-warning btn-circle element-white editar" id="editar">
+                              <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-danger btn-circle eliminar" id="eliminar">
+                              <i class="fas fa-trash"></i>
+                            </button>
+                          </center>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>3</td>
+                        <td>Samsung</td>
+                        <td>Corporación multinacional que fabrica productos electrónicos.</td>
+                        <td>Corea del Sur</td>
+                        <td>Tecnológico</td>
+                        <td>
+                          <center>
+                            <button class="btn btn-warning btn-circle element-white editar" id="editar">
+                              <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-danger btn-circle eliminar" id="eliminar">
+                              <i class="fas fa-trash"></i>
+                            </button>
+                          </center>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>4</td>
+                        <td>Ashley Furniture</td>
+                        <td>Empresa estadounidense que fabrica y vende muebles para el hogar y la oficina.</td>
+                        <td>Estados Unidos</td>
+                        <td>Mobiliario</td>
+                        <td>
+                          <center>
+                            <button class="btn btn-warning btn-circle element-white editar" id="editar">
+                              <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-danger btn-circle eliminar" id="eliminar">
+                              <i class="fas fa-trash"></i>
+                            </button>
+                          </center>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>5</td>
+                        <td>Herman Miller</td>
+                        <td>Empresa estadounidense de diseño y fabricación de mobiliario para hogares, oficinas y
+                          espacios públicos.</td>
+                        <td>Estados Unidos</td>
+                        <td>Mobiliario</td>
+                        <td>
+                          <center>
+                            <button class="btn btn-warning btn-circle element-white editar" id="editar">
+                              <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-danger btn-circle eliminar" id="eliminar">
+                              <i class="fas fa-trash"></i>
+                            </button>
+                          </center>
+                        </td>
+                      </tr>
                     </tbody>
                     <tfoot>
                       <tr>
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Descripción</th>
-                        <th>Facultad Pertenece</th>
-                        <th>Bloque Pertenece</th>
-                        <th>Piso</th>
-                        <th>Laboratorista Encargado</th>
+                        <th>País Origen</th>
+                        <th>Área</th>
                         <th>Acciones</th>
                       </tr>
                     </tfoot>
+                    <tbody>
+
+                    </tbody>
                   </table>
                 </div>
               </div>
@@ -451,6 +408,7 @@
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
+
 
 
   <!-- Logout Modal-->
@@ -485,61 +443,43 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
-          <h3 class="modal-title text-white" id="modal-register-label">Agregar Área</h3>
+          <h3 class="modal-title text-white" id="modal-register-label">Agregar Marca</h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="formAgregar">
+        <form class="forms-sample">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
-                <p class="card-description">Por favor, complete los siguientes campos para agregar una nueva Área de un
-                  Bloque al sistema:</p>
+                <p class="card-description">Por favor, complete los siguientes campos para agregar una nueva marca al
+                  sistema:</p>
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="Name" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" id="nombreA" placeholder="Nombre"
+                    <input type="text" class="form-control" id="Name" placeholder="Nombre"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="area" class="text-bold">Área</label>
+                    <select class="form-control" id="area" required>
+                      <option value="">Seleccione un Área</option>
+                      <option value="tecnologico">Tecnológico</option>
+                      <option value="mobiliario">Mobiliario</option>
+                    </select>
                   </div>
 
                 </div>
                 <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="bloque" class="text-bold">Bloque Pertenece</label>
-                    <select class="form-control" id="bloqueA" required>
-                      <option value="">Seleccione un Bloque</option>
-                      <?php
-                      $bloques = AccionesAreas::listarBloquesInsertar();
-                      echo ($bloques['dato']);
-                      ?>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="piso" class="text-bold">Piso Pertenece</label>
-                    <select class="form-control" id="pisoA" required>
-                      <option value="">Seleccione un Piso</option>
-                      <option value="Planta Baja">Planta Baja</option>
-                      <option value="Primer Piso">Primer Piso</option>
-                      <option value="Segundo Piso">Segundo Piso</option>
-                    </select>
-                  </div>
                   <div class="form-group col-md-12">
-                    <label for="usuario" class="text-bold">Laboratorista Encargado</label>
-                    <select class="form-control" id="usuarioA" required>
-                      <option value="">Seleccione un Laboratorista</option>
-                      <?php
-                      $bloques = AccionesAreas::listarUsuariosInsertar();
-                      echo ($bloques['dato']);
-                      ?>
-                    </select>
+                    <label for="Pais" class="text-bold">País</label>
+                    <input type="text" class="form-control" id="pais" placeholder="País"
+                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                   </div>
-                </div>
-                <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="Name" class="text-bold">Descripción</label>
-                    <textarea class="form-control" id="descripcionA" placeholder="Descripción"
+                    <textarea class="form-control" id="Description" placeholder="Descripción"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
                   </div>
                 </div>
@@ -547,9 +487,9 @@
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-bs-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
-            <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Área ">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Marca ">
           </div>
         </form>
       </div>
@@ -561,17 +501,17 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
-          <h3 class="modal-title text-white" id="modal-register-label">Eliminar Área </h3>
+          <h3 class="modal-title text-white" id="modal-register-label">Eliminar Marca </h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="formEliminar">
+        <form class="forms-sample">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
-                <p class="card-description">¿Está seguro de que desea eliminar el Área?</p>
+                <p class="card-description">¿Está seguro de que desea eliminar la Marca?</p>
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <p class="text-danger"><small>Esta acción no se puede deshacer.</small></p>
@@ -583,69 +523,55 @@
           <div class="modal-footer">
             <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
-            <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Área ">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Marca ">
           </div>
         </form>
       </div>
     </div>
   </div>
 
-  <div class="modal fade" id="modalCrudEditar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
+  <div class="modal fade" id="modalCrud" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
     aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
-          <h3 class="modal-title text-white" id="modal-register-label">Editar Área</h3>
+          <h3 class="modal-title text-white" id="modal-register-label">Editar Marca</h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="formEditar">
+        <form class="forms-sample">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
                 <p class="card-description">Por favor, complete los siguientes campos para editar la información del
-                  Área seleccionada:</p>
+                  software seleccionado:</p>
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="Name" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" id="nombreE" placeholder="Nombre"
+                    <input type="text" class="form-control" id="Name" placeholder="Nombre"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                   </div>
+                  <div class="form-group col-md-6">
+                    <label for="area" class="text-bold">Área</label>
+                    <select class="form-control" id="area" required>
+                      <option value="">Seleccione un Área</option>
+                      <option value="tecnologico">Tecnológico</option>
+                      <option value="mobiliario">Mobiliario</option>
+                    </select>
+                  </div>
+
                 </div>
                 <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="bloque" class="text-bold">Bloque Pertenece</label>
-                    <select class="form-control" id="bloqueE" required>
-                      <?php
-                      $bloques = AccionesAreas::listarBloquesEditar();
-                      echo ($bloques['dato']);
-                      ?>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="piso" class="text-bold">Piso Pertenece</label>
-                    <select class="form-control" id="pisoE" required>
-                      <option value="Planta Baja">Planta Baja</option>
-                      <option value="Primer Piso">Primer Piso</option>
-                      <option value="Segundo Piso">Segundo Piso</option>
-                    </select>
-                  </div>
                   <div class="form-group col-md-12">
-                    <label for="usuario" class="text-bold">Laboratorista Encargado</label>
-                    <select class="form-control" id="usuarioE" required>
-                      <?php
-                      $bloques = AccionesAreas::listarUsuariosEditar();
-                      echo ($bloques['dato']);
-                      ?>
-                    </select>
+                    <label for="Pais" class="text-bold">País</label>
+                    <input type="text" class="form-control" id="pais" placeholder="País"
+                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                   </div>
-                </div>
-                <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="Name" class="text-bold">Descripción</label>
-                    <textarea class="form-control" id="descripcionE" placeholder="Descripción"
+                    <textarea class="form-control" id="Description" placeholder="Descripción"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
                   </div>
                 </div>
@@ -655,12 +581,14 @@
           <div class="modal-footer">
             <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
-            <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Área ">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Marca ">
           </div>
         </form>
       </div>
     </div>
   </div>
+
+
 
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>

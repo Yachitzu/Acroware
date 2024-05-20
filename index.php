@@ -36,7 +36,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 
 <body>
   <div class="container-scroller">
-    <!-- partial:partials/_navbar.html -->
+    <!-- partial:partials/_navbar.php -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
         <a class="navbar-brand brand-logo mr-5" href="index.php"><img src="resources/images/logos/Acroware.png"
@@ -91,7 +91,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
               <img src="resources/images/faces/perfil1.png" alt="profile" />
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item" href="pages/others/acount.html">
+              <a class="dropdown-item" href="pages/others/acount.php">
                 <i class="ti-settings text-primary"></i>
                 Editar Perfil
               </a>
@@ -115,7 +115,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
     </nav>
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
-      <!-- partial:partials/_settings-panel.html -->
+      <!-- partial:partials/_settings-panel.php -->
 
       <div id="right-sidebar" class="settings-panel">
         <i class="settings-close ti-close"></i>
@@ -189,7 +189,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         </div>
       </div>
       <!-- partial -->
-      <!-- partial:partials/_sidebar.html -->
+      <!-- partial:partials/_sidebar.php -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
@@ -200,7 +200,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="pages/management/users.html">
+            <a class="nav-link" href="pages/management/users.php">
               <i class="icon-head menu-icon"></i>
               <span class="menu-title">Usuarios</span>
             </a>
@@ -214,8 +214,8 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             </a>
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/assets/assets-i.html">Bienes Informáticos</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/assets/assets-m.html">Bienes Mobiliarios</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/assets/assets-i.php">Bienes Informáticos</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/assets/assets-m.php">Bienes Mobiliarios</a></li>
               </ul>
             </div>
           </li>
@@ -237,21 +237,21 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="pages/others/acount.html">
+            <a class="nav-link" href="pages/others/acount.php">
               <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Cuenta</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="pages/management/software.html">
+            <a class="nav-link" href="pages/management/software.php">
               <i class="icon-grid-2 menu-icon"></i>
               <span class="menu-title">Software</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="pages/others/QR.html">
+            <a class="nav-link" href="pages/others/QR.php">
               <i class="icon-contract menu-icon"></i>
               <span class="menu-title">Escaneo QR</span>
             </a>
@@ -821,7 +821,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           </div>
         </div>
         <!-- content-wrapper ends -->
-        <!-- partial:partials/_footer.html -->
+        <!-- partial:partials/_footer.php -->
         <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">
             <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Acroware © 2024. Todos los

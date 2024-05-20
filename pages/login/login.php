@@ -87,7 +87,7 @@ if (isset($_SESSION['email'])) {
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small text-secondary" href="forgot.html">¿Olvidaste tu Contraseña?</a>
+                                        <a class="small text-secondary" href="forgot.php">¿Olvidaste tu Contraseña?</a>
 
                                     </div>
                                     <div class="text-center">

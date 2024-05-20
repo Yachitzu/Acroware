@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Gestión - Software</title>
+  <title>Gestión - Usuarios</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="../../resources/vendors/feather/feather.css">
   <link rel="stylesheet" href="../../resources/vendors/ti-icons/css/themify-icons.css">
@@ -20,11 +20,13 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="../../resources/css/vertical-layout-light/style.css">
   <!-- endinject -->
-  <link rel="shortcut icon" href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" /> 
+  <link rel="shortcut icon" href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" />
+
+  
 </head>
 <body>
   <div class="container-scroller">
-    <!-- partial:partials/_navbar.html -->
+    <!-- partial:partials/_navbar.php -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
         <a class="navbar-brand brand-logo mr-5" href="../../index.php"><img src="../../resources/images/logos/Acroware.png" class="mr-2" alt="logo"/></a>
@@ -36,8 +38,7 @@
         </button>
         <ul class="navbar-nav mr-lg-2">
           <li class="nav-item nav-search d-none d-lg-block">
-            <div class="input-group">
-              
+            <div class="input-group"> 
             </div>
           </li>
         </ul>
@@ -69,7 +70,7 @@
               <img src="../../resources/images/faces/perfil1.png" alt="profile"/>
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item"  href="../others/acount.html">
+              <a class="dropdown-item"  href="../others/acount.php">
                 <i class="ti-settings text-primary"></i>
                 Editar Perfil
               </a>
@@ -92,7 +93,7 @@
     </nav>
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
-      <!-- partial:partials/_settings-panel.html -->
+      <!-- partial:partials/_settings-panel.php -->
       
       <div id="right-sidebar" class="settings-panel">
         <i class="settings-close ti-close"></i>
@@ -164,8 +165,8 @@
         </div>
       </div>
       <!-- partial -->
-      <!-- partial:partials/_sidebar.html -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+      <!-- partial:partials/_sidebar.php -->
+      <nav class="sidebar sidebar-offcanvas " id="sidebar">
         <ul class="nav">
           <li class="nav-item">
             <a class="nav-link" href="../../index.php">
@@ -175,7 +176,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="users.html">
+            <a class="nav-link" href="users.php">
               <i class="icon-head menu-icon"></i>
               <span class="menu-title">Usuarios</span>
             </a>
@@ -189,8 +190,8 @@
             </a>
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.html">Bienes Informáticos</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.html">Bienes Mobiliarios</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.php">Bienes Informáticos</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.php">Bienes Mobiliarios</a></li>
               </ul>
             </div>
           </li>
@@ -212,28 +213,28 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="marca.html">
+            <a class="nav-link" href="marca.php">
                 <i class="icon-bar-graph menu-icon"></i>
               <span class="menu-title">Marcas</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="../others/acount.html">
+            <a class="nav-link" href="../others/acount.php">
               <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Cuenta</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="software.html">
+            <a class="nav-link" href="software.php">
               <i class="icon-grid-2 menu-icon"></i>
               <span class="menu-title">Software</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="../others/QR.html">
+            <a class="nav-link" href="../others/QR.php">
               <i class="icon-contract menu-icon"></i>
               <span class="menu-title">Escaneo QR</span>
             </a>
@@ -249,11 +250,11 @@
                 <div class="col-md-12">
                     <div class="profile">
                         <div class="cover-image-gest d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5">
-                            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase titleMain font-berthold">Software</h1>
+                            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase titleMain font-berthold">Usuarios</h1>
                             <div class="d-inline-flex mb-lg-5">
                                 <p class="m-0 text-white"><a class="text-white" href="../../index.php">Inicio</a></p>
                                 <p class="m-0 text-white px-2">/</p>
-                                <p class="m-0 text-white">Gestor de Software</p>
+                                <p class="m-0 text-white">Gestor de Usuarios</p>
                             </div>
                         </div>
                     </div>
@@ -274,7 +275,7 @@
                             <span class="icon text-white-50">
                                 <i class="fas fa-plus-circle"></i> 
                             </span>
-                            <span class="text text-white">Agregar Software</span>
+                            <span class="text text-white">Agregar Usuario</span>
                         </button>
                     </div>
                     <div class="card-body bg-darkwhite">
@@ -284,21 +285,30 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Nombre</th>
-                                        <th>Proovedor</th>
-                                        <th>Tipo Licencia</th>
-                                        <th>Activado</th>
-                                        <th>Fecha Adquisición</th>
+                                        <th>Apellido</th>
+                                        <th>Cedula</th>
+                                        <th>Email</th>
+                                        <th>Telefono</th>
+                                        <th>Rol</th>
+                                        <th>Dirección</th>
+                                        <th>Perfil</th>
+                                        <th>Fecha Creación</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td>Microsoft Office</td>
-                                        <td>Microsoft</td>
-                                        <td>Comercial</td>
-                                        <td>Si</td>
-                                        <td>2023-05-15</td>
+                                        <td>John</td>
+                                        <td>Doe</td>
+                                        <td>password123</td>
+                                        <td>john.doe@example.com</td>
+                                        <td>1234567890</td>
+                                        <td>User</td>
+                                        
+                                        <td>123 Main St</td>
+                                        <td><img src="../../resources/images/faces/perfil1.png" alt="Profile Picture"></td>
+                                        <td>2024-05-06</td>
                                         <td>
                                             <center>          
                                                 <button class="btn btn-warning btn-circle element-white editar" id="editar">
@@ -312,11 +322,16 @@
                                     </tr>
                                     <tr>
                                         <td>2</td>
-                                        <td>Adobe Photoshop</td>
-                                        <td>Adobe</td>
-                                        <td>Comercial</td>
-                                        <td>No</td>
-                                        <td>2022-10-20</td>
+                                        <td>Jane</td>
+                                        <td>Smith</td>
+                                        <td>abc123</td>
+                                        <td>jane.smith@example.com</td>
+                                        <td>9876543210</td>
+                                        <td>Admin</td>
+                                        
+                                        <td>456 Oak St</td>
+                                        <td><img src="../../resources/images/faces/perfil1.png" alt="Profile Picture"></td>
+                                        <td>2024-05-05</td>
                                         <td>
                                             <center>          
                                                 <button class="btn btn-warning btn-circle element-white editar" id="editar">
@@ -330,11 +345,16 @@
                                     </tr>
                                     <tr>
                                         <td>3</td>
-                                        <td>Linux Ubuntu</td>
-                                        <td>Comunidad</td>
-                                        <td>Open Source</td>
-                                        <td>Si</td>
-                                        <td>2023-01-30</td>
+                                        <td>Michael</td>
+                                        <td>Johnson</td>
+                                        <td>pass456</td>
+                                        <td>michael.johnson@example.com</td>
+                                        <td>5556667777</td>
+                                        <td>User</td>
+                                        
+                                        <td>789 Pine St</td>
+                                        <td><img src="../../resources/images/faces/perfil1.png" alt="Profile Picture"></td>
+                                        <td>2024-05-04</td>
                                         <td>
                                             <center>          
                                                 <button class="btn btn-warning btn-circle element-white editar" id="editar">
@@ -346,13 +366,19 @@
                                             </center>
                                         </td>
                                     </tr>
+
                                     <tr>
                                         <td>4</td>
-                                        <td>Google Chrome</td>
-                                        <td>Google</td>
-                                        <td>Comercial</td>
-                                        <td>Si</td>
-                                        <td>2022-08-10</td>
+                                        <td>Sarah</td>
+                                        <td>Williams</td>
+                                        <td>pass789</td>
+                                        <td>sarah.williams@example.com</td>
+                                        <td>3334445555</td>
+                                        <td>User</td>
+                                        
+                                        <td>101 Elm St</td>
+                                        <td><img src="../../resources/images/faces/perfil1.png" alt="Profile Picture"></td>
+                                        <td>2024-05-03</td>
                                         <td>
                                             <center>          
                                                 <button class="btn btn-warning btn-circle element-white editar" id="editar">
@@ -366,11 +392,16 @@
                                     </tr>
                                     <tr>
                                         <td>5</td>
-                                        <td>Visual Studio Code</td>
-                                        <td>Microsoft</td>
-                                        <td>Open Source</td>
-                                        <td>No</td>
-                                        <td>2023-03-25</td>
+                                        <td>Emily</td>
+                                        <td>Brown</td>
+                                        <td>qwerty</td>
+                                        <td>emily.brown@example.com</td>
+                                        <td>7778889999</td>
+                                        <td>Admin</td>
+                                        
+                                        <td>202 Maple St</td>
+                                        <td><img src="../../resources/images/faces/perfil1.png" alt="Profile Picture"></td>
+                                        <td>2024-05-02</td>
                                         <td>
                                             <center>          
                                                 <button class="btn btn-warning btn-circle element-white editar" id="editar">
@@ -384,11 +415,16 @@
                                     </tr>
                                     <tr>
                                         <td>6</td>
-                                        <td>Skype</td>
-                                        <td>Microsoft</td>
-                                        <td>Comercial</td>
-                                        <td>No</td>
-                                        <td>2022-12-05</td>
+                                        <td>David</td>
+                                        <td>Miller</td>
+                                        <td>password</td>
+                                        <td>david.miller@example.com</td>
+                                        <td>2223334444</td>
+                                        <td>User</td>
+                                        
+                                        <td>303 Pine St</td>
+                                        <td><img src="../../resources/images/faces/perfil1.png" alt="Profile Picture"></td>
+                                        <td>2024-05-01</td>
                                         <td>
                                             <center>          
                                                 <button class="btn btn-warning btn-circle element-white editar" id="editar">
@@ -401,12 +437,17 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>7</td>
-                                        <td>Zoom</td>
-                                        <td>Zoom Video Communications</td>
-                                        <td>Comercial</td>
-                                        <td>Si</td>
-                                        <td>2022-11-18</td>
+                                        <td>2</td>
+                                        <td>Jane</td>
+                                        <td>Smith</td>
+                                        <td>abc123</td>
+                                        <td>jane.smith@example.com</td>
+                                        <td>9876543210</td>
+                                        <td>Admin</td>
+                                        
+                                        <td>456 Oak St</td>
+                                        <td><img src="../../resources/images/faces/perfil1.png" alt="Profile Picture"></td>
+                                        <td>2024-05-05</td>
                                         <td>
                                             <center>          
                                                 <button class="btn btn-warning btn-circle element-white editar" id="editar">
@@ -419,12 +460,17 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>8</td>
-                                        <td>Firefox</td>
-                                        <td>Mozilla</td>
-                                        <td>Open Source</td>
-                                        <td>Si</td>
-                                        <td>2023-02-14</td>
+                                        <td>3</td>
+                                        <td>Michael</td>
+                                        <td>Johnson</td>
+                                        <td>pass456</td>
+                                        <td>michael.johnson@example.com</td>
+                                        <td>5556667777</td>
+                                        <td>User</td>
+                                        
+                                        <td>789 Pine St</td>
+                                        <td><img src="../../resources/images/faces/perfil1.png" alt="Profile Picture"></td>
+                                        <td>2024-05-04</td>
                                         <td>
                                             <center>          
                                                 <button class="btn btn-warning btn-circle element-white editar" id="editar">
@@ -436,15 +482,91 @@
                                             </center>
                                         </td>
                                     </tr>
+
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Sarah</td>
+                                        <td>Williams</td>
+                                        <td>pass789</td>
+                                        <td>sarah.williams@example.com</td>
+                                        <td>3334445555</td>
+                                        <td>User</td>
+                                        
+                                        <td>101 Elm St</td>
+                                        <td><img src="../../resources/images/faces/perfil1.png" alt="Profile Picture"></td>
+                                        <td>2024-05-03</td>
+                                        <td>
+                                            <center>          
+                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </center>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Emily</td>
+                                        <td>Brown</td>
+                                        <td>qwerty</td>
+                                        <td>emily.brown@example.com</td>
+                                        <td>7778889999</td>
+                                        <td>Admin</td>
+                                        
+                                        <td>202 Maple St</td>
+                                        <td><img src="../../resources/images/faces/perfil1.png" alt="Profile Picture"></td>
+                                        <td>2024-05-02</td>
+                                        <td>
+                                            <center>          
+                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </center>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>David</td>
+                                        <td>Miller</td>
+                                        <td>password</td>
+                                        <td>david.miller@example.com</td>
+                                        <td>2223334444</td>
+                                        <td>User</td>
+                                        
+                                        <td>303 Pine St</td>
+                                        <td><img src="../../resources/images/faces/perfil1.png" alt="Profile Picture"></td>
+                                        <td>2024-05-01</td>
+                                        <td>
+                                            <center>          
+                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </center>
+                                        </td>
+                                    </tr>
+                                    
                                 </tbody>                                
                                 <tfoot>
                                     <tr>
                                         <th>ID</th>
                                         <th>Nombre</th>
-                                        <th>Proovedor</th>
-                                        <th>Tipo Licencia</th>
-                                        <th>Activado</th>
-                                        <th>Fecha Adquisición</th>
+                                        <th>Apellido</th>
+                                        <th>Cedula</th>
+                                        <th>Email</th>
+                                        <th>Telefono</th>
+                                        <th>Rol</th>
+                                        
+                                        <th>Dirección</th>
+                                        <th>Perfil</th>
+                                        <th>Fecha Creación</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </tfoot>
@@ -461,7 +583,7 @@
 
         </div>
         <!-- content-wrapper ends -->
-        <!-- partial:partials/_footer.html -->
+        <!-- partial:partials/_footer.php -->
         <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">
             <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Acroware © 2024. Todos los derechos reservados.</span>
@@ -505,7 +627,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-primary">
-                <h3 class="modal-title text-white" id="modal-register-label">Agregar Software</h3>
+                <h3 class="modal-title text-white" id="modal-register-label">Agregar Usuario</h3>
                 <p class="modal">Ingrese los datos del Usuario:</p>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <i class="fas fa-times" class="element-white"></i>
@@ -515,11 +637,11 @@
             <div class="modal-body">
                 <div class="grid-margin-modal">          
                     <div class="card-body">
-                        <p class="card-description">Por favor, complete los siguientes campos para agregar un nuevo software al sistema:</p>
+                        <p class="card-description">Por favor, complete los siguientes campos para agregar un nuevo usuario al sistema:</p>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="Dni" class="text-bold">Proveedor</label>
-                                <input type="text" class="form-control" id="Proveedor" placeholder="Proveedor" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                                <label for="Dni" class="text-bold">Cedula</label>
+                                <input type="text" class="form-control" id="Dni" placeholder="Cédula" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="Name" class="text-bold">Nombre</label>
@@ -527,40 +649,52 @@
                             </div>
                         </div>
                         <div class="form-row">
-                          <div class="form-group col-md-6">
-                            <label for="activo" class="text-bold">Activo</label>
-                            <div class="form-check mx-4">
-                                <input class="form-check-input" type="radio" name="activo" id="si_activo" value="si" required>
-                                <label class="form-check-label" for="si_activo">
-                                    Sí
-                                </label>
+                            <div class="form-group col-md-6">
+                                <label for="Last_Name" class="text-bold">Apellido</label>
+                                <input type="text" class="form-control" id="Last_Name" placeholder="Apellido" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                             </div>
-                            <div class="form-check mx-4">
-                                <input class="form-check-input" type="radio" name="activo" id="no_activo" value="no" required>
-                                <label class="form-check-label" for="no_activo">
-                                    No
-                                </label>
+                            <div class="form-group col-md-6">
+                                <label for="Adress" class="text-bold">Dirección</label>
+                                <input type="text" class="form-control" id="Address" placeholder="Dirección" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="Email" class="text-bold">Email</label>
+                                <input type="email" class="form-control" id="Email" placeholder="Email" required>
                             </div>
                         </div>
+                        <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="role" class="text-bold">Tipo Licencia</label>
-                                <select class="form-control" id="licencia" required>
-                                    <option value="">Seleccione un Tipo</option>
-                                    <option value="publico">Dominio Público</option>
-                                    <option value="abierto">Codigo Abierto</option>
-                                    <option value="suscripcion">Suscripción</option>
-                                    <option value="propietario">Propietario</option>
-                                    <option value="gratuito">Gratuito</option>
+                                <label for="Mobile" class="text-bold">Telefono</label>
+                                <input type="text" class="form-control" id="Mobile" placeholder="Telefono" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="role" class="text-bold">Rol</label>
+                                <select class="form-control" id="role" required>
+                                    <option value="">Seleccione un rol</option>
+                                    <option value="laboratorista">Laboratorista</option>
+                                    <option value="administrador">Administrador</option>
+                                    <option value="estudiante">Estudiante en Prácticas</option>
+                                    <option value="generador_reportes">Generador de Reportes</option>
                                 </select>
                             </div>
                         </div>
-                        
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="InputPassword" class="text-bold">Contraseña</label>
+                                <input type="password" class="form-control" id="InputPassword" placeholder="Contraseña" pattern="^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$" title="La contraseña debe tener entre 8 y 20 caracteres, al menos una letra mayúscula y un número. No se permiten caracteres especiales." oninput="validatePassword(this)" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="ConfirmPassword" class="text-bold">Confirmar Contraseña</label>
+                                <input type="password" class="form-control" id="ConfirmPassword" placeholder="Contraseña" pattern="^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$" title="La contraseña debe tener entre 8 y 20 caracteres, al menos una letra mayúscula y un número. No se permiten caracteres especiales." oninput="validatePassword(this); checkPasswordMatch();" required>
+                                <div class="invalid-feedback" id="passwordMatchError" style="display: none;">Las contraseñas no coinciden.</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
-                <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Software ">
+                <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Usuario ">
             </div>
           </form>
         </div>
@@ -571,7 +705,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-primary">
-                <h3 class="modal-title text-white" id="modal-register-label">Eliminar Software </h3>
+                <h3 class="modal-title text-white" id="modal-register-label">Eliminar Usuario</h3>
                 <p class="modal">Ingrese los datos del Usuario:</p>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <i class="fas fa-times" class="element-white"></i>
@@ -581,7 +715,7 @@
             <div class="modal-body">
                 <div class="grid-margin-modal">          
                     <div class="card-body">
-                        <p class="card-description">¿Está seguro de que desea eliminar el Software?</p>
+                        <p class="card-description">¿Está seguro de que desea eliminar el Usuario?</p>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <p class="text-danger"><small>Esta acción no se puede deshacer.</small></p>
@@ -592,7 +726,7 @@
             </div>
             <div class="modal-footer">
                 <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
-                <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Software ">
+                <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Usuario ">
             </div>
           </form>
         </div>
@@ -603,7 +737,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-primary">
-                <h3 class="modal-title text-white" id="modal-register-label">Editar Software</h3>
+                <h3 class="modal-title text-white" id="modal-register-label">Editar Usuario</h3>
                 <p class="modal">Ingrese los datos del Usuario:</p>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <i class="fas fa-times" class="element-white"></i>
@@ -613,57 +747,36 @@
             <div class="modal-body">
                 <div class="grid-margin-modal">          
                     <div class="card-body">
-                        <p class="card-description">Por favor, complete los siguientes campos para editar la información del software seleccionado:</p>
+                        <p class="card-description">Por favor, complete los siguientes campos para editar su información personal:</p>
                         <div class="form-row">
-                          <div class="form-group col-md-6">
-                              <label for="Dni" class="text-bold">Proveedor</label>
-                              <input type="text" class="form-control" id="Proveedor" placeholder="Proveedor" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
-                          </div>
-                          <div class="form-group col-md-6">
-                              <label for="Name" class="text-bold">Nombre</label>
-                              <input type="text" class="form-control" id="Name" placeholder="Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
-                          </div>
-                      </div>
-                      <div class="form-row">
-                        <div class="form-group col-md-6">
-                          <label for="activo" class="text-bold">Activo</label>
-                          <div class="form-check mx-4">
-                              <input class="form-check-input" type="radio" name="activo" id="si_activo" value="si" required>
-                              <label class="form-check-label" for="si_activo">
-                                  Sí
-                              </label>
-                          </div>
-                          <div class="form-check mx-4">
-                              <input class="form-check-input" type="radio" name="activo" id="no_activo" value="no" required>
-                              <label class="form-check-label" for="no_activo">
-                                  No
-                              </label>
-                          </div>
-                      </div>
-                          <div class="form-group col-md-6">
-                              <label for="licencia" class="text-bold">Tipo Licencia</label>
-                              <select class="form-control" id="licencia" required>
-                                  <option value="">Seleccione un Tipo</option>
-                                  <option value="publico">Dominio Público</option>
-                                  <option value="abierto">Codigo Abierto</option>
-                                  <option value="suscripcion">Suscripción</option>
-                                  <option value="propietario">Propietario</option>
-                                  <option value="gratuito">Gratuito</option>
-                              </select>
-                          </div>
-                      </div>
+                            <div class="form-group col-md-12">
+                                <label for="Email" class="text-bold">Email</label>
+                                <input type="email" class="form-control" id="Email" placeholder="Email" required>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="role" class="text-bold">Rol</label>
+                                <select class="form-control" id="role" required>
+                                    <option value="">Seleccione un rol</option>
+                                    <option value="laboratorista">Laboratorista</option>
+                                    <option value="administrador">Administrador</option>
+                                    <option value="estudiante">Estudiante en Prácticas</option>
+                                    <option value="generador_reportes">Generador de Reportes</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
-                <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Software ">
+                <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Usuario ">
             </div>
           </form>
         </div>
     </div>
 </div>
   
+
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->

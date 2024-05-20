@@ -122,7 +122,7 @@
   </script>
 
   <div class="container-scroller">
-    <!-- partial:partials/_navbar.html -->
+    <!-- partial:partials/_navbar.php -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
         <a class="navbar-brand brand-logo mr-5" href="../../index.php"><img
@@ -171,7 +171,7 @@
               <img src="../../resources/images/faces/perfil1.png" alt="profile" />
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item" href="../others/acount.html">
+              <a class="dropdown-item" href="../others/acount.php">
                 <i class="ti-settings text-primary"></i>
                 Editar Perfil
               </a>
@@ -195,7 +195,7 @@
     </nav>
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
-      <!-- partial:partials/_settings-panel.html -->
+      <!-- partial:partials/_settings-panel.php -->
 
       <div id="right-sidebar" class="settings-panel">
         <i class="settings-close ti-close"></i>
@@ -269,7 +269,7 @@
         </div>
       </div>
       <!-- partial -->
-      <!-- partial:partials/_sidebar.html -->
+      <!-- partial:partials/_sidebar.php -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
@@ -280,7 +280,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="../management/users.html">
+            <a class="nav-link" href="../management/users.php">
               <i class="icon-head menu-icon"></i>
               <span class="menu-title">Usuarios</span>
             </a>
@@ -294,8 +294,8 @@
             </a>
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.html">Bienes Informáticos</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.html">Bienes Mobiliarios</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.php">Bienes Informáticos</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.php">Bienes Mobiliarios</a></li>
               </ul>
             </div>
           </li>
@@ -317,28 +317,28 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="../management/marca.html">
+            <a class="nav-link" href="../management/marca.php">
               <i class="icon-bar-graph menu-icon"></i>
               <span class="menu-title">Marcas</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="../others/acount.html">
+            <a class="nav-link" href="../others/acount.php">
               <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Cuenta</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="../management/software.html">
+            <a class="nav-link" href="../management/software.php">
               <i class="icon-grid-2 menu-icon"></i>
               <span class="menu-title">Software</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="../others/QR.html">
+            <a class="nav-link" href="../others/QR.php">
               <i class="icon-contract menu-icon"></i>
               <span class="menu-title">Escaneo QR</span>
             </a>
@@ -422,7 +422,7 @@
 
         </div>
         <!-- content-wrapper ends -->
-        <!-- partial:partials/_footer.html -->
+        <!-- partial:partials/_footer.php -->
         <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">
             <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Acroware © 2024. Todos los
