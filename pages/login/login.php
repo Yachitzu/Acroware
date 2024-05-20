@@ -92,7 +92,7 @@ if (isset($_SESSION['email'])) {
                                     </div>
                                     <div class="text-center">
 
-                                        <a class="small text-secondary" href="../../index.html">Dashboard</a>
+                                        <a class="small text-secondary" href="../../index.php">Dashboard</a>
                                     </div>
 
                                 </div>
