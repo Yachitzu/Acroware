@@ -15,7 +15,6 @@
   <link rel="stylesheet" href="../../resources/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
   <link href="../../resources/vendors/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="../../resources/vendors/ti-icons/css/themify-icons.css">
-  <link rel="stylesheet" type="text/css" href="../../resources/js/select.dataTables.min.css">
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href="../../resources/css/vertical-layout-light/style.css">
@@ -597,7 +596,6 @@
   <script src="../../resources/vendors/chart.js/Chart.min.js"></script>
   <script src="../../resources/vendors/datatables.net/jquery.dataTables.js"></script>
   <script src="../../resources/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
-  <script src="../../resources/js/dataTables.select.min.js"></script>
 
   <!-- End plugin js for this page -->
   <!-- inject:js -->
@@ -607,10 +605,8 @@
   <script src="../../resources/js/hoverable-collapse.js"></script>
   <script src="../../resources/js/template.js"></script>
   <script src="../../resources/js/settings.js"></script>
-  <script src="../../resources/js/todolist.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
-  <script src="../../resources/js/dashboard.js"></script>
   <script src="../../resources/js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
 
