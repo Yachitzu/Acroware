@@ -21,7 +21,7 @@ class AuthenticateDatabase implements AuthenticationStrategy
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($data) {
-            if ($data['password'] == $password) {
+            if ($data['psswd'] == $password) {
                 Sesion::getInstance()->setSesion("email", $data["email"]);
 
                 $_SESSION['usuario'] = $data['nombre'] . ' ' . $data['apellido'];
