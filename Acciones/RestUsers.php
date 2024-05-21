@@ -13,15 +13,12 @@ switch ($opc) {
             Guardar::GuardarUsuario();
             break;
         case "DELETE":
-            $cedula=$_GET['cedula'];
-            Eliminar::BorrarEstudiantes($cedula);
+            $id = $_GET['id'];
+            Eliminar::BorrarUsuario($id);
             break;
         case "PUT":
-            $cedula = $_GET["cedula"];
-            $nombre = $_GET["nombre"];
-            $apellido = $_GET["apellido"];
-            $password = $_GET["password"];
-            Actualizar::ActualizarUsuario($cedula,$nombre,$apellido,$password);
+            $id = $_GET["id"];
+            Actualizar::ActualizarUsuario($id);
             break;
     }
 ?>
