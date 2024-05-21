@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../../resources/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
   <link href="../../resources/vendors/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="../../resources/vendors/ti-icons/css/themify-icons.css">
+  <!-- <link rel="stylesheet" type="text/css" href="../../resources/js/select.dataTables.min.css">-->
   <!-- End plugin css for this page -->
   <!-- inject:css -->
   <link rel="stylesheet" href="../../resources/css/vertical-layout-light/style.css">
@@ -23,14 +24,15 @@
     href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" />
 </head>
 
+
 <body>
   <div class="container-scroller">
-    <!-- partial:partials/_navbar.php -->
+    <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="../../index.php"><img
+        <a class="navbar-brand brand-logo mr-5" href="../../index.html"><img
             src="../../resources/images/logos/Acroware.png" class="mr-2" alt="logo" /></a>
-        <a class="navbar-brand brand-logo-mini" href="../../index.php"><img
+        <a class="navbar-brand brand-logo-mini" href="../../index.html"><img
             src="../../resources/images/logos/acroware-mini.png" alt="logo" /></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
@@ -74,7 +76,7 @@
               <img src="../../resources/images/faces/perfil1.png" alt="profile" />
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item" href="../others/acount.php">
+              <a class="dropdown-item" href="../others/acount.html">
                 <i class="ti-settings text-primary"></i>
                 Editar Perfil
               </a>
@@ -98,7 +100,7 @@
     </nav>
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
-      <!-- partial:partials/_settings-panel.php -->
+      <!-- partial:partials/_settings-panel.html -->
 
       <div id="right-sidebar" class="settings-panel">
         <i class="settings-close ti-close"></i>
@@ -172,18 +174,18 @@
         </div>
       </div>
       <!-- partial -->
-      <!-- partial:partials/_sidebar.php -->
+      <!-- partial:partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="../../index.php">
+            <a class="nav-link" href="../../index.html">
               <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="users.php">
+            <a class="nav-link" href="users.html">
               <i class="icon-head menu-icon"></i>
               <span class="menu-title">Usuarios</span>
             </a>
@@ -197,8 +199,8 @@
             </a>
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.php">Bienes Informáticos</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.php">Bienes Mobiliarios</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.html">Bienes Informáticos</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.html">Bienes Mobiliarios</a></li>
               </ul>
             </div>
           </li>
@@ -211,37 +213,37 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../places/faculty.php">Facultades</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../places/block.php">Bloques</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../places/area.php">Áreas</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../places/location.php">Ubicaciones</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../places/faculty.html">Facultades</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../places/block.html">Bloques</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../places/area.html">Áreas</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../places/location.html">Ubicaciones</a></li>
               </ul>
             </div>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="marca.php">
+            <a class="nav-link" href="marca.html">
               <i class="icon-bar-graph menu-icon"></i>
               <span class="menu-title">Marcas</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="../others/acount.php">
+            <a class="nav-link" href="../others/acount.html">
               <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Cuenta</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="software.php">
+            <a class="nav-link" href="software.html">
               <i class="icon-grid-2 menu-icon"></i>
               <span class="menu-title">Software</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="../others/QR.php">
+            <a class="nav-link" href="../others/QR.html">
               <i class="icon-contract menu-icon"></i>
               <span class="menu-title">Escaneo QR</span>
             </a>
@@ -259,7 +261,7 @@
                 <div class="cover-image-gest d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5">
                   <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase titleMain font-berthold">Marcas</h1>
                   <div class="d-inline-flex mb-lg-5">
-                    <p class="m-0 text-white"><a class="text-white" href="../../index.php">Inicio</a></p>
+                    <p class="m-0 text-white"><a class="text-white" href="../../index.html">Inicio</a></p>
                     <p class="m-0 text-white px-2">/</p>
                     <p class="m-0 text-white">Gestor de Marcas</p>
                   </div>
@@ -299,76 +301,7 @@
                         <th>Acciones</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td>2</td>
-                        <td>Apple</td>
-                        <td>Empresa tecnológica conocida por sus productos como el iPhone, iPad y Mac.</td>
-                        <td>Estados Unidos</td>
-                        <td>Tecnológico</td>
-                        <td>
-                          <center>
-                            <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                              <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                              <i class="fas fa-trash"></i>
-                            </button>
-                          </center>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>Samsung</td>
-                        <td>Corporación multinacional que fabrica productos electrónicos.</td>
-                        <td>Corea del Sur</td>
-                        <td>Tecnológico</td>
-                        <td>
-                          <center>
-                            <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                              <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                              <i class="fas fa-trash"></i>
-                            </button>
-                          </center>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>Ashley Furniture</td>
-                        <td>Empresa estadounidense que fabrica y vende muebles para el hogar y la oficina.</td>
-                        <td>Estados Unidos</td>
-                        <td>Mobiliario</td>
-                        <td>
-                          <center>
-                            <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                              <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                              <i class="fas fa-trash"></i>
-                            </button>
-                          </center>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>5</td>
-                        <td>Herman Miller</td>
-                        <td>Empresa estadounidense de diseño y fabricación de mobiliario para hogares, oficinas y
-                          espacios públicos.</td>
-                        <td>Estados Unidos</td>
-                        <td>Mobiliario</td>
-                        <td>
-                          <center>
-                            <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                              <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                              <i class="fas fa-trash"></i>
-                            </button>
-                          </center>
-                        </td>
-                      </tr>
+                    <tbody id="marcasTableBody">
                     </tbody>
                     <tfoot>
                       <tr>
@@ -393,7 +326,7 @@
 
         </div>
         <!-- content-wrapper ends -->
-        <!-- partial:partials/_footer.php -->
+        <!-- partial:partials/_footer.html -->
         <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">
             <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Acroware © 2024. Todos los
@@ -430,7 +363,7 @@
         <div class="modal-footer">
           <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
             aria-label="Close" value="Cancelar" id="cancelButton">
-          <a class="btn-crud btn-primary text-bold" href="../../cerrar.php">Cerrar Sesión</a>
+          <a class="btn-crud btn-primary text-bold">Cerrar Sesión</a>
         </div>
       </div>
     </div>
@@ -448,7 +381,7 @@
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample">
+        <form class="forms-sample" id="agregarMarcaForm" method="post">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -456,13 +389,13 @@
                   sistema:</p>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="Name" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" id="Name" placeholder="Nombre"
+                    <label for="nombreC" class="text-bold">Nombre</label>
+                    <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="area" class="text-bold">Área</label>
-                    <select class="form-control" id="area" required>
+                    <label for="areaC" class="text-bold">Área</label>
+                    <select class="form-control" name="areaC" id="areaC" required>
                       <option value="">Seleccione un Área</option>
                       <option value="tecnologico">Tecnológico</option>
                       <option value="mobiliario">Mobiliario</option>
@@ -472,13 +405,13 @@
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-12">
-                    <label for="Pais" class="text-bold">País</label>
-                    <input type="text" class="form-control" id="pais" placeholder="País"
+                    <label for="paisC" class="text-bold">País</label>
+                    <input type="text" class="form-control" name="paisC" id="paisC" placeholder="País"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                   </div>
                   <div class="form-group col-md-12">
-                    <label for="Name" class="text-bold">Descripción</label>
-                    <textarea class="form-control" id="Description" placeholder="Descripción"
+                    <label for="descripcionC" class="text-bold">Descripción</label>
+                    <textarea class="form-control" name="descripcionC" id="descripcionC" placeholder="Descripción"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
                   </div>
                 </div>
@@ -495,6 +428,7 @@
     </div>
   </div>
 
+  <!-- Delete Modal-->
   <div class="modal fade" id="modalCrudEliminar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
     aria-hidden="true">
     <div class="modal-dialog">
@@ -506,7 +440,7 @@
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample">
+        <form class="forms-sample" id="eliminarMarcaForm">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -528,8 +462,8 @@
       </div>
     </div>
   </div>
-
-  <div class="modal fade" id="modalCrud" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
+  <!-- Edit Modal-->
+  <div class="modal fade" id="modalCrudEditar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
     aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -540,21 +474,21 @@
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample">
+        <form class="forms-sample" id="editarMarcaForm">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
-                <p class="card-description">Por favor, complete los siguientes campos para editar la información del
-                  software seleccionado:</p>
+                <p class="card-description">Por favor, complete los siguientes campos para editar la información de la
+                  marca seleccionada:</p>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="Name" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" id="Name" placeholder="Nombre"
+                    <label for="nombre" class="text-bold">Nombre</label>
+                    <input type="text" class="form-control" id="nombreE" placeholder="Nombre"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="area" class="text-bold">Área</label>
-                    <select class="form-control" id="area" required>
+                    <select class="form-control" id="areaE" required>
                       <option value="">Seleccione un Área</option>
                       <option value="tecnologico">Tecnológico</option>
                       <option value="mobiliario">Mobiliario</option>
@@ -564,13 +498,13 @@
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-12">
-                    <label for="Pais" class="text-bold">País</label>
-                    <input type="text" class="form-control" id="pais" placeholder="País"
+                    <label for="pais" class="text-bold">País</label>
+                    <input type="text" class="form-control" id="paisE" placeholder="País"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                   </div>
                   <div class="form-group col-md-12">
-                    <label for="Name" class="text-bold">Descripción</label>
-                    <textarea class="form-control" id="Description" placeholder="Descripción"
+                    <label for="descripcion" class="text-bold">Descripción</label>
+                    <textarea class="form-control" id="descripcionE" placeholder="Descripción"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
                   </div>
                 </div>
@@ -596,6 +530,7 @@
   <script src="../../resources/vendors/chart.js/Chart.min.js"></script>
   <script src="../../resources/vendors/datatables.net/jquery.dataTables.js"></script>
   <script src="../../resources/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <!-- <script src="../../resources/js/dataTables.select.min.js"></script>-->
 
   <!-- End plugin js for this page -->
   <!-- inject:js -->
@@ -605,8 +540,10 @@
   <script src="../../resources/js/hoverable-collapse.js"></script>
   <script src="../../resources/js/template.js"></script>
   <script src="../../resources/js/settings.js"></script>
+  <!-- <script src="../../resources/js/todolist.js"></script>-->
   <!-- endinject -->
   <!-- Custom js for this page-->
+  <!-- <script src="../../resources/js/dashboard.js"></script>-->
   <script src="../../resources/js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
 
@@ -617,5 +554,184 @@
   <!-- Page level custom scripts -->
   <script src="../../resources/js/datatables-demo.js"></script>
 </body>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const apiBaseUrl = '../../Acciones/RestMarcas.php';
+
+    const marcasTableBody = document.getElementById('marcasTableBody');
+    const agregarMarcaForm = document.getElementById('agregarMarcaForm');
+    const editarModal = new bootstrap.Modal(document.getElementById('modalCrudEditar'));
+    const eliminarModal = new bootstrap.Modal(document.getElementById('modalCrudEliminar'));
+
+    let marcaAEliminarId = null;
+    let marcaAEditarId = null;
+
+    async function fetchMarcas() {
+      try {
+        const response = await fetch(apiBaseUrl);
+        const data = await response.json();
+
+        marcasTableBody.innerHTML = '';
+        data.forEach(marca => {
+          const row = document.createElement('tr');
+
+          row.innerHTML = `
+            <td>${marca.id}</td>
+            <td>${marca.nombre}</td>
+            <td>${marca.descripcion}</td>
+            <td>${marca.pais}</td>
+            <td>${marca.area}</td>
+            <td>
+            <center>          
+              <button class="btn btn-warning btn-circle element-white editar" id="editar" onclick="showEditarModal(${marca.id})">
+                <i class="fas fa-edit" ></i>
+              </button>
+              <button class="btn btn-danger btn-circle eliminar" id="eliminar" onclick="showEliminarModal(${marca.id})">
+                <i class="fas fa-trash"></i>
+              </button>
+            </center>
+            </td>
+          `;
+          marcasTableBody.appendChild(row);
+        });
+      } catch (error) {
+        console.error('Error fetching marcas:', error);
+      }
+    }
+
+    agregarMarcaForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
+      const nombre = document.getElementById('nombreC').value;
+      const pais = document.getElementById('paisC').value;
+      const descripcion = document.getElementById('descripcionC').value;
+      const area = document.getElementById('areaC').value;
+
+      try {
+        const response = await fetch(apiBaseUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ nombre, descripcion, pais, area })
+        });
+
+        if (response.ok) {
+          // Si la solicitud es exitosa, recarga la lista de marcas
+          fetchMarcas();
+          // Limpia los campos del formulario
+          agregarMarcaForm.reset();
+          // Cierra el modal
+          $('#modalCrudAgregar').modal('hide');
+        } else {
+          console.error('Error al agregar marca:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error al agregar marca:', error);
+      }
+    });
+
+
+
+    document.getElementById('editarMarcaForm').addEventListener('submit', async function (event) {
+      event.preventDefault();
+      // Obtener los valores actualizados del formulario
+      const id = marcaAEditarId;
+      const nombre = document.getElementById('nombreE').value;
+      const pais = document.getElementById('paisE').value;
+      const descripcion = document.getElementById('descripcionE').value;
+      const area = document.getElementById('areaE').value;
+
+      try {
+        // Enviar la solicitud de edición al servidor
+        const response = await fetch(apiBaseUrl + `?id=${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ nombre, descripcion, pais, area })
+        });
+
+        if (response.ok) {
+          // Si la solicitud es exitosa, recarga la lista de marcas
+          fetchMarcas();
+          // Cierra el modal de edición
+          editarModal.hide();
+        } else {
+          console.error('Error al editar marca:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error al editar marca:', error);
+      }
+    });
+
+
+    const eliminarMarcaForm = document.getElementById('eliminarMarcaForm');
+
+    eliminarMarcaForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
+      try {
+        const id = marcaAEliminarId;
+        const response = await fetch(apiBaseUrl + `?id=${id}`, {
+          method: 'DELETE'
+        });
+
+        if (response.ok) {
+          // Si la solicitud es exitosa, recarga la lista de marcas
+          fetchMarcas();
+          // Cierra el modal de eliminación
+          eliminarModal.hide()
+        } else {
+          console.error('Error al eliminar marca:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error al eliminar marca:', error);
+      }
+    });
+    window.showEditarModal = async function (id) {
+      try {
+        const response = await fetch(apiBaseUrl + `?id=${id}`);
+        if (!response.ok) {
+          throw new Error('Error al obtener detalles de la marca para editar');
+        }
+        const marca = await response.json();
+        //console.log(marca[0].nombre)
+        // Llenar los campos del formulario con los detalles de la marca
+
+        document.getElementById('nombreE').value = marca[0].nombre;
+        document.getElementById('paisE').value = marca[0].pais;
+        document.getElementById('descripcionE').value = marca[0].descripcion;
+        const selectedArea = marca[0].area;
+        const areaEInput = document.getElementById('areaE');
+
+        // Iteramos sobre cada opción en el campo de selección
+        for (let i = 0; i < areaEInput.options.length; i++) {
+          // Si el valor de la opción coincide con el valor seleccionado previamente
+          if (areaEInput.options[i].value === selectedArea) {
+            // Marcamos esta opción como seleccionada
+            areaEInput.options[i].selected = true;
+            // Salimos del bucle ya que hemos encontrado la opción correcta
+            break;
+          }
+        }
+        marcaAEditarId = id; 
+        // Mostrar el modal de edición
+        editarModal.show();
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+
+    window.showEliminarModal = function (id) {
+      marcaAEliminarId = id;
+      eliminarModal.show()
+      console.log('Mostrar modal de eliminación para el ID:', id);
+    };
+
+    fetchMarcas();
+  });
+</script>
 
 </html>
