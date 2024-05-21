@@ -287,270 +287,14 @@
                                         <th>Apellido</th>
                                         <th>Cedula</th>
                                         <th>Email</th>
-                                        <th>Telefono</th>
+                                        <th>Contraseña</th>
                                         <th>Rol</th>
-                                        <th>Dirección</th>
-                                        <th>Perfil</th>
                                         <th>Fecha Creación</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>John</td>
-                                        <td>Doe</td>
-                                        <td>password123</td>
-                                        <td>john.doe@example.com</td>
-                                        <td>1234567890</td>
-                                        <td>User</td>
-                                        
-                                        <td>123 Main St</td>
-                                        <td><img src="../../resources/images/faces/perfil1.png" alt="Profile Picture"></td>
-                                        <td>2024-05-06</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Jane</td>
-                                        <td>Smith</td>
-                                        <td>abc123</td>
-                                        <td>jane.smith@example.com</td>
-                                        <td>9876543210</td>
-                                        <td>Admin</td>
-                                        
-                                        <td>456 Oak St</td>
-                                        <td><img src="../../resources/images/faces/perfil1.png" alt="Profile Picture"></td>
-                                        <td>2024-05-05</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Michael</td>
-                                        <td>Johnson</td>
-                                        <td>pass456</td>
-                                        <td>michael.johnson@example.com</td>
-                                        <td>5556667777</td>
-                                        <td>User</td>
-                                        
-                                        <td>789 Pine St</td>
-                                        <td><img src="../../resources/images/faces/perfil1.png" alt="Profile Picture"></td>
-                                        <td>2024-05-04</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Sarah</td>
-                                        <td>Williams</td>
-                                        <td>pass789</td>
-                                        <td>sarah.williams@example.com</td>
-                                        <td>3334445555</td>
-                                        <td>User</td>
-                                        
-                                        <td>101 Elm St</td>
-                                        <td><img src="../../resources/images/faces/perfil1.png" alt="Profile Picture"></td>
-                                        <td>2024-05-03</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>Emily</td>
-                                        <td>Brown</td>
-                                        <td>qwerty</td>
-                                        <td>emily.brown@example.com</td>
-                                        <td>7778889999</td>
-                                        <td>Admin</td>
-                                        
-                                        <td>202 Maple St</td>
-                                        <td><img src="../../resources/images/faces/perfil1.png" alt="Profile Picture"></td>
-                                        <td>2024-05-02</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>David</td>
-                                        <td>Miller</td>
-                                        <td>password</td>
-                                        <td>david.miller@example.com</td>
-                                        <td>2223334444</td>
-                                        <td>User</td>
-                                        
-                                        <td>303 Pine St</td>
-                                        <td><img src="../../resources/images/faces/perfil1.png" alt="Profile Picture"></td>
-                                        <td>2024-05-01</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Jane</td>
-                                        <td>Smith</td>
-                                        <td>abc123</td>
-                                        <td>jane.smith@example.com</td>
-                                        <td>9876543210</td>
-                                        <td>Admin</td>
-                                        
-                                        <td>456 Oak St</td>
-                                        <td><img src="../../resources/images/faces/perfil1.png" alt="Profile Picture"></td>
-                                        <td>2024-05-05</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Michael</td>
-                                        <td>Johnson</td>
-                                        <td>pass456</td>
-                                        <td>michael.johnson@example.com</td>
-                                        <td>5556667777</td>
-                                        <td>User</td>
-                                        
-                                        <td>789 Pine St</td>
-                                        <td><img src="../../resources/images/faces/perfil1.png" alt="Profile Picture"></td>
-                                        <td>2024-05-04</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Sarah</td>
-                                        <td>Williams</td>
-                                        <td>pass789</td>
-                                        <td>sarah.williams@example.com</td>
-                                        <td>3334445555</td>
-                                        <td>User</td>
-                                        
-                                        <td>101 Elm St</td>
-                                        <td><img src="../../resources/images/faces/perfil1.png" alt="Profile Picture"></td>
-                                        <td>2024-05-03</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>Emily</td>
-                                        <td>Brown</td>
-                                        <td>qwerty</td>
-                                        <td>emily.brown@example.com</td>
-                                        <td>7778889999</td>
-                                        <td>Admin</td>
-                                        
-                                        <td>202 Maple St</td>
-                                        <td><img src="../../resources/images/faces/perfil1.png" alt="Profile Picture"></td>
-                                        <td>2024-05-02</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>David</td>
-                                        <td>Miller</td>
-                                        <td>password</td>
-                                        <td>david.miller@example.com</td>
-                                        <td>2223334444</td>
-                                        <td>User</td>
-                                        
-                                        <td>303 Pine St</td>
-                                        <td><img src="../../resources/images/faces/perfil1.png" alt="Profile Picture"></td>
-                                        <td>2024-05-01</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
+                                <tbody id="usersTableBody">
+                                   
                                     
                                 </tbody>                                
                                 <tfoot>
@@ -560,11 +304,8 @@
                                         <th>Apellido</th>
                                         <th>Cedula</th>
                                         <th>Email</th>
-                                        <th>Telefono</th>
+                                        <th>Contraseña</th>
                                         <th>Rol</th>
-                                        
-                                        <th>Dirección</th>
-                                        <th>Perfil</th>
                                         <th>Fecha Creación</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -632,43 +373,35 @@
                     <i class="fas fa-times" class="element-white"></i>
                 </button>
             </div> 
-            <form class="forms-sample">
+            <form class="forms-sample" id="aggUser" method="post">
             <div class="modal-body">
                 <div class="grid-margin-modal">          
                     <div class="card-body">
                         <p class="card-description">Por favor, complete los siguientes campos para agregar un nuevo usuario al sistema:</p>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="Dni" class="text-bold">Cedula</label>
-                                <input type="text" class="form-control" id="Dni" placeholder="Cédula" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);" required>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="Name" class="text-bold">Nombre</label>
-                                <input type="text" class="form-control" id="Name" placeholder="Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                            <div class="form-group col-md-12">
+                                <label for="cedula" class="text-bold">Cedula</label>
+                                <input type="text" class="form-control" name="cedula" id="cedula" placeholder="Cédula" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);" required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="Last_Name" class="text-bold">Apellido</label>
-                                <input type="text" class="form-control" id="Last_Name" placeholder="Apellido" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                                <label for="nombre" class="text-bold">Nombre</label>
+                                <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="Adress" class="text-bold">Dirección</label>
-                                <input type="text" class="form-control" id="Address" placeholder="Dirección" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                                <label for="apellido" class="text-bold">Apellido</label>
+                                <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Apellido" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                             </div>
                             <div class="form-group col-md-12">
-                                <label for="Email" class="text-bold">Email</label>
-                                <input type="email" class="form-control" id="Email" placeholder="Email" required>
+                                <label for="email" class="text-bold">Email</label>
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="Mobile" class="text-bold">Telefono</label>
-                                <input type="text" class="form-control" id="Mobile" placeholder="Telefono" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);" required>
-                            </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-12">
                                 <label for="role" class="text-bold">Rol</label>
-                                <select class="form-control" id="role" required>
+                                <select class="form-control" name="rol" id="rol" required>
                                     <option value="">Seleccione un rol</option>
                                     <option value="laboratorista">Laboratorista</option>
                                     <option value="administrador">Administrador</option>
@@ -680,7 +413,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="InputPassword" class="text-bold">Contraseña</label>
-                                <input type="password" class="form-control" id="InputPassword" placeholder="Contraseña" pattern="^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$" title="La contraseña debe tener entre 8 y 20 caracteres, al menos una letra mayúscula y un número. No se permiten caracteres especiales." oninput="validatePassword(this)" required>
+                                <input type="password" class="form-control" name="InputPassword" id="InputPassword" placeholder="Contraseña" pattern="^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$" title="La contraseña debe tener entre 8 y 20 caracteres, al menos una letra mayúscula y un número. No se permiten caracteres especiales." oninput="validatePassword(this)" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="ConfirmPassword" class="text-bold">Confirmar Contraseña</label>
@@ -710,7 +443,7 @@
                     <i class="fas fa-times" class="element-white"></i>
                 </button>
             </div> 
-            <form class="forms-sample">
+            <form class="forms-sample" id="eliminarUserForm">
             <div class="modal-body">
                 <div class="grid-margin-modal">          
                     <div class="card-body">
@@ -742,7 +475,7 @@
                     <i class="fas fa-times" class="element-white"></i>
                 </button>
             </div> 
-            <form class="forms-sample">
+            <form class="forms-sample" id="editarUserForm">
             <div class="modal-body">
                 <div class="grid-margin-modal">          
                     <div class="card-body">
@@ -750,11 +483,11 @@
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="Email" class="text-bold">Email</label>
-                                <input type="email" class="form-control" id="Email" placeholder="Email" required>
+                                <input type="email" class="form-control" id="emailE" placeholder="Email" required>
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="role" class="text-bold">Rol</label>
-                                <select class="form-control" id="role" required>
+                                <select class="form-control" id="rolE" required>
                                     <option value="">Seleccione un rol</option>
                                     <option value="laboratorista">Laboratorista</option>
                                     <option value="administrador">Administrador</option>
@@ -803,7 +536,172 @@
 
     <!-- Page level custom scripts -->
     <script src="../../resources/js/datatables-demo.js"></script>
-</body>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const apiBaseUrl = '../../Acciones/RestUsers.php';
+    const usersTableBody = document.getElementById('usersTableBody');
+    const aggUser = document.getElementById('aggUser');
+    const editarModal = new bootstrap.Modal(document.getElementById('modalCrud'));
+    const eliminarModal = new bootstrap.Modal(document.getElementById('modalCrudEliminar'));
+
+    let userAEliminarId = null;
+    let userAEditarId = null;
+
+    async function fetchUsers() {
+      try {
+        const response = await fetch(apiBaseUrl);
+        const data = await response.json();
+
+        usersTableBody.innerHTML = '';
+        data.forEach(user => {
+          const row = document.createElement('tr');
+
+          row.innerHTML = `
+            <td>${user.id}</td>
+            <td>${user.nombre}</td>
+            <td>${user.apellido}</td>
+            <td>${user.cedula}</td>
+            <td>${user.email}</td>
+            <td>${user.psswd}</td>
+            <td>${user.rol}</td>
+            <td>${user.fecha_ingreso}</td>
+            <td>
+            <center>          
+              <button class="btn btn-warning btn-circle element-white editar" id="editar" onclick="showEditarModal(${user.id})">
+                <i class="fas fa-edit" ></i>
+              </button>
+              <button class="btn btn-danger btn-circle eliminar" id="eliminar" onclick="showEliminarModal(${user.id})">
+                <i class="fas fa-trash"></i>
+              </button>
+            </center>
+            </td>
+          `;
+          usersTableBody.appendChild(row);
+        });
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+    }
+
+    aggUser.addEventListener('submit', async function (event) {
+      event.preventDefault();
+      const cedula = document.getElementById('cedula').value;
+      const nombre = document.getElementById('nombre').value;
+      const apellido = document.getElementById('apellido').value;
+      const email = document.getElementById('email').value;
+      const psswd = document.getElementById('InputPassword').value;
+      const rol = document.getElementById('rol').value;
+
+      try {
+        const response = await fetch(apiBaseUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ cedula, nombre, apellido, email, psswd, rol})
+        });
+
+        if (response.ok) {
+          // Si la solicitud es exitosa, recarga la lista de marcas
+          fetchUsers();
+          // Limpia los campos del formulario
+          aggUser.reset();
+          // Cierra el modal
+          $('#modalCrudAgregar').modal('hide');
+        } else {
+          console.error('Error al agregar usuario:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error al agregar usuario:', error);
+      }
+    });
+
+
+
+    document.getElementById('editarUserForm').addEventListener('submit', async function (event) {
+      event.preventDefault();
+      // Obtener los valores actualizados del formulario
+      const id = userAEditarId;
+      const email = document.getElementById('emailE').value;
+      const rol = document.getElementById('rolE').value;
+
+      try {
+        // Enviar la solicitud de edición al servidor
+        const response = await fetch(apiBaseUrl + `?id=${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email,rol })
+        });
+
+        if (response.ok) {
+          // Si la solicitud es exitosa, recarga la lista de marcas
+          fetchUsers();
+          // Cierra el modal de edición
+          editarModal.hide();
+        } else {
+          console.error('Error al editar usuer:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error al editar user:', error);
+      }
+    });
+
+
+
+    const eliminarUserForm = document.getElementById('eliminarUserForm');
+
+    eliminarUserForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
+      try {
+        const id = userAEliminarId;
+        const response = await fetch(apiBaseUrl + `?id=${id}`, {
+          method: 'DELETE'
+        });
+
+        if (response.ok) {
+          // Si la solicitud es exitosa, recarga la lista de marcas
+          fetchUsers();
+          // Cierra el modal de eliminación
+          eliminarModal.hide()
+        } else {
+          console.error('Error al eliminar user:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error al eliminar user:', error);
+      }
+    });
+    window.showEditarModal = async function (id) {
+      try {
+        const response = await fetch(apiBaseUrl + `?id=${id}`);
+        if (!response.ok) {
+          throw new Error('Error al obtener detalles del usuario para editar');
+        }
+        const user = await response.json();
+        //console.log(marca[0].nombre)
+        // Llenar los campos del formulario con los detalles del user
+
+        document.getElementById('emailE').value = user[0].email;
+        document.getElementById('rolE').value = user[0].rol;
+        
+        userAEditarId = id; 
+        // Mostrar el modal de edición
+        editarModal.show();
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+
+    window.showEliminarModal = function (id) {
+      userAEliminarId = id;
+      eliminarModal.show()
+      console.log('Mostrar modal de eliminación para el ID:', id);
+    };
+
+    fetchUsers();
+  });
+</script>
 
 </html>
-
