@@ -404,9 +404,9 @@
                                 <select class="form-control" name="rol" id="rol" required>
                                     <option value="">Seleccione un rol</option>
                                     <option value="laboratorista">Laboratorista</option>
-                                    <option value="administrador">Administrador</option>
+                                    <option value="admin">Administrador</option>
                                     <option value="estudiante">Estudiante en Prácticas</option>
-                                    <option value="generador_reportes">Generador de Reportes</option>
+                                    <option value="reportero">Generador de Reportes</option>
                                 </select>
                             </div>
                         </div>
@@ -487,12 +487,12 @@
                             </div>
                             <div class="form-group col-md-12">
                                 <label for="role" class="text-bold">Rol</label>
-                                <select class="form-control" id="rolE" required>
+                                <select class="form-control" name="rolE" id="rolE" required>
                                     <option value="">Seleccione un rol</option>
                                     <option value="laboratorista">Laboratorista</option>
-                                    <option value="administrador">Administrador</option>
+                                    <option value="admin">Administrador</option>
                                     <option value="estudiante">Estudiante en Prácticas</option>
-                                    <option value="generador_reportes">Generador de Reportes</option>
+                                    <option value="reportero">Generador de Reportes</option>
                                 </select>
                             </div>
                         </div>
@@ -555,7 +555,21 @@
         usersTableBody.innerHTML = '';
         data.forEach(user => {
           const row = document.createElement('tr');
-
+          var rol=user.rol;
+          switch (rol) {
+          case "admin":
+                rol='Administrador';
+            break;
+          case "laboratorista":
+              rol='Laboratorista';
+          break;
+          case "estudiante":
+                rol='Estudiante en Prácticas';
+            break;
+            case "reportero":
+                rol='Generador de Reportes';
+            break;
+        }
           row.innerHTML = `
             <td>${user.id}</td>
             <td>${user.nombre}</td>
@@ -563,7 +577,7 @@
             <td>${user.cedula}</td>
             <td>${user.email}</td>
             <td>${user.psswd}</td>
-            <td>${user.rol}</td>
+            <td>${rol}</td>
             <td>${user.fecha_ingreso}</td>
             <td>
             <center>          
@@ -591,7 +605,6 @@
       const email = document.getElementById('email').value;
       const psswd = document.getElementById('InputPassword').value;
       const rol = document.getElementById('rol').value;
-
       try {
         const response = await fetch(apiBaseUrl, {
           method: 'POST',
