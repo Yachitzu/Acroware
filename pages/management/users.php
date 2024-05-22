@@ -534,6 +534,7 @@
     <script src="../../resources/vendors/datatables/jquery.dataTables.min.js"></script>
     <script src="../../resources/vendors/datatables/dataTables.bootstrap4.min.js"></script>
 
+    
     <!-- Page level custom scripts -->
     <script src="../../resources/js/datatables-demo.js"></script>
     <script>

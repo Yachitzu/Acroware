@@ -41,7 +41,7 @@ if (isset($_SESSION['email'])) {
     <link rel="stylesheet" href="../../resources/css/vertical-layout-light/style.css">
     <!-- endinject -->
     <link rel="shortcut icon"
-        href="../../resources/images/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" />
+        href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" />
 </head>
 
 <body class="bg-login">
@@ -117,7 +117,6 @@ if (isset($_SESSION['email'])) {
     <script src="../../resources/js/hoverable-collapse.js"></script>
     <script src="../../resources/js/template.js"></script>
     <script src="../../resources/js/settings.js"></script>
-    <script src="../../resources/js/todolist.js"></script>
     <script src="../../resources/js/validation.js"></script>
     <!-- endinject -->
 </body>
