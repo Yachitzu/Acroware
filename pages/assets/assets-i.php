@@ -294,19 +294,41 @@
                   <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%"
                     cellspacing="0">
                     <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Codigo UTA</th>
-                        <th>Nombre</th>
-                        <th>Modelo</th>
-                        <th>Marca</th>
-                        <th>Serie</th>
-                        <th>Custodio</th>
-                        <th>Ubicación</th>
-                        <th>Fecha Ingreso</th>
-                      </tr>
+                        <tr>
+                            <th>ID</th>
+                            <th>Codigo UTA</th>
+                            <th>Nombre</th>
+                            <th>Modelo</th>
+                            <th>Marca</th>
+                            <th>Serie</th>
+                            <th>Custodio</th>
+                            <th>Ubicación</th>
+                            <th>Fecha Ingreso</th>
+                            <th>Acciones</th>
+                        </tr>
                     </thead>
                     <tbody id="marcasTableBody">
+                        <tr>
+                            <td>1</td>
+                            <td>UTA123456</td>
+                            <td>Equipo de Computo</td>
+                            <td>XPS 13</td>
+                            <td>Dell</td>
+                            <td>SN123456789</td>
+                            <td>Juan Pérez</td>
+                            <td>Oficina 101</td>
+                            <td>2024-05-22</td>
+                            <td>
+                                <center>
+                                    <button class="btn btn-warning btn-circle element-white editar" id="editar">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-circle eliminar" id="eliminar">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </center>
+                            </td>
+                        </tr>
                     </tbody>
                     <tfoot>
                       <tr>
@@ -319,6 +341,7 @@
                         <th>Custodio</th>
                         <th>Ubicación</th>
                         <th>Fecha Ingreso</th>
+                        <th>Acciones</th>
                       </tr>
                     </tfoot>
                     <tbody>
@@ -492,7 +515,7 @@
     </div>
   </div>
   <!-- Edit Modal-->
-  <div class="modal fade" id="modalCrudEditar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
+  <div class="modal fade" id="modalCrud" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
     aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
