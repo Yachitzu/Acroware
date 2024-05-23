@@ -294,42 +294,64 @@
                   <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%"
                     cellspacing="0">
                     <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Codigo UTA</th>
-                        <th>Nombre</th>
-                        <th>Modelo</th>
-                        <th>Marca</th>
-                        <th>Color</th>
-                        <th>Material</th>
-                        <th>Dimensiones</th>
-                        <th>Condición</th>
-                        <th>Custodio</th>
-                        <th>BLD / BCA</th>
-                        <th>Valor Contable</th>
-                        <th>Ubicación</th>
-                        <th>Fecha Ingreso</th>
-                      </tr>
+                        <tr>
+                            <th>ID</th>
+                            <th>Codigo UTA</th>
+                            <th>Nombre</th>
+                            <th>Modelo</th>
+                            <th>Marca</th>
+                            <th>Color</th>
+                            <th>Material</th>
+                            <th>Dimensiones</th>
+                            <th>Condición</th>
+                            <th>Custodio</th>
+                            <th>Ubicación</th>
+                            <th>Fecha Ingreso</th>
+                            <th>Acciones</th>
+                        </tr>
                     </thead>
                     <tbody id="marcasTableBody">
+                        <tr>
+                            <td>1</td>
+                            <td>UTA123456</td>
+                            <td>Producto Ejemplo</td>
+                            <td>Modelo X</td>
+                            <td>Marca Y</td>
+                            <td>Rojo</td>
+                            <td>Plástico</td>
+                            <td>10x20x30 cm</td>
+                            <td>Nuevo</td>
+                            <td>Juan Pérez</td>
+                            <td>Almacén 1</td>
+                            <td>2024-05-22</td>
+                            <td>
+                                <center>
+                                    <button class="btn btn-warning btn-circle element-white editar" id="editar">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-circle eliminar" id="eliminar">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </center>
+                            </td>
+                        </tr>
                     </tbody>
                     <tfoot>
-                      <tr>
-                        <th>ID</th>
-                        <th>Codigo UTA</th>
-                        <th>Nombre</th>
-                        <th>Modelo</th>
-                        <th>Marca</th>
-                        <th>Color</th>
-                        <th>Material</th>
-                        <th>Dimensiones</th>
-                        <th>Condición</th>
-                        <th>Custodio</th>
-                        <th>BLD / BCA</th>
-                        <th>Valor Contable</th>
-                        <th>Ubicación</th>
-                        <th>Fecha Ingreso</th>
-                      </tr>
+                        <tr>
+                            <th>ID</th>
+                            <th>Codigo UTA</th>
+                            <th>Nombre</th>
+                            <th>Modelo</th>
+                            <th>Marca</th>
+                            <th>Color</th>
+                            <th>Material</th>
+                            <th>Dimensiones</th>
+                            <th>Condición</th>
+                            <th>Custodio</th>
+                            <th>Ubicación</th>
+                            <th>Fecha Ingreso</th>
+                            <th>Acciones</th>
+                        </tr>
                     </tfoot>
                     <tbody>
 
@@ -546,8 +568,7 @@
           <div class="modal-body">
             <div class="grid-margin-modal">
                 <div class="card-body">
-                    <p class="card-description">Por favor, complete los siguientes campos para editar la información de la
-                  marca seleccionada:</p>
+                    <p class="card-description">Por favor, complete los siguientes campos para editar la información del bien seleccionado:</p>
                   <div class="form-row">
                         <div class="form-group col-md-12">
                             <label for="codigoUTAC" class="text-bold">Codigo UTA</label>

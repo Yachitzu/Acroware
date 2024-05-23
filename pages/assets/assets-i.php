@@ -530,8 +530,7 @@
           <div class="modal-body">
             <div class="grid-margin-modal">
                 <div class="card-body">
-                    <p class="card-description">Por favor, complete los siguientes campos para editar la información de la
-                  marca seleccionada:</p>
+                    <p class="card-description">Por favor, complete los siguientes campos para editar la información del bien seleccionado:</p>
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
