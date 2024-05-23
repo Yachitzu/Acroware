@@ -359,6 +359,287 @@
   </div>
   <!-- container-scroller -->
 
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title text-primary" id="modal-register-label">¿Listo para partir?</h3>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="card-body">
+            <p class="card-description">Seleccione "Cerrar sesión" a continuación si está list@ para finalizar su sesión
+              actual.</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+            aria-label="Close" value="Cancelar" id="cancelButton">
+          <a class="btn-crud btn-primary text-bold" href="../../cerrar.php">Cerrar Sesión</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Modal-->
+  <div class="modal fade modal-crud" id="modalCrudAgregar" tabindex="-1" role="dialog"
+    aria-labelledby="modal-register-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h3 class="modal-title text-white" id="modal-register-label">Agregar Bien</h3>
+          <p class="modal">Ingrese los datos del Usuario:</p>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
+        </div>
+        <form class="forms-sample" id="agregarMarcaForm" method="post">
+          <div class="modal-body">
+            <div class="grid-margin-modal">
+                <div class="card-body">
+                    <p class="card-description">Por favor, complete los siguientes campos para agregar un nuevo bien al
+                    sistema:</p>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
+                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Código UTA" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nombreC" class="text-bold">Nombre</label>
+                            <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre"
+                            oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="codigoUTAC" class="text-bold">Modelo</label>
+                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Modelo" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="facultad" class="text-bold">Marca</label>
+                            <select class="form-control" id="facultad" required>
+                                <option value="">Seleccione una Marca</option>
+                                <option value="HP">HP</option>
+                                <option value="Dell">DELL</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="nombreC" class="text-bold">Color</label>
+                            <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Color"
+                            oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nombreC" class="text-bold">Material</label>
+                            <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Material"
+                            oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="codigoUTAC" class="text-bold">Dimensiones</label>
+                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Dimensiones" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="ubicación" class="text-bold">Condición</label>
+                            <select class="form-control" id="ubicación" required>
+                                <option value="">Seleccione una condición</option>
+                                <option value="buen">Buen estado</option>
+                                <option value="mal">Mal Estado</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="ubicación" class="text-bold">Custodio</label>
+                            <select class="form-control" id="ubicación" required>
+                                <option value="">Seleccione un custodio</option>
+                                <option value="buen">Esteban Cifuentes</option>
+                                <option value="mal">Nik Frias</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="facultad" class="text-bold">Facultad</label>
+                            <select class="form-control" id="facultad" required>
+                                <option value="">Seleccione una Facultad</option>
+                                <option value="FISEI">Facultad de Ingenieria en Sistemas, Electronica e Industrial</option>
+                                <option value="FDA">Facultad de Diseño y Arquitectura</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="ubicación" class="text-bold">Ubicación</label>
+                            <select class="form-control" id="ubicación" required>
+                                <option value="">Seleccione una Ubicación</option>
+                                <option value="Aula01">Aula 01</option>
+                                <option value="Aula02">Aula 02</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-bs-dismiss="modal"
+              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Bien ">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Modal-->
+  <div class="modal fade" id="modalCrudEliminar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h3 class="modal-title text-white" id="modal-register-label">Eliminar Bien </h3>
+          <p class="modal">Ingrese los datos del Usuario:</p>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
+        </div>
+        <form class="forms-sample" id="eliminarMarcaForm">
+          <div class="modal-body">
+            <div class="grid-margin-modal">
+              <div class="card-body">
+                <p class="card-description">¿Está seguro de que desea eliminar el Bien?</p>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <p class="text-danger"><small>Esta acción no se puede deshacer.</small></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Bien ">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Edit Modal-->
+  <div class="modal fade" id="modalCrud" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h3 class="modal-title text-white" id="modal-register-label">Editar Bien</h3>
+          <p class="modal">Ingrese los datos del Usuario:</p>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
+        </div>
+        <form class="forms-sample" id="editarMarcaForm">
+          <div class="modal-body">
+            <div class="grid-margin-modal">
+                <div class="card-body">
+                    <p class="card-description">Por favor, complete los siguientes campos para editar la información de la
+                  marca seleccionada:</p>
+                  <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
+                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Código UTA" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nombreC" class="text-bold">Nombre</label>
+                            <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre"
+                            oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="codigoUTAC" class="text-bold">Modelo</label>
+                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Modelo" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="facultad" class="text-bold">Marca</label>
+                            <select class="form-control" id="facultad" required>
+                                <option value="">Seleccione una Marca</option>
+                                <option value="HP">HP</option>
+                                <option value="Dell">DELL</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="nombreC" class="text-bold">Color</label>
+                            <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Color"
+                            oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nombreC" class="text-bold">Material</label>
+                            <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Material"
+                            oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="codigoUTAC" class="text-bold">Dimensiones</label>
+                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Dimensiones" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="ubicación" class="text-bold">Condición</label>
+                            <select class="form-control" id="ubicación" required>
+                                <option value="">Seleccione una condición</option>
+                                <option value="buen">Buen estado</option>
+                                <option value="mal">Mal Estado</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="ubicación" class="text-bold">Custodio</label>
+                            <select class="form-control" id="ubicación" required>
+                                <option value="">Seleccione un custodio</option>
+                                <option value="buen">Esteban Cifuentes</option>
+                                <option value="mal">Nik Frias</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="facultad" class="text-bold">Facultad</label>
+                            <select class="form-control" id="facultad" required>
+                                <option value="">Seleccione una Facultad</option>
+                                <option value="FISEI">Facultad de Ingenieria en Sistemas, Electronica e Industrial</option>
+                                <option value="FDA">Facultad de Diseño y Arquitectura</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="ubicación" class="text-bold">Ubicación</label>
+                            <select class="form-control" id="ubicación" required>
+                                <option value="">Seleccione una Ubicación</option>
+                                <option value="Aula01">Aula 01</option>
+                                <option value="Aula02">Aula 02</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Bien">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
