@@ -49,4 +49,24 @@ Class Obtener{
         //$conectar->commit();
     }
     }
+        Class Actualizar{
+        public static function ActualizarSoftware($id){
+            $json = file_get_contents('php://input');
+            $data = json_decode($json, true);
+            $conectar = Conexion::getInstance()->getConexion();
+            if ($data !== null) {
+                $nombre_software = $data["nombre_software"];
+                $proveedor = $data["proveedor"];
+                $tipo_licencia = $data["tipo_licencia"];
+                $activado = $data["activado"];
+                $fecha_adqui = $data["fecha_adqui"];
+            }
+
+            $updatesql = "UPDATE software  set nombre_software= '$nombre_software',proveedor= '$proveedor',tipo_licencia='$tipo_licencia',activado='$activado',fecha_adqui='$fecha_adqui'  Where id='$id'";
+            $resultado = $conectar->prepare($updatesql);
+            $resultado->execute();
+            echo json_encode($resultado);
+            //$conectar->commit();
+        }
+    } 
 ?>
