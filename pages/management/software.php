@@ -292,133 +292,7 @@
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Microsoft Office</td>
-                                        <td>Microsoft</td>
-                                        <td>Comercial</td>
-                                        <td>Si</td>
-                                        <td>2023-05-15</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Adobe Photoshop</td>
-                                        <td>Adobe</td>
-                                        <td>Comercial</td>
-                                        <td>No</td>
-                                        <td>2022-10-20</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Linux Ubuntu</td>
-                                        <td>Comunidad</td>
-                                        <td>Open Source</td>
-                                        <td>Si</td>
-                                        <td>2023-01-30</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Google Chrome</td>
-                                        <td>Google</td>
-                                        <td>Comercial</td>
-                                        <td>Si</td>
-                                        <td>2022-08-10</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>Visual Studio Code</td>
-                                        <td>Microsoft</td>
-                                        <td>Open Source</td>
-                                        <td>No</td>
-                                        <td>2023-03-25</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>Skype</td>
-                                        <td>Microsoft</td>
-                                        <td>Comercial</td>
-                                        <td>No</td>
-                                        <td>2022-12-05</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>7</td>
-                                        <td>Zoom</td>
-                                        <td>Zoom Video Communications</td>
-                                        <td>Comercial</td>
-                                        <td>Si</td>
-                                        <td>2022-11-18</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
+                                <tbody id="softwareTableBody">
                                     <tr>
                                         <td>8</td>
                                         <td>Firefox</td>
@@ -507,12 +381,12 @@
         <div class="modal-content">
             <div class="modal-header bg-primary">
                 <h3 class="modal-title text-white" id="modal-register-label">Agregar Software</h3>
-                <p class="modal">Ingrese los datos del Usuario:</p>
+                <p class="modal">Ingrese los datos del Software:</p>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <i class="fas fa-times" class="element-white"></i>
                 </button>
             </div> 
-            <form class="forms-sample">
+            <form class="forms-sample" id='aggSoftware' method='post'>
             <div class="modal-body">
                 <div class="grid-margin-modal">          
                     <div class="card-body">
@@ -520,11 +394,11 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="Dni" class="text-bold">Proveedor</label>
-                                <input type="text" class="form-control" id="Proveedor" placeholder="Proveedor" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                                <input type="text" class="form-control" id="proveedor" placeholder="Proveedor" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="Name" class="text-bold">Nombre</label>
-                                <input type="text" class="form-control" id="Name" placeholder="Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                                <input type="text" class="form-control" id="nombre_software" placeholder="Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                             </div>
                         </div>
                         <div class="form-row">
@@ -545,7 +419,7 @@
                         </div>
                             <div class="form-group col-md-6">
                                 <label for="role" class="text-bold">Tipo Licencia</label>
-                                <select class="form-control" id="licencia" required>
+                                <select class="form-control" id="tipo_licencia" required>
                                     <option value="">Seleccione un Tipo</option>
                                     <option value="publico">Dominio Público</option>
                                     <option value="abierto">Codigo Abierto</option>
@@ -555,7 +429,10 @@
                                 </select>
                             </div>
                         </div>
-                        
+                        <div class="form-group col-md-12">
+                                <label for="Name" class="text-bold">Fecha de Adquisición</label>
+                                <input type="date" class="form-control" id="fecha_adqui" placeholder="Fecha de adquisición" required>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -573,12 +450,12 @@
         <div class="modal-content">
             <div class="modal-header bg-primary">
                 <h3 class="modal-title text-white" id="modal-register-label">Eliminar Software </h3>
-                <p class="modal">Ingrese los datos del Usuario:</p>
+                <p class="modal">Ingrese los datos del Software:</p>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <i class="fas fa-times" class="element-white"></i>
                 </button>
             </div> 
-            <form class="forms-sample">
+            <form class="forms-sample" id="eliminarSoftwareForm">
             <div class="modal-body">
                 <div class="grid-margin-modal">          
                     <div class="card-body">
@@ -610,7 +487,7 @@
                     <i class="fas fa-times" class="element-white"></i>
                 </button>
             </div> 
-            <form class="forms-sample">
+            <form class="forms-sample" id='editarSoftwareForm'>
             <div class="modal-body">
                 <div class="grid-margin-modal">          
                     <div class="card-body">
@@ -618,11 +495,11 @@
                         <div class="form-row">
                           <div class="form-group col-md-6">
                               <label for="Dni" class="text-bold">Proveedor</label>
-                              <input type="text" class="form-control" id="Proveedor" placeholder="Proveedor" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                              <input type="text" class="form-control" id="proveedorE" placeholder="Proveedor" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                           </div>
                           <div class="form-group col-md-6">
                               <label for="Name" class="text-bold">Nombre</label>
-                              <input type="text" class="form-control" id="Name" placeholder="Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                              <input type="text" class="form-control" id="nombreE" placeholder="Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                           </div>
                       </div>
                       <div class="form-row">
@@ -653,6 +530,10 @@
                               </select>
                           </div>
                       </div>
+                      <div class="form-group col-md-12">
+                                <label for="Name" class="text-bold">Fecha de Adquisición</label>
+                                <input type="date" class="form-control" id="fecha_adqui" placeholder="Fecha de adquisición" required>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -664,7 +545,8 @@
         </div>
     </div>
 </div>
-  
+    
+
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
@@ -690,9 +572,175 @@
     <script src="../../resources/vendors/datatables/jquery.dataTables.min.js"></script>
     <script src="../../resources/vendors/datatables/dataTables.bootstrap4.min.js"></script>
 
+
     <!-- Page level custom scripts -->
     <script src="../../resources/js/datatables-demo.js"></script>
-</body>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const apiBaseUrl = '../../Acciones/RestSoftware.php';
+    const softwareTableBody = document.getElementById('softwareTableBody');
+    const aggSoftware = document.getElementById('aggSoftware');
+    const editarModal = new bootstrap.Modal(document.getElementById('modalCrud'));
+    const eliminarModal = new bootstrap.Modal(document.getElementById('modalCrudEliminar'));
+    let softwareAEliminarId = null;
+    let softwareAEditarId = null;
+
+    async function fetchSoftware() {
+      try {
+        const response = await fetch(apiBaseUrl);
+        const data = await response.json();
+
+        softwareTableBody.innerHTML = '';
+        data.forEach(software => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${software.id}</td>
+            <td>${software.nombre_software}</td>
+            <td>${software.proveedor}</td>
+            <td>${software.tipo_licencia}</td>
+            <td>${software.activado}</td>
+            <td>${software.fecha_adqui}</td>
+            <td>
+            <center>          
+              <button class="btn btn-warning btn-circle element-white editar" id="editar" onclick="showEditarModal(${software.id})">
+                <i class="fas fa-edit" ></i>
+              </button>
+              <button class="btn btn-danger btn-circle eliminar" id="eliminar" onclick="showEliminarModal(${software.id})">
+                <i class="fas fa-trash"></i>
+              </button>
+            </center>
+            </td>
+          `;
+          softwareTableBody.appendChild(row);
+        });
+      } catch (error) {
+        console.error('Error fetching software:', error);
+      }
+    }
+
+    aggSoftware.addEventListener('submit', async function (event) {
+  event.preventDefault();
+  const nombre_software = document.getElementById('nombre_software').value;
+  const proveedor = document.getElementById('proveedor').value;
+  const tipo_licencia = document.getElementById('tipo_licencia').value;
+  let activado = null;
+  let radios = document.getElementsByName('activo');
+  for (var radio of radios) {
+    if (radio.checked) {
+      activo = radio.value;
+    }
+  }
+  const fecha_adqui = document.getElementById('fecha_adqui').value;
+  alert(`Nombre del software: ${nombre_software}\nProveedor: ${proveedor}\nTipo de licencia: ${tipo_licencia}\nActivo: ${activo}\nFecha de adquisición: ${fecha_adqui}`);
+  try {
+    const response = await fetch(apiBaseUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ nombre_software, proveedor, tipo_licencia, activado, fecha_adqui})
+    });
+
+    if (response.ok) {
+      // Si la solicitud es exitosa, recarga la lista de marcas
+      fetchSoftware();
+      // Limpia los campos del formulario
+      aggSoftware.reset();
+      // Cierra el modal
+      $('#modalCrudAgregar').modal('hide');
+    } else {
+      console.error('Error al agregar software:', response.statusText);
+    }
+  } catch (error) {
+    console.error('Error al agregar software:', error);
+  }
+});
+
+
+
+    document.getElementById('editarSoftwareForm').addEventListener('submit', async function (event) {
+      event.preventDefault();
+      // Obtener los valores actualizados del formulario
+      const id = softwareAEditarId;
+      const nombre_software = document.getElementById('nombre_software').value;
+      const proveedor = document.getElementById('proveedor').value;
+      const tipo_licencia = document.getElementById('tipo_licencia').value;
+      const activo = document.querySelector('input[name="activo"][checked]').value;
+      const fecha_adqui = document.getElementById('fecha_adqui').value;
+
+      try {
+        // Enviar la solicitud de edición al servidor
+        const response = await fetch(apiBaseUrl + `?id=${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email,rol })
+        });
+
+        if (response.ok) {
+          // Si la solicitud es exitosa, recarga la lista de software
+          fetchSoftware();
+          // Cierra el modal de edición
+          editarModal.hide();
+        } else {
+          console.error('Error al editar software:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error al editar software:', error);
+      }
+    });
+
+
+
+    const eliminarSoftwareForm = document.getElementById('eliminarSoftwareForm');
+
+    eliminarSoftwareForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
+      try {
+        const id = softwareAEliminarId;
+        const response = await fetch(apiBaseUrl + `?id=${id}`, {
+          method: 'DELETE'
+        });
+
+        if (response.ok) {
+          // Si la solicitud es exitosa, recarga la lista de marcas
+          fetchSoftware();
+          // Cierra el modal de eliminación
+          eliminarModal.hide()
+        } else {
+          console.error('Error al eliminar software:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error al eliminar software:', error);
+      }
+    });
+    window.showEditarModal = async function (id) {
+      try {
+        const response = await fetch(apiBaseUrl + `?id=${id}`);
+        if (!response.ok) {
+          throw new Error('Error al obtener detalles del software para editar');
+        }
+        const software = await response.json();
+        //console.log(marca[0].nombre)
+        // Llenar los campos del formulario con los detalles del software
+        softwareAEditarId = id; 
+        // Mostrar el modal de edición
+        editarModal.show();
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+
+    window.showEliminarModal = function (id) {
+      softwareAEliminarId = id;
+      eliminarModal.show()
+      console.log('Mostrar modal de eliminación para el ID:', id);
+    };
+
+    fetchSoftware();
+  });
+</script>
 
 </html>
-
