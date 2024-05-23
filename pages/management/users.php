@@ -190,6 +190,8 @@
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.php">Bienes Informáticos</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../assets/component.php">Componentes</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../assets/repowering.php">Repotenciación</a></li>
                 <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.php">Bienes Mobiliarios</a></li>
               </ul>
             </div>
@@ -534,7 +536,7 @@
     <script src="../../resources/vendors/datatables/jquery.dataTables.min.js"></script>
     <script src="../../resources/vendors/datatables/dataTables.bootstrap4.min.js"></script>
 
-    
+
     <!-- Page level custom scripts -->
     <script src="../../resources/js/datatables-demo.js"></script>
     <script>

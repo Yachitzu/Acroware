@@ -200,6 +200,8 @@
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="assets-i.php">Bienes Informáticos</a></li>
+                <li class="nav-item"> <a class="nav-link" href="component.php">Componentes</a></li>
+                <li class="nav-item"> <a class="nav-link" href="repowering.php">Repotenciación</a></li>
                 <li class="nav-item"> <a class="nav-link" href="assets-m.php">Bienes Mobiliarios</a></li>
               </ul>
             </div>
