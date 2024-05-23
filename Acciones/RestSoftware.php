@@ -13,4 +13,8 @@ switch ($opc) {
         case 'POST':
             Guardar::GuardarSoftware();
             break;
+        case "DELETE":
+            $id = $_GET['id'];
+            Eliminar::BorrarSoftware($id);
+            break;
 ?>
