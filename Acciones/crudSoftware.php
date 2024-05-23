@@ -69,4 +69,19 @@ Class Obtener{
             //$conectar->commit();
         }
     } 
+        Class Eliminar{
+        public static function BorrarSoftware($id)
+        {
+            $conectar = Conexion::getInstance()->getConexion();
+            $borrarSQL = "DELETE FROM software WHERE id ='$id'";
+            $resultado = $conectar->prepare($borrarSQL);
+            $resultado->execute();
+            //$conectar->commit();
+            if ($resultado->rowCount() > 0) {
+                echo json_encode("Se eliminaron: " . $resultado->rowCount() . " registros");
+            } else {
+                echo json_encode(false);
+            }
+        }
+    }
 ?>
