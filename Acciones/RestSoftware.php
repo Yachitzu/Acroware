@@ -8,8 +8,7 @@ switch ($opc) {
             }else{
                 Obtener::ObtenerSoftware();
             }
-        }
-        break;
+            break;
         case 'POST':
             Guardar::GuardarSoftware();
             break;
@@ -17,4 +16,9 @@ switch ($opc) {
             $id = $_GET['id'];
             Eliminar::BorrarSoftware($id);
             break;
+        case "PUT":
+            $id = $_GET["id"];
+            Actualizar::ActualizarSoftware($id);
+            break;
+    }
 ?>
