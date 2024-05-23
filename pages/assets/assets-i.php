@@ -432,7 +432,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="codigoUTAC" class="text-bold">Serie</label>
-                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Código UTA" required>
+                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Serie" required>
                         </div>
                     </div>
                     <div class="form-row">
@@ -446,7 +446,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="codigoUTAC" class="text-bold">Modelo</label>
-                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Código UTA" required>
+                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Modelo" required>
                         </div> 
                     </div>
                     <div class="form-row">
@@ -545,7 +545,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="codigoUTAC" class="text-bold">Serie</label>
-                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Código UTA" required>
+                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Serie" required>
                         </div>
                     </div>
                     <div class="form-row">
@@ -559,7 +559,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="codigoUTAC" class="text-bold">Modelo</label>
-                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Código UTA" required>
+                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Modelo" required>
                         </div> 
                     </div>
                     <div class="form-row">
