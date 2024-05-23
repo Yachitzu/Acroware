@@ -9,4 +9,8 @@ switch ($opc) {
                 Obtener::ObtenerSoftware();
             }
         }
+        break;
+        case 'POST':
+            Guardar::GuardarSoftware();
+            break;
 ?>
