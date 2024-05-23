@@ -28,4 +28,25 @@ Class Obtener{
             echo json_encode($array);
         }
     }
+    Class Guardar{
+        public static function GuardarSoftware()
+    {
+        $json = file_get_contents('php://input');
+        $data = json_decode($json, true);
+        $conectar = Conexion::getInstance()->getConexion();
+        if ($data !== null) {
+            $nombre_software = $data["nombre_software"];
+            $proveedor = $data["proveedor"];
+            $tipo_licencia = $data["tipo_licencia"];
+            $activado = $data["activado"];
+            $fecha_adqui = $data["fecha_adqui"];
+
+        }
+
+        $insertarSql = "INSERT INTO software(nombre_software,proveedor,tipo_licencia,activado, fecha_adqui)VALUES('$nombre_software','$proveedor','$tipo_licencia','$activado','$fecha_adqui')";
+        $resultado = $conectar->prepare($insertarSql);
+        $resultado->execute();
+        //$conectar->commit();
+    }
+    }
 ?>
