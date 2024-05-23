@@ -294,28 +294,49 @@
                   <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%"
                     cellspacing="0">
                     <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Codigo UTA</th>
-                        <th>Componente</th>
-                        <th>Nombre</th>
-                        <th>Serie</th>
-                        <th>Detalle</th>
-                        <th>Fecha Repotenciación</th>
-                      </tr>
+                        <tr>
+                            <th>ID</th>
+                            <th>Codigo UTA</th>
+                            <th>Componente</th>
+                            <th>Nombre</th>
+                            <th>Serie</th>
+                            <th>Detalle</th>
+                            <th>Fecha Repotenciación</th>
+                            <th>Acciones</th>
+                        </tr>
                     </thead>
                     <tbody id="marcasTableBody">
+                        <tr>
+                            <td>1</td>
+                            <td>UTA123456</td>
+                            <td>Motor</td>
+                            <td>Motor de Arranque</td>
+                            <td>SN123456789</td>
+                            <td>Motor de arranque con nuevas mejoras</td>
+                            <td>2023-12-01</td>
+                            <td>
+                                <center>
+                                    <button class="btn btn-warning btn-circle element-white editar" id="editar">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-circle eliminar" id="eliminar">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </center>
+                            </td>
+                        </tr>
                     </tbody>
                     <tfoot>
-                      <tr>
-                        <th>ID</th>
-                        <th>Codigo UTA</th>
-                        <th>Componente</th>
-                        <th>Nombre</th>
-                        <th>Serie</th>
-                        <th>Detalle</th>
-                        <th>Fecha Repotenciación</th>
-                      </tr>
+                        <tr>
+                            <th>ID</th>
+                            <th>Codigo UTA</th>
+                            <th>Componente</th>
+                            <th>Nombre</th>
+                            <th>Serie</th>
+                            <th>Detalle</th>
+                            <th>Fecha Repotenciación</th>
+                            <th>Acciones</th>
+                        </tr>
                     </tfoot>
                     <tbody>
 
