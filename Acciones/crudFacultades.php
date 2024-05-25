@@ -45,7 +45,7 @@ class AccionesFacultades
             ];
         }
     }
-
+    
     public static function insertarFacultades($nombre, $descripcion, $campus)
     {
         try {
