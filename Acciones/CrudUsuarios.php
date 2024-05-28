@@ -1,29 +1,29 @@
 <?php
 include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php');
 Class Obtener{
-        public static function ObtenerUsuarios(){
-            $conectar=Conexion::getInstance()->getConexion();
-            $select="SELECT * FROM usuarios";
-            $resultado=$conectar->prepare($select);
-            $resultado->execute();
-            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
-            echo(json_encode($data));
-        }
-        public static function ObtenerById($cedula){
+    public static function ObtenerUsuarios(){
+        $conectar=Conexion::getInstance()->getConexion();
+        $select="SELECT * FROM usuarios";
+        $resultado=$conectar->prepare($select);
+        $resultado->execute();
+        $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        echo(json_encode($data));
+    }
+        public static function ObtenerById($id){
             $bd = Conexion::getInstance()->getConexion();
-            $id = $cedula;
+            $id = $id;
             $array = array();
-            $resultado = $bd->query("SELECT * FROM usuarios WHERE cedula = '$id'");
+            $resultado = $bd->query("SELECT * FROM usuarios WHERE id = '$id'");
 
             while ($row = $resultado->fetch()) {
                 $e = array();
-                $e["nombre"] = $row[0];
-                $e["apellido"] = $row[1];
-                $e["cedula"] = $row[2];
-                $e["email"] = $row[3];
-                $e["password"] = $row[4];
-                $e["rol"] = $row[5];
-                $e["fecha_ingreso"] = $row[6];
+                $e["nombre"] = $row[1];
+                $e["apellido"] = $row[2];
+                $e["cedula"] = $row[3];
+                $e["email"] = $row[4];
+                $e["password"] = $row[5];
+                $e["rol"] = $row[6];
+                $e["fecha_ingreso"] = $row[7];
                 array_push($array, $e);
             }
             echo json_encode($array);
