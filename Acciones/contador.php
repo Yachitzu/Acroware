@@ -18,6 +18,7 @@ function contarLaboratoristas() {
         // Devolvemos el total
         return $result['total'];
     } catch (PDOException $e) {
+        error_log($e->getMessage(), 3, 'app_errors.log');
         // Manejo de errores
         return -1; // Retornamos un valor negativo para indicar un error
     }
@@ -39,6 +40,7 @@ function contarSoftware() {
         // Devolvemos el total
         return $result['total'];
     } catch (PDOException $e) {
+        error_log($e->getMessage(), 3, 'app_errors.log');
         // Manejo de errores
         return -1; // Retornamos un valor negativo para indicar un error
     }
@@ -60,6 +62,7 @@ function contarComponentes() {
         // Devolvemos el total
         return $result['total'];
     } catch (PDOException $e) {
+        error_log($e->getMessage(), 3, 'app_errors.log');
         // Manejo de errores
         return -1; // Retornamos un valor negativo para indicar un error
     }
@@ -81,8 +84,33 @@ function contarBienesInformaticos() {
         // Devolvemos el total
         return $result['total'];
     } catch (PDOException $e) {
+        error_log($e->getMessage(), 3, 'app_errors.log');
         // Manejo de errores
         return -1; // Retornamos un valor negativo para indicar un error
+    }
+}
+
+function obtenerBienesMobiliariosRecientes() {
+    try {
+        // Obtenemos una instancia de la conexión
+        $conexion = Conexion::getInstance()->getConexion();
+
+        // Consulta para obtener los últimos 7 registros de bienes mobiliarios
+        $query = "SELECT codigo_uta, nombre, modelo, marca, id_ubi_per, activo 
+                  FROM bienes_mobiliarios 
+                  ORDER BY fecha_ingreso DESC 
+                  LIMIT 7";
+        $stmt = $conexion->prepare($query);
+        $stmt->execute();
+
+        // Obtenemos el resultado
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    } catch (PDOException $e) {
+        error_log($e->getMessage(), 3, 'app_errors.log');
+        // Manejo de errores
+        return [];
     }
 }
 
