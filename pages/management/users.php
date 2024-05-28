@@ -1,15 +1,3 @@
-<?php
-if (session_status() == PHP_SESSION_NONE) {
-  session_start();
-}
-if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
-  header('Location: ../login/login.php');
-  exit;
-} else {
-  $_SESSION['email'];
-}
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -301,7 +289,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                                         <th>Apellido</th>
                                         <th>Cedula</th>
                                         <th>Email</th>
-                                        <th>Contraseña</th>
                                         <th>Rol</th>
                                         <th>Fecha Creación</th>
                                         <th>Acciones</th>
@@ -318,7 +305,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                                         <th>Apellido</th>
                                         <th>Cedula</th>
                                         <th>Email</th>
-                                        <th>Contraseña</th>
                                         <th>Rol</th>
                                         <th>Fecha Creación</th>
                                         <th>Acciones</th>
@@ -559,6 +545,8 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
     const editarModal = new bootstrap.Modal(document.getElementById('modalCrud'));
     const eliminarModal = new bootstrap.Modal(document.getElementById('modalCrudEliminar'));
 
+document.getElementById('emailE').value = email;
+document.getElementById('rolE').value = rol;
     let userAEliminarId = null;
     let userAEditarId = null;
 
@@ -591,7 +579,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <td>${user.apellido}</td>
             <td>${user.cedula}</td>
             <td>${user.email}</td>
-            <td>${user.psswd}</td>
             <td>${rol}</td>
             <td>${user.fecha_ingreso}</td>
             <td>
@@ -630,7 +617,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         });
 
         if (response.ok) {
-          // Si la solicitud es exitosa, recarga la lista de marcas
+          // Si la solicitud es exitosa, recarga la lista de usuarios
           fetchUsers();
           // Limpia los campos del formulario
           aggUser.reset();
@@ -664,7 +651,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         });
 
         if (response.ok) {
-          // Si la solicitud es exitosa, recarga la lista de marcas
+          // Si la solicitud es exitosa, recarga la lista de usuarios
           fetchUsers();
           // Cierra el modal de edición
           editarModal.hide();
@@ -689,7 +676,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         });
 
         if (response.ok) {
-          // Si la solicitud es exitosa, recarga la lista de marcas
+          // Si la solicitud es exitosa, recarga la lista de usuarios
           fetchUsers();
           // Cierra el modal de eliminación
           eliminarModal.hide()
@@ -700,6 +687,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         console.error('Error al eliminar user:', error);
       }
     });
+
     window.showEditarModal = async function (id) {
       try {
         const response = await fetch(apiBaseUrl + `?id=${id}`);
@@ -707,9 +695,8 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           throw new Error('Error al obtener detalles del usuario para editar');
         }
         const user = await response.json();
-        //console.log(marca[0].nombre)
-        // Llenar los campos del formulario con los detalles del user
-
+        
+        // Llenar los campos del formulario con los detalles del usuario
         document.getElementById('emailE').value = user[0].email;
         document.getElementById('rolE').value = user[0].rol;
         
@@ -725,7 +712,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
     window.showEliminarModal = function (id) {
       userAEliminarId = id;
       eliminarModal.show()
-      console.log('Mostrar modal de eliminación para el ID:', id);
+      console.log('Mostrar modal de eliminación para el ID:', userAEliminarId);
     };
 
     fetchUsers();
