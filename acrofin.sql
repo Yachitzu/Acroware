@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-05-2024 a las 15:13:01
+-- Tiempo de generación: 27-05-2024 a las 04:55:53
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `acrofin`
+-- Base de datos: `acroware`
 --
 
 -- --------------------------------------------------------
@@ -34,7 +34,10 @@ CREATE TABLE `actividades` (
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
   `plazo` int(11) DEFAULT NULL,
   `fecha_finalizacion` date DEFAULT NULL,
-  `id_bien_info` int(11) DEFAULT NULL
+  `id_area` int(11) DEFAULT NULL,
+  `id_ubicacion` int(11) DEFAULT NULL,
+  `id_bien_info` int(11) DEFAULT NULL,
+  `id_bien_mobi` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -46,8 +49,10 @@ CREATE TABLE `actividades` (
 CREATE TABLE `areas` (
   `id` int(11) NOT NULL,
   `nombre` varchar(60) DEFAULT NULL,
+  `descripcion` varchar(500) DEFAULT NULL,
   `piso` int(11) DEFAULT NULL,
-  `id_bloque_per` int(11) DEFAULT NULL
+  `id_bloque_per` int(11) DEFAULT NULL,
+  `id_usu_encargado` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -63,9 +68,12 @@ CREATE TABLE `bienes_informaticos` (
   `serie` varchar(20) DEFAULT NULL,
   `id_marca` int(11) DEFAULT NULL,
   `modelo` varchar(50) DEFAULT NULL,
+  `id_area_per` int(11) DEFAULT NULL,
+  `id_ubi_per` int(11) DEFAULT NULL,
   `ip` varchar(20) DEFAULT NULL,
   `fecha_ingreso` date DEFAULT current_timestamp(),
-  `id_ubi_per` int(11) DEFAULT NULL
+  `precio` float DEFAULT NULL,
+  `activo` enum('si','no') NOT NULL DEFAULT 'si'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -90,7 +98,10 @@ CREATE TABLE `bienes_mobiliarios` (
   `custodio_actual` varchar(250) DEFAULT NULL,
   `fecha_ingreso` date DEFAULT current_timestamp(),
   `valor_contable` float DEFAULT NULL,
-  `id_ubi_per` int(11) DEFAULT NULL
+  `precio` float DEFAULT NULL,
+  `id_area_per` int(11) DEFAULT NULL,
+  `id_ubi_per` int(11) DEFAULT NULL,
+  `activo` enum('si','no') NOT NULL DEFAULT 'si'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -102,7 +113,9 @@ CREATE TABLE `bienes_mobiliarios` (
 CREATE TABLE `bloques` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) DEFAULT NULL,
-  `id_facultad_per` int(11) DEFAULT NULL
+  `descripcion` varchar(500) DEFAULT NULL,
+  `id_facultad_per` int(11) DEFAULT NULL,
+  `pisos` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -130,7 +143,8 @@ CREATE TABLE `componentes` (
 CREATE TABLE `facultades` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) DEFAULT NULL,
-  `descripcion` varchar(600) DEFAULT NULL
+  `descripcion` varchar(600) DEFAULT NULL,
+  `campus` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -142,7 +156,9 @@ CREATE TABLE `facultades` (
 CREATE TABLE `marcas` (
   `id` int(11) NOT NULL,
   `nombre` varchar(30) DEFAULT NULL,
-  `pais` varchar(30) DEFAULT NULL
+  `descripcion` varchar(600) DEFAULT NULL,
+  `pais` varchar(30) DEFAULT NULL,
+  `area` varchar(60) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -173,7 +189,9 @@ CREATE TABLE `software` (
   `proveedor` varchar(30) DEFAULT NULL,
   `tipo_licencia` varchar(50) DEFAULT NULL,
   `activado` varchar(2) DEFAULT NULL CHECK (`activado` in ('si','no')),
-  `fecha_adqui` date DEFAULT current_timestamp()
+  `fecha_adqui` date DEFAULT current_timestamp(),
+  `fecha_activacion` date DEFAULT NULL,
+  `precio` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -216,14 +234,18 @@ CREATE TABLE `usuarios` (
 ALTER TABLE `actividades`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_usu_asig` (`id_usu_asig`),
-  ADD KEY `id_bien_info` (`id_bien_info`);
+  ADD KEY `id_area` (`id_area`),
+  ADD KEY `id_ubicacion` (`id_ubicacion`),
+  ADD KEY `id_bien_info` (`id_bien_info`),
+  ADD KEY `id_bien_mobi` (`id_bien_mobi`);
 
 --
 -- Indices de la tabla `areas`
 --
 ALTER TABLE `areas`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_bloque_per` (`id_bloque_per`);
+  ADD KEY `id_bloque_per` (`id_bloque_per`),
+  ADD KEY `id_usu_encargado` (`id_usu_encargado`);
 
 --
 -- Indices de la tabla `bienes_informaticos`
@@ -231,6 +253,7 @@ ALTER TABLE `areas`
 ALTER TABLE `bienes_informaticos`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_marca` (`id_marca`),
+  ADD KEY `id_area_per` (`id_area_per`),
   ADD KEY `id_ubi_per` (`id_ubi_per`);
 
 --
@@ -239,6 +262,7 @@ ALTER TABLE `bienes_informaticos`
 ALTER TABLE `bienes_mobiliarios`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_marca` (`id_marca`),
+  ADD KEY `id_area_per` (`id_area_per`),
   ADD KEY `id_ubi_per` (`id_ubi_per`);
 
 --
@@ -377,52 +401,58 @@ ALTER TABLE `usuarios`
 -- Filtros para la tabla `actividades`
 --
 ALTER TABLE `actividades`
-  ADD CONSTRAINT `fk_act_bienes_inf` FOREIGN KEY (`id_bien_info`) REFERENCES `bienes_informaticos` (`id`),
-  ADD CONSTRAINT `fk_act_usuarios` FOREIGN KEY (`id_usu_asig`) REFERENCES `usuarios` (`id`);
+  ADD CONSTRAINT `actividades_ibfk_1` FOREIGN KEY (`id_usu_asig`) REFERENCES `usuarios` (`id`),
+  ADD CONSTRAINT `actividades_ibfk_2` FOREIGN KEY (`id_area`) REFERENCES `areas` (`id`),
+  ADD CONSTRAINT `actividades_ibfk_3` FOREIGN KEY (`id_ubicacion`) REFERENCES `ubicaciones` (`id`),
+  ADD CONSTRAINT `actividades_ibfk_4` FOREIGN KEY (`id_bien_info`) REFERENCES `bienes_informaticos` (`id`),
+  ADD CONSTRAINT `actividades_ibfk_5` FOREIGN KEY (`id_bien_mobi`) REFERENCES `bienes_mobiliarios` (`id`);
 
 --
 -- Filtros para la tabla `areas`
 --
 ALTER TABLE `areas`
-  ADD CONSTRAINT `fk_area_bloque` FOREIGN KEY (`id_bloque_per`) REFERENCES `bloques` (`id`);
+  ADD CONSTRAINT `areas_ibfk_1` FOREIGN KEY (`id_bloque_per`) REFERENCES `bloques` (`id`),
+  ADD CONSTRAINT `areas_ibfk_2` FOREIGN KEY (`id_usu_encargado`) REFERENCES `usuarios` (`id`);
 
 --
 -- Filtros para la tabla `bienes_informaticos`
 --
 ALTER TABLE `bienes_informaticos`
-  ADD CONSTRAINT `fk_inf_marca` FOREIGN KEY (`id_marca`) REFERENCES `marcas` (`id`),
-  ADD CONSTRAINT `fk_inf_ubicacion` FOREIGN KEY (`id_ubi_per`) REFERENCES `ubicaciones` (`id`);
+  ADD CONSTRAINT `bienes_informaticos_ibfk_1` FOREIGN KEY (`id_marca`) REFERENCES `marcas` (`id`),
+  ADD CONSTRAINT `bienes_informaticos_ibfk_2` FOREIGN KEY (`id_area_per`) REFERENCES `areas` (`id`),
+  ADD CONSTRAINT `bienes_informaticos_ibfk_3` FOREIGN KEY (`id_ubi_per`) REFERENCES `ubicaciones` (`id`);
 
 --
 -- Filtros para la tabla `bienes_mobiliarios`
 --
 ALTER TABLE `bienes_mobiliarios`
-  ADD CONSTRAINT `fk_mob_marca` FOREIGN KEY (`id_marca`) REFERENCES `marcas` (`id`),
-  ADD CONSTRAINT `fk_mob_ubicacion` FOREIGN KEY (`id_ubi_per`) REFERENCES `ubicaciones` (`id`);
+  ADD CONSTRAINT `bienes_mobiliarios_ibfk_1` FOREIGN KEY (`id_marca`) REFERENCES `marcas` (`id`),
+  ADD CONSTRAINT `bienes_mobiliarios_ibfk_2` FOREIGN KEY (`id_area_per`) REFERENCES `areas` (`id`),
+  ADD CONSTRAINT `bienes_mobiliarios_ibfk_3` FOREIGN KEY (`id_ubi_per`) REFERENCES `ubicaciones` (`id`);
 
 --
 -- Filtros para la tabla `bloques`
 --
 ALTER TABLE `bloques`
-  ADD CONSTRAINT `fk_bloque_facultad` FOREIGN KEY (`id_facultad_per`) REFERENCES `facultades` (`id`);
+  ADD CONSTRAINT `bloques_ibfk_1` FOREIGN KEY (`id_facultad_per`) REFERENCES `facultades` (`id`);
 
 --
 -- Filtros para la tabla `componentes`
 --
 ALTER TABLE `componentes`
-  ADD CONSTRAINT `fk_comp_bienes_inf` FOREIGN KEY (`id_bien_infor_per`) REFERENCES `bienes_informaticos` (`id`);
+  ADD CONSTRAINT `componentes_ibfk_1` FOREIGN KEY (`id_bien_infor_per`) REFERENCES `bienes_informaticos` (`id`);
 
 --
 -- Filtros para la tabla `repotenciaciones`
 --
 ALTER TABLE `repotenciaciones`
-  ADD CONSTRAINT `fk_repot_componente` FOREIGN KEY (`id_componente`) REFERENCES `componentes` (`id`);
+  ADD CONSTRAINT `repotenciaciones_ibfk_1` FOREIGN KEY (`id_componente`) REFERENCES `componentes` (`id`);
 
 --
 -- Filtros para la tabla `ubicaciones`
 --
 ALTER TABLE `ubicaciones`
-  ADD CONSTRAINT `fk_ubicacion_area` FOREIGN KEY (`id_area_per`) REFERENCES `areas` (`id`);
+  ADD CONSTRAINT `ubicaciones_ibfk_1` FOREIGN KEY (`id_area_per`) REFERENCES `areas` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
