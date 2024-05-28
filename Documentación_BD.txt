@@ -284,3 +284,14 @@ Ref: repotenciaciones.id_componente > componentes.id
 Ref: actividades.id_usu_asig > usuarios.id
 Ref: actividades.id_bien_info > bienes_informaticos.id
 
+///////  SQLS EXTRAS ///////
+//tabla para recuperar contraseña
+
+CREATE TABLE recuperar_password (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(25) NOT NULL,
+    token VARCHAR(100) NOT NULL,
+    expFech DATE NOT NULL
+);
+
+
