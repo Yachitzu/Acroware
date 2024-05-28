@@ -304,151 +304,11 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        
-                                        <td>Microsoft Office</td>
-                                        <td>Microsoft</td>
-                                        <td>Comercial</td>
-                                        <td>Si</td>
-                                        <td>2023-05-15</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        
-                                        <td>Adobe Photoshop</td>
-                                        <td>Adobe</td>
-                                        <td>Comercial</td>
-                                        <td>No</td>
-                                        <td>2022-10-20</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        
-                                        <td>Linux Ubuntu</td>
-                                        <td>Comunidad</td>
-                                        <td>Open Source</td>
-                                        <td>Si</td>
-                                        <td>2023-01-30</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        
-                                        <td>Google Chrome</td>
-                                        <td>Google</td>
-                                        <td>Comercial</td>
-                                        <td>Si</td>
-                                        <td>2022-08-10</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        
-                                        <td>Visual Studio Code</td>
-                                        <td>Microsoft</td>
-                                        <td>Open Source</td>
-                                        <td>No</td>
-                                        <td>2023-03-25</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        
-                                        <td>Skype</td>
-                                        <td>Microsoft</td>
-                                        <td>Comercial</td>
-                                        <td>No</td>
-                                        <td>2022-12-05</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        
-                                        <td>Zoom</td>
-                                        <td>Zoom Video Communications</td>
-                                        <td>Comercial</td>
-                                        <td>Si</td>
-                                        <td>2022-11-18</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        
-                                        <td>Firefox</td>
-                                        <td>Mozilla</td>
-                                        <td>Open Source</td>
-                                        <td>Si</td>
-                                        <td>2023-02-14</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
+
+                                <tbody id="softwareTableBody">
+                                    
+
+
                                 </tbody>                                
                                 <tfoot>
                                     <tr>
@@ -519,12 +379,12 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         <div class="modal-content">
             <div class="modal-header bg-primary">
                 <h3 class="modal-title text-white" id="modal-register-label">Agregar Software</h3>
-                <p class="modal">Ingrese los datos del Usuario:</p>
+                <p class="modal">Ingrese los datos del Software:</p>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <i class="fas fa-times" class="element-white"></i>
                 </button>
             </div> 
-            <form class="forms-sample">
+            <form class="forms-sample" id='aggSoftware' method='post'>
             <div class="modal-body">
                 <div class="grid-margin-modal">          
                     <div class="card-body">
@@ -532,11 +392,11 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="Dni" class="text-bold">Proveedor</label>
-                                <input type="text" class="form-control" id="Proveedor" placeholder="Proveedor" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                                <input type="text" class="form-control" id="proveedor" placeholder="Proveedor" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="Name" class="text-bold">Nombre</label>
-                                <input type="text" class="form-control" id="Name" placeholder="Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                                <input type="text" class="form-control" id="nombre_software" placeholder="Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                             </div>
                         </div>
                         <div class="form-row">
@@ -555,19 +415,22 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                                 </label>
                             </div>
                         </div>
-                            <div class="form-group col-md-6">
-                                <label for="role" class="text-bold">Tipo Licencia</label>
-                                <select class="form-control" id="licencia" required>
-                                    <option value="">Seleccione un Tipo</option>
-                                    <option value="publico">Dominio Público</option>
-                                    <option value="abierto">Codigo Abierto</option>
-                                    <option value="suscripcion">Suscripción</option>
-                                    <option value="propietario">Propietario</option>
-                                    <option value="gratuito">Gratuito</option>
-                                </select>
-                            </div>
+                          <div class="form-group col-md-6">
+                              <label for="licencia" class="text-bold">Tipo Licencia</label>
+                              <select class="form-control" id="licenciaE" required>
+                                  <option value="">Seleccione un Tipo</option>
+                                  <option value="Dominio Público">Dominio Público</option>
+                                  <option value="Codigo Abierto">Codigo Abierto</option>
+                                  <option value="Suscripción">Suscripción</option>
+                                  <option value="Propietario">Propietario</option>
+                                  <option value="Gratuito">Gratuito</option>
+                              </select>
+                          </div>
                         </div>
-                        
+                        <div class="form-group col-md-12">
+                                <label for="Name" class="text-bold">Fecha de Adquisición</label>
+                                <input type="date" class="form-control" id="fecha_adqui" placeholder="Fecha de adquisición" required>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -585,12 +448,12 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         <div class="modal-content">
             <div class="modal-header bg-primary">
                 <h3 class="modal-title text-white" id="modal-register-label">Eliminar Software </h3>
-                <p class="modal">Ingrese los datos del Usuario:</p>
+                <p class="modal">Ingrese los datos del Software:</p>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <i class="fas fa-times" class="element-white"></i>
                 </button>
             </div> 
-            <form class="forms-sample">
+            <form class="forms-sample" id="eliminarSoftwareForm">
             <div class="modal-body">
                 <div class="grid-margin-modal">          
                     <div class="card-body">
@@ -622,7 +485,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     <i class="fas fa-times" class="element-white"></i>
                 </button>
             </div> 
-            <form class="forms-sample">
+            <form class="forms-sample" id='editarSoftwareForm'>
             <div class="modal-body">
                 <div class="grid-margin-modal">          
                     <div class="card-body">
@@ -630,24 +493,24 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                         <div class="form-row">
                           <div class="form-group col-md-6">
                               <label for="Dni" class="text-bold">Proveedor</label>
-                              <input type="text" class="form-control" id="Proveedor" placeholder="Proveedor" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                              <input type="text" class="form-control" id="proveedorE" placeholder="Proveedor" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                           </div>
                           <div class="form-group col-md-6">
                               <label for="Name" class="text-bold">Nombre</label>
-                              <input type="text" class="form-control" id="Name" placeholder="Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                              <input type="text" class="form-control" id="nombreE" placeholder="Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                           </div>
                       </div>
                       <div class="form-row">
                         <div class="form-group col-md-6">
-                          <label for="activo" class="text-bold">Activo</label>
+                          <label for="activoE" class="text-bold">Activo</label>
                           <div class="form-check mx-4">
-                              <input class="form-check-input" type="radio" name="activo" id="si_activo" value="si" required>
+                              <input class="form-check-input" type="radio" name="activoE" id="si_activoE" value="si" required>
                               <label class="form-check-label" for="si_activo">
                                   Sí
                               </label>
                           </div>
                           <div class="form-check mx-4">
-                              <input class="form-check-input" type="radio" name="activo" id="no_activo" value="no" required>
+                              <input class="form-check-input" type="radio" name="activoE" id="no_activoE" value="no" required>
                               <label class="form-check-label" for="no_activo">
                                   No
                               </label>
@@ -655,16 +518,20 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                       </div>
                           <div class="form-group col-md-6">
                               <label for="licencia" class="text-bold">Tipo Licencia</label>
-                              <select class="form-control" id="licencia" required>
+                              <select class="form-control" id="licenciaE" required>
                                   <option value="">Seleccione un Tipo</option>
-                                  <option value="publico">Dominio Público</option>
-                                  <option value="abierto">Codigo Abierto</option>
-                                  <option value="suscripcion">Suscripción</option>
-                                  <option value="propietario">Propietario</option>
-                                  <option value="gratuito">Gratuito</option>
+                                  <option value="Dominio Público">Dominio Público</option>
+                                  <option value="Codigo Abierto">Codigo Abierto</option>
+                                  <option value="Suscripción">Suscripción</option>
+                                  <option value="Propietario">Propietario</option>
+                                  <option value="Gratuito">Gratuito</option>
                               </select>
                           </div>
                       </div>
+                      <div class="form-group col-md-12">
+                                <label for="Name" class="text-bold">Fecha de Adquisición</label>
+                                <input type="date" class="form-control" id="fecha_adquiE" placeholder="Fecha de adquisición" required>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -676,7 +543,8 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         </div>
     </div>
 </div>
-  
+    
+
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
@@ -702,9 +570,202 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
     <script src="../../resources/vendors/datatables/jquery.dataTables.min.js"></script>
     <script src="../../resources/vendors/datatables/dataTables.bootstrap4.min.js"></script>
 
+
     <!-- Page level custom scripts -->
     <script src="../../resources/js/datatables-demo.js"></script>
-</body>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const apiBaseUrl = '../../Acciones/RestSoftware.php';
+    const softwareTableBody = document.getElementById('softwareTableBody');
+    const aggSoftware = document.getElementById('aggSoftware');
+    const editarModal = new bootstrap.Modal(document.getElementById('modalCrud'));
+    const eliminarModal = new bootstrap.Modal(document.getElementById('modalCrudEliminar'));
+    let softwareAEliminarId = null;
+    let softwareAEditarId = null;
+
+    async function fetchSoftware() {
+      try {
+        const response = await fetch(apiBaseUrl);
+        const data = await response.json();
+
+        softwareTableBody.innerHTML = '';
+        data.forEach(software => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${software.id}</td>
+            <td>${software.nombre_software}</td>
+            <td>${software.proveedor}</td>
+            <td>${software.tipo_licencia}</td>
+            <td>${software.activado}</td>
+            <td>${software.fecha_adqui}</td>
+            <td>
+            <center>          
+              <button class="btn btn-warning btn-circle element-white editar" id="editar" onclick="showEditarModal(${software.id})">
+                <i class="fas fa-edit" ></i>
+              </button>
+              <button class="btn btn-danger btn-circle eliminar" id="eliminar" onclick="showEliminarModal(${software.id})">
+                <i class="fas fa-trash"></i>
+              </button>
+            </center>
+            </td>
+          `;
+          softwareTableBody.appendChild(row);
+        });
+      } catch (error) {
+        console.error('Error fetching software:', error);
+      }
+    }
+
+  aggSoftware.addEventListener('submit', async function (event) {
+  event.preventDefault();
+  const nombre_software = document.getElementById('nombre_software').value;
+  const proveedor = document.getElementById('proveedor').value;
+  const tipo_licencia = document.getElementById('tipo_licencia').value;
+  let activo = null;
+  let radios = document.getElementsByName('activo');
+  for (var radio of radios) {
+    if (radio.checked) {
+      activo = radio.value;
+    }
+  }
+  const fecha_adqui = document.getElementById('fecha_adqui').value;
+  alert(`Nombre del software: ${nombre_software}\nProveedor: ${proveedor}\nTipo de licencia: ${tipo_licencia}\nActivo: ${activo}\nFecha de adquisición: ${fecha_adqui}`);
+  try {
+    const response = await fetch(apiBaseUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ nombre_software, proveedor, tipo_licencia, activo, fecha_adqui})
+    });
+
+    if (response.ok) {
+      // Si la solicitud es exitosa, recarga la lista de marcas
+      fetchSoftware();
+      // Limpia los campos del formulario
+      aggSoftware.reset();
+      // Cierra el modal
+      $('#modalCrudAgregar').modal('hide');
+    } else {
+      console.error('Error al agregar software:', response.statusText);
+    }
+  } catch (error) {
+    console.error('Error al agregar software:', error);
+  }
+});
+
+
+
+    document.getElementById('editarSoftwareForm').addEventListener('submit', async function (event) {
+      event.preventDefault();
+      // Obtener los valores actualizados del formulario
+      const id = softwareAEditarId;
+      const nombre_software = document.getElementById('nombreE').value;
+      const proveedor = document.getElementById('proveedorE').value;
+      const tipo_licencia = document.getElementById('licenciaE').value;
+      let activo = null;
+      let radios = document.getElementsByName('activoE');
+      for (var radio of radios) {
+        if (radio.checked) {
+          activo = radio.value;
+        }
+      }
+      const fecha_adqui = document.getElementById('fecha_adquiE').value;
+
+      try {
+        // Enviar la solicitud de edición al servidor
+        const response = await fetch(apiBaseUrl + `?id=${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ nombre_software,proveedor, tipo_licencia,activo,fecha_adqui })
+        });
+
+        if (response.ok) {
+          // Si la solicitud es exitosa, recarga la lista de software
+          fetchSoftware();
+          // Cierra el modal de edición
+          editarModal.hide();
+        } else {
+          console.error('Error al editar software:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error al editar software:', error);
+      }
+    });
+
+
+
+    const eliminarSoftwareForm = document.getElementById('eliminarSoftwareForm');
+
+    eliminarSoftwareForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
+      try {
+        const id = softwareAEliminarId;
+        const response = await fetch(apiBaseUrl + `?id=${id}`, {
+          method: 'DELETE'
+        });
+
+        if (response.ok) {
+          // Si la solicitud es exitosa, recarga la lista de marcas
+          fetchSoftware();
+          // Cierra el modal de eliminación
+          eliminarModal.hide()
+        } else {
+          console.error('Error al eliminar software:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error al eliminar software:', error);
+      }
+    });
+    window.showEditarModal = async function (id) {
+      try {
+        const response = await fetch(apiBaseUrl + `?id=${id}`);
+        if (!response.ok) {
+          throw new Error('Error al obtener detalles del software para editar');
+        }
+        const software = await response.json();
+        //console.log(software[0].nombre_software)
+        // Llenar los campos del formulario con los detalles del software
+        document.getElementById('proveedorE').value = software[0].proveedor;
+        document.getElementById('nombreE').value = software[0].nombre_software;
+        document.getElementById('fecha_adquiE').value = software[0].fecha_adqui;
+        let radio = software[0].activado;
+        if (radio="Si") {
+          document.getElementById("si_activoE").checked = true;
+        }else{
+          document.getElementById("no_activoE").checked = true;
+
+        }
+        const licenciaSeleccionada = software[0].tipo_licencia;
+        const licenciaE = document.getElementById('licenciaE');
+        for (let i = 0; i < licenciaE.options.length; i++) {
+          // Si el valor de la opción coincide con el valor seleccionado previamente
+          if (licenciaE.options[i].value === licenciaSeleccionada) {
+            // Marcamos esta opción como seleccionada
+            licenciaE.options[i].selected = true;
+            // Salimos del bucle ya que hemos encontrado la opción correcta
+            break;
+          }
+        }
+        softwareAEditarId = id; 
+        // Mostrar el modal de edición
+        editarModal.show();
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+
+    window.showEliminarModal = function (id) {
+      softwareAEliminarId = id;
+      eliminarModal.show()
+      console.log('Mostrar modal de eliminación para el ID:', id);
+    };
+
+    fetchSoftware();
+  });
+</script>
 
 </html>
-
