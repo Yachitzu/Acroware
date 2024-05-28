@@ -34,11 +34,12 @@ Class Obtener{
         $json = file_get_contents('php://input');
         $data = json_decode($json, true);
         $conectar = Conexion::getInstance()->getConexion();
+        echo($data);
         if ($data !== null) {
             $nombre_software = $data["nombre_software"];
             $proveedor = $data["proveedor"];
             $tipo_licencia = $data["tipo_licencia"];
-            $activado = $data["activado"];
+            $activado = $data["activo"];
             $fecha_adqui = $data["fecha_adqui"];
 
         }
@@ -49,7 +50,7 @@ Class Obtener{
         //$conectar->commit();
     }
     }
-        Class Actualizar{
+    class Actualizar{
         public static function ActualizarSoftware($id){
             $json = file_get_contents('php://input');
             $data = json_decode($json, true);
@@ -58,7 +59,7 @@ Class Obtener{
                 $nombre_software = $data["nombre_software"];
                 $proveedor = $data["proveedor"];
                 $tipo_licencia = $data["tipo_licencia"];
-                $activado = $data["activado"];
+                $activado = $data["activo"];
                 $fecha_adqui = $data["fecha_adqui"];
             }
 
@@ -68,8 +69,8 @@ Class Obtener{
             echo json_encode($resultado);
             //$conectar->commit();
         }
-    } 
-        Class Eliminar{
+    }  
+    class Eliminar{
         public static function BorrarSoftware($id)
         {
             $conectar = Conexion::getInstance()->getConexion();
