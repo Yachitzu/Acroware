@@ -531,7 +531,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         descripcion = $("#descripcionA").val();
         campus = $("#campusA").val();
         $.ajax({
-          url: "http://localhost/Acroware/Acciones/RestFacultades.php",
+          url: "../../Acciones/RestFacultades.php",
           type: "POST",
           data: JSON.stringify({
             nombre: nombre,
@@ -567,7 +567,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         descripcion = $("#descripcionE").val();
         campus = $("#campusE").val();
         $.ajax({
-          url: "http://localhost/Acroware/Acciones/RestFacultades.php",
+          url: "../../Acciones/RestFacultades.php",
           type: "PUT",
           data: JSON.stringify({
             id: id,
@@ -595,7 +595,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         e.preventDefault();
         id;
         $.ajax({
-          url: "http://localhost/Acroware/Acciones/RestFacultades.php",
+          url: "../../Acciones/RestFacultades.php",
           type: "DELETE",
           data: JSON.stringify({
             id: id
@@ -612,7 +612,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-      fetch('http://localhost/Acroware/Acciones/RestFacultades.php', {
+      fetch('../../Acciones/RestFacultades.php', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'

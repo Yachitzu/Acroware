@@ -38,28 +38,16 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center wow fadeIn">
-                                        <h1 class="h4 text-gray-900 mb-2 font-berthold">¿Olvidaste tu contraseña?</h1>
-                                        <p class="mb-4">Lo entendemos, pasan cosas. Sólo tienes que introducir tu
-                                            dirección de correo electrónico a continuación
-                                            ¡Y te enviaremos un enlace para restablecer tu contraseña!</p>
+                                        <h1 class="h4 text-gray-900 mb-2 font-berthold">¡Algo ha fallado!</h1>
+                                        <p class="mb-4">El enlace de restablecimiento es inválido o ha expirado.</p>
                                     </div>
-                                    <form class="user" action="restablecer_clave_solicitud.php" method="POST">
-                                        <div class="form-group wow fadeIn">
-                                            <input type="email" name="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Correo Electrónico" required>
-                                        </div>
+                                    <form class="user" action="forgot.php">
                                         <button type="submit"
                                             class="btn btn-primary btn-user btn-block font-weight-semi-bold text-white">
-                                            Restablecer contraseña
+                                            Volver a intentarlo
                                         </button>
                                     </form>
                                     <hr>
-
-                                    <div class="text-center">
-                                        <a class="small text-secondary" href="login.php">¿Ya tienes una cuenta? ¡Inicia
-                                            sesión!</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>
