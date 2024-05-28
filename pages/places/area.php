@@ -1,3 +1,15 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
+if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
+  header('Location: ../login/login.php');
+  exit;
+} else {
+  $_SESSION['email'];
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -399,7 +411,7 @@
                     cellspacing="0">
                     <thead>
                       <tr>
-                        <th>ID</th>
+                        
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Facultad Pertenece</th>
@@ -418,7 +430,7 @@
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th>ID</th>
+                        
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Facultad Pertenece</th>

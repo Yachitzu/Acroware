@@ -1,3 +1,15 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
+if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
+  header('Location: ../login/login.php');
+  exit;
+} else {
+  $_SESSION['email'];
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -294,28 +306,49 @@
                   <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%"
                     cellspacing="0">
                     <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Codigo UTA</th>
-                        <th>Componente</th>
-                        <th>Nombre</th>
-                        <th>Serie</th>
-                        <th>Detalle</th>
-                        <th>Fecha Repotenciación</th>
-                      </tr>
+                        <tr>
+                            
+                            <th>Codigo UTA</th>
+                            <th>Componente</th>
+                            <th>Nombre</th>
+                            <th>Serie</th>
+                            <th>Detalle</th>
+                            <th>Fecha Repotenciación</th>
+                            <th>Acciones</th>
+                        </tr>
                     </thead>
                     <tbody id="marcasTableBody">
+                        <tr>
+                            
+                            <td>UTA123456</td>
+                            <td>Motor</td>
+                            <td>Motor de Arranque</td>
+                            <td>SN123456789</td>
+                            <td>Motor de arranque con nuevas mejoras</td>
+                            <td>2023-12-01</td>
+                            <td>
+                                <center>
+                                    <button class="btn btn-warning btn-circle element-white editar" id="editar">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-circle eliminar" id="eliminar">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </center>
+                            </td>
+                        </tr>
                     </tbody>
                     <tfoot>
-                      <tr>
-                        <th>ID</th>
-                        <th>Codigo UTA</th>
-                        <th>Componente</th>
-                        <th>Nombre</th>
-                        <th>Serie</th>
-                        <th>Detalle</th>
-                        <th>Fecha Repotenciación</th>
-                      </tr>
+                        <tr>
+                            
+                            <th>Codigo UTA</th>
+                            <th>Componente</th>
+                            <th>Nombre</th>
+                            <th>Serie</th>
+                            <th>Detalle</th>
+                            <th>Fecha Repotenciación</th>
+                            <th>Acciones</th>
+                        </tr>
                     </tfoot>
                     <tbody>
 
@@ -344,6 +377,192 @@
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
+
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title text-primary" id="modal-register-label">¿Listo para partir?</h3>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="card-body">
+            <p class="card-description">Seleccione "Cerrar sesión" a continuación si está list@ para finalizar su sesión
+              actual.</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+            aria-label="Close" value="Cancelar" id="cancelButton">
+          <a class="btn-crud btn-primary text-bold" href="../../cerrar.php">Cerrar Sesión</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Modal-->
+  <div class="modal fade modal-crud" id="modalCrudAgregar" tabindex="-1" role="dialog"
+    aria-labelledby="modal-register-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h3 class="modal-title text-white" id="modal-register-label">Agregar Repotenciación</h3>
+          <p class="modal">Ingrese los datos del Usuario:</p>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
+        </div>
+        <form class="forms-sample" id="agregarMarcaForm" method="post">
+          <div class="modal-body">
+            <div class="grid-margin-modal">
+                <div class="card-body">
+                    <p class="card-description">Por favor, complete los siguientes campos para agregar un nuevo bien al
+                    sistema:</p>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
+                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Código UTA" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nombreC" class="text-bold">Nombre</label>
+                            <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre"
+                            oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="codigoUTAC" class="text-bold">Serie</label>
+                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Serie" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="facultad" class="text-bold">Componente</label>
+                            <select class="form-control" id="facultad" required>
+                                <option value="">Seleccione un Componente</option>
+                                <option value="PC01">PC 01</option>
+                                <option value="PC02">PC 02</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="Name" class="text-bold">Descripción</label>
+                            <textarea class="form-control" id="descripcionE" placeholder="Descripción"
+                            oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-bs-dismiss="modal"
+              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Repotenciación ">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Modal-->
+  <div class="modal fade" id="modalCrudEliminar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h3 class="modal-title text-white" id="modal-register-label">Eliminar Repotenciación </h3>
+          <p class="modal">Ingrese los datos del Usuario:</p>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
+        </div>
+        <form class="forms-sample" id="eliminarMarcaForm">
+          <div class="modal-body">
+            <div class="grid-margin-modal">
+              <div class="card-body">
+                <p class="card-description">¿Está seguro de que desea eliminar la Repotenciación?</p>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <p class="text-danger"><small>Esta acción no se puede deshacer.</small></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Repotenciación ">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Edit Modal-->
+  <div class="modal fade" id="modalCrud" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h3 class="modal-title text-white" id="modal-register-label">Editar Repotenciación</h3>
+          <p class="modal">Ingrese los datos del Usuario:</p>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
+        </div>
+        <form class="forms-sample" id="editarMarcaForm">
+          <div class="modal-body">
+            <div class="grid-margin-modal">
+                <div class="card-body">
+                    <p class="card-description">Por favor, complete los siguientes campos para editar la información de la Repotenciación seleccionada:</p>
+                    
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
+                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Código UTA" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nombreC" class="text-bold">Nombre</label>
+                            <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre"
+                            oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="codigoUTAC" class="text-bold">Serie</label>
+                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Serie" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="facultad" class="text-bold">Componente</label>
+                            <select class="form-control" id="facultad" required>
+                                <option value="">Seleccione un Componente</option>
+                                <option value="PC01">PC 01</option>
+                                <option value="PC02">PC 02</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="Name" class="text-bold">Descripción</label>
+                            <textarea class="form-control" id="descripcionE" placeholder="Descripción"
+                            oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Repotenciación">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>

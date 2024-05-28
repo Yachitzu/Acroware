@@ -9,6 +9,8 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
   $_SESSION['email'];
 }
 
+require_once __DIR__ . '/Acciones/contador.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -302,8 +304,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   <img src="resources/images/dashboard/4959495-removebg-preview.png" alt="people">
                   <div class="weather-info">
                     <div class="d-flex">
-                      <div>
-                        <h2 class="mb-0 font-weight-bold text"><i class="icon-sun mr-2"></i>31<sup>C</sup></h2>
+                      <div class="result">
                       </div>
                       <div class="ml-2">
                         <h4 class="location font-weight-bold">Ambato</h4>
@@ -320,19 +321,19 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   <div class="card card-dark-blue">
                     <div class="card-body">
                       <p class="mb-4">Número Total</p>
-                      <p class="fs-30 mb-2"><i class="ti-layers"></i> 20</p>
-                      <p>Laboratorios</p>
+                      <p class="fs-30 mb-2"><i class="ti-layers"></i><?php echo contarSoftware(); ?></p>
+                      <p>Software</p>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4 stretch-card transparent">
                   <div class="card card-tale">
-                    <div class="card-body">
-                      <!-- Icono de un frasco de laboratorio -->
-                      <p class="mb-4">Número Total </p>
-                      <p class="fs-30 mb-2"><i class="ti-user"></i> 5</p>
-                      <p>Laboratoristas</p>
-                    </div>
+                      <div class="card-body">
+                          <!-- Icono de un frasco de laboratorio -->
+                          <p class="mb-4">Número Total </p>
+                          <p class="fs-30 mb-2"><i class="ti-user"></i> <?php echo contarLaboratoristas(); ?></p>
+                          <p>Laboratoristas</p>
+                      </div>
                   </div>
                 </div>
               </div>
@@ -341,7 +342,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   <div class="card card-light-blue">
                     <div class="card-body">
                       <p class="mb-4">Número Total</p>
-                      <p class="fs-30 mb-2"><i class="ti-desktop"></i> 100</p>
+                      <p class="fs-30 mb-2"><i class="ti-desktop"></i><?php echo contarBienesInformaticos(); ?></p>
                       <p>Bienes</p>
                     </div>
                   </div>
@@ -350,7 +351,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   <div class="card card-light-danger">
                     <div class="card-body">
                       <p class="mb-4">Número Total</p>
-                      <p class="fs-30 mb-2"><i class="ti-panel"></i> 470</p>
+                      <p class="fs-30 mb-2"><i class="ti-panel"></i><?php echo contarComponentes(); ?></p>
                       <p>Componentes</p>
                     </div>
                   </div>
@@ -884,6 +885,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
   <script src="resources/js/hoverable-collapse.js"></script>
   <script src="resources/js/template.js"></script>
   <script src="resources/js/settings.js"></script>
+  <script src="resources/js/clima.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script src="resources/js/Chart.roundedBarCharts.js"></script>

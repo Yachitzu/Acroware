@@ -1,3 +1,15 @@
+<?php
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
+if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
+  header('Location: ../login/login.php');
+  exit;
+} else {
+  $_SESSION['email'];
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -283,7 +295,7 @@
                             <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        
                                         <th>Nombre</th>
                                         <th>Proovedor</th>
                                         <th>Tipo Licencia</th>
@@ -292,12 +304,15 @@
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
+
                                 <tbody id="softwareTableBody">
                                     
+
+
                                 </tbody>                                
                                 <tfoot>
                                     <tr>
-                                        <th>ID</th>
+                                        
                                         <th>Nombre</th>
                                         <th>Proovedor</th>
                                         <th>Tipo Licencia</th>
