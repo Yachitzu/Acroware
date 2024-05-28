@@ -3,8 +3,8 @@ include_once('CrudUsuarios.php');
 $opc=$_SERVER["REQUEST_METHOD"];
 switch ($opc) {
         case 'GET':
-            if (isset($_GET['cedula'])) {
-                Obtener::ObtenerById($_GET['cedula']);
+            if (isset($_GET['id'])) {
+                Obtener::ObtenerById($_GET['id  ']);
             }else{
                 Obtener::ObtenerUsuarios();
             }
