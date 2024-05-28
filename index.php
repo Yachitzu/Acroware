@@ -304,8 +304,7 @@ require_once __DIR__ . '/Acciones/contador.php';
                   <img src="resources/images/dashboard/4959495-removebg-preview.png" alt="people">
                   <div class="weather-info">
                     <div class="d-flex">
-                      <div>
-                        <h2 class="mb-0 font-weight-bold text"><i class="icon-sun mr-2"></i>31<sup>C</sup></h2>
+                      <div class="result">
                       </div>
                       <div class="ml-2">
                         <h4 class="location font-weight-bold">Ambato</h4>
@@ -886,6 +885,7 @@ require_once __DIR__ . '/Acciones/contador.php';
   <script src="resources/js/hoverable-collapse.js"></script>
   <script src="resources/js/template.js"></script>
   <script src="resources/js/settings.js"></script>
+  <script src="resources/js/clima.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script src="resources/js/Chart.roundedBarCharts.js"></script>
