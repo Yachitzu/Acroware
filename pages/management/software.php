@@ -293,24 +293,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="softwareTableBody">
-                                    <tr>
-                                        <td>8</td>
-                                        <td>Firefox</td>
-                                        <td>Mozilla</td>
-                                        <td>Open Source</td>
-                                        <td>Si</td>
-                                        <td>2023-02-14</td>
-                                        <td>
-                                            <center>          
-                                                <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                                    <i class="fas fa-edit"></i>
-                                                </button>
-                                                <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </center>
-                                        </td>
-                                    </tr>
+                                    
                                 </tbody>                                
                                 <tfoot>
                                     <tr>
@@ -417,17 +400,17 @@
                                 </label>
                             </div>
                         </div>
-                            <div class="form-group col-md-6">
-                                <label for="role" class="text-bold">Tipo Licencia</label>
-                                <select class="form-control" id="tipo_licencia" required>
-                                    <option value="">Seleccione un Tipo</option>
-                                    <option value="publico">Dominio Público</option>
-                                    <option value="abierto">Codigo Abierto</option>
-                                    <option value="suscripcion">Suscripción</option>
-                                    <option value="propietario">Propietario</option>
-                                    <option value="gratuito">Gratuito</option>
-                                </select>
-                            </div>
+                          <div class="form-group col-md-6">
+                              <label for="licencia" class="text-bold">Tipo Licencia</label>
+                              <select class="form-control" id="licenciaE" required>
+                                  <option value="">Seleccione un Tipo</option>
+                                  <option value="Dominio Público">Dominio Público</option>
+                                  <option value="Codigo Abierto">Codigo Abierto</option>
+                                  <option value="Suscripción">Suscripción</option>
+                                  <option value="Propietario">Propietario</option>
+                                  <option value="Gratuito">Gratuito</option>
+                              </select>
+                          </div>
                         </div>
                         <div class="form-group col-md-12">
                                 <label for="Name" class="text-bold">Fecha de Adquisición</label>
@@ -504,15 +487,15 @@
                       </div>
                       <div class="form-row">
                         <div class="form-group col-md-6">
-                          <label for="activo" class="text-bold">Activo</label>
+                          <label for="activoE" class="text-bold">Activo</label>
                           <div class="form-check mx-4">
-                              <input class="form-check-input" type="radio" name="activo" id="si_activo" value="si" required>
+                              <input class="form-check-input" type="radio" name="activoE" id="si_activoE" value="si" required>
                               <label class="form-check-label" for="si_activo">
                                   Sí
                               </label>
                           </div>
                           <div class="form-check mx-4">
-                              <input class="form-check-input" type="radio" name="activo" id="no_activo" value="no" required>
+                              <input class="form-check-input" type="radio" name="activoE" id="no_activoE" value="no" required>
                               <label class="form-check-label" for="no_activo">
                                   No
                               </label>
@@ -520,19 +503,19 @@
                       </div>
                           <div class="form-group col-md-6">
                               <label for="licencia" class="text-bold">Tipo Licencia</label>
-                              <select class="form-control" id="licencia" required>
+                              <select class="form-control" id="licenciaE" required>
                                   <option value="">Seleccione un Tipo</option>
-                                  <option value="publico">Dominio Público</option>
-                                  <option value="abierto">Codigo Abierto</option>
-                                  <option value="suscripcion">Suscripción</option>
-                                  <option value="propietario">Propietario</option>
-                                  <option value="gratuito">Gratuito</option>
+                                  <option value="Dominio Público">Dominio Público</option>
+                                  <option value="Codigo Abierto">Codigo Abierto</option>
+                                  <option value="Suscripción">Suscripción</option>
+                                  <option value="Propietario">Propietario</option>
+                                  <option value="Gratuito">Gratuito</option>
                               </select>
                           </div>
                       </div>
                       <div class="form-group col-md-12">
                                 <label for="Name" class="text-bold">Fecha de Adquisición</label>
-                                <input type="date" class="form-control" id="fecha_adqui" placeholder="Fecha de adquisición" required>
+                                <input type="date" class="form-control" id="fecha_adquiE" placeholder="Fecha de adquisición" required>
                         </div>
                     </div>
                 </div>
@@ -618,12 +601,12 @@
       }
     }
 
-    aggSoftware.addEventListener('submit', async function (event) {
+  aggSoftware.addEventListener('submit', async function (event) {
   event.preventDefault();
   const nombre_software = document.getElementById('nombre_software').value;
   const proveedor = document.getElementById('proveedor').value;
   const tipo_licencia = document.getElementById('tipo_licencia').value;
-  let activado = null;
+  let activo = null;
   let radios = document.getElementsByName('activo');
   for (var radio of radios) {
     if (radio.checked) {
@@ -638,7 +621,7 @@
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ nombre_software, proveedor, tipo_licencia, activado, fecha_adqui})
+      body: JSON.stringify({ nombre_software, proveedor, tipo_licencia, activo, fecha_adqui})
     });
 
     if (response.ok) {
@@ -662,11 +645,17 @@
       event.preventDefault();
       // Obtener los valores actualizados del formulario
       const id = softwareAEditarId;
-      const nombre_software = document.getElementById('nombre_software').value;
-      const proveedor = document.getElementById('proveedor').value;
-      const tipo_licencia = document.getElementById('tipo_licencia').value;
-      const activo = document.querySelector('input[name="activo"][checked]').value;
-      const fecha_adqui = document.getElementById('fecha_adqui').value;
+      const nombre_software = document.getElementById('nombreE').value;
+      const proveedor = document.getElementById('proveedorE').value;
+      const tipo_licencia = document.getElementById('licenciaE').value;
+      let activo = null;
+      let radios = document.getElementsByName('activoE');
+      for (var radio of radios) {
+        if (radio.checked) {
+          activo = radio.value;
+        }
+      }
+      const fecha_adqui = document.getElementById('fecha_adquiE').value;
 
       try {
         // Enviar la solicitud de edición al servidor
@@ -675,7 +664,7 @@
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ email,rol })
+          body: JSON.stringify({ nombre_software,proveedor, tipo_licencia,activo,fecha_adqui })
         });
 
         if (response.ok) {
@@ -722,8 +711,29 @@
           throw new Error('Error al obtener detalles del software para editar');
         }
         const software = await response.json();
-        //console.log(marca[0].nombre)
+        //console.log(software[0].nombre_software)
         // Llenar los campos del formulario con los detalles del software
+        document.getElementById('proveedorE').value = software[0].proveedor;
+        document.getElementById('nombreE').value = software[0].nombre_software;
+        document.getElementById('fecha_adquiE').value = software[0].fecha_adqui;
+        let radio = software[0].activado;
+        if (radio="Si") {
+          document.getElementById("si_activoE").checked = true;
+        }else{
+          document.getElementById("no_activoE").checked = true;
+
+        }
+        const licenciaSeleccionada = software[0].tipo_licencia;
+        const licenciaE = document.getElementById('licenciaE');
+        for (let i = 0; i < licenciaE.options.length; i++) {
+          // Si el valor de la opción coincide con el valor seleccionado previamente
+          if (licenciaE.options[i].value === licenciaSeleccionada) {
+            // Marcamos esta opción como seleccionada
+            licenciaE.options[i].selected = true;
+            // Salimos del bucle ya que hemos encontrado la opción correcta
+            break;
+          }
+        }
         softwareAEditarId = id; 
         // Mostrar el modal de edición
         editarModal.show();
