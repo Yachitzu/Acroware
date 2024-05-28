@@ -16,7 +16,7 @@ class AccionesFacultades
             foreach ($dato as $respuesta) {
                 $tabla .= '
                     <tr>
-                        <td ">' . htmlspecialchars($respuesta['id']) . '</td>
+                        
                         <td ">' . htmlspecialchars($respuesta['nombre']) . '</td>
                         <td ">' . htmlspecialchars($respuesta['descripcion']) . '</td>
                         <td ">' . htmlspecialchars($respuesta['campus']) . '</td>

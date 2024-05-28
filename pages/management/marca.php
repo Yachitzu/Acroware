@@ -306,7 +306,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     cellspacing="0">
                     <thead>
                       <tr>
-                        <th>ID</th>
+                        
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>País Origen</th>
@@ -318,7 +318,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th>ID</th>
+                        
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>País Origen</th>
@@ -588,7 +588,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           const row = document.createElement('tr');
 
           row.innerHTML = `
-            <td>${marca.id}</td>
+            
             <td>${marca.nombre}</td>
             <td>${marca.descripcion}</td>
             <td>${marca.pais}</td>

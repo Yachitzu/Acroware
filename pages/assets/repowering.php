@@ -307,7 +307,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     cellspacing="0">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            
                             <th>Codigo UTA</th>
                             <th>Componente</th>
                             <th>Nombre</th>
@@ -319,7 +319,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     </thead>
                     <tbody id="marcasTableBody">
                         <tr>
-                            <td>1</td>
+                            
                             <td>UTA123456</td>
                             <td>Motor</td>
                             <td>Motor de Arranque</td>
@@ -340,7 +340,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>ID</th>
+                            
                             <th>Codigo UTA</th>
                             <th>Componente</th>
                             <th>Nombre</th>

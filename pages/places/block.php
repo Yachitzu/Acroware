@@ -405,7 +405,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     cellspacing="0">
                     <thead>
                       <tr>
-                        <th>ID</th>
+                        
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Facultad</th>
@@ -422,7 +422,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     </tbody>
                     <tfoot>
                       <tr>
-                        <th>ID</th>
+                        
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Facultad</th>

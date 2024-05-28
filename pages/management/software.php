@@ -295,7 +295,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                             <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        
                                         <th>Nombre</th>
                                         <th>Proovedor</th>
                                         <th>Tipo Licencia</th>
@@ -306,7 +306,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>1</td>
+                                        
                                         <td>Microsoft Office</td>
                                         <td>Microsoft</td>
                                         <td>Comercial</td>
@@ -324,7 +324,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>2</td>
+                                        
                                         <td>Adobe Photoshop</td>
                                         <td>Adobe</td>
                                         <td>Comercial</td>
@@ -342,7 +342,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>3</td>
+                                        
                                         <td>Linux Ubuntu</td>
                                         <td>Comunidad</td>
                                         <td>Open Source</td>
@@ -360,7 +360,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>4</td>
+                                        
                                         <td>Google Chrome</td>
                                         <td>Google</td>
                                         <td>Comercial</td>
@@ -378,7 +378,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>5</td>
+                                        
                                         <td>Visual Studio Code</td>
                                         <td>Microsoft</td>
                                         <td>Open Source</td>
@@ -396,7 +396,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>6</td>
+                                        
                                         <td>Skype</td>
                                         <td>Microsoft</td>
                                         <td>Comercial</td>
@@ -414,7 +414,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>7</td>
+                                        
                                         <td>Zoom</td>
                                         <td>Zoom Video Communications</td>
                                         <td>Comercial</td>
@@ -432,7 +432,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>8</td>
+                                        
                                         <td>Firefox</td>
                                         <td>Mozilla</td>
                                         <td>Open Source</td>
@@ -452,7 +452,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                                 </tbody>                                
                                 <tfoot>
                                     <tr>
-                                        <th>ID</th>
+                                        
                                         <th>Nombre</th>
                                         <th>Proovedor</th>
                                         <th>Tipo Licencia</th>

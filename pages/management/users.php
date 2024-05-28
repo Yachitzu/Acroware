@@ -297,7 +297,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                             <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        
                                         <th>Nombre</th>
                                         <th>Apellido</th>
                                         <th>Cedula</th>
@@ -314,7 +314,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                                 </tbody>                                
                                 <tfoot>
                                     <tr>
-                                        <th>ID</th>
+                                        
                                         <th>Nombre</th>
                                         <th>Apellido</th>
                                         <th>Cedula</th>
@@ -591,7 +591,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             break;
         }
           row.innerHTML = `
-            <td>${user.id}</td>
+            
             <td>${user.nombre}</td>
             <td>${user.apellido}</td>
             <td>${user.cedula}</td>
