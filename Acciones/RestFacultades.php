@@ -1,5 +1,5 @@
 <?php
-include_once ('CrudFacultades.php');
+include_once ('crudFacultades.php');
 $op = $_SERVER["REQUEST_METHOD"];
 switch ($op) {
     case 'GET':
