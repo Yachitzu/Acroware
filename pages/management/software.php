@@ -1,15 +1,3 @@
-<?php
-if (session_status() == PHP_SESSION_NONE) {
-  session_start();
-}
-if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
-  header('Location: ../login/login.php');
-  exit;
-} else {
-  $_SESSION['email'];
-}
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -295,7 +283,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                             <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        
                                         <th>Nombre</th>
                                         <th>Proovedor</th>
                                         <th>Tipo Licencia</th>
@@ -304,15 +291,11 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
-
                                 <tbody id="softwareTableBody">
                                     
-
-
                                 </tbody>                                
                                 <tfoot>
                                     <tr>
-                                        
                                         <th>Nombre</th>
                                         <th>Proovedor</th>
                                         <th>Tipo Licencia</th>
@@ -417,7 +400,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                         </div>
                           <div class="form-group col-md-6">
                               <label for="licencia" class="text-bold">Tipo Licencia</label>
-                              <select class="form-control" id="licenciaE" required>
+                              <select class="form-control" id="licencia" required>
                                   <option value="">Seleccione un Tipo</option>
                                   <option value="Dominio Público">Dominio Público</option>
                                   <option value="Codigo Abierto">Codigo Abierto</option>
@@ -592,7 +575,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         data.forEach(software => {
           const row = document.createElement('tr');
           row.innerHTML = `
-            <td>${software.id}</td>
             <td>${software.nombre_software}</td>
             <td>${software.proveedor}</td>
             <td>${software.tipo_licencia}</td>
@@ -620,7 +602,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
   event.preventDefault();
   const nombre_software = document.getElementById('nombre_software').value;
   const proveedor = document.getElementById('proveedor').value;
-  const tipo_licencia = document.getElementById('tipo_licencia').value;
+  const tipo_licencia = document.getElementById('licencia').value;
   let activo = null;
   let radios = document.getElementsByName('activo');
   for (var radio of radios) {
@@ -629,7 +611,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
     }
   }
   const fecha_adqui = document.getElementById('fecha_adqui').value;
-  alert(`Nombre del software: ${nombre_software}\nProveedor: ${proveedor}\nTipo de licencia: ${tipo_licencia}\nActivo: ${activo}\nFecha de adquisición: ${fecha_adqui}`);
   try {
     const response = await fetch(apiBaseUrl, {
       method: 'POST',
