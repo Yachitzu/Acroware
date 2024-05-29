@@ -9,6 +9,17 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
   $_SESSION['email'];
 }
 
+require_once __DIR__ . '/Acciones/contador.php';
+
+$bienes = obtenerBienesMobiliariosRecientes();
+
+// Verificar si $bienes es un array
+if (!is_array($bienes)) {
+    echo "Error: No se obtuvo un array.";
+    var_dump($bienes);
+    exit;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -302,8 +313,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   <img src="resources/images/dashboard/4959495-removebg-preview.png" alt="people">
                   <div class="weather-info">
                     <div class="d-flex">
-                      <div>
-                        <h2 class="mb-0 font-weight-bold text"><i class="icon-sun mr-2"></i>31<sup>C</sup></h2>
+                      <div class="result">
                       </div>
                       <div class="ml-2">
                         <h4 class="location font-weight-bold">Ambato</h4>
@@ -320,19 +330,19 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   <div class="card card-dark-blue">
                     <div class="card-body">
                       <p class="mb-4">Número Total</p>
-                      <p class="fs-30 mb-2"><i class="ti-layers"></i> 20</p>
-                      <p>Laboratorios</p>
+                      <p class="fs-30 mb-2"><i class="ti-layers"></i><?php echo contarSoftware(); ?></p>
+                      <p>Software</p>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6 mb-4 stretch-card transparent">
                   <div class="card card-tale">
-                    <div class="card-body">
-                      <!-- Icono de un frasco de laboratorio -->
-                      <p class="mb-4">Número Total </p>
-                      <p class="fs-30 mb-2"><i class="ti-user"></i> 5</p>
-                      <p>Laboratoristas</p>
-                    </div>
+                      <div class="card-body">
+                          <!-- Icono de un frasco de laboratorio -->
+                          <p class="mb-4">Número Total </p>
+                          <p class="fs-30 mb-2"><i class="ti-user"></i> <?php echo contarLaboratoristas(); ?></p>
+                          <p>Laboratoristas</p>
+                      </div>
                   </div>
                 </div>
               </div>
@@ -341,7 +351,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   <div class="card card-light-blue">
                     <div class="card-body">
                       <p class="mb-4">Número Total</p>
-                      <p class="fs-30 mb-2"><i class="ti-desktop"></i> 100</p>
+                      <p class="fs-30 mb-2"><i class="ti-desktop"></i><?php echo contarBienesInformaticos(); ?></p>
                       <p>Bienes</p>
                     </div>
                   </div>
@@ -350,7 +360,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   <div class="card card-light-danger">
                     <div class="card-body">
                       <p class="mb-4">Número Total</p>
-                      <p class="fs-30 mb-2"><i class="ti-panel"></i> 470</p>
+                      <p class="fs-30 mb-2"><i class="ti-panel"></i><?php echo contarComponentes(); ?></p>
                       <p>Componentes</p>
                     </div>
                   </div>
@@ -681,89 +691,44 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           </div>
           <div class="row">
             <div class="col-md-7 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <p class="card-title mb-0">Bienes Agregados Recientemente</p>
-                  <div class="table-responsive">
-                    <table class="table table-striped table-borderless">
-                      <thead>
-                        <tr>
-                          <th>ID</th>
-                          <th>Bien</th>
-                          <th>Laboratorio</th>
-                          <th>Fecha</th>
-                          <th>Estado</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>50</td>
-                          <td>Maquina Lab-60A</td>
-                          <td class="font-weight-bold">Lab-CTT</td>
-                          <td>21/05/2024</td>
-                          <td class="font-weight-medium">
-                            <div class="badge badge-success">Completo</div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>49</td>
-                          <td>Maquina Lab01-20B</td>
-                          <td class="font-weight-bold">Lab-01</td>
-                          <td>13/04/2024</td>
-                          <td class="font-weight-medium">
-                            <div class="badge badge-success">Completo</div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>48</td>
-                          <td>Maquina Lab60A</td>
-                          <td class="font-weight-bold">Lab-01</td>
-                          <td>05/04/2024</td>
-                          <td class="font-weight-medium">
-                            <div class="badge badge-warning">Pendiente</div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>47</td>
-                          <td>Maquina Lab60A</td>
-                          <td class="font-weight-bold">Lab-01</td>
-                          <td>01/04/2024</td>
-                          <td class="font-weight-medium">
-                            <div class="badge badge-warning">Pendiente</div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>46</td>
-                          <td>Maquina Lab60A</td>
-                          <td class="font-weight-bold">Lab-01</td>
-                          <td>20/03/2024</td>
-                          <td class="font-weight-medium">
-                            <div class="badge badge-danger">Incompleto</div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>45</td>
-                          <td>Maquina Lab60A</td>
-                          <td class="font-weight-bold">Lab-01</td>
-                          <td>15/03/2024</td>
-                          <td class="font-weight-medium">
-                            <div class="badge badge-warning">Pendiente</div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>44</td>
-                          <td>Maquina Lab60A</td>
-                          <td class="font-weight-bold">Lab-01</td>
-                          <td>03/03/2024</td>
-                          <td class="font-weight-medium">
-                            <div class="badge badge-success">Completo</div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-title mb-0">Bienes Agregados Recientemente</p>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th>Codigo UTA</th>
+                                        <th>Nombre</th>
+                                        <th>Modelo</th>
+                                        <th>Marca</th>
+                                        <th>Ubicacion</th>
+                                        <th>Activo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($bienes as $bien): ?>
+                                        <tr>
+                                            <td><?php echo htmlspecialchars($bien['codigo_uta']); ?></td>
+                                            <td><?php echo htmlspecialchars($bien['nombre']); ?></td>
+                                            <td><?php echo htmlspecialchars($bien['modelo']); ?></td>
+                                            <td><?php echo htmlspecialchars($bien['marca']); ?></td>
+                                            <td><?php echo htmlspecialchars($bien['id_ubi_per']); ?></td>
+                                            <td class="font-weight-medium">
+                                                <?php
+                                                    $badge_class = $bien['activo'] === 'si' ? 'badge-success' : 'badge-danger';
+                                                ?>
+                                                <div class="badge <?php echo $badge_class; ?>">
+                                                    <?php echo ucfirst(htmlspecialchars($bien['activo'])); ?>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
             <div class="col-md-5 grid-margin stretch-card">
               <div class="card">
@@ -884,6 +849,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
   <script src="resources/js/hoverable-collapse.js"></script>
   <script src="resources/js/template.js"></script>
   <script src="resources/js/settings.js"></script>
+  <script src="resources/js/clima.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script src="resources/js/Chart.roundedBarCharts.js"></script>
