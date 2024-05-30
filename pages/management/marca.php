@@ -32,7 +32,8 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
   <!-- inject:css -->
   <link rel="stylesheet" href="../../resources/css/vertical-layout-light/style.css">
   <!-- endinject -->
-  <link rel="shortcut icon" href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" /> 
+  <link rel="shortcut icon"
+    href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" />
 </head>
 
 
@@ -306,7 +307,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     cellspacing="0">
                     <thead>
                       <tr>
-                        
+
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>País Origen</th>
@@ -318,7 +319,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     </tbody>
                     <tfoot>
                       <tr>
-                        
+
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>País Origen</th>
@@ -557,12 +558,12 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
   <script src="../../resources/js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
 
-    <!-- Page level plugins -->
-    <script src="../../resources/vendors/datatables/jquery.dataTables.min.js"></script>
-    <script src="../../resources/vendors/datatables/dataTables.bootstrap4.min.js"></script>
+  <!-- Page level plugins -->
+  <script src="../../resources/vendors/datatables/jquery.dataTables.min.js"></script>
+  <script src="../../resources/vendors/datatables/dataTables.bootstrap4.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="../../resources/js/datatables-demo.js"></script>
+  <!-- Page level custom scripts -->
+  <script src="../../resources/js/datatables-demo.js"></script>
 </body>
 
 
@@ -580,8 +581,14 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 
     async function fetchMarcas() {
       try {
-        const response = await fetch(apiBaseUrl);
-        const data = await response.json();
+        const response = await fetch(apiBaseUrl, {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        const responseData = await response.json();
+        const data = responseData.data;
+        console.log('Datos recibidos del servidor:', data)
 
         marcasTableBody.innerHTML = '';
         data.forEach(marca => {
@@ -613,6 +620,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 
     agregarMarcaForm.addEventListener('submit', async function (event) {
       event.preventDefault();
+      
       const nombre = document.getElementById('nombreC').value;
       const pais = document.getElementById('paisC').value;
       const descripcion = document.getElementById('descripcionC').value;
@@ -660,14 +668,19 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ nombre, descripcion, pais, area })
+          body: JSON.stringify({ id, nombre, descripcion, pais, area })
         });
 
         if (response.ok) {
-          // Si la solicitud es exitosa, recarga la lista de marcas
-          fetchMarcas();
-          // Cierra el modal de edición
-          editarModal.hide();
+          const result = await response.json();
+          if (result.success) {
+            // Si la solicitud es exitosa, recarga la lista de marcas
+            await fetchMarcas();
+            // Cierra el modal de edición
+            editarModal.hide();
+          } else {
+            console.error('Error al editar marca:', result.message);
+          }
         } else {
           console.error('Error al editar marca:', response.statusText);
         }
@@ -683,36 +696,48 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       event.preventDefault();
       try {
         const id = marcaAEliminarId;
-        const response = await fetch(apiBaseUrl + `?id=${id}`, {
-          method: 'DELETE'
+
+        if (!id) {
+          console.error('ID de marca a eliminar no está definido.');
+          return;
+        }
+
+        const response = await fetch(`${apiBaseUrl}?id=${id}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
         });
 
         if (response.ok) {
           // Si la solicitud es exitosa, recarga la lista de marcas
-          fetchMarcas();
+          await fetchMarcas();
           // Cierra el modal de eliminación
-          eliminarModal.hide()
+          eliminarModal.hide();
         } else {
-          console.error('Error al eliminar marca:', response.statusText);
+          const errorData = await response.json();
+          console.error('Error al eliminar marca:', errorData.message || response.statusText);
         }
       } catch (error) {
         console.error('Error al eliminar marca:', error);
       }
     });
+
     window.showEditarModal = async function (id) {
       try {
         const response = await fetch(apiBaseUrl + `?id=${id}`);
         if (!response.ok) {
           throw new Error('Error al obtener detalles de la marca para editar');
         }
-        const marca = await response.json();
-        //console.log(marca[0].nombre)
+        const responseMarca = await response.json();
+        const marca = responseMarca.data;
+        console.log(marca)
         // Llenar los campos del formulario con los detalles de la marca
 
-        document.getElementById('nombreE').value = marca[0].nombre;
-        document.getElementById('paisE').value = marca[0].pais;
-        document.getElementById('descripcionE').value = marca[0].descripcion;
-        const selectedArea = marca[0].area;
+        document.getElementById('nombreE').value = marca.nombre;
+        document.getElementById('paisE').value = marca.pais;
+        document.getElementById('descripcionE').value = marca.descripcion;
+        const selectedArea = marca.area;
         const areaEInput = document.getElementById('areaE');
 
         // Iteramos sobre cada opción en el campo de selección
@@ -725,7 +750,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             break;
           }
         }
-        marcaAEditarId = id; 
+        marcaAEditarId = id;
         // Mostrar el modal de edición
         editarModal.show();
       } catch (error) {
