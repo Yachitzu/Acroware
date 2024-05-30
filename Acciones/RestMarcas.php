@@ -17,8 +17,8 @@ switch ($opc) {
         break;
     case 'DELETE':
         $data = json_decode(file_get_contents('php://input'), true);
-        if (isset($data['id']) && !empty($data['id'])) {
-            Eliminar::BorrarMarca($data['id']);
+        if (isset($_GET['id']) && !empty($_GET['id'])) {
+            Eliminar::BorrarMarca($_GET['id']);
         } else {
             echo json_encode(['success' => false, 'message' => 'ID no proporcionado']);
         }
