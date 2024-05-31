@@ -7,11 +7,38 @@ class Obtener
     {
         try {
             $conectar = Conexion::getInstance()->getConexion();
-            $select = "SELECT * FROM marcas WHERE activo ='si'";
-            $resultado = $conectar->prepare($select);
+    
+            // Obtener los parámetros enviados por DataTables
+            $start = isset($_GET['start']) ? $_GET['start'] : 0;
+            $length = isset($_GET['length']) ? $_GET['length'] : 10;
+            $search = isset($_GET['search']['value']) ? $_GET['search']['value'] : '';
+            $orderColumnIndex = isset($_GET['order'][0]['column']) ? $_GET['order'][0]['column'] : 0;
+            $orderColumnName = isset($_GET['columns'][$orderColumnIndex]['data']) ? $_GET['columns'][$orderColumnIndex]['data'] : 'id';
+            $orderDir = isset($_GET['order'][0]['dir']) ? $_GET['order'][0]['dir'] : 'asc';
+    
+            // Construir la consulta SQL con búsqueda y ordenamiento
+            $query = "SELECT * FROM marcas WHERE activo = 'si'";
+            if (!empty($search)) {
+                $query .= " AND (nombre LIKE '%$search%' OR descripcion LIKE '%$search%' OR pais LIKE '%$search%' OR area LIKE '%$search%')";
+            }
+            $query .= " ORDER BY " . $orderColumnName . " " . $orderDir . " LIMIT " . $start . ", " . $length;
+    
+            $resultado = $conectar->prepare($query);
             $resultado->execute();
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
-            echo json_encode(['success' => true, 'data' => $data]);
+    
+            // Obtener el total de registros sin filtrar para la paginación
+            $totalRegistros = $conectar->query("SELECT COUNT(*) FROM marcas WHERE activo = 'si'")->fetchColumn();
+    
+            // Obtener el total de registros después de aplicar el filtro de búsqueda
+            $filtroRegistros = $conectar->query("SELECT COUNT(*) FROM marcas WHERE activo = 'si' AND (nombre LIKE '%$search%' OR descripcion LIKE '%$search%' OR pais LIKE '%$search%' OR area LIKE '%$search%')")->fetchColumn();
+    
+            echo json_encode([
+                'draw' => isset($_GET['draw']) ? intval($_GET['draw']) : 1,
+                'recordsTotal' => $totalRegistros,
+                'recordsFiltered' => $filtroRegistros,
+                'data' => $data
+            ]);
         } catch (PDOException $e) {
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
         }

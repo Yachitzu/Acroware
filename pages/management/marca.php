@@ -307,7 +307,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     cellspacing="0">
                     <thead>
                       <tr>
-
+                     
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>País Origen</th>
@@ -319,7 +319,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     </tbody>
                     <tfoot>
                       <tr>
-
+                        
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>País Origen</th>
@@ -579,6 +579,77 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
     let marcaAEliminarId = null;
     let marcaAEditarId = null;
 
+    $('#dataTable').DataTable({
+      "processing": true,
+      "serverSide": true,
+      "ajax": {
+        "url": apiBaseUrl,
+        "type": "GET",
+        "data": function (d) {
+          d.start = d.start || 0; // Indice de inicio para la paginación
+          d.length = d.length || 10; // Número de registros por página
+          d.draw = d.draw || 1; // Número de la solicitud de dibujo
+          d.search = d.search || {}; // Objeto de búsqueda
+          d.search.value = d.search.value || ""; // Valor de búsqueda
+          d.order = d.order || [0, 'asc']; // Orden de las columnas
+          return d;
+        },
+        "dataSrc": function (json) {
+          // Devuelve los datos de la respuesta JSON
+          return json.data;
+        },
+        "error": function (xhr, error, thrown) {
+          console.log('Error:', error);
+        }
+      },
+      "columns": [
+            { "data": "nombre" },
+            { "data": "descripcion" },
+            { "data": "pais" },
+            { "data": "area" },
+            { 
+                "data": null, 
+                "defaultContent": "", 
+                "orderable": false, 
+                "searchable": false,
+                "render": function (data, type, row) {
+                    return `
+                        <center>          
+                            <button class="btn btn-warning btn-circle element-white editar" id="editar" onclick="showEditarModal(${row.id})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-danger btn-circle eliminar" id="eliminar" onclick="showEliminarModal(${row.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </center>
+                    `;
+                }
+            }
+        ],
+      "searching": true, // Habilita la búsqueda
+      "lengthChange": true, // Habilita el cambio de longitud
+      "lengthMenu": [10, 25, 50, 100], // Opciones de longitud de página
+      "paging": true, // Habilita la paginación
+      "info": true, // Habilita la información de la tabla
+      "ordering": true, // Habilita la ordenación
+      "order": [[0, 'asc']], // Columna inicial para ordenar
+      "language": {
+        // Personaliza los textos, por ejemplo:
+        "lengthMenu": "Mostrar _MENU_ registros por página",
+        "zeroRecords": "No se encontraron registros",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+        "infoEmpty": "Mostrando 0 a 0 de 0 registros",
+        "infoFiltered": "(filtrado de _MAX_ registros totales)",
+        "search": "Buscar:",
+        "paginate": {
+          "first": "Primero",
+          "last": "Último",
+          "next": "Siguiente",
+          "previous": "Anterior"
+        }
+      }
+    });
+
     async function fetchMarcas() {
       try {
         const response = await fetch(apiBaseUrl, {
@@ -590,28 +661,21 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         const data = responseData.data;
         console.log('Datos recibidos del servidor:', data)
 
-        marcasTableBody.innerHTML = '';
-        data.forEach(marca => {
-          const row = document.createElement('tr');
+        $('#dataTable').DataTable().clear().draw();
 
-          row.innerHTML = `
+        // Agregar filas a la tabla
+        data.forEach(marca => {
+          $('#dataTable').DataTable().row.add({
             
-            <td>${marca.nombre}</td>
-            <td>${marca.descripcion}</td>
-            <td>${marca.pais}</td>
-            <td>${marca.area}</td>
-            <td>
-            <center>          
-              <button class="btn btn-warning btn-circle element-white editar" id="editar" onclick="showEditarModal(${marca.id})">
-                <i class="fas fa-edit" ></i>
-              </button>
-              <button class="btn btn-danger btn-circle eliminar" id="eliminar" onclick="showEliminarModal(${marca.id})">
-                <i class="fas fa-trash"></i>
-              </button>
-            </center>
-            </td>
-          `;
-          marcasTableBody.appendChild(row);
+            "nombre": marca.nombre,
+            "descripcion": marca.descripcion,
+            "pais": marca.pais,
+            "area": marca.area,
+            "id": marca.id
+           
+
+
+          }).draw();
         });
       } catch (error) {
         console.error('Error fetching marcas:', error);
@@ -620,7 +684,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 
     agregarMarcaForm.addEventListener('submit', async function (event) {
       event.preventDefault();
-      
+
       const nombre = document.getElementById('nombreC').value;
       const pais = document.getElementById('paisC').value;
       const descripcion = document.getElementById('descripcionC').value;
