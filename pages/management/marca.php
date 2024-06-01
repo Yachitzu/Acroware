@@ -404,8 +404,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="nombreC" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                    <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre" required>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="areaC" class="text-bold">Área</label>
@@ -425,8 +424,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   </div>
                   <div class="form-group col-md-12">
                     <label for="descripcionC" class="text-bold">Descripción</label>
-                    <textarea class="form-control" name="descripcionC" id="descripcionC" placeholder="Descripción"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
+                    <textarea class="form-control" name="descripcionC" id="descripcionC" placeholder="Descripción"></textarea>
                   </div>
                 </div>
               </div>
@@ -497,8 +495,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="nombre" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" id="nombreE" placeholder="Nombre"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                    <input type="text" class="form-control" id="nombreE" placeholder="Nombre" required>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="area" class="text-bold">Área</label>
@@ -518,8 +515,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   </div>
                   <div class="form-group col-md-12">
                     <label for="descripcion" class="text-bold">Descripción</label>
-                    <textarea class="form-control" id="descripcionE" placeholder="Descripción"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
+                    <textarea class="form-control" id="descripcionE" placeholder="Descripción"></textarea>
                   </div>
                 </div>
               </div>

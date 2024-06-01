@@ -228,7 +228,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="pages/assets/assets-i.php">Bienes Informáticos</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/assets/component.php">Componentes</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/assets/repowering.php">Repotenciación</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/assets/assets-m.php">Bienes Mobiliarios</a></li>
               </ul>
@@ -289,8 +288,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                   <h3 class="font-weight-bold">¡Bienvenido a Acroware!</h3>
-                  <h6 class="font-weight-normal mb-0">¡Gestión Inteligente! ¡Tienes <span class="text-primary">1
-                      notificación!</span></h6>
+                  <h6 class="font-weight-normal mb-0">¡Gestión Inteligente!</h6>
                 </div>
                 <div class="col-12 col-xl-4">
                   <div class="justify-content-end d-flex">

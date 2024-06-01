@@ -420,8 +420,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="Name" class="text-bold">Descripción</label>
-                    <textarea class="form-control" id="descripcionA" placeholder="Descripción"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
+                    <textarea class="form-control" id="descripcionA" placeholder="Descripción"></textarea>
                   </div>
                 </div>
               </div>
@@ -506,8 +505,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="Name" class="text-bold">Descripción</label>
-                    <textarea class="form-control" id="descripcionE" placeholder="Descripción"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
+                    <textarea class="form-control" id="descripcionE" placeholder="Descripción"></textarea>
                   </div>
                 </div>
               </div>

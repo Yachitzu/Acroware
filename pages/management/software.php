@@ -391,7 +391,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="Name" class="text-bold">Nombre</label>
-                                <input type="text" class="form-control" id="nombre_software" placeholder="Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                                <input type="text" class="form-control" id="nombre_software" placeholder="Nombre" required>
                             </div>
                         </div>
                         <div class="form-row">
@@ -492,7 +492,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                           </div>
                           <div class="form-group col-md-6">
                               <label for="Name" class="text-bold">Nombre</label>
-                              <input type="text" class="form-control" id="nombreE" placeholder="Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                              <input type="text" class="form-control" id="nombreE" placeholder="Nombre" required>
                           </div>
                       </div>
                       <div class="form-row">

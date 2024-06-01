@@ -250,7 +250,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="software.php">
+            <a class="nav-link" href="../management/software.php">
               <i class="icon-grid-2 menu-icon"></i>
               <span class="menu-title">Software</span>
             </a>
@@ -447,8 +447,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="nombreC" class="text-bold">Nombre</label>
-                            <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre"
-                            oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                            <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="codigoUTAC" class="text-bold">Modelo</label>
@@ -590,8 +589,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="nombreC" class="text-bold">Nombre</label>
-                            <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre"
-                            oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                            <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="codigoUTAC" class="text-bold">Modelo</label>
