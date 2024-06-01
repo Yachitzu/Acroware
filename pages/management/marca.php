@@ -187,7 +187,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       </div>
       <!-- partial -->
       <!-- partial:partials/_sidebar.php -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+      <nav class="sidebar sidebar-offcanvas " id="sidebar">
         <ul class="nav">
           <li class="nav-item">
             <a class="nav-link" href="../../index.php">
@@ -201,22 +201,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
               <i class="icon-head menu-icon"></i>
               <span class="menu-title">Usuarios</span>
             </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="ui-basic">
-              <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">Inventario</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="auth">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.php">Bienes Informáticos</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../assets/component.php">Componentes</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../assets/repowering.php">Repotenciación</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.php">Bienes Mobiliarios</a></li>
-              </ul>
-            </div>
           </li>
 
           <li class="nav-item">
@@ -237,16 +221,25 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 
           <li class="nav-item">
             <a class="nav-link" href="marca.php">
-              <i class="icon-bar-graph menu-icon"></i>
+                <i class="icon-bar-graph menu-icon"></i>
               <span class="menu-title">Marcas</span>
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="../others/acount.php">
-              <i class="icon-paper menu-icon"></i>
-              <span class="menu-title">Cuenta</span>
+            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="ui-basic">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title">Inventario</span>
+              <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="auth">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.php">Bienes Informáticos</a></li>
+                
+                <li class="nav-item"> <a class="nav-link" href="../assets/repowering.php">Repotenciación</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.php">Bienes Mobiliarios</a></li>
+              </ul>
+            </div>
           </li>
 
           <li class="nav-item">
@@ -260,6 +253,13 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <a class="nav-link" href="../others/QR.php">
               <i class="icon-contract menu-icon"></i>
               <span class="menu-title">Escaneo QR</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="../others/acount.php">
+              <i class="icon-paper menu-icon"></i>
+              <span class="menu-title">Cuenta</span>
             </a>
           </li>
 
@@ -405,8 +405,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="nombreC" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                    <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre" required>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="areaC" class="text-bold">Área</label>
@@ -426,8 +425,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   </div>
                   <div class="form-group col-md-12">
                     <label for="descripcionC" class="text-bold">Descripción</label>
-                    <textarea class="form-control" name="descripcionC" id="descripcionC" placeholder="Descripción"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
+                    <textarea class="form-control" name="descripcionC" id="descripcionC" placeholder="Descripción"></textarea>
                   </div>
                 </div>
               </div>
@@ -498,8 +496,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="nombre" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" id="nombreE" placeholder="Nombre"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                    <input type="text" class="form-control" id="nombreE" placeholder="Nombre" required>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="area" class="text-bold">Área</label>
@@ -519,8 +516,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   </div>
                   <div class="form-group col-md-12">
                     <label for="descripcion" class="text-bold">Descripción</label>
-                    <textarea class="form-control" id="descripcionE" placeholder="Descripción"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
+                    <textarea class="form-control" id="descripcionE" placeholder="Descripción"></textarea>
                   </div>
                 </div>
               </div>

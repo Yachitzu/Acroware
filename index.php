@@ -20,6 +20,9 @@ if (!is_array($bienes)) {
     exit;
 }
 
+$usuario_id = $_SESSION['id'];
+$basePath = $_SERVER['DOCUMENT_ROOT'] . '/Acroware/';
+$recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -141,7 +144,7 @@ if (!is_array($bienes)) {
             <div class="add-items d-flex px-3 mb-0">
               <form class="form w-100">
                 <div class="form-group d-flex">
-                  <input type="text" class="form-control todo-list-input" placeholder="Agregar actividad">
+                  <input type="text" class="form-control" placeholder="Agregar actividad">
                   <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task">Agregar</button>
                 </div>
               </form>
@@ -217,22 +220,6 @@ if (!is_array($bienes)) {
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="ui-basic">
-              <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">Inventario</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="auth">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/assets/assets-i.php">Bienes Informáticos</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/assets/component.php">Componentes</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/assets/repowering.php">Repotenciación</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/assets/assets-m.php">Bienes Mobiliarios</a></li>
-              </ul>
-            </div>
-          </li>
-
-          <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="icon-columns menu-icon"></i>
               <span class="menu-title">Lugares</span>
@@ -256,10 +243,18 @@ if (!is_array($bienes)) {
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="pages/others/acount.php">
-              <i class="icon-paper menu-icon"></i>
-              <span class="menu-title">Cuenta</span>
+            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="ui-basic">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title">Inventario</span>
+              <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="auth">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/assets/assets-i.php">Bienes Informáticos</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/assets/repowering.php">Repotenciación</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/assets/assets-m.php">Bienes Mobiliarios</a></li>
+              </ul>
+            </div>
           </li>
 
           <li class="nav-item">
@@ -276,6 +271,13 @@ if (!is_array($bienes)) {
             </a>
           </li>
 
+          <li class="nav-item">
+            <a class="nav-link" href="pages/others/acount.php">
+              <i class="icon-paper menu-icon"></i>
+              <span class="menu-title">Cuenta</span>
+            </a>
+          </li>
+
         </ul>
       </nav>
       <!-- partial -->
@@ -286,8 +288,7 @@ if (!is_array($bienes)) {
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                   <h3 class="font-weight-bold">¡Bienvenido a Acroware!</h3>
-                  <h6 class="font-weight-normal mb-0">¡Gestión Inteligente! ¡Tienes <span class="text-primary">1
-                      notificación!</span></h6>
+                  <h6 class="font-weight-normal mb-0">¡Gestión Inteligente!</h6>
                 </div>
                 <div class="col-12 col-xl-4">
                   <div class="justify-content-end d-flex">
@@ -730,67 +731,43 @@ if (!is_array($bienes)) {
                     </div>
                 </div>
             </div>
+            <script>
+                var usuarioId = <?php echo $usuario_id; ?>;
+            </script>
             <div class="col-md-5 grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Recordatorio</h4>
-                  <div class="list-wrapper pt-2">
-                    <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
-                      <li>
-                        <div class="form-check form-check-flat">
-                          <label class="form-check-label">
-                            <input class="checkbox" type="checkbox">
-                            Revisión de proyectos
-                          </label>
-                        </div>
-                        <i class="remove ti-close"></i>
-                      </li>
-                      <li class="Completo">
-                        <div class="form-check form-check-flat">
-                          <label class="form-check-label">
-                            <input class="checkbox" type="checkbox" checked>
-                            Visualización de etiquetas
-                          </label>
-                        </div>
-                        <i class="remove ti-close"></i>
-                      </li>
-                      <li>
-                        <div class="form-check form-check-flat">
-                          <label class="form-check-label">
-                            <input class="checkbox" type="checkbox">
-                            Reunión de equipo
-                          </label>
-                        </div>
-                        <i class="remove ti-close"></i>
-                      </li>
-                      <li class="Completo">
-                        <div class="form-check form-check-flat">
-                          <label class="form-check-label">
-                            <input class="checkbox" type="checkbox" checked>
-                            Preparar una presentación
-                          </label>
-                        </div>
-                        <i class="remove ti-close"></i>
-                      </li>
-                      <li>
-                        <div class="form-check form-check-flat">
-                          <label class="form-check-label">
-                            <input class="checkbox" type="checkbox">
-                            Generar todas las etiquetas de laboratorio 1
-                          </label>
-                        </div>
-                        <i class="remove ti-close"></i>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="add-items d-flex mb-0 mt-2">
-                    <input type="text" class="form-control todo-list-input" placeholder="Agregar nueva actividad">
-                    <button class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i
-                        class="icon-circle-plus"></i></button>
-                  </div>
-                </div>
-              </div>
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Recordatorio</h4>
+            <div class="list-wrapper pt-2">
+                <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
+                    <?php if (is_array($recordatorios) && count($recordatorios) > 0): ?>
+                        <?php foreach ($recordatorios as $recordatorio): ?>
+                            <li data-id="<?php echo $recordatorio['id']; ?>">
+                                <div class="form-check form-check-flat">
+                                    <label class="form-check-label">
+                                        <input class="checkbox" type="checkbox">
+                                        <?php echo htmlspecialchars($recordatorio['actividad']); ?>
+                                    </label>
+                                </div>
+                                <i class="remove ti-close"></i>
+                            </li>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <li>No se encontraron recordatorios pendientes.</li>
+                    <?php endif; ?>
+                </ul>
             </div>
+            <div class="add-items d-flex mb-0 mt-2">
+              <form id="add-todo-form" class="d-flex w-100">
+                <input type="hidden" class="form-control todo-list-input" name="usuario_id" value="<?php echo $usuario_id; ?>">
+                <input type="text" class="form-control todo-list-input" name="actividad" placeholder="Agregar nueva actividad">
+                <button type="submit" class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i class="icon-circle-plus"></i></button>
+              </form>
+            </div>
+        </div>
+    </div>
+</div>
+
           </div>
         </div>
         <!-- content-wrapper ends -->
@@ -850,10 +827,11 @@ if (!is_array($bienes)) {
   <script src="resources/js/template.js"></script>
   <script src="resources/js/settings.js"></script>
   <script src="resources/js/clima.js"></script>
+  <script src="resources/js/todolist.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script src="resources/js/Chart.roundedBarCharts.js"></script>
-  <!-- End custom js for this page-->
+  <script src="resources/js/dashboard.js"></script>
 </body>
 
 </html>

@@ -27,6 +27,7 @@ class AuthenticateDatabase implements AuthenticationStrategy
                 $_SESSION['usuario'] = $data['nombre'] . ' ' . $data['apellido'];
                 $_SESSION['rol'] = $data['rol'];
                 $_SESSION['correo'] = $data['email'];
+                $_SESSION['id'] = $data['id'];
             } else {
                 header("Location: login.php?error=contrasena");
                 exit();
