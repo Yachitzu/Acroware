@@ -221,7 +221,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 
           <li class="nav-item">
             <a class="nav-link" href="marca.php">
-                <i class="icon-bar-graph menu-icon"></i>
+              <i class="icon-bar-graph menu-icon"></i>
               <span class="menu-title">Marcas</span>
             </a>
           </li>
@@ -235,7 +235,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.php">Bienes Informáticos</a></li>
-                
+
                 <li class="nav-item"> <a class="nav-link" href="../assets/repowering.php">Repotenciación</a></li>
                 <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.php">Bienes Mobiliarios</a></li>
               </ul>
@@ -307,23 +307,24 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     cellspacing="0">
                     <thead>
                       <tr>
-                     
+
                         <th>Nombre</th>
-                        <th>Descripción</th>
                         <th>País Origen</th>
                         <th>Área</th>
+                        <th>Descripción</th>
                         <th>Acciones</th>
+
                       </tr>
                     </thead>
                     <tbody id="marcasTableBody">
                     </tbody>
                     <tfoot>
                       <tr>
-                        
+
                         <th>Nombre</th>
-                        <th>Descripción</th>
                         <th>País Origen</th>
                         <th>Área</th>
+                        <th>Descripción</th>
                         <th>Acciones</th>
                       </tr>
                     </tfoot>
@@ -375,7 +376,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           </div>
         </div>
         <div class="modal-footer">
-          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
             aria-label="Close" value="Cancelar" id="cancelButton">
           <a class="btn-crud btn-primary text-bold" href="../../cerrar.php">Cerrar Sesión</a>
         </div>
@@ -424,14 +425,15 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   </div>
                   <div class="form-group col-md-12">
                     <label for="descripcionC" class="text-bold">Descripción</label>
-                    <textarea class="form-control" name="descripcionC" id="descripcionC" placeholder="Descripción"></textarea>
+                    <textarea class="form-control" name="descripcionC" id="descripcionC"
+                      placeholder="Descripción"></textarea>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-bs-dismiss="modal"
+            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Marca ">
           </div>
@@ -466,7 +468,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Marca ">
           </div>
@@ -522,7 +524,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Marca ">
           </div>
@@ -576,7 +578,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
     let marcaAEditarId = null;
 
     $('#dataTable').DataTable({
-      "processing": true,
+      "processing": false,
       "serverSide": true,
       "ajax": {
         "url": apiBaseUrl,
@@ -599,17 +601,17 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         }
       },
       "columns": [
-            { "data": "nombre" },
-            { "data": "descripcion" },
-            { "data": "pais" },
-            { "data": "area" },
-            { 
-                "data": null, 
-                "defaultContent": "", 
-                "orderable": false, 
-                "searchable": false,
-                "render": function (data, type, row) {
-                    return `
+        { "data": "nombre" },
+        { "data": "pais" },
+        { "data": "area" },
+        { "data": "descripcion" },
+        {
+          "data": null,
+          "defaultContent": "",
+          "orderable": false,
+          "searchable": false,
+          "render": function (data, type, row) {
+            return `
                         <center>          
                             <button class="btn btn-warning btn-circle element-white editar" id="editar" onclick="showEditarModal(${row.id})">
                                 <i class="fas fa-edit"></i>
@@ -619,9 +621,9 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                             </button>
                         </center>
                     `;
-                }
-            }
-        ],
+          }
+        }
+      ],
       "searching": true, // Habilita la búsqueda
       "lengthChange": true, // Habilita el cambio de longitud
       "lengthMenu": [10, 25, 50, 100], // Opciones de longitud de página
@@ -662,13 +664,12 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         // Agregar filas a la tabla
         data.forEach(marca => {
           $('#dataTable').DataTable().row.add({
-            
+
             "nombre": marca.nombre,
-            "descripcion": marca.descripcion,
             "pais": marca.pais,
             "area": marca.area,
+            "descripcion": marca.descripcion,
             "id": marca.id
-           
 
 
           }).draw();
@@ -770,13 +771,17 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         });
 
         if (response.ok) {
-          // Si la solicitud es exitosa, recarga la lista de marcas
-          await fetchMarcas();
-          // Cierra el modal de eliminación
-          eliminarModal.hide();
-        } else {
-          const errorData = await response.json();
-          console.error('Error al eliminar marca:', errorData.message || response.statusText);
+          const responseData = await response.json();
+          if (responseData.success) {
+            // Si la solicitud es exitosa, recarga la lista de marcas
+            await fetchMarcas();
+            // Cierra el modal de eliminación
+            eliminarModal.hide();
+
+          } else {
+            console.error('Error al eliminar marca:', responseData.message || response.statusText);
+            alert(responseData.message)
+          }
         }
       } catch (error) {
         console.error('Error al eliminar marca:', error);
