@@ -578,10 +578,14 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       })
         .then(response => response.json())
         .then(data => {
-          const tbody = document.querySelector('tbody');
+          const tbody = document.querySelector('#dataTable tbody');
+          if ($.fn.DataTable.isDataTable('#dataTable')) {
+            $('#dataTable').DataTable().destroy();
+          }
+          tbody.innerHTML = '';
+
           if (data.codigo === 0) {
             tbody.innerHTML = data.dato;
-            addEventListeners();
           } else {
             const tr = document.createElement('tr');
             const td = document.createElement('td');
@@ -590,10 +594,34 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             tr.appendChild(td);
             tbody.appendChild(tr);
           }
+
+          $('#dataTable').DataTable({
+            language: {
+              "decimal": "",
+              "emptyTable": "No hay información",
+              "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+              "infoEmpty": "Mostrando 0 to 0 of 0 entradas",
+              "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+              "infoPostFix": "",
+              "thousands": ",",
+              "lengthMenu": "Mostrar _MENU_ registros por página",
+              "loadingRecords": "Cargando...",
+              "processing": "Procesando...",
+              "search": "Buscar:",
+              "zeroRecords": "Sin resultados encontrados",
+              "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+              }
+            }
+          });
+          addEventListeners();
         })
         .catch(error => {
           console.error('Error:', error);
-          const tbody = document.querySelector('tbody');
+          const tbody = document.querySelector('#dataTable tbody');
           const tr = document.createElement('tr');
           const td = document.createElement('td');
           td.textContent = 'Error al cargar los datos.';

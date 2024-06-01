@@ -530,38 +530,69 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       })
         .then(response => response.json())
         .then(data => {
-          const tbody = document.querySelector('tbody');
+          const tbody = document.querySelector('#dataTable tbody');
+          if ($.fn.DataTable.isDataTable('#dataTable')) {
+            $('#dataTable').DataTable().destroy();
+          }
+          tbody.innerHTML = '';
+
           if (data.codigo === 0) {
             tbody.innerHTML = data.dato;
-            addEventListeners();
           } else {
             const tr = document.createElement('tr');
             const td = document.createElement('td');
             td.textContent = 'No se encontraron facultades.';
-            td.setAttribute('colspan', '5');
+            td.setAttribute('colspan', '4');
             tr.appendChild(td);
             tbody.appendChild(tr);
           }
+
+          $('#dataTable').DataTable({
+            language: {
+              "decimal": "",
+              "emptyTable": "No hay información",
+              "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+              "infoEmpty": "Mostrando 0 to 0 of 0 entradas",
+              "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+              "infoPostFix": "",
+              "thousands": ",",
+              "lengthMenu": "Mostrar _MENU_ registros por página",
+              "loadingRecords": "Cargando...",
+              "processing": "Procesando...",
+              "search": "Buscar:",
+              "zeroRecords": "Sin resultados encontrados",
+              "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+              }
+            }
+          });
+          addEventListeners();
         })
         .catch(error => {
           console.error('Error:', error);
-          const tbody = document.querySelector('tbody');
+          const tbody = document.querySelector('#dataTable tbody');
           const tr = document.createElement('tr');
           const td = document.createElement('td');
           td.textContent = 'Error al cargar los datos.';
-          td.setAttribute('colspan', '5');
+          td.setAttribute('colspan', '4');
           tr.appendChild(td);
           tbody.appendChild(tr);
         });
     }
 
+
     function addEventListeners() {
       id = "";
+
       $("#formAgregar").submit(function (e) {
         e.preventDefault();
         nombre = $("#nombreA").val();
         descripcion = $("#descripcionA").val();
         campus = $("#campusA").val();
+
         $.ajax({
           url: "../../Acciones/RestFacultades.php",
           type: "POST",
@@ -581,12 +612,13 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         });
       });
 
-      $(".editar").click(function () {
+      $(document).on('click', '.editar', function () {
         id = $(this).data("id");
         fila = $(this).closest("tr");
         nombre = fila.find('td:eq(0)').text();
         descripcion = fila.find('td:eq(1)').text();
         campus = fila.find('td:eq(2)').text();
+
         $("#nombreE").val(nombre);
         $("#descripcionE").val(descripcion);
         $("#campusE").val(campus);
@@ -595,10 +627,10 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 
       $("#formEditar").submit(function (e) {
         e.preventDefault();
-        id;
         nombre = $("#nombreE").val();
         descripcion = $("#descripcionE").val();
         campus = $("#campusE").val();
+
         $.ajax({
           url: "../../Acciones/RestFacultades.php",
           type: "PUT",
@@ -619,14 +651,14 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         });
       });
 
-      $(".eliminar").click(function () {
+      $(document).on('click', '.eliminar', function () {
         id = $(this).data("id");
         $("#modalCrudEliminar").modal('show');
       });
 
       $("#formEliminar").submit(function (e) {
         e.preventDefault();
-        id;
+
         $.ajax({
           url: "../../Acciones/RestFacultades.php",
           type: "DELETE",
@@ -644,6 +676,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         });
       });
     }
+
     document.addEventListener('DOMContentLoaded', function () {
       cargarTabla();
     });
