@@ -221,7 +221,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 
           <li class="nav-item">
             <a class="nav-link" href="marca.php">
-                <i class="icon-bar-graph menu-icon"></i>
+              <i class="icon-bar-graph menu-icon"></i>
               <span class="menu-title">Marcas</span>
             </a>
           </li>
@@ -235,7 +235,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.php">Bienes Informáticos</a></li>
-                
+
                 <li class="nav-item"> <a class="nav-link" href="../assets/repowering.php">Repotenciación</a></li>
                 <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.php">Bienes Mobiliarios</a></li>
               </ul>
@@ -425,7 +425,8 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   </div>
                   <div class="form-group col-md-12">
                     <label for="descripcionC" class="text-bold">Descripción</label>
-                    <textarea class="form-control" name="descripcionC" id="descripcionC" placeholder="Descripción"></textarea>
+                    <textarea class="form-control" name="descripcionC" id="descripcionC"
+                      placeholder="Descripción"></textarea>
                   </div>
                 </div>
               </div>
@@ -770,13 +771,17 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         });
 
         if (response.ok) {
-          // Si la solicitud es exitosa, recarga la lista de marcas
-          await fetchMarcas();
-          // Cierra el modal de eliminación
-          eliminarModal.hide();
-        } else {
-          const errorData = await response.json();
-          console.error('Error al eliminar marca:', errorData.message || response.statusText);
+          const responseData = await response.json();
+          if (responseData.success) {
+            // Si la solicitud es exitosa, recarga la lista de marcas
+            await fetchMarcas();
+            // Cierra el modal de eliminación
+            eliminarModal.hide();
+
+          } else {
+            console.error('Error al eliminar marca:', responseData.message || response.statusText);
+            alert(responseData.message)
+          }
         }
       } catch (error) {
         console.error('Error al eliminar marca:', error);
