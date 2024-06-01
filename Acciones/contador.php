@@ -131,7 +131,7 @@ function obtenerRecordatoriosPendientes($usuario_id) {
         return $result;
     } catch (PDOException $e) {
         // Manejo de errores: registrar el error en un log para depuración
-        error_log($e->getMessage(), 3, '/var/log/app_errors.log');
+        error_log($e->getMessage(), 3, 'app_errors.log');
 
         // Retornar un array vacío para evitar errores
         return [];
