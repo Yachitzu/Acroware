@@ -359,6 +359,8 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 
         </ul>
       </nav>
+
+      
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
