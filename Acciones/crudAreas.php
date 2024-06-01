@@ -32,7 +32,7 @@ class AccionesAreas
                             <button class="btn btn-warning btn-circle element-white editar" data-id="' . $respuesta['id'] . '" id="editar">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <button class="btn btn-danger btn-circle eliminar" id="eliminar">
+                        <button class="btn btn-danger btn-circle eliminar" data-id="' . $respuesta['id'] . '" id="eliminar">
                             <i class="fas fa-trash"></i>
                         </button>
                             </center>

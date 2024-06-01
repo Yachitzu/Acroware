@@ -38,104 +38,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 </head>
 
 <body>
-  <script>
-    $(document).ready(function () {
-      id = "";
-      $(".editar").click(function () {
-        fila = $(this).closest("tr");
-        id = fila.find('td:eq(0)').text();
-        nombre = fila.find('td:eq(1)').text();
-        descripcion = fila.find('td:eq(2)').text();
-        facultad = fila.find('td:eq(3)').text();
-        pisos = fila.find('td:eq(4)').text();
-        $("#nombreE").val(nombre);
-        $("#descripcionE").val(descripcion);
-        $("#facultadE").val(facultad);
-        $("#pisosE").val(pisos);
-        $("#modalCrudEditar").modal('show');
-      });
-
-      $("#formEditar").submit(function (e) {
-        e.preventDefault();
-        id;
-        nombre = $("#nombreE").val();
-        descripcion = $("#descripcionE").val();
-        id_facultad_per = $("#facultadE").val();
-        pisos = $("#pisosE").val();
-        opcion = 5;
-        $.ajax({
-          url: "../../Acciones/Rest.php",
-          type: "POST",
-          data: JSON.stringify({
-            id: id,
-            nombre: nombre,
-            descripcion: descripcion,
-            id_facultad_per: id_facultad_per,
-            pisos: pisos,
-            opcion: opcion
-          }),
-          error: function (error) {
-            console.error("Error en la solicitud AJAX", error);
-          },
-          complete: function () {
-            location.reload();
-          }
-        });
-      });
-
-      $(".eliminar").click(function () {
-        fila = $(this).closest("tr");
-        id = fila.find('td:eq(0)').text();
-        $("#modalCrudEliminar").modal('show');
-      });
-
-      $("#formEliminar").submit(function (e) {
-        e.preventDefault();
-        id;
-        opcion = 6;
-        $.ajax({
-          url: "../../Acciones/Rest.php",
-          type: "POST",
-          data: JSON.stringify({
-            id: id,
-            opcion: opcion
-          }),
-          error: function (error) {
-            console.error("Error en la solicitud AJAX", error);
-          },
-          complete: function () {
-            location.reload();
-          }
-        });
-      });
-      
-      $("#formAgregar").submit(function (e) {
-        e.preventDefault();
-        nombre = $("#nombreA").val();
-        descripcion = $("#descripcionA").val();
-        id_facultad_per = $("#facultadA").val();
-        pisos = $("#pisosA").val();
-        opcion = 4;
-        $.ajax({
-          url: "../../Acciones/Rest.php",
-          type: "POST",
-          data: JSON.stringify({
-            nombre: nombre,
-            descripcion: descripcion,
-            id_facultad_per, id_facultad_per,
-            pisos: pisos,
-            opcion: opcion
-          }),
-          error: function (error) {
-            console.error("Error en la solicitud AJAX", error);
-          },
-          complete: function () {
-            location.reload();
-          }
-        });
-      });
-    })
-  </script>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.php -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -405,7 +307,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     cellspacing="0">
                     <thead>
                       <tr>
-                        
+
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Facultad</th>
@@ -414,24 +316,18 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                       </tr>
                     </thead>
                     <tbody>
-                      <?php
-                      include_once ("../../Acciones/crudBloques.php");
-                      $resultado = AccionesBloques::listarBloques();
-                      echo ($resultado['dato']);
-                      ?>
+
                     </tbody>
                     <tfoot>
                       <tr>
-                        
+
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Facultad</th>
+                        <th>Pisos</th>
                         <th>Acciones</th>
                       </tr>
                     </tfoot>
-                    <tbody>
-
-                    </tbody>
                   </table>
                 </div>
               </div>
@@ -512,6 +408,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     <select class="form-control" id="facultadA" required>
                       <option value="">Seleccione un Campus</option>
                       <?php
+                      include_once ("../../Acciones/crudBloques.php");
                       $facultades = AccionesBloques::listarFacultadesInsertar();
                       echo ($facultades['dato']);
                       ?>
@@ -632,7 +529,142 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       </div>
     </div>
   </div>
+  <script>
+    function cargarTabla() {
+      fetch('../../Acciones/RestBloques.php', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          const tbody = document.querySelector('tbody');
+          if (data.codigo === 0) {
+            tbody.innerHTML = data.dato;
+            addEventListeners();
+          } else {
+            const tr = document.createElement('tr');
+            const td = document.createElement('td');
+            td.textContent = 'No se encontraron bloques.';
+            td.setAttribute('colspan', '6');
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          const tbody = document.querySelector('tbody');
+          const tr = document.createElement('tr');
+          const td = document.createElement('td');
+          td.textContent = 'Error al cargar los datos.';
+          td.setAttribute('colspan', '6');
+          tr.appendChild(td);
+          tbody.appendChild(tr);
+        });
+    }
+    function addEventListeners() {
+      id = "";
+      $(".editar").click(function () {
+        id = $(this).data("id");
+        fila = $(this).closest("tr");
+        nombre = fila.find('td:eq(0)').text();
+        descripcion = fila.find('td:eq(1)').text();
+        facultad = fila.find('td:eq(2)').text();
+        pisos = fila.find('td:eq(3)').text();
+        $("#nombreE").val(nombre);
+        $("#descripcionE").val(descripcion);
+        $("#facultadE").val(facultad);
+        $("#pisosE").val(pisos);
+        $("#modalCrudEditar").modal('show');
+      });
 
+      $("#formEditar").submit(function (e) {
+        e.preventDefault();
+        id;
+        nombre = $("#nombreE").val();
+        descripcion = $("#descripcionE").val();
+        id_facultad_per = $("#facultadE").val();
+        pisos = $("#pisosE").val();
+        $.ajax({
+          url: "../../Acciones/RestBloques.php",
+          type: "PUT",
+          data: JSON.stringify({
+            id: id,
+            nombre: nombre,
+            descripcion: descripcion,
+            id_facultad_per: id_facultad_per,
+            pisos: pisos
+          }),
+          contentType: "application/json",
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            $("#modalCrudEditar").modal('hide');
+            cargarTabla();
+          }
+        });
+      });
+
+      $(".eliminar").click(function () {
+        id = $(this).data("id");
+        $("#modalCrudEliminar").modal('show');
+      });
+
+      $("#formEliminar").submit(function (e) {
+        e.preventDefault();
+        id;
+        opcion = 6;
+        $.ajax({
+          url: "../../Acciones/RestBloques.php",
+          type: "DELETE",
+          data: JSON.stringify({
+            id: id
+          }),
+          contentType: "application/json",
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            $("#modalCrudEliminar").modal('hide');
+            cargarTabla();
+          }
+        });
+      });
+
+      $("#formAgregar").submit(function (e) {
+        e.preventDefault();
+        nombre = $("#nombreA").val();
+        descripcion = $("#descripcionA").val();
+        id_facultad_per = $("#facultadA").val();
+        pisos = $("#pisosA").val();
+        $.ajax({
+          url: "../../Acciones/RestBloques.php",
+          type: "POST",
+          data: JSON.stringify({
+            nombre: nombre,
+            descripcion: descripcion,
+            id_facultad_per, id_facultad_per,
+            pisos: pisos
+          }),
+          contentType: "application/json",
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            $("#modalCrudAgregar").modal('hide');
+            cargarTabla();
+          }
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      cargarTabla();
+    });
+
+  </script>
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->

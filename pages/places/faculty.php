@@ -38,8 +38,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 </head>
 
 <body>
-
-
   <div class="container-scroller">
     <!-- partial:partials/_navbar.php -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -310,7 +308,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     cellspacing="0">
                     <thead>
                       <tr>
-                        
+
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Campus</th>
@@ -318,11 +316,11 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                       </tr>
                     </thead>
                     <tbody>
-                      
+
                     </tbody>
                     <tfoot>
                       <tr>
-                        
+
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Campus</th>
@@ -523,95 +521,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
     </div>
   </div>
   <script>
-    function addEventListeners() {
-      id = "";
-      $("#formAgregar").submit(function (e) {
-        e.preventDefault();
-        nombre = $("#nombreA").val();
-        descripcion = $("#descripcionA").val();
-        campus = $("#campusA").val();
-        $.ajax({
-          url: "../../Acciones/RestFacultades.php",
-          type: "POST",
-          data: JSON.stringify({
-            nombre: nombre,
-            descripcion: descripcion,
-            campus: campus
-          }),
-          contentType: "application/json",
-          error: function (error) {
-            console.error("Error en la solicitud AJAX", error);
-          },
-          complete: function () {
-            location.reload();
-          }
-        });
-      });
-
-      $(".editar").click(function () {
-        fila = $(this).closest("tr");
-        id = fila.find('td:eq(0)').text();
-        nombre = fila.find('td:eq(1)').text();
-        descripcion = fila.find('td:eq(2)').text();
-        campus = fila.find('td:eq(3)').text();
-        $("#nombreE").val(nombre);
-        $("#descripcionE").val(descripcion);
-        $("#campusE").val(campus);
-        $("#modalCrudEditar").modal('show');
-      });
-
-      $("#formEditar").submit(function (e) {
-        e.preventDefault();
-        id;
-        nombre = $("#nombreE").val();
-        descripcion = $("#descripcionE").val();
-        campus = $("#campusE").val();
-        $.ajax({
-          url: "../../Acciones/RestFacultades.php",
-          type: "PUT",
-          data: JSON.stringify({
-            id: id,
-            nombre: nombre,
-            descripcion: descripcion,
-            campus: campus
-          }),
-          contentType: "application/json",
-          error: function (error) {
-            console.error("Error en la solicitud AJAX", error);
-          },
-          complete: function () {
-            location.reload();
-          }
-        });
-      });
-
-      $(".eliminar").click(function () {
-        fila = $(this).closest("tr");
-        id = fila.find('td:eq(0)').text();
-        $("#modalCrudEliminar").modal('show');
-      });
-
-      $("#formEliminar").submit(function (e) {
-        e.preventDefault();
-        id;
-        $.ajax({
-          url: "../../Acciones/RestFacultades.php",
-          type: "DELETE",
-          data: JSON.stringify({
-            id: id
-          }),
-          contentType: "application/json",
-          error: function (error) {
-            console.error("Error en la solicitud AJAX", error);
-          },
-          complete: function () {
-            location.reload();
-          }
-        });
-      });
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
+    function cargarTabla() {
       fetch('../../Acciones/RestFacultades.php', {
         method: 'GET',
         headers: {
@@ -643,6 +553,99 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           tr.appendChild(td);
           tbody.appendChild(tr);
         });
+    }
+
+    function addEventListeners() {
+      id = "";
+      $("#formAgregar").submit(function (e) {
+        e.preventDefault();
+        nombre = $("#nombreA").val();
+        descripcion = $("#descripcionA").val();
+        campus = $("#campusA").val();
+        $.ajax({
+          url: "../../Acciones/RestFacultades.php",
+          type: "POST",
+          data: JSON.stringify({
+            nombre: nombre,
+            descripcion: descripcion,
+            campus: campus
+          }),
+          contentType: "application/json",
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            $("#modalCrudAgregar").modal('hide');
+            cargarTabla();
+          }
+        });
+      });
+
+      $(".editar").click(function () {
+        id = $(this).data("id");
+        fila = $(this).closest("tr");
+        nombre = fila.find('td:eq(0)').text();
+        descripcion = fila.find('td:eq(1)').text();
+        campus = fila.find('td:eq(2)').text();
+        $("#nombreE").val(nombre);
+        $("#descripcionE").val(descripcion);
+        $("#campusE").val(campus);
+        $("#modalCrudEditar").modal('show');
+      });
+
+      $("#formEditar").submit(function (e) {
+        e.preventDefault();
+        id;
+        nombre = $("#nombreE").val();
+        descripcion = $("#descripcionE").val();
+        campus = $("#campusE").val();
+        $.ajax({
+          url: "../../Acciones/RestFacultades.php",
+          type: "PUT",
+          data: JSON.stringify({
+            id: id,
+            nombre: nombre,
+            descripcion: descripcion,
+            campus: campus
+          }),
+          contentType: "application/json",
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            $("#modalCrudEditar").modal('hide');
+            cargarTabla();
+          }
+        });
+      });
+
+      $(".eliminar").click(function () {
+        id = $(this).data("id");
+        $("#modalCrudEliminar").modal('show');
+      });
+
+      $("#formEliminar").submit(function (e) {
+        e.preventDefault();
+        id;
+        $.ajax({
+          url: "../../Acciones/RestFacultades.php",
+          type: "DELETE",
+          data: JSON.stringify({
+            id: id
+          }),
+          contentType: "application/json",
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            $("#modalCrudEliminar").modal('hide');
+            cargarTabla();
+          }
+        });
+      });
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+      cargarTabla();
     });
   </script>
 

@@ -38,100 +38,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 </head>
 
 <body>
-
-  <script>
-    $(document).ready(function () {
-      id = "";
-      $(".editar").click(function () {
-        fila = $(this).closest("tr");
-        id = fila.find('td:eq(0)').text();
-        nombre = fila.find('td:eq(1)').text();
-        descripcion = fila.find('td:eq(2)').text();
-        id_area_per = fila.find('td:eq(3)').text();
-        $("#nombreE").val(nombre);
-        $("#descripcionE").val(descripcion);
-        $("#areaE").val(id_area_per);
-        $("#modalCrudEditar").modal('show');
-      });
-
-      $("#formEditar").submit(function (e) {
-        e.preventDefault();
-        id;
-        nombre = $("#nombreE").val();
-        descripcion = $("#descripcionE").val();
-        id_area_per = $("#areaE").val();
-        opcion = 11;
-        $.ajax({
-          url: "../../Acciones/Rest.php",
-          type: "POST",
-          data: JSON.stringify({
-            id: id,
-            nombre: nombre,
-            descripcion: descripcion,
-            id_area_per: id_area_per,
-            opcion: opcion
-          }),
-          error: function (error) {
-            console.error("Error en la solicitud AJAX", error);
-          },
-          complete: function () {
-            location.reload();
-          }
-        });
-      });
-
-      $(".eliminar").click(function () {
-        fila = $(this).closest("tr");
-        id = fila.find('td:eq(0)').text();
-        $("#modalCrudEliminar").modal('show');
-      });
-
-      $("#formEliminar").submit(function (e) {
-        e.preventDefault();
-        id;
-        opcion = 12;
-        $.ajax({
-          url: "../../Acciones/Rest.php",
-          type: "POST",
-          data: JSON.stringify({
-            id: id,
-            opcion: opcion
-          }),
-          error: function (error) {
-            console.error("Error en la solicitud AJAX", error);
-          },
-          complete: function () {
-            location.reload();
-          }
-        });
-      });
-
-      $("#formAgregar").submit(function (e) {
-        e.preventDefault();
-        nombre = $("#nombreA").val();
-        descripcion = $("#descripcionA").val();
-        id_area_per = $("#areaA").val();
-        opcion = 10;
-        $.ajax({
-          url: "../../Acciones/Rest.php",
-          type: "POST",
-          data: JSON.stringify({
-            nombre: nombre,
-            descripcion: descripcion,
-            id_area_per: id_area_per,
-            opcion: opcion
-          }),
-          error: function (error) {
-            console.error("Error en la solicitud AJAX", error);
-          },
-          complete: function () {
-            location.reload();
-          }
-        });
-      });
-    })
-  </script>
-
   <div class="container-scroller">
     <!-- partial:partials/_navbar.php -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -402,7 +308,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     cellspacing="0">
                     <thead>
                       <tr>
-                        
+
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Área Pertenece</th>
@@ -410,15 +316,11 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                       </tr>
                     </thead>
                     <tbody>
-                      <?php
-                      include_once ("../../Acciones/crudUbicaciones.php");
-                      $resultado = AccionesUbicaciones::listarUbicaciones();
-                      echo ($resultado['dato']);
-                      ?>
+
                     </tbody>
                     <tfoot>
                       <tr>
-                        
+
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Área Pertenece</th>
@@ -505,6 +407,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     <select class="form-control" id="areaA" required>
                       <option value="">Seleccione una Área</option>
                       <?php
+                      include_once ("../../Acciones/crudUbicaciones.php");
                       $resultado = AccionesUbicaciones::listarAreasInsertar();
                       echo ($resultado['dato']);
                       ?>
@@ -617,7 +520,131 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       </div>
     </div>
   </div>
+  <script>
+    function cargarTabla() {
+      fetch('../../Acciones/RestUbicaciones.php', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          const tbody = document.querySelector('tbody');
+          if (data.codigo === 0) {
+            tbody.innerHTML = data.dato;
+            addEventListeners();
+          } else {
+            const tr = document.createElement('tr');
+            const td = document.createElement('td');
+            td.textContent = 'No se encontraron ubicaciones.';
+            td.setAttribute('colspan', '5');
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          const tbody = document.querySelector('tbody');
+          const tr = document.createElement('tr');
+          const td = document.createElement('td');
+          td.textContent = 'Error al cargar los datos.';
+          td.setAttribute('colspan', '5');
+          tr.appendChild(td);
+          tbody.appendChild(tr);
+        });
+    }
 
+    function addEventListeners() {
+      id = "";
+      $(".editar").click(function () {
+        id = $(this).data("id");
+        fila = $(this).closest("tr");
+        nombre = fila.find('td:eq(0)').text();
+        descripcion = fila.find('td:eq(1)').text();
+        id_area_per = fila.find('td:eq(2)').text();
+        $("#nombreE").val(nombre);
+        $("#descripcionE").val(descripcion);
+        $("#areaE").val(id_area_per);
+        $("#modalCrudEditar").modal('show');
+      });
+
+      $("#formEditar").submit(function (e) {
+        e.preventDefault();
+        id;
+        nombre = $("#nombreE").val();
+        descripcion = $("#descripcionE").val();
+        id_area_per = $("#areaE").val();
+        $.ajax({
+          url: "../../Acciones/RestUbicaciones.php",
+          type: "PUT",
+          data: JSON.stringify({
+            id: id,
+            nombre: nombre,
+            descripcion: descripcion,
+            id_area_per: id_area_per
+          }), contentType: "application/json",
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            $("#modalCrudEditar").modal('hide');
+            cargarTabla();
+          }
+        });
+      });
+
+      $(".eliminar").click(function () {
+        id = $(this).data("id");
+        $("#modalCrudEliminar").modal('show');
+      });
+
+      $("#formEliminar").submit(function (e) {
+        e.preventDefault();
+        id;
+        $.ajax({
+          url: "../../Acciones/RestUbicaciones.php",
+          type: "DELETE",
+          data: JSON.stringify({
+            id: id
+          }), contentType: "application/json",
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            $("#modalCrudEliminar").modal('hide');
+            cargarTabla();
+          }
+        });
+      });
+
+      $("#formAgregar").submit(function (e) {
+        e.preventDefault();
+        nombre = $("#nombreA").val();
+        descripcion = $("#descripcionA").val();
+        id_area_per = $("#areaA").val();
+        $.ajax({
+          url: "../../Acciones/RestUbicaciones.php",
+          type: "POST",
+          data: JSON.stringify({
+            nombre: nombre,
+            descripcion: descripcion,
+            id_area_per: id_area_per
+          }), contentType: "application/json",
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            $("#modalCrudAgregar").modal('hide');
+            cargarTabla();
+          }
+        });
+      });
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+      cargarTabla();
+    });
+  </script>
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->

@@ -8,7 +8,7 @@ class AccionesUbicaciones
             $conexion = Conexion::getInstance()->getConexion();
             $consulta = "SELECT ubicaciones.*, areas.nombre AS nombre_area from ubicaciones
             INNER JOIN areas ON ubicaciones.id_area_per=areas.id";
-            
+
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
             $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -26,7 +26,7 @@ class AccionesUbicaciones
                             <button class="btn btn-warning btn-circle element-white editar" data-id="' . $respuesta['id'] . '" id="editar">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <button class="btn btn-danger btn-circle eliminar" id="eliminar">
+                        <button class="btn btn-danger btn-circle eliminar" data-id="' . $respuesta['id'] . '" id="eliminar">
                             <i class="fas fa-trash"></i>
                         </button>
                             </center>
@@ -105,7 +105,7 @@ class AccionesUbicaciones
         }
     }
 
-    
+
     public static function insertarUbicaciones($nombre, $descripcion, $id_area_per)
     {
         try {
