@@ -307,23 +307,24 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     cellspacing="0">
                     <thead>
                       <tr>
-                     
+
                         <th>Nombre</th>
-                        <th>Descripción</th>
                         <th>País Origen</th>
                         <th>Área</th>
+                        <th>Descripción</th>
                         <th>Acciones</th>
+
                       </tr>
                     </thead>
                     <tbody id="marcasTableBody">
                     </tbody>
                     <tfoot>
                       <tr>
-                        
+
                         <th>Nombre</th>
-                        <th>Descripción</th>
                         <th>País Origen</th>
                         <th>Área</th>
+                        <th>Descripción</th>
                         <th>Acciones</th>
                       </tr>
                     </tfoot>
@@ -603,17 +604,17 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         }
       },
       "columns": [
-            { "data": "nombre" },
-            { "data": "descripcion" },
-            { "data": "pais" },
-            { "data": "area" },
-            { 
-                "data": null, 
-                "defaultContent": "", 
-                "orderable": false, 
-                "searchable": false,
-                "render": function (data, type, row) {
-                    return `
+        { "data": "nombre" },
+        { "data": "pais" },
+        { "data": "area" },
+        { "data": "descripcion" },
+        {
+          "data": null,
+          "defaultContent": "",
+          "orderable": false,
+          "searchable": false,
+          "render": function (data, type, row) {
+            return `
                         <center>          
                             <button class="btn btn-warning btn-circle element-white editar" id="editar" onclick="showEditarModal(${row.id})">
                                 <i class="fas fa-edit"></i>
@@ -623,9 +624,9 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                             </button>
                         </center>
                     `;
-                }
-            }
-        ],
+          }
+        }
+      ],
       "searching": true, // Habilita la búsqueda
       "lengthChange": true, // Habilita el cambio de longitud
       "lengthMenu": [10, 25, 50, 100], // Opciones de longitud de página
@@ -666,13 +667,12 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         // Agregar filas a la tabla
         data.forEach(marca => {
           $('#dataTable').DataTable().row.add({
-            
+
             "nombre": marca.nombre,
-            "descripcion": marca.descripcion,
             "pais": marca.pais,
             "area": marca.area,
+            "descripcion": marca.descripcion,
             "id": marca.id
-           
 
 
           }).draw();
