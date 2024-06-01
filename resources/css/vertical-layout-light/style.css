@@ -30947,4 +30947,11 @@
     border-radius: 5px; /* Radio de borde para esquinas suavizadas */
     resize: vertical; /* Permite redimensionar verticalmente */
   }
+
+  .additional-info {
+    background-color: #f9f9f9;
+    border-top: 1px solid #ddd;
+    padding: 10px;
+  }
+  
   

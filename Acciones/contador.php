@@ -114,4 +114,28 @@ function obtenerBienesMobiliariosRecientes() {
     }
 }
 
+function obtenerRecordatoriosPendientes($usuario_id) {
+    try {
+        // Obtenemos una instancia de la conexión
+        $conexion = Conexion::getInstance()->getConexion();
+
+        // Consulta para obtener los recordatorios pendientes
+        $query = "SELECT id, actividad, estado FROM recordatorio WHERE estado = 'pendiente' AND usuario_id = :usuario_id";
+        $stmt = $conexion->prepare($query);
+        $stmt->bindParam(':usuario_id', $usuario_id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        // Obtenemos el resultado
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    } catch (PDOException $e) {
+        // Manejo de errores: registrar el error en un log para depuración
+        error_log($e->getMessage(), 3, '/var/log/app_errors.log');
+
+        // Retornar un array vacío para evitar errores
+        return [];
+    }
+}
+
 ?>

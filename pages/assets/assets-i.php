@@ -32,6 +32,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
   <!-- inject:css -->
   <link rel="stylesheet" href="../../resources/css/vertical-layout-light/style.css">
   <!-- endinject -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="shortcut icon"
     href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" />
 </head>
@@ -341,6 +342,69 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                                 </center>
                             </td>
                         </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>UTA123456</td>
+                            <td>Equipo de Computo</td>
+                            <td>XPS 13</td>
+                            <td>Dell</td>
+                            <td>SN123456789</td>
+                            <td>Juan Pérez</td>
+                            <td>Oficina 101</td>
+                            <td>2024-05-22</td>
+                            <td>
+                                <center>
+                                    <button class="btn btn-warning btn-circle element-white editar" id="editar">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-circle eliminar" id="eliminar">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </center>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>UTA123456</td>
+                            <td>Equipo de Computo</td>
+                            <td>XPS 13</td>
+                            <td>Dell</td>
+                            <td>SN123456789</td>
+                            <td>Juan Pérez</td>
+                            <td>Oficina 101</td>
+                            <td>2024-05-22</td>
+                            <td>
+                                <center>
+                                    <button class="btn btn-warning btn-circle element-white editar" id="editar">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-circle eliminar" id="eliminar">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </center>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>UTA123456</td>
+                            <td>Equipo de Computo</td>
+                            <td>XPS 13</td>
+                            <td>Dell</td>
+                            <td>SN123456789</td>
+                            <td>Juan Pérez</td>
+                            <td>Oficina 101</td>
+                            <td>2024-05-22</td>
+                            <td>
+                                <center>
+                                    <button class="btn btn-warning btn-circle element-white editar" id="editar">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-danger btn-circle eliminar" id="eliminar">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </center>
+                            </td>
+                        </tr>
                     </tbody>
                     <tfoot>
                       <tr>
@@ -356,15 +420,13 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                         <th>Acciones</th>
                       </tr>
                     </tfoot>
-                    <tbody>
-
-                    </tbody>
                   </table>
                 </div>
               </div>
             </div>
 
           </div>
+          
           <!-- /.container-fluid -->
 
         </div>
