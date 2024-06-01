@@ -12,4 +12,8 @@ $(document).ready(function(){
         $("#modalCrudEliminar").modal('show');
     });
 
+    $("#eliminarComponente").click(function(){
+        $("#modalCrudEliminarComponente").modal('show');
+    });
+
 });
