@@ -788,7 +788,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           <div class="modal-footer">
             <input type="button" class="btn-crud btn-secondary text-white text-bold " data-bs-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
-            <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Bien ">
+            <input type="submit" class="btn-crud btn-primary text-bold agregarBien" value=" Agregar Bien "  id="agregarBien">
           </div>
         </form>
       </div>
@@ -826,6 +826,92 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Bien ">
           </div>
         </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalQR" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h3 class="modal-title text-white" id="modal-register-label"> QR Bien Informático </h3>
+          <p class="modal">Ingrese los datos del Usuario:</p>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
+        </div>
+        
+          <div class="modal-body">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6 text-center">
+                  <img src="../../resources/images/logos/OIP.jpg" alt="Código QR" class="img-fluid">     
+                </div>
+                <div class="col-md-6">
+                  <ul>
+                    <li><strong>Código UTA:</strong> UTA123456</li>
+                    <li><strong>Nombre:</strong> Equipo de Computo</li>
+                    <li><strong>Modelo:</strong> XPS 13</li>
+                    <li><strong>Marca:</strong> Dell</li>
+                    <li><strong>Custodio:</strong> Juan Perez</li>
+                    <li><strong>Ubicación:</strong> Oficina-01</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+              aria-label="Close" value="Cerrar Modal" id="cancelButton"> 
+            <button class="btn-crud btn-primary text-bold">
+              <i class="fas fa-download"></i> Descargar QR
+            </button>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalQREditar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h3 class="modal-title text-white" id="modal-register-label"> QR Bien Informático </h3>
+          <p class="modal">Ingrese los datos del Usuario:</p>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
+        </div>
+        
+          <div class="modal-body">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6 text-center">
+                  <img src="../../resources/images/logos/OIP.jpg" alt="Código QR" class="img-fluid">     
+                </div>
+                <div class="col-md-6">
+                  <ul>
+                    <li><strong>Código UTA:</strong> UTA123456</li>
+                    <li><strong>Nombre:</strong> Equipo de Computo</li>
+                    <li><strong>Modelo:</strong> XPS 13</li>
+                    <li><strong>Marca:</strong> Dell</li>
+                    <li><strong>Custodio:</strong> Juan Perez</li>
+                    <li><strong>Ubicación:</strong> Oficina-01</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+              aria-label="Close" value="Cerrar Modal" id="cancelButton"> 
+            <button class="btn-crud btn-primary text-bold">
+              <i class="fas fa-download"></i> Descargar QR
+            </button>
+          </div>
       </div>
     </div>
   </div>
@@ -902,7 +988,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           <div class="modal-footer">
             <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
-            <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Bien">
+            <input type="submit" class="btn-crud btn-primary text-bold editarBien" id="editarBien" value=" Editar Bien">
           </div>
         </form>
       </div>

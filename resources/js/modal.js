@@ -16,4 +16,14 @@ $(document).ready(function(){
         $("#modalCrudEliminarComponente").modal('show');
     });
 
+    $("#agregarBien").click(function(){
+        $("#modalCrudAgregar").modal('hide');
+        $("#modalQR").modal('show');
+    });
+
+    $("#editarBien").click(function(){
+        $("#modalCrud").modal('hide');
+        $("#modalQREditar").modal('show');
+    });
+
 });
