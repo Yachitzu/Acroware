@@ -375,7 +375,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           </div>
         </div>
         <div class="modal-footer">
-          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
             aria-label="Close" value="Cancelar" id="cancelButton">
           <a class="btn-crud btn-primary text-bold" href="../../cerrar.php">Cerrar Sesión</a>
         </div>
@@ -433,7 +433,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-bs-dismiss="modal"
+            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Marca ">
           </div>
@@ -468,7 +468,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Marca ">
           </div>
@@ -526,7 +526,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Marca ">
           </div>
@@ -580,7 +580,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
     let marcaAEditarId = null;
 
     $('#dataTable').DataTable({
-      "processing": true,
+      "processing": false,
       "serverSide": true,
       "ajax": {
         "url": apiBaseUrl,
