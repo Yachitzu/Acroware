@@ -203,7 +203,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.php">Bienes Informáticos</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../assets/component.php">Componentes</a></li>
+                
                 <li class="nav-item"> <a class="nav-link" href="../assets/repowering.php">Repotenciación</a></li>
                 <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.php">Bienes Mobiliarios</a></li>
               </ul>
