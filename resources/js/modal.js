@@ -26,4 +26,16 @@ $(document).ready(function(){
         $("#modalQREditar").modal('show');
     });
 
+    $("#generar-reporte-info").click(function(){
+        $("#modalInfo").modal('show');
+    });
+
+    $("#generar-reporte-mobi").click(function(){
+        $("#modalMobi").modal('show');
+    });
+
+    $("#generar-reporte-sof").click(function(){
+        $("#modalSoft").modal('show');
+    });
+
 });

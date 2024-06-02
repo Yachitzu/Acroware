@@ -241,6 +241,13 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           </li>
 
           <li class="nav-item">
+            <a class="nav-link" href="report.php">
+              <i class="icon-grid-2 menu-icon"></i>
+              <span class="menu-title">Reportes</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a class="nav-link" href="QR.php">
               <i class="icon-contract menu-icon"></i>
               <span class="menu-title">Escaneo QR</span>

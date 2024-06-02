@@ -30700,6 +30700,14 @@
       letter-spacing: 0em;
       text-align: center;
   }
+
+  .font-berthold-small{
+    font-family: 'Monospace-Bold';
+    font-size: 1em;
+    font-weight: 200;
+    line-height: 10px;
+    letter-spacing: 0em;
+}
   
   .font-MonoSpace{
     font-family: 'Monospace-Bold';
