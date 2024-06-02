@@ -24,8 +24,10 @@ class AuthenticateDatabase implements AuthenticationStrategy
             if ($data['psswd'] == $password) {
                 Sesion::getInstance()->setSesion("email", $data["email"]);
 
-                $_SESSION['usuario'] = $data['nombre'] . ' ' . $data['apellido'];
+                $_SESSION['nombre'] = $data['nombre'];
+                $_SESSION['apellido'] = $data['apellido'];
                 $_SESSION['rol'] = $data['rol'];
+                $_SESSION['cedula'] = $data['cedula'];
                 $_SESSION['correo'] = $data['email'];
                 $_SESSION['id'] = $data['id'];
             } else {

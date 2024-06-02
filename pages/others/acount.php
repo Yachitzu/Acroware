@@ -288,24 +288,33 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                                 <div class="card-header bg-transparent text-center">
                                     <div class="avatar-perfil">
                                         <img src="../../resources/images/faces/perfil1.png" alt="student dp">
-                                        <a href="#" class="cambiar-foto">
-                                            <i class="fas fa-camera"></i> 
-                                            <span>Cambiar foto</span>
-                                        </a>
                                     </div>
-                                        <button class="edit-button btn-circle bg-primary editar" id="editar">
-                                            <i class="fas fa-pencil-alt text-secondary"></i>
-                                        </button>
-                                        <h3>Estefanía Mora Parra</h3>
-                                </div>
+                                    <button class="edit-button btn-circle bg-primary editar" id="editar">
+                                      <i class="fas fa-pencil-alt text-secondary"></i>
+                                    </button>
+                                </div> 
                                 
                                 <div class="card-body">
-                                    <p class="mb-0"><strong class="pr-1">Código Usuario:</strong>321000001</p>
-                                    <p class="mb-0"><strong class="pr-1">Rol:</strong>Administrador</p>
-                                    <p class="mb-0"><strong class="pr-1">Correo:</strong>yachitzuEM@hotmail.com</p>
+                                  <h3 class="text-center"><?php echo $_SESSION['nombre'].' '.$_SESSION['apellido']; ?></h3>
+                                    <p class="mb-0"><strong class="pr-1">Rol:</strong><?php 
+                                    switch ($_SESSION['rol']) {
+                                      case 'admin':
+                                        echo 'Administrador';
+                                        break;
+                                      case 'laboratorista':
+                                        echo 'Laboratorista';
+                                        break;
+                                      case 'reportero':
+                                        echo 'Generador de Reportes';
+                                        break;
+                                      default:
+                                        echo 'Estudiante';
+                                        break;
+                                    } ?></p>
+                                    <p class="mb-0"><strong class="pr-1">Correo:</strong><?php echo $_SESSION['correo']; ?></p>
                                     <hr>
                                     <center>
-                                      <button class="btn-crud btn-primary text-white text-bold eliminar" id="eliminar">Cambiar Contraseña <i class="fas fa-pencil-alt text-secondary"></i></button>
+                                      <button class="btn-crud btn-primary text-white text-bold" id="cambiarPass" data-toggle="modal" data-target="#modalCrudPass">Cambiar Contraseña <i class="fas fa-pencil-alt text-secondary"></i></button>
                                     </center>
                                 </div>
                             </div>
@@ -320,22 +329,19 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                                     <tr>
                                         <th width="30%" class="p-3">Nombre</th>
                                         <td width="2%">:</td>
-                                        <td>Estefanía Mora Parra</td>
+                                        <td id="nameVar"><?php echo $_SESSION['nombre']; ?></td>
+
+                                    </tr>
+                                    <tr>
+                                        <th width="30%" class="p-3">Apellido</th>
+                                        <td width="2%">:</td>
+                                        <td  id="lastNameVar"><?php echo $_SESSION['apellido']; ?></td>
+
                                     </tr>
                                     <tr>
                                         <th width="30%" class="p-3">Cedula</th>
                                         <td width="2%">:</td>
-                                        <td>0803536341</td>
-                                    </tr>
-                                    <tr>
-                                        <th width="30%" class="p-3">Dirección</th>
-                                        <td width="2%">:</td>
-                                        <td>Av. Chasquiz</td>
-                                    </tr>
-                                    <tr>
-                                        <th width="30%" class="p-3">Telefono</th>
-                                        <td width="2%">:</td>
-                                        <td>0985184705</td>
+                                        <td><?php echo $_SESSION['cedula']; ?></td>
                                     </tr>
                                 </table>
                             </div>
@@ -343,7 +349,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 
                         <div style="height: 26px"></div>
                         
-                        <div class="card shadow-sm">
+                        <!-- <div class="card shadow-sm">
                             <div class="card-header bg-transparent border-0">
                                 <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Información Acerca del Sistema</h3>
                             </div>
@@ -366,7 +372,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                                         </tr>
                                     </table>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -407,67 +413,58 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 </div>
             </div>
             <div class="modal-footer">
-                <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
+                <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
                 <a class="btn-crud btn-primary text-bold" href="../../cerrar.php">Cerrar Sesión</a>
             </div>
         </div>
     </div>
   </div>
-
-<div class="modal fade" id="modalCrud" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
+  <div class="modal fade" id="modalCrud" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-primary">
-                <h3 class="modal-title text-white" id="modal-register-label">Editar Usuario</h3>
-                <p class="modal">Ingrese los datos del Usuario:</p>
+                <h3 class="modal-title text-white" id="modal-register-label">Editar Perfil</h3>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <i class="fas fa-times" class="element-white"></i>
                 </button>
-            </div> 
-            <form class="forms-sample">
-            <div class="modal-body">
+            </div>
+            <form id="editProfileForm" class="forms-sample">
+              <div class="modal-body">
                 <div class="grid-margin-modal">          
                     <div class="card-body">
-                        <p class="card-description">Por favor, complete los siguientes campos para editar la información del usuario seleccionado:</p>
+                        <p class="card-description">Por favor, complete los siguientes campos:</p>
                         <div class="form-row">
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="Name" class="text-bold">Nombre</label>
-                                    <input type="text" class="form-control" id="Name" placeholder="Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="Last_Name" class="text-bold">Apellido</label>
-                                    <input type="text" class="form-control" id="Last_Name" placeholder="Apellido" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label for="Adress" class="text-bold">Dirección</label>
-                                    <input type="text" class="form-control" id="Address" placeholder="Dirección" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="Mobile" class="text-bold">Telefono</label>
-                                    <input type="text" class="form-control" id="Mobile" placeholder="Telefono" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);" required>
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label for="Email" class="text-bold">Email</label>
-                                    <input type="email" class="form-control" id="Email" placeholder="Email" required>
-                                </div>
-                            </div>
-                            
+                          <input type="hidden"  name="id" value="<?php echo $_SESSION['id']; ?>">
+                          <div class="form-group col-md-6">
+                              <label for="Name" class="text-bold">Nombre</label>
+                              <input type="text" class="form-control" placeholder="Nombre" name="nombre" value="<?php echo $_SESSION['nombre']?>" required>
+                          </div>
+                          <div class="form-group col-md-6">
+                              <label for="LastName" class="text-bold">Apellido</label>
+                              <input type="text" class="form-control" placeholder="Apellido" name="apellido" value="<?php echo $_SESSION['apellido']?>" required>
+                          </div>
+                          <div class="form-group col-md-12">
+                              <label for="ID" class="text-bold">Cédula</label>
+                              <input type="text" class="form-control" placeholder="Cédula" name="cedula" value="<?php echo $_SESSION['cedula']?>" required>
+                          </div>
+                          <div class="form-group col-md-12">
+                              <label for="Email" class="text-bold">Correo Electrónico</label>
+                              <input type="email" class="form-control" placeholder="Correo Electrónico" name="correo" value="<?php echo $_SESSION['correo']?>" required>
+                          </div>
                         </div>
                     </div>
+                  </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
-                <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Usuario ">
-            </div>
-          </form>
-        </div>
-    </div>
-</div>
+                <div class="modal-footer">
+                    <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButtonProfile">
+                    <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Perfil ">
+                </div>
+            </form>
+          </div>
+      </div>
+  </div>
 
-<div class="modal fade" id="modalCrudEliminar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
+<div class="modal fade" id="modalCrudPass" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
   <div class="modal-dialog">
       <div class="modal-content">
           <div class="modal-header bg-primary">
@@ -477,35 +474,88 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   <i class="fas fa-times" class="element-white"></i>
               </button>
           </div> 
-          <form class="forms-sample">
+          <form id="editPasswordForm" class="forms-sample">
           <div class="modal-body">
               <div class="grid-margin-modal">          
                   <div class="card-body">
                       <p class="card-description">Por favor, complete los siguientes campos si desea modificar la contraseña:</p>
                       <div class="form-row">
-                        <div class="form-row">
-                          <div class="form-group col-md-6">
+                          <input type="hidden" name="id" value="<?php echo $_SESSION[ 'id' ]; ?>">
+                          <div class="form-group col-md-12">
                               <label for="InputPassword" class="text-bold">Contraseña</label>
-                              <input type="password" class="form-control" id="InputPassword" placeholder="Contraseña" pattern="^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$" title="La contraseña debe tener entre 8 y 20 caracteres, al menos una letra mayúscula y un número. No se permiten caracteres especiales." oninput="validatePassword(this)" required>
+                              <input type="password" class="form-control" id="InputPassword" name="password" placeholder="Contraseña" pattern="^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$" title="La contraseña debe tener entre 8 y 20 caracteres, al menos una letra mayúscula y un número. No se permiten caracteres especiales." oninput="validatePassword(this)" required>
                           </div>
-                          <div class="form-group col-md-6">
+                          <div class="form-group col-md-12">
                               <label for="ConfirmPassword" class="text-bold">Confirmar Contraseña</label>
-                              <input type="password" class="form-control" id="ConfirmPassword" placeholder="Contraseña" pattern="^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$" title="La contraseña debe tener entre 8 y 20 caracteres, al menos una letra mayúscula y un número. No se permiten caracteres especiales." oninput="validatePassword(this); checkPasswordMatch();" required>
+                              <input type="password" class="form-control" id="ConfirmPassword" name="confirmPassword" placeholder="Contraseña" pattern="^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$" title="La contraseña debe tener entre 8 y 20 caracteres, al menos una letra mayúscula y un número. No se permiten caracteres especiales." oninput="validatePassword(this); checkPasswordMatch();" required>
                               <div class="invalid-feedback" id="passwordMatchError" style="display: none;">Las contraseñas no coinciden.</div>
-                          </div>
-                      </div>   
+                          </div>  
                       </div>
                   </div>
               </div>
           </div>
           <div class="modal-footer">
-              <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
-              <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Usuario ">
+              <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButtonPass">
+              <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Contraseña ">
           </div>
         </form>
       </div>
   </div>
 </div>
+<script>
+  document.getElementById('editProfileForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(this);
+    const data = {};
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
+
+    fetch('../../Acciones/RestUsers.php?profile=full&id='+data['id'], {
+
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+      $('#modalCrud').modal('hide');
+      location.reload();
+    })
+    .catch((error) => {
+      console.log(data);
+      console.log('Error:', error);
+    });
+  });
+  document.getElementById('editPasswordForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const formData = new FormData(this);
+    const data = {};
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
+
+    fetch('../../Acciones/RestUsers.php?profile=pass&id='+data['id'], {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      $('#modalCrudPass').modal('hide');
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  });
+</script>
 
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>
