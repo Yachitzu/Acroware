@@ -2,7 +2,7 @@
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php';
 
 class Obtener{
-    public static function ObtenerRepotenciacion(){
+    public static function ObtenerComponente(){
         
     }
 
@@ -12,19 +12,19 @@ class Obtener{
 }
 
 class Guardar{
-    public static function GuardarRepotenciacion(){
+    public static function GuardarComponente(){
         
     }
 }
 
 class Actualizar{
-    public static function ActualizarRepotenciacion($id){
+    public static function ActualizarComponente($id){
         
     }
 }
 
 class Eliminar{
-    public static function BorrarRepotenciacion($id){
+    public static function BorrarComponente($id){
         
     }
 }

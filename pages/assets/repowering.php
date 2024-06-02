@@ -317,7 +317,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody id="marcasTableBody">
+                    <tbody id="repoTableBody">
                         <tr>
                             
                             <td>UTA123456</td>
@@ -379,8 +379,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
   <!-- container-scroller -->
 
 <!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -416,7 +415,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="agregarMarcaForm" method="post">
+        <form class="forms-sample" id="agregarRepoForm" method="post">
           <div class="modal-body">
             <div class="grid-margin-modal">
                 <div class="card-body">
@@ -477,7 +476,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="eliminarMarcaForm">
+        <form class="forms-sample" id="eliminarRepotenciacionForm">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -511,7 +510,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="editarMarcaForm">
+        <form class="forms-sample" id="editarRepotenciacionForm">
           <div class="modal-body">
             <div class="grid-margin-modal">
                 <div class="card-body">
