@@ -506,7 +506,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="pisos" class="text-bold">Pisos</label>
-                    <input type="number" class="form-control" id="pisosE" placeholder="Número Pisos" required>
+                    <input type="number" class="form-control" id="pisosE" placeholder="Número Pisos" min="1" oninput="if(this.value < 1) this.value = 1;" required>
                   </div>
                   <div class="form-group col-md-12">
                     <label for="Name" class="text-bold">Descripción</label>
