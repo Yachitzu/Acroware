@@ -6,7 +6,7 @@ class AccionesFacultades
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = "SELECT * FROM facultades";
+            $consulta = "SELECT * FROM facultades where activo='si'";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
             $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -25,7 +25,7 @@ class AccionesFacultades
                             <button class="btn btn-warning btn-circle element-white editar" data-id="' . $respuesta['id'] . '" id="editar">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <button class="btn btn-danger btn-circle eliminar" id="eliminar">
+                        <button class="btn btn-danger btn-circle eliminar" data-id="' . $respuesta['id'] . '" id="eliminar">
                             <i class="fas fa-trash"></i>
                         </button>
                             </center>
@@ -45,12 +45,12 @@ class AccionesFacultades
             ];
         }
     }
-    
+
     public static function insertarFacultades($nombre, $descripcion, $campus)
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = "SELECT * FROM facultades where nombre = :nombre";
+            $consulta = "SELECT * FROM facultades where BINARY nombre = :nombre and activo='si'";
             $resultado = $conexion->prepare($consulta);
             $resultado->bindParam(':nombre', $nombre);
             $resultado->execute();
@@ -75,7 +75,7 @@ class AccionesFacultades
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = "SELECT * FROM facultades where nombre = :nombre AND id != :id";
+            $consulta = "SELECT * FROM facultades where BINARY nombre = :nombre AND activo='si' AND id != :id AND activo='si'";
             $resultado = $conexion->prepare($consulta);
             $resultado->bindParam(':nombre', $nombre);
             $resultado->bindParam(':id', $id);
@@ -102,10 +102,18 @@ class AccionesFacultades
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = $conexion->prepare("DELETE FROM facultades where id=:id");
-            $consulta->bindParam(':id', $id);
-            $consulta->execute();
-            return 0;
+            $verificacion = $conexion->prepare("SELECT COUNT(*) AS referencias FROM bloques WHERE id_facultad_per = :id AND activo='si'");
+            $verificacion->bindParam(':id', $id);
+            $verificacion->execute();
+            $resultado = $verificacion->fetch(PDO::FETCH_ASSOC);
+            if ($resultado['referencias'] > 0) {
+                return 1;
+            } else {
+                $consulta = $conexion->prepare("UPDATE facultades  set activo= 'no' where id=:id");
+                $consulta->bindParam(':id', $id);
+                $consulta->execute();
+                return 0;
+            }
         } catch (PDOException $e) {
             error_log('Error en eliminarFacultad: ' . $e->getMessage());
             return 2;
