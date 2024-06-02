@@ -482,7 +482,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                       <p class="card-description">Por favor, complete los siguientes campos si desea modificar la contraseña:</p>
                       <div class="form-row">
                           <input type="hidden" name="profile" value="pass">
-                          <input type="hidden" name="id" value="<?php echo $_SESSION[ 'id' ]; ?>">
+                          <input type="hidden" name="id" value="<?php echo $_SESSION['id']; ?>">
                           <div class="form-group col-md-12">
                               <label for="InputPassword" class="text-bold">Contraseña</label>
                               <input type="password" class="form-control" id="InputPassword" name="password" placeholder="Contraseña" pattern="^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$" title="La contraseña debe tener entre 8 y 20 caracteres, al menos una letra mayúscula y un número. No se permiten caracteres especiales." oninput="validatePassword(this)" required>
