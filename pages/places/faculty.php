@@ -90,7 +90,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
               <img src="../../resources/images/faces/perfil1.png" alt="profile" />
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item" href="../others/acount.php">
+              <a class="dropdown-item" href="../others/account.php">
                 <i class="ti-settings text-primary"></i>
                 Editar Perfil
               </a>
@@ -245,7 +245,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="../others/acount.php">
+            <a class="nav-link" href="../others/account.php">
               <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Cuenta</span>
             </a>

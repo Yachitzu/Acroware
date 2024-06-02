@@ -104,7 +104,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               <img src="resources/images/faces/perfil1.png" alt="profile" />
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item" href="pages/others/acount.php">
+              <a class="dropdown-item" href="pages/others/account.php">
                 <i class="ti-settings text-primary"></i>
                 Editar Perfil
               </a>
@@ -259,7 +259,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="pages/others/acount.php">
+            <a class="nav-link" href="pages/others/account.php">
               <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Cuenta</span>
             </a>
