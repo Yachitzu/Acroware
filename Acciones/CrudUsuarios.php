@@ -15,7 +15,7 @@ Class Obtener{
 
             $select="SELECT * FROM usuarios WHERE activo = 'si'";
             if (!empty($search)) {
-                $query .= " AND (nombre LIKE '%$search%' OR apellido LIKE '%$search%' OR cedula LIKE '%$search%' OR email LIKE '%$search%' OR rol LIKE '%$search%' OR fechaCreacion LIKE '%$search%')";
+                $query .= " AND (cedula LIKE '%$search%' OR nombre LIKE '%$search%' OR apellido LIKE '%$search%' OR email LIKE '%$search%' OR rol LIKE '%$search%' OR fechaCreacion LIKE '%$search%')";
             }
             $query .= " ORDER BY " . $orderColumnName . " " . $orderDir . " LIMIT " . $start . ", " . $length;
 
@@ -26,7 +26,7 @@ Class Obtener{
             $totalRegistros = $conectar->query("SELECT COUNT(*) FROM usuarios WHERE activo = 'si'")->fetchColumn();
 
             // Obtener el total de registros después de aplicar el filtro de búsqueda
-            $filtroRegistros = $conectar->query("SELECT COUNT(*) FROM usuarios WHERE activo = 'si' AND (nombre LIKE '%$search%' OR apellido LIKE '%$search%' OR cedula LIKE '%$search%' OR email LIKE '%$search%' OR rol LIKE '%$search%' OR fechaCreacion LIKE '%$search%')")->fetchColumn();
+            $filtroRegistros = $conectar->query("SELECT COUNT(*) FROM usuarios WHERE activo = 'si' AND (cedula LIKE '%$search%' OR nombre LIKE '%$search%' OR apellido LIKE '%$search%' OR email LIKE '%$search%' OR rol LIKE '%$search%' OR fechaCreacion LIKE '%$search%')")->fetchColumn();
 
             echo json_encode([
                 'draw' => isset($_GET['draw']) ? intval($_GET['draw']) : 1,
