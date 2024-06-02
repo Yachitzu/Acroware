@@ -569,17 +569,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
   <script src="../../resources/js/datatables-demo.js"></script>
 </body>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const apiBaseUrl = "../../Acciones/RestUsers.php";
-      const usersTableBody = document.getElementById("usersTableBody");
-      const aggUser = document.getElementById("aggUser");
-      const editarModal = new bootstrap.Modal(
-        document.getElementById("modalCrud")
-      );
-      const eliminarModal = new bootstrap.Modal(
-        document.getElementById("modalCrudEliminar")
-      );
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -712,6 +701,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       } catch (error) {
         console.error('Error fetching users:', error);
       }
+    }
 
     agregarUserForm.addEventListener('submit', async function (event) {
       event.preventDefault();
@@ -742,35 +732,9 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         } else {
           console.error('Error al agregar usuario:', response.statusText);
         }
-      });
-
-      window.showEditarModal = async function (id) {
-        try {
-          const response = await fetch(apiBaseUrl + `?id=${id}`);
-          if (!response.ok) {
-            throw new Error("Error al obtener detalles del usuario para editar");
-          }
-          const user = await response.json();
-
-          // Llenar los campos del formulario con los detalles del usuario
-          document.getElementById("emailE").value = user[0].email;
-          document.getElementById("rolE").value = user[0].rol;
-
-          userAEditarId = id;
-          // Mostrar el modal de edición
-          editarModal.show();
-        } catch (error) {
-          console.error(error);
-        }
-      };
-
-      window.showEliminarModal = function (id) {
-        userAEliminarId = id;
-        eliminarModal.show();
-        console.log("Mostrar modal de eliminación para el ID:", userAEliminarId);
-      };
-
-      fetchUsers();
+      } catch (error) {
+        console.error('Error al agregar usuario:', error);
+      }
     });
 
 
