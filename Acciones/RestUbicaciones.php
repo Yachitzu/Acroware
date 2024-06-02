@@ -45,9 +45,6 @@ switch ($op) {
         if ($resultado === 0) {
             http_response_code(200);
             echo json_encode(["message" => "Ubicación eliminada."]);
-        } else {
-            http_response_code(400);
-            echo json_encode(["message" => "No se puedo eliminar la ubicación."]);
         }
         break;
 }

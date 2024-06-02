@@ -371,7 +371,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           </div>
         </div>
         <div class="modal-footer">
-          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
             aria-label="Close" value="Cancelar" id="cancelButton">
           <a class="btn-crud btn-primary text-bold" href="../../cerrar.php">Cerrar Sesión</a>
         </div>
@@ -387,7 +387,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         <div class="modal-header bg-primary">
           <h3 class="modal-title text-white" id="modal-register-label">Agregar Bloque</h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
@@ -446,7 +446,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         <div class="modal-header bg-primary">
           <h3 class="modal-title text-white" id="modal-register-label">Eliminar Bloque </h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
@@ -480,7 +480,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         <div class="modal-header bg-primary">
           <h3 class="modal-title text-white" id="modal-register-label">Editar Bloque</h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
@@ -530,6 +530,38 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
     </div>
   </div>
   <script>
+    $(document).ready(function () {
+      $("#formAgregar").submit(function (e) {
+        e.preventDefault();
+        nombre = $("#nombreA").val();
+        descripcion = $("#descripcionA").val();
+        id_facultad_per = $("#facultadA").val();
+        pisos = $("#pisosA").val();
+        $.ajax({
+          url: "../../Acciones/RestBloques.php",
+          type: "POST",
+          data: JSON.stringify({
+            nombre: nombre,
+            descripcion: descripcion,
+            id_facultad_per, id_facultad_per,
+            pisos: pisos
+          }),
+          contentType: "application/json",
+          cache: false,
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            $("#modalCrudAgregar").modal('hide');
+            $("#nombreA").val("");
+            $("#descripcionA").val("");
+            $("#facultadA").val("");
+            $("#pisosA").val("");
+            cargarTabla();
+          }
+        });
+      });
+    });
     function cargarTabla() {
       fetch('../../Acciones/RestBloques.php', {
         method: 'GET',
@@ -657,32 +689,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           },
           complete: function () {
             $("#modalCrudEliminar").modal('hide');
-            cargarTabla();
-          }
-        });
-      });
-
-      $("#formAgregar").submit(function (e) {
-        e.preventDefault();
-        nombre = $("#nombreA").val();
-        descripcion = $("#descripcionA").val();
-        id_facultad_per = $("#facultadA").val();
-        pisos = $("#pisosA").val();
-        $.ajax({
-          url: "../../Acciones/RestBloques.php",
-          type: "POST",
-          data: JSON.stringify({
-            nombre: nombre,
-            descripcion: descripcion,
-            id_facultad_per, id_facultad_per,
-            pisos: pisos
-          }),
-          contentType: "application/json",
-          error: function (error) {
-            console.error("Error en la solicitud AJAX", error);
-          },
-          complete: function () {
-            $("#modalCrudAgregar").modal('hide');
             cargarTabla();
           }
         });

@@ -48,9 +48,6 @@ switch ($op) {
         if ($resultado === 0) {
             http_response_code(200);
             echo json_encode(["message" => "Facultad eliminada con éxito."]);
-        } else {
-            http_response_code(400);
-            echo json_encode(["message" => "No se pudo eliminar la facultad."]);
         }
         break;
 }

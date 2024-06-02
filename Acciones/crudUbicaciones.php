@@ -7,7 +7,8 @@ class AccionesUbicaciones
         try {
             $conexion = Conexion::getInstance()->getConexion();
             $consulta = "SELECT ubicaciones.*, areas.nombre AS nombre_area from ubicaciones
-            INNER JOIN areas ON ubicaciones.id_area_per=areas.id";
+            INNER JOIN areas ON ubicaciones.id_area_per=areas.id
+            WHERE ubicaciones.activo = 'si'";
 
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
@@ -51,7 +52,7 @@ class AccionesUbicaciones
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = "SELECT * FROM areas";
+            $consulta = "SELECT * FROM areas where activo='si'";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
             $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -80,7 +81,7 @@ class AccionesUbicaciones
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = "SELECT * FROM areas";
+            $consulta = "SELECT * FROM areas where activo='si'";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
             $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -110,7 +111,7 @@ class AccionesUbicaciones
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = "SELECT * FROM ubicaciones where BINARY nombre= :nombre";
+            $consulta = "SELECT * FROM ubicaciones where BINARY nombre= :nombre and activo='si'";
             $resultado = $conexion->prepare($consulta);
             $resultado->bindParam(':nombre', $nombre);
             $resultado->execute();
@@ -135,7 +136,7 @@ class AccionesUbicaciones
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = "SELECT * FROM ubicaciones where nombre= :nombre AND id != :id";
+            $consulta = "SELECT * FROM ubicaciones where BINARY nombre= :nombre AND id != :id AND activo='si'";
             $resultado = $conexion->prepare($consulta);
             $resultado->bindParam(':nombre', $nombre);
             $resultado->bindParam(':id', $id);
@@ -168,7 +169,7 @@ class AccionesUbicaciones
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = $conexion->prepare("DELETE FROM ubicaciones where id= :id");
+            $consulta = $conexion->prepare("UPDATE ubicaciones set activo= 'no' where id= :id");
             $consulta->bindParam(':id', $id);
             $consulta->execute();
             return 0;
