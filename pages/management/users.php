@@ -612,7 +612,23 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         { "data": "nombre" },
         { "data": "apellido" },
         { "data": "email" },
-        { "data": "rol" },
+        {
+          "data": "rol",
+          "render": function (data, type, row) {
+            switch (data) {
+              case "admin":
+                return "Administrador";
+              case "laboratorista":
+                return "Laboratorista";
+              case "estudiante":
+                return "Estudiante en Prácticas";
+              case "reportero":
+                return "Generador de Reportes";
+              default:
+                return "Rol desconocido";
+            }
+          }
+        },
         { "data": "fecha_ingreso"},
         {
           "data": null,
