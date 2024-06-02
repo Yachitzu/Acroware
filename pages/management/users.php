@@ -770,7 +770,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 >>>>>>> bfa74a3d6cb79043436180661766382a9a57cd70
       }
 
-<<<<<<< HEAD
     agregarUserForm.addEventListener('submit', async function (event) {
       event.preventDefault();
 
@@ -799,92 +798,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           $('#modalCrudAgregar').modal('hide');
         } else {
           console.error('Error al agregar usuario:', response.statusText);
-=======
-      aggUser.addEventListener("submit", async function (event) {
-        event.preventDefault();
-        const cedula = document.getElementById("cedula").value;
-        const nombre = document.getElementById("nombre").value;
-        const apellido = document.getElementById("apellido").value;
-        const email = document.getElementById("email").value;
-        const psswd = document.getElementById("InputPassword").value;
-        const rol = document.getElementById("rol").value;
-        try {
-          const response = await fetch(apiBaseUrl, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ cedula, nombre, apellido, email, psswd, rol }),
-          });
-
-          if (response.ok) {
-            // Si la solicitud es exitosa, recarga la lista de usuarios
-            fetchUsers();
-            // Limpia los campos del formulario
-            aggUser.reset();
-            // Cierra el modal
-            $("#modalCrudAgregar").modal("hide");
-          } else {
-            console.error("Error al agregar usuario:", response.statusText);
-          }
-        } catch (error) {
-          console.error("Error al agregar usuario:", error);
-        }
-      });
-
-      document
-        .getElementById("editarUserForm")
-        .addEventListener("submit", async function (event) {
-          event.preventDefault();
-          // Obtener los valores actualizados del formulario
-          const id = userAEditarId;
-          const email = document.getElementById("emailE").value;
-          const rol = document.getElementById("rolE").value;
-
-          try {
-            // Enviar la solicitud de edición al servidor
-            const response = await fetch(apiBaseUrl + `?id=${id}`, {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ email, rol }),
-            });
-
-            if (response.ok) {
-              // Si la solicitud es exitosa, recarga la lista de usuarios
-              fetchUsers();
-              // Cierra el modal de edición
-              editarModal.hide();
-            } else {
-              console.error("Error al editar usuer:", response.statusText);
-            }
-          } catch (error) {
-            console.error("Error al editar user:", error);
-          }
-        });
-
-      const eliminarUserForm = document.getElementById("eliminarUserForm");
-
-      eliminarUserForm.addEventListener("submit", async function (event) {
-        event.preventDefault();
-        try {
-          const id = userAEliminarId;
-          const response = await fetch(apiBaseUrl + `?id=${id}`, {
-            method: "DELETE",
-          });
-
-          if (response.ok) {
-            // Si la solicitud es exitosa, recarga la lista de usuarios
-            fetchUsers();
-            // Cierra el modal de eliminación
-            eliminarModal.hide();
-          } else {
-            console.error("Error al eliminar user:", response.statusText);
-          }
-        } catch (error) {
-          console.error("Error al eliminar user:", error);
->>>>>>> bfa74a3d6cb79043436180661766382a9a57cd70
         }
       });
 
@@ -916,7 +829,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 
       fetchUsers();
     });
-<<<<<<< HEAD
 
 
 
@@ -1028,8 +940,3 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 </script>
 
 </html>
-=======
-  </script>
-</body>
-</html>
->>>>>>> bfa74a3d6cb79043436180661766382a9a57cd70
