@@ -9,7 +9,8 @@ class AccionesBloques
             $conexion = Conexion::getInstance()->getConexion();
             $consulta = "SELECT bloques.*, facultades.nombre AS nombre_facultad 
             FROM bloques 
-            INNER JOIN facultades ON bloques.id_facultad_per = facultades.id";
+            INNER JOIN facultades ON bloques.id_facultad_per = facultades.id
+            WHERE bloques.activo = 'si'";
             /* LEFT JOIN facultades ON bloques.id_facultad_per = facultades.id"; */
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
@@ -30,7 +31,7 @@ class AccionesBloques
                             <button class="btn btn-warning btn-circle element-white editar" data-id="' . $respuesta['id'] . '" id="editar">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <button class="btn btn-danger btn-circle eliminar" id="eliminar">
+                        <button class="btn btn-danger btn-circle eliminar" data-id="' . $respuesta['id'] . '" id="eliminar">
                             <i class="fas fa-trash"></i>
                         </button>
                             </center>
@@ -55,7 +56,7 @@ class AccionesBloques
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = "SELECT * FROM facultades";
+            $consulta = "SELECT * FROM facultades where activo='si'";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
             $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -84,7 +85,7 @@ class AccionesBloques
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = "SELECT * FROM facultades";
+            $consulta = "SELECT * FROM facultades where activo='si'";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
             $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -114,7 +115,7 @@ class AccionesBloques
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = "SELECT * FROM bloques where nombre = :nombre";
+            $consulta = "SELECT * FROM bloques where BINARY nombre = :nombre and activo='si'";
             $resultado = $conexion->prepare($consulta);
             $resultado->bindParam(':nombre', $nombre);
             $resultado->execute();
@@ -141,7 +142,7 @@ class AccionesBloques
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = "SELECT * FROM bloques where nombre = :nombre AND id != :id";
+            $consulta = "SELECT * FROM bloques where BINARY nombre = :nombre AND id != :id AND activo='si'";
             $resultado = $conexion->prepare($consulta);
             $resultado->bindParam(':nombre', $nombre);
             $resultado->bindParam(':id', $id);
@@ -173,10 +174,18 @@ class AccionesBloques
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = $conexion->prepare("DELETE FROM bloques where id=:id");
-            $consulta->bindParam(':id', $id);
-            $consulta->execute();
-            return 0;
+            $verificacion = $conexion->prepare("SELECT COUNT(*) AS referencias FROM areas WHERE id_bloque_per = :id AND activo='si'");
+            $verificacion->bindParam(':id', $id);
+            $verificacion->execute();
+            $resultado = $verificacion->fetch(PDO::FETCH_ASSOC);
+            if ($resultado['referencias'] > 0) {
+                return 1;
+            } else {
+                $consulta = $conexion->prepare("UPDATE bloques set activo= 'no' where id=:id");
+                $consulta->bindParam(':id', $id);
+                $consulta->execute();
+                return 0;
+            }
         } catch (PDOException $e) {
             error_log('Error en eliminarBloques: ' . $e->getMessage());
             return 2;

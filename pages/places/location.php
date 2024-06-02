@@ -38,100 +38,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 </head>
 
 <body>
-
-  <script>
-    $(document).ready(function () {
-      id = "";
-      $(".editar").click(function () {
-        fila = $(this).closest("tr");
-        id = fila.find('td:eq(0)').text();
-        nombre = fila.find('td:eq(1)').text();
-        descripcion = fila.find('td:eq(2)').text();
-        id_area_per = fila.find('td:eq(3)').text();
-        $("#nombreE").val(nombre);
-        $("#descripcionE").val(descripcion);
-        $("#areaE").val(id_area_per);
-        $("#modalCrudEditar").modal('show');
-      });
-
-      $("#formEditar").submit(function (e) {
-        e.preventDefault();
-        id;
-        nombre = $("#nombreE").val();
-        descripcion = $("#descripcionE").val();
-        id_area_per = $("#areaE").val();
-        opcion = 11;
-        $.ajax({
-          url: "../../Acciones/Rest.php",
-          type: "POST",
-          data: JSON.stringify({
-            id: id,
-            nombre: nombre,
-            descripcion: descripcion,
-            id_area_per: id_area_per,
-            opcion: opcion
-          }),
-          error: function (error) {
-            console.error("Error en la solicitud AJAX", error);
-          },
-          complete: function () {
-            location.reload();
-          }
-        });
-      });
-
-      $(".eliminar").click(function () {
-        fila = $(this).closest("tr");
-        id = fila.find('td:eq(0)').text();
-        $("#modalCrudEliminar").modal('show');
-      });
-
-      $("#formEliminar").submit(function (e) {
-        e.preventDefault();
-        id;
-        opcion = 12;
-        $.ajax({
-          url: "../../Acciones/Rest.php",
-          type: "POST",
-          data: JSON.stringify({
-            id: id,
-            opcion: opcion
-          }),
-          error: function (error) {
-            console.error("Error en la solicitud AJAX", error);
-          },
-          complete: function () {
-            location.reload();
-          }
-        });
-      });
-
-      $("#formAgregar").submit(function (e) {
-        e.preventDefault();
-        nombre = $("#nombreA").val();
-        descripcion = $("#descripcionA").val();
-        id_area_per = $("#areaA").val();
-        opcion = 10;
-        $.ajax({
-          url: "../../Acciones/Rest.php",
-          type: "POST",
-          data: JSON.stringify({
-            nombre: nombre,
-            descripcion: descripcion,
-            id_area_per: id_area_per,
-            opcion: opcion
-          }),
-          error: function (error) {
-            console.error("Error en la solicitud AJAX", error);
-          },
-          complete: function () {
-            location.reload();
-          }
-        });
-      });
-    })
-  </script>
-
   <div class="container-scroller">
     <!-- partial:partials/_navbar.php -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -298,22 +204,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="ui-basic">
-              <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">Inventario</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="auth">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.php">Bienes Informáticos</a></li>
-                
-                <li class="nav-item"> <a class="nav-link" href="../assets/repowering.php">Repotenciación</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.php">Bienes Mobiliarios</a></li>
-              </ul>
-            </div>
-          </li>
-
-          <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="icon-columns menu-icon"></i>
               <span class="menu-title">Lugares</span>
@@ -337,10 +227,19 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="../others/acount.php">
-              <i class="icon-paper menu-icon"></i>
-              <span class="menu-title">Cuenta</span>
+            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="ui-basic">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title">Inventario</span>
+              <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="auth">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.php">Bienes Informáticos</a></li>
+                
+                <li class="nav-item"> <a class="nav-link" href="../assets/repowering.php">Repotenciación</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.php">Bienes Mobiliarios</a></li>
+              </ul>
+            </div>
           </li>
 
           <li class="nav-item">
@@ -357,8 +256,17 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             </a>
           </li>
 
+          <li class="nav-item">
+            <a class="nav-link" href="../others/acount.php">
+              <i class="icon-paper menu-icon"></i>
+              <span class="menu-title">Cuenta</span>
+            </a>
+          </li>
+
         </ul>
       </nav>
+
+      
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -402,7 +310,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     cellspacing="0">
                     <thead>
                       <tr>
-                        
+
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Área Pertenece</th>
@@ -410,15 +318,11 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                       </tr>
                     </thead>
                     <tbody>
-                      <?php
-                      include_once ("../../Acciones/crudUbicaciones.php");
-                      $resultado = AccionesUbicaciones::listarUbicaciones();
-                      echo ($resultado['dato']);
-                      ?>
+
                     </tbody>
                     <tfoot>
                       <tr>
-                        
+
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Área Pertenece</th>
@@ -468,7 +372,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           </div>
         </div>
         <div class="modal-footer">
-          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
             aria-label="Close" value="Cancelar" id="cancelButton">
           <a class="btn-crud btn-primary text-bold" href="../../cerrar.php">Cerrar Sesión</a>
         </div>
@@ -484,7 +388,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         <div class="modal-header bg-primary">
           <h3 class="modal-title text-white" id="modal-register-label">Agregar Ubicación</h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
@@ -497,14 +401,14 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="Name" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" id="nombreA" placeholder="Nombre"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                    <input type="text" class="form-control" id="nombreA" placeholder="Nombre" required>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="area" class="text-bold">Área Pertenece</label>
                     <select class="form-control" id="areaA" required>
                       <option value="">Seleccione una Área</option>
                       <?php
+                      include_once ("../../Acciones/crudUbicaciones.php");
                       $resultado = AccionesUbicaciones::listarAreasInsertar();
                       echo ($resultado['dato']);
                       ?>
@@ -514,8 +418,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="Name" class="text-bold">Descripción</label>
-                    <textarea class="form-control" id="descripcionA" placeholder="Descripción"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
+                    <textarea class="form-control" id="descripcionA" placeholder="Descripción"></textarea>
                   </div>
                 </div>
               </div>
@@ -538,7 +441,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         <div class="modal-header bg-primary">
           <h3 class="modal-title text-white" id="modal-register-label">Eliminar Ubicación </h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
@@ -572,7 +475,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         <div class="modal-header bg-primary">
           <h3 class="modal-title text-white" id="modal-register-label">Editar Ubicación</h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
@@ -585,8 +488,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="Name" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" id="nombreE" placeholder="Nombre"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                    <input type="text" class="form-control" id="nombreE" placeholder="Nombre" required>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="area" class="text-bold">Área Pertenece</label>
@@ -601,8 +503,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="Name" class="text-bold">Descripción</label>
-                    <textarea class="form-control" id="descripcionE" placeholder="Descripción"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
+                    <textarea class="form-control" id="descripcionE" placeholder="Descripción" ></textarea>
                   </div>
                 </div>
               </div>
@@ -617,7 +518,164 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       </div>
     </div>
   </div>
+  <script>
+    $(document).ready(function () {
+      $("#formAgregar").submit(function (e) {
+        e.preventDefault();
+        nombre = $("#nombreA").val();
+        descripcion = $("#descripcionA").val();
+        id_area_per = $("#areaA").val();
+        $.ajax({
+          url: "../../Acciones/RestUbicaciones.php",
+          type: "POST",
+          data: JSON.stringify({
+            nombre: nombre,
+            descripcion: descripcion,
+            id_area_per: id_area_per
+          }), contentType: "application/json",
+          cache: false,
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            $("#modalCrudAgregar").modal('hide');
+            $("#nombreA").val("");
+            $("#descripcionA").val("");
+            $("#areaA").val("");
+            cargarTabla();
+          }
+        });
+      });
+    });
+    function cargarTabla() {
+      fetch('../../Acciones/RestUbicaciones.php', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          const tbody = document.querySelector('#dataTable tbody');
+          if ($.fn.DataTable.isDataTable('#dataTable')) {
+            $('#dataTable').DataTable().destroy();
+          }
+          tbody.innerHTML = '';
 
+          if (data.codigo === 0) {
+            tbody.innerHTML = data.dato;
+          } else {
+            const tr = document.createElement('tr');
+            const td = document.createElement('td');
+            td.textContent = 'No se encontraron facultades.';
+            td.setAttribute('colspan', '5');
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+          }
+
+          $('#dataTable').DataTable({
+            language: {
+              "decimal": "",
+              "emptyTable": "No hay información",
+              "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+              "infoEmpty": "Mostrando 0 to 0 of 0 entradas",
+              "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+              "infoPostFix": "",
+              "thousands": ",",
+              "lengthMenu": "Mostrar _MENU_ registros por página",
+              "loadingRecords": "Cargando...",
+              "processing": "Procesando...",
+              "search": "Buscar:",
+              "zeroRecords": "Sin resultados encontrados",
+              "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+              }
+            }
+          });
+          addEventListeners();
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          const tbody = document.querySelector('#dataTable tbody');
+          const tr = document.createElement('tr');
+          const td = document.createElement('td');
+          td.textContent = 'Error al cargar los datos.';
+          td.setAttribute('colspan', '5');
+          tr.appendChild(td);
+          tbody.appendChild(tr);
+        });
+    }
+
+    function addEventListeners() {
+      id = "";
+      $(".editar").click(function () {
+        id = $(this).data("id");
+        fila = $(this).closest("tr");
+        nombre = fila.find('td:eq(0)').text();
+        descripcion = fila.find('td:eq(1)').text();
+        id_area_per = fila.find('td:eq(2)').text();
+        $("#nombreE").val(nombre);
+        $("#descripcionE").val(descripcion);
+        $("#areaE").val(id_area_per);
+        $("#modalCrudEditar").modal('show');
+      });
+
+      $("#formEditar").submit(function (e) {
+        e.preventDefault();
+        id;
+        nombre = $("#nombreE").val();
+        descripcion = $("#descripcionE").val();
+        id_area_per = $("#areaE").val();
+        $.ajax({
+          url: "../../Acciones/RestUbicaciones.php",
+          type: "PUT",
+          data: JSON.stringify({
+            id: id,
+            nombre: nombre,
+            descripcion: descripcion,
+            id_area_per: id_area_per
+          }), contentType: "application/json",
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            $("#modalCrudEditar").modal('hide');
+            cargarTabla();
+          }
+        });
+      });
+
+      $(".eliminar").click(function () {
+        id = $(this).data("id");
+        $("#modalCrudEliminar").modal('show');
+      });
+
+      $("#formEliminar").submit(function (e) {
+        e.preventDefault();
+        id;
+        $.ajax({
+          url: "../../Acciones/RestUbicaciones.php",
+          type: "DELETE",
+          data: JSON.stringify({
+            id: id
+          }), contentType: "application/json",
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            $("#modalCrudEliminar").modal('hide');
+            cargarTabla();
+          }
+        });
+      });
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+      cargarTabla();
+    });
+  </script>
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->

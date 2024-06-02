@@ -187,7 +187,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       </div>
       <!-- partial -->
       <!-- partial:partials/_sidebar.php -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+      <nav class="sidebar sidebar-offcanvas " id="sidebar">
         <ul class="nav">
           <li class="nav-item">
             <a class="nav-link" href="../../index.php">
@@ -201,22 +201,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
               <i class="icon-head menu-icon"></i>
               <span class="menu-title">Usuarios</span>
             </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="ui-basic">
-              <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">Inventario</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="auth">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.php">Bienes Informáticos</a></li>
-                
-                <li class="nav-item"> <a class="nav-link" href="../assets/repowering.php">Repotenciación</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.php">Bienes Mobiliarios</a></li>
-              </ul>
-            </div>
           </li>
 
           <li class="nav-item">
@@ -243,10 +227,19 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="../others/acount.php">
-              <i class="icon-paper menu-icon"></i>
-              <span class="menu-title">Cuenta</span>
+            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="ui-basic">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title">Inventario</span>
+              <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="auth">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.php">Bienes Informáticos</a></li>
+
+                <li class="nav-item"> <a class="nav-link" href="../assets/repowering.php">Repotenciación</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.php">Bienes Mobiliarios</a></li>
+              </ul>
+            </div>
           </li>
 
           <li class="nav-item">
@@ -260,6 +253,13 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <a class="nav-link" href="../others/QR.php">
               <i class="icon-contract menu-icon"></i>
               <span class="menu-title">Escaneo QR</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="../others/acount.php">
+              <i class="icon-paper menu-icon"></i>
+              <span class="menu-title">Cuenta</span>
             </a>
           </li>
 
@@ -307,23 +307,24 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     cellspacing="0">
                     <thead>
                       <tr>
-                     
+
                         <th>Nombre</th>
-                        <th>Descripción</th>
                         <th>País Origen</th>
                         <th>Área</th>
+                        <th>Descripción</th>
                         <th>Acciones</th>
+
                       </tr>
                     </thead>
                     <tbody id="marcasTableBody">
                     </tbody>
                     <tfoot>
                       <tr>
-                        
+
                         <th>Nombre</th>
-                        <th>Descripción</th>
                         <th>País Origen</th>
                         <th>Área</th>
+                        <th>Descripción</th>
                         <th>Acciones</th>
                       </tr>
                     </tfoot>
@@ -375,7 +376,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           </div>
         </div>
         <div class="modal-footer">
-          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
             aria-label="Close" value="Cancelar" id="cancelButton">
           <a class="btn-crud btn-primary text-bold" href="../../cerrar.php">Cerrar Sesión</a>
         </div>
@@ -404,8 +405,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="nombreC" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                    <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre" required>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="areaC" class="text-bold">Área</label>
@@ -425,15 +425,15 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   </div>
                   <div class="form-group col-md-12">
                     <label for="descripcionC" class="text-bold">Descripción</label>
-                    <textarea class="form-control" name="descripcionC" id="descripcionC" placeholder="Descripción"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
+                    <textarea class="form-control" name="descripcionC" id="descripcionC"
+                      placeholder="Descripción"></textarea>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-bs-dismiss="modal"
+            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Marca ">
           </div>
@@ -468,7 +468,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Marca ">
           </div>
@@ -497,8 +497,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="nombre" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" id="nombreE" placeholder="Nombre"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                    <input type="text" class="form-control" id="nombreE" placeholder="Nombre" required>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="area" class="text-bold">Área</label>
@@ -518,15 +517,14 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   </div>
                   <div class="form-group col-md-12">
                     <label for="descripcion" class="text-bold">Descripción</label>
-                    <textarea class="form-control" id="descripcionE" placeholder="Descripción"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required></textarea>
+                    <textarea class="form-control" id="descripcionE" placeholder="Descripción"></textarea>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Marca ">
           </div>
@@ -580,7 +578,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
     let marcaAEditarId = null;
 
     $('#dataTable').DataTable({
-      "processing": true,
+      "processing": false,
       "serverSide": true,
       "ajax": {
         "url": apiBaseUrl,
@@ -603,17 +601,17 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         }
       },
       "columns": [
-            { "data": "nombre" },
-            { "data": "descripcion" },
-            { "data": "pais" },
-            { "data": "area" },
-            { 
-                "data": null, 
-                "defaultContent": "", 
-                "orderable": false, 
-                "searchable": false,
-                "render": function (data, type, row) {
-                    return `
+        { "data": "nombre" },
+        { "data": "pais" },
+        { "data": "area" },
+        { "data": "descripcion" },
+        {
+          "data": null,
+          "defaultContent": "",
+          "orderable": false,
+          "searchable": false,
+          "render": function (data, type, row) {
+            return `
                         <center>          
                             <button class="btn btn-warning btn-circle element-white editar" id="editar" onclick="showEditarModal(${row.id})">
                                 <i class="fas fa-edit"></i>
@@ -623,9 +621,9 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                             </button>
                         </center>
                     `;
-                }
-            }
-        ],
+          }
+        }
+      ],
       "searching": true, // Habilita la búsqueda
       "lengthChange": true, // Habilita el cambio de longitud
       "lengthMenu": [10, 25, 50, 100], // Opciones de longitud de página
@@ -666,13 +664,12 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         // Agregar filas a la tabla
         data.forEach(marca => {
           $('#dataTable').DataTable().row.add({
-            
+
             "nombre": marca.nombre,
-            "descripcion": marca.descripcion,
             "pais": marca.pais,
             "area": marca.area,
+            "descripcion": marca.descripcion,
             "id": marca.id
-           
 
 
           }).draw();
@@ -774,13 +771,17 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         });
 
         if (response.ok) {
-          // Si la solicitud es exitosa, recarga la lista de marcas
-          await fetchMarcas();
-          // Cierra el modal de eliminación
-          eliminarModal.hide();
-        } else {
-          const errorData = await response.json();
-          console.error('Error al eliminar marca:', errorData.message || response.statusText);
+          const responseData = await response.json();
+          if (responseData.success) {
+            // Si la solicitud es exitosa, recarga la lista de marcas
+            await fetchMarcas();
+            // Cierra el modal de eliminación
+            eliminarModal.hide();
+
+          } else {
+            console.error('Error al eliminar marca:', responseData.message || response.statusText);
+            alert(responseData.message)
+          }
         }
       } catch (error) {
         console.error('Error al eliminar marca:', error);

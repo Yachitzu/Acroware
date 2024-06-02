@@ -63,15 +63,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         </button>
         <ul class="navbar-nav mr-lg-2">
           <li class="nav-item nav-search d-none d-lg-block">
-            <div class="input-group">
-              <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-                <span class="input-group-text" id="search">
-                  <i class="icon-search"></i>
-                </span>
-              </div>
-              <input type="text" class="form-control" id="navbar-search-input" placeholder="Buscar ahora"
-                aria-label="search" aria-describedby="search">
-            </div>
           </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
@@ -220,22 +211,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="ui-basic">
-              <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">Inventario</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="auth">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/assets/assets-i.php">Bienes Informáticos</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/assets/component.php">Componentes</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/assets/repowering.php">Repotenciación</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/assets/assets-m.php">Bienes Mobiliarios</a></li>
-              </ul>
-            </div>
-          </li>
-
-          <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="icon-columns menu-icon"></i>
               <span class="menu-title">Lugares</span>
@@ -259,10 +234,18 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="pages/others/acount.php">
-              <i class="icon-paper menu-icon"></i>
-              <span class="menu-title">Cuenta</span>
+            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="ui-basic">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title">Inventario</span>
+              <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="auth">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/assets/assets-i.php">Bienes Informáticos</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/assets/repowering.php">Repotenciación</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/assets/assets-m.php">Bienes Mobiliarios</a></li>
+              </ul>
+            </div>
           </li>
 
           <li class="nav-item">
@@ -279,6 +262,13 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </a>
           </li>
 
+          <li class="nav-item">
+            <a class="nav-link" href="pages/others/acount.php">
+              <i class="icon-paper menu-icon"></i>
+              <span class="menu-title">Cuenta</span>
+            </a>
+          </li>
+
         </ul>
       </nav>
       <!-- partial -->
@@ -289,8 +279,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               <div class="row">
                 <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                   <h3 class="font-weight-bold">¡Bienvenido a Acroware!</h3>
-                  <h6 class="font-weight-normal mb-0">¡Gestión Inteligente! ¡Tienes <span class="text-primary">1
-                      notificación!</span></h6>
+                  <h6 class="font-weight-normal mb-0">¡Gestión Inteligente!</h6>
                 </div>
                 <div class="col-12 col-xl-4">
                   <div class="justify-content-end d-flex">
