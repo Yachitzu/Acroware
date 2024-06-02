@@ -113,6 +113,7 @@ Class Obtener{
                 $json = file_get_contents('php://input');
                 $data = json_decode($json, true);
                 if ($data !== null) {
+                    $email=$data["email"];
                     $conectar = Conexion::getInstance()->getConexion();
                     $updatesql = "UPDATE usuarios SET email = :email, rol = :rol WHERE id = :id";
                     $resultado = $conectar->prepare($updatesql);
@@ -120,6 +121,11 @@ Class Obtener{
                     $resultado->bindParam(':rol', $data["rol"], PDO::PARAM_STR);
                     $resultado->bindParam(':id', $id, PDO::PARAM_INT);
                     $resultado->execute();
+                    Sesion::getInstance()->setSesion("email", $email);
+                    if ($_SESSION['id'] == $id) {
+                        $_SESSION['correo'] = $email;
+                    }
+                    
                     echo json_encode(['success' => true]);
                 } else {
                     echo json_encode(['success' => false, 'message' => 'Invalid input']);
