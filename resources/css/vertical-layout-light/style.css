@@ -28897,6 +28897,7 @@
   .navbar .navbar-brand-wrapper .brand-logo-mini img {
     width: calc(70px - 30px);
     max-width: 100%;
+    height: auto;
     margin: auto;
   }
   
@@ -30879,8 +30880,8 @@
   
   .student-profile .avatar-perfil {
     display: flex;
-    width: 230px;
-    height: 230px;
+    max-width: 230px;
+    aspect-ratio: 1 / 1;
     background-color: #D9DCF1;
     align-items: center;
     justify-content: center;
@@ -30973,4 +30974,7 @@
 .additional-info td {
     padding: 5px;
 }
-  
+
+center button i{
+  margin: 0 auto !important;
+}

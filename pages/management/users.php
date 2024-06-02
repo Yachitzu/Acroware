@@ -540,193 +540,193 @@
   <script src="../../resources/js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
 
-    <!-- Page level plugins -->
-    <script src="../../resources/vendors/datatables/jquery.dataTables.min.js"></script>
-    <script src="../../resources/vendors/datatables/dataTables.bootstrap4.min.js"></script>
+  <!-- Page level plugins -->
+  <script src="../../resources/vendors/datatables/jquery.dataTables.min.js"></script>
+  <script src="../../resources/vendors/datatables/dataTables.bootstrap4.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="../../resources/js/datatables-demo.js"></script>
+  <!-- Page level custom scripts -->
+  <script src="../../resources/js/datatables-demo.js"></script>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const apiBaseUrl = "../../Acciones/RestUsers.php";
+      const usersTableBody = document.getElementById("usersTableBody");
+      const aggUser = document.getElementById("aggUser");
+      const editarModal = new bootstrap.Modal(
+        document.getElementById("modalCrud")
+      );
+      const eliminarModal = new bootstrap.Modal(
+        document.getElementById("modalCrudEliminar")
+      );
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-    const apiBaseUrl = '../../Acciones/RestUsers.php';
-    const usersTableBody = document.getElementById('usersTableBody');
-    const aggUser = document.getElementById('aggUser');
-    const editarModal = new bootstrap.Modal(document.getElementById('modalCrud'));
-    const eliminarModal = new bootstrap.Modal(document.getElementById('modalCrudEliminar'));
+      document.getElementById("emailE").value = email;
+      document.getElementById("rolE").value = rol;
+      let userAEliminarId = null;
+      let userAEditarId = null;
 
-document.getElementById('emailE').value = email;
-document.getElementById('rolE').value = rol;
-    let userAEliminarId = null;
-    let userAEditarId = null;
+      async function fetchUsers() {
+        try {
+          const response = await fetch(apiBaseUrl);
+          const data = await response.json();
 
-    async function fetchUsers() {
-      try {
-        const response = await fetch(apiBaseUrl);
-        const data = await response.json();
-
-        usersTableBody.innerHTML = '';
-        data.forEach(user => {
-          const row = document.createElement('tr');
-          var rol=user.rol;
-          switch (rol) {
-          case "admin":
-                rol='Administrador';
-            break;
-          case "laboratorista":
-              rol='Laboratorista';
-          break;
-          case "estudiante":
-                rol='Estudiante en Prácticas';
-            break;
-            case "reportero":
-                rol='Generador de Reportes';
-            break;
+          usersTableBody.innerHTML = "";
+          data.forEach((user) => {
+            const row = document.createElement("tr");
+            var rol = user.rol;
+            switch (rol) {
+              case "admin":
+                rol = "Administrador";
+                break;
+              case "laboratorista":
+                rol = "Laboratorista";
+                break;
+              case "estudiante":
+                rol = "Estudiante en Prácticas";
+                break;
+              case "reportero":
+                rol = "Generador de Reportes";
+                break;
+            }
+            row.innerHTML = `
+                <td>${user.nombre}</td>
+                <td>${user.apellido}</td>
+                <td>${user.cedula}</td>
+                <td>${user.email}</td>
+                <td>${rol}</td>
+                <td>${user.fecha_ingreso}</td>
+                <td>
+                <center>          
+                  <button class="btn btn-warning btn-circle element-white editar" id="editar" onclick="showEditarModal(${user.id})">
+                    <i class="fas fa-edit" ></i>
+                  </button>
+                  <button class="btn btn-danger btn-circle eliminar" id="eliminar" onclick="showEliminarModal(${user.id})">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </center>
+                </td>
+              `;
+            usersTableBody.appendChild(row);
+          });
+        } catch (error) {
+          console.error("Error fetching users:", error);
         }
-          row.innerHTML = `
-            <td>${user.nombre}</td>
-            <td>${user.apellido}</td>
-            <td>${user.cedula}</td>
-            <td>${user.email}</td>
-            <td>${rol}</td>
-            <td>${user.fecha_ingreso}</td>
-            <td>
-            <center>          
-              <button class="btn btn-warning btn-circle element-white editar" id="editar" onclick="showEditarModal(${user.id})">
-                <i class="fas fa-edit" ></i>
-              </button>
-              <button class="btn btn-danger btn-circle eliminar" id="eliminar" onclick="showEliminarModal(${user.id})">
-                <i class="fas fa-trash"></i>
-              </button>
-            </center>
-            </td>
-          `;
-          usersTableBody.appendChild(row);
-        });
-      } catch (error) {
-        console.error('Error fetching users:', error);
       }
-    }
 
-    aggUser.addEventListener('submit', async function (event) {
-      event.preventDefault();
-      const cedula = document.getElementById('cedula').value;
-      const nombre = document.getElementById('nombre').value;
-      const apellido = document.getElementById('apellido').value;
-      const email = document.getElementById('email').value;
-      const psswd = document.getElementById('InputPassword').value;
-      const rol = document.getElementById('rol').value;
-      try {
-        const response = await fetch(apiBaseUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ cedula, nombre, apellido, email, psswd, rol})
-        });
+      aggUser.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const cedula = document.getElementById("cedula").value;
+        const nombre = document.getElementById("nombre").value;
+        const apellido = document.getElementById("apellido").value;
+        const email = document.getElementById("email").value;
+        const psswd = document.getElementById("InputPassword").value;
+        const rol = document.getElementById("rol").value;
+        try {
+          const response = await fetch(apiBaseUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ cedula, nombre, apellido, email, psswd, rol }),
+          });
 
-        if (response.ok) {
-          // Si la solicitud es exitosa, recarga la lista de usuarios
-          fetchUsers();
-          // Limpia los campos del formulario
-          aggUser.reset();
-          // Cierra el modal
-          $('#modalCrudAgregar').modal('hide');
-        } else {
-          console.error('Error al agregar usuario:', response.statusText);
+          if (response.ok) {
+            // Si la solicitud es exitosa, recarga la lista de usuarios
+            fetchUsers();
+            // Limpia los campos del formulario
+            aggUser.reset();
+            // Cierra el modal
+            $("#modalCrudAgregar").modal("hide");
+          } else {
+            console.error("Error al agregar usuario:", response.statusText);
+          }
+        } catch (error) {
+          console.error("Error al agregar usuario:", error);
         }
-      } catch (error) {
-        console.error('Error al agregar usuario:', error);
-      }
+      });
+
+      document
+        .getElementById("editarUserForm")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
+          // Obtener los valores actualizados del formulario
+          const id = userAEditarId;
+          const email = document.getElementById("emailE").value;
+          const rol = document.getElementById("rolE").value;
+
+          try {
+            // Enviar la solicitud de edición al servidor
+            const response = await fetch(apiBaseUrl + `?id=${id}`, {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ email, rol }),
+            });
+
+            if (response.ok) {
+              // Si la solicitud es exitosa, recarga la lista de usuarios
+              fetchUsers();
+              // Cierra el modal de edición
+              editarModal.hide();
+            } else {
+              console.error("Error al editar usuer:", response.statusText);
+            }
+          } catch (error) {
+            console.error("Error al editar user:", error);
+          }
+        });
+
+      const eliminarUserForm = document.getElementById("eliminarUserForm");
+
+      eliminarUserForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        try {
+          const id = userAEliminarId;
+          const response = await fetch(apiBaseUrl + `?id=${id}`, {
+            method: "DELETE",
+          });
+
+          if (response.ok) {
+            // Si la solicitud es exitosa, recarga la lista de usuarios
+            fetchUsers();
+            // Cierra el modal de eliminación
+            eliminarModal.hide();
+          } else {
+            console.error("Error al eliminar user:", response.statusText);
+          }
+        } catch (error) {
+          console.error("Error al eliminar user:", error);
+        }
+      });
+
+      window.showEditarModal = async function (id) {
+        try {
+          const response = await fetch(apiBaseUrl + `?id=${id}`);
+          if (!response.ok) {
+            throw new Error("Error al obtener detalles del usuario para editar");
+          }
+          const user = await response.json();
+
+          // Llenar los campos del formulario con los detalles del usuario
+          document.getElementById("emailE").value = user[0].email;
+          document.getElementById("rolE").value = user[0].rol;
+
+          userAEditarId = id;
+          // Mostrar el modal de edición
+          editarModal.show();
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+      window.showEliminarModal = function (id) {
+        userAEliminarId = id;
+        eliminarModal.show();
+        console.log("Mostrar modal de eliminación para el ID:", userAEliminarId);
+      };
+
+      fetchUsers();
     });
-
-
-
-    document.getElementById('editarUserForm').addEventListener('submit', async function (event) {
-      event.preventDefault();
-      // Obtener los valores actualizados del formulario
-      const id = userAEditarId;
-      const email = document.getElementById('emailE').value;
-      const rol = document.getElementById('rolE').value;
-
-      try {
-        // Enviar la solicitud de edición al servidor
-        const response = await fetch(apiBaseUrl + `?id=${id}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ email,rol })
-        });
-
-        if (response.ok) {
-          // Si la solicitud es exitosa, recarga la lista de usuarios
-          fetchUsers();
-          // Cierra el modal de edición
-          editarModal.hide();
-        } else {
-          console.error('Error al editar usuer:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error al editar user:', error);
-      }
-    });
-
-
-
-    const eliminarUserForm = document.getElementById('eliminarUserForm');
-
-    eliminarUserForm.addEventListener('submit', async function (event) {
-      event.preventDefault();
-      try {
-        const id = userAEliminarId;
-        const response = await fetch(apiBaseUrl + `?id=${id}`, {
-          method: 'DELETE'
-        });
-
-        if (response.ok) {
-          // Si la solicitud es exitosa, recarga la lista de usuarios
-          fetchUsers();
-          // Cierra el modal de eliminación
-          eliminarModal.hide()
-        } else {
-          console.error('Error al eliminar user:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error al eliminar user:', error);
-      }
-    });
-
-    window.showEditarModal = async function (id) {
-      try {
-        const response = await fetch(apiBaseUrl + `?id=${id}`);
-        if (!response.ok) {
-          throw new Error('Error al obtener detalles del usuario para editar');
-        }
-        const user = await response.json();
-        
-        // Llenar los campos del formulario con los detalles del usuario
-        document.getElementById('emailE').value = user[0].email;
-        document.getElementById('rolE').value = user[0].rol;
-        
-        userAEditarId = id; 
-        // Mostrar el modal de edición
-        editarModal.show();
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-
-    window.showEliminarModal = function (id) {
-      userAEliminarId = id;
-      eliminarModal.show()
-      console.log('Mostrar modal de eliminación para el ID:', userAEliminarId);
-    };
-
-    fetchUsers();
-  });
-</script>
-
+  </script>
+</body>
 </html>
