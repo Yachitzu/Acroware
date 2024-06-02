@@ -229,6 +229,13 @@
           </li>
 
           <li class="nav-item">
+            <a class="nav-link" href="../others/report.php">
+              <i class="icon-paper menu-icon"></i>
+              <span class="menu-title">Reportes</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a class="nav-link" href="../others/QR.php">
               <i class="icon-contract menu-icon"></i>
               <span class="menu-title">Escaneo QR</span>
@@ -237,10 +244,11 @@
 
           <li class="nav-item">
             <a class="nav-link" href="../others/acount.php">
-              <i class="icon-paper menu-icon"></i>
+              <i class="icon-head menu-icon"></i>
               <span class="menu-title">Cuenta</span>
             </a>
           </li>
+
 
         </ul>
       </nav>
