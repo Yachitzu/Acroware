@@ -68,6 +68,19 @@ Class Obtener{
             echo json_encode($resultado);
             //$conectar->commit();
         }
+        public static function ActualizarContrasena($id){
+            $json = file_get_contents('php://input');
+            $data = json_decode($json, true);
+            $conectar = Conexion::getInstance()->getConexion();
+            if ($data !== null) {
+                $pass = $data["password"];
+            }
+            $updatesql = "UPDATE usuarios SET psswd= '$pass' WHERE id='$id'";
+            $resultado = $conectar->prepare($updatesql);
+            $resultado->execute();
+            echo json_encode('Actualizada');
+            //$conectar->commit();
+        }
         public static function ActualizarPerfil($id){
             $json = file_get_contents('php://input');
             $data = json_decode($json, true);

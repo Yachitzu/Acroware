@@ -314,7 +314,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                                     <p class="mb-0"><strong class="pr-1">Correo:</strong><?php echo $_SESSION['correo']; ?></p>
                                     <hr>
                                     <center>
-                                      <button class="btn-crud btn-primary text-white text-bold eliminar" id="eliminar">Cambiar Contraseña <i class="fas fa-pencil-alt text-secondary"></i></button>
+                                      <button class="btn-crud btn-primary text-white text-bold" id="cambiarPass" data-toggle="modal" data-target="#modalCrudPass">Cambiar Contraseña <i class="fas fa-pencil-alt text-secondary"></i></button>
                                     </center>
                                 </div>
                             </div>
@@ -464,7 +464,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       </div>
   </div>
 
-<div class="modal fade" id="modalCrudEliminar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
+<div class="modal fade" id="modalCrudPass" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
   <div class="modal-dialog">
       <div class="modal-content">
           <div class="modal-header bg-primary">
@@ -474,21 +474,20 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   <i class="fas fa-times" class="element-white"></i>
               </button>
           </div> 
-          <form class="forms-sample">
+          <form id="editPasswordForm" class="forms-sample">
           <div class="modal-body">
               <div class="grid-margin-modal">          
                   <div class="card-body">
                       <p class="card-description">Por favor, complete los siguientes campos si desea modificar la contraseña:</p>
                       <div class="form-row">
-                          <input type="hidden"  name="profile" value="pass">
-                          <input type="hidden"  name="id" value="<?php echo $_SESSION[ 'id' ]; ?>">
+                          <input type="hidden" name="id" value="<?php echo $_SESSION[ 'id' ]; ?>">
                           <div class="form-group col-md-12">
                               <label for="InputPassword" class="text-bold">Contraseña</label>
-                              <input type="password" class="form-control" id="InputPassword" placeholder="Contraseña" pattern="^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$" title="La contraseña debe tener entre 8 y 20 caracteres, al menos una letra mayúscula y un número. No se permiten caracteres especiales." oninput="validatePassword(this)" required>
+                              <input type="password" class="form-control" id="InputPassword" name="password" placeholder="Contraseña" pattern="^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$" title="La contraseña debe tener entre 8 y 20 caracteres, al menos una letra mayúscula y un número. No se permiten caracteres especiales." oninput="validatePassword(this)" required>
                           </div>
                           <div class="form-group col-md-12">
                               <label for="ConfirmPassword" class="text-bold">Confirmar Contraseña</label>
-                              <input type="password" class="form-control" id="ConfirmPassword" placeholder="Contraseña" pattern="^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$" title="La contraseña debe tener entre 8 y 20 caracteres, al menos una letra mayúscula y un número. No se permiten caracteres especiales." oninput="validatePassword(this); checkPasswordMatch();" required>
+                              <input type="password" class="form-control" id="ConfirmPassword" name="confirmPassword" placeholder="Contraseña" pattern="^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$" title="La contraseña debe tener entre 8 y 20 caracteres, al menos una letra mayúscula y un número. No se permiten caracteres especiales." oninput="validatePassword(this); checkPasswordMatch();" required>
                               <div class="invalid-feedback" id="passwordMatchError" style="display: none;">Las contraseñas no coinciden.</div>
                           </div>  
                       </div>
@@ -530,6 +529,30 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
     .catch((error) => {
       console.log(data);
       console.log('Error:', error);
+    });
+  });
+  document.getElementById('editPasswordForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const formData = new FormData(this);
+    const data = {};
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
+
+    fetch('../../Acciones/RestUsers.php?profile=pass&id='+data['id'], {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      $('#modalCrudPass').modal('hide');
+    })
+    .catch((error) => {
+      console.error('Error:', error);
     });
   });
 </script>
