@@ -428,14 +428,13 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     <i class="fas fa-times" class="element-white"></i>
                 </button>
             </div>
-            <form class="forms-sample">
+            <form id="editProfileForm" class="forms-sample">
               <div class="modal-body">
                 <div class="grid-margin-modal">          
                     <div class="card-body">
                         <p class="card-description">Por favor, complete los siguientes campos:</p>
                         <div class="form-row">
-                          <input type="hidden"  name="profile" value="full">
-                          <input type="hidden"  name="id" value="<?php echo $_SESSION[ 'id' ]; ?>">
+                          <input type="hidden"  name="id" value="<?php echo $_SESSION['id']; ?>">
                           <div class="form-group col-md-6">
                               <label for="Name" class="text-bold">Nombre</label>
                               <input type="text" class="form-control" placeholder="Nombre" name="nombre" value="<?php echo $_SESSION['nombre']?>" required>
@@ -504,6 +503,36 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       </div>
   </div>
 </div>
+<script>
+  document.getElementById('editProfileForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(this);
+    const data = {};
+    formData.forEach((value, key) => {
+      data[key] = value;
+    });
+
+    fetch('../../Acciones/RestUsers.php?profile=full&id='+data['id'], {
+
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+      $('#modalCrud').modal('hide');
+      location.reload();
+    })
+    .catch((error) => {
+      console.log(data);
+      console.log('Error:', error);
+    });
+  });
+</script>
 
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>

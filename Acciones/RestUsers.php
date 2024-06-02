@@ -18,7 +18,11 @@ switch ($opc) {
             break;
         case "PUT":
             $id = $_GET["id"];
-            Actualizar::ActualizarUsuario($id);
+            if(isset($_GET['profile'])){
+                Actualizar::ActualizarPerfil($id);
+            }else{
+                Actualizar::ActualizarUsuario($id);
+            }
             break;
     }
 ?>

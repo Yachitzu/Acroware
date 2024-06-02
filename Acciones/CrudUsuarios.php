@@ -1,5 +1,6 @@
 <?php
 include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php');
+include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Sesion.php');
 Class Obtener{
     public static function ObtenerUsuarios(){
         $conectar=Conexion::getInstance()->getConexion();
@@ -65,6 +66,28 @@ Class Obtener{
             $resultado = $conectar->prepare($updatesql);
             $resultado->execute();
             echo json_encode($resultado);
+            //$conectar->commit();
+        }
+        public static function ActualizarPerfil($id){
+            $json = file_get_contents('php://input');
+            $data = json_decode($json, true);
+            $conectar = Conexion::getInstance()->getConexion();
+            if ($data !== null) {
+                $nombre = htmlspecialchars($data["nombre"]);
+                $apellido = htmlspecialchars($data["apellido"]);
+                $cedula = htmlspecialchars($data["cedula"]);
+                $email = htmlspecialchars($data["correo"]);
+            }
+
+            $updatesql = "UPDATE usuarios  SET email= '$email',nombre= '$nombre',apellido= '$apellido',cedula= '$cedula' WHERE id='$id'";
+            $resultado = $conectar->prepare($updatesql);
+            $resultado->execute();
+            Sesion::getInstance()->setSesion("email", $email);
+            $_SESSION['nombre'] = $nombre;
+            $_SESSION['apellido'] = $apellido;
+            $_SESSION['cedula'] = $cedula;
+            $_SESSION['correo'] = $email;
+            echo json_encode($_SESSION['nombre']);
             //$conectar->commit();
         }
     }  
