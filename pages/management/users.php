@@ -567,10 +567,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 
   <!-- Page level custom scripts -->
   <script src="../../resources/js/datatables-demo.js"></script>
-<<<<<<< HEAD
 </body>
-=======
->>>>>>> bfa74a3d6cb79043436180661766382a9a57cd70
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -584,7 +581,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         document.getElementById("modalCrudEliminar")
       );
 
-<<<<<<< HEAD
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const apiBaseUrl = '../../Acciones/RestUsuarios.php';
@@ -715,59 +711,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         });
       } catch (error) {
         console.error('Error fetching users:', error);
-=======
-      document.getElementById("emailE").value = email;
-      document.getElementById("rolE").value = rol;
-      let userAEliminarId = null;
-      let userAEditarId = null;
-
-      async function fetchUsers() {
-        try {
-          const response = await fetch(apiBaseUrl);
-          const data = await response.json();
-
-          usersTableBody.innerHTML = "";
-          data.forEach((user) => {
-            const row = document.createElement("tr");
-            var rol = user.rol;
-            switch (rol) {
-              case "admin":
-                rol = "Administrador";
-                break;
-              case "laboratorista":
-                rol = "Laboratorista";
-                break;
-              case "estudiante":
-                rol = "Estudiante en Prácticas";
-                break;
-              case "reportero":
-                rol = "Generador de Reportes";
-                break;
-            }
-            row.innerHTML = `
-                <td>${user.nombre}</td>
-                <td>${user.apellido}</td>
-                <td>${user.cedula}</td>
-                <td>${user.email}</td>
-                <td>${rol}</td>
-                <td>${user.fecha_ingreso}</td>
-                <td>
-                <center>          
-                  <button class="btn btn-warning btn-circle element-white editar" id="editar" onclick="showEditarModal(${user.id})">
-                    <i class="fas fa-edit" ></i>
-                  </button>
-                  <button class="btn btn-danger btn-circle eliminar" id="eliminar" onclick="showEliminarModal(${user.id})">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                </center>
-                </td>
-              `;
-            usersTableBody.appendChild(row);
-          });
-        } catch (error) {
-          console.error("Error fetching users:", error);
-        }
->>>>>>> bfa74a3d6cb79043436180661766382a9a57cd70
       }
 
     agregarUserForm.addEventListener('submit', async function (event) {
