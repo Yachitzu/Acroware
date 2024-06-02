@@ -11,7 +11,7 @@ class AccionesAreas
             LEFT JOIN bloques ON areas.id_bloque_per = bloques.id
             LEFT JOIN facultades ON bloques.id_facultad_per = facultades.id
             LEFT JOIN usuarios ON areas.id_usu_encargado = usuarios.id
-            ");
+            WHERE areas.activo = 'si'");
             /* FROM areas INNER JOIN facultades ON areas.id_facultad_per = facultades.id"); */
             $consulta->execute();
             $dato = $consulta->fetchAll(PDO::FETCH_ASSOC);
@@ -32,7 +32,7 @@ class AccionesAreas
                             <button class="btn btn-warning btn-circle element-white editar" data-id="' . $respuesta['id'] . '" id="editar">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <button class="btn btn-danger btn-circle eliminar" id="eliminar">
+                        <button class="btn btn-danger btn-circle eliminar" data-id="' . $respuesta['id'] . '" id="eliminar">
                             <i class="fas fa-trash"></i>
                         </button>
                             </center>
@@ -60,7 +60,8 @@ class AccionesAreas
             $conexion = Conexion::getInstance()->getConexion();
             $consulta = "SELECT bloques.*, facultades.nombre AS nombre_facultad 
             FROM bloques 
-            INNER JOIN facultades ON bloques.id_facultad_per = facultades.id";
+            INNER JOIN facultades ON bloques.id_facultad_per = facultades.id
+            WHERE bloques.activo = 'si'";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
             $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -91,7 +92,8 @@ class AccionesAreas
             $conexion = Conexion::getInstance()->getConexion();
             $consulta = "SELECT bloques.*, facultades.nombre AS nombre_facultad 
             FROM bloques 
-            INNER JOIN facultades ON bloques.id_facultad_per = facultades.id";
+            INNER JOIN facultades ON bloques.id_facultad_per = facultades.id
+            WHERE bloques.activo = 'si'";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
             $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -120,7 +122,7 @@ class AccionesAreas
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = "SELECT * FROM usuarios";
+            $consulta = "SELECT * FROM usuarios WHERE rol='laboratorista' AND activo = 'si'";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
             $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -149,7 +151,7 @@ class AccionesAreas
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = "SELECT * FROM usuarios";
+            $consulta = "SELECT * FROM usuarios WHERE rol='laboratorista' AND activo = 'si'";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
             $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -178,7 +180,7 @@ class AccionesAreas
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = $conexion->prepare("SELECT * FROM areas WHERE nombre= :nombre");
+            $consulta = $conexion->prepare("SELECT * FROM areas WHERE BINARY nombre= :nombre and activo='si'");
             $consulta->bindParam(":nombre", $nombre);
             $consulta->execute();
             if ($consulta->fetch()) {
@@ -204,7 +206,7 @@ class AccionesAreas
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = $conexion->prepare("SELECT * FROM areas WHERE nombre= :nombre AND id != :id");
+            $consulta = $conexion->prepare("SELECT * FROM areas WHERE BINARY nombre= :nombre AND id != :id AND activo='si'");
             $consulta->bindParam(":nombre", $nombre);
             $consulta->bindParam(":id", $id);
             $consulta->execute();
@@ -243,10 +245,18 @@ class AccionesAreas
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = $conexion->prepare("DELETE FROM areas WHERE id=:id");
+            $verificacion = $conexion->prepare("SELECT COUNT(*) AS referencias FROM ubicaciones WHERE id_area_per = :id AND activo='si'");
+            $verificacion->bindParam(':id', $id);
+            $verificacion->execute();
+            $resultado = $verificacion->fetch(PDO::FETCH_ASSOC);
+            if ($resultado['referencias'] > 0) {
+                return 1;
+            } else {
+                $consulta = $conexion->prepare("UPDATE areas set activo= 'no' WHERE id=:id");
             $consulta->bindParam(":id", $id);
             $consulta->execute();
             return 0;
+            }  
         } catch (PDOException $e) {
             error_log('Error en eliminarArea: ' . $e->getMessage());
             return 2;
