@@ -128,42 +128,52 @@ Class Obtener{
                 echo json_encode(['success' => false, 'message' => $e->getMessage()]);
             }
         }
-        public static function ActualizarContrasena($id){
-            $json = file_get_contents('php://input');
-            $data = json_decode($json, true);
-            $conectar = Conexion::getInstance()->getConexion();
-            if ($data !== null) {
-                $pass = $data["password"];
+        public static function ActualizarContrasena($data){
+            try {
+                if ($data !== null) {
+                    $conectar = Conexion::getInstance()->getConexion();
+                    $updatesql = "UPDATE usuarios SET psswd = :psswd WHERE id = :id";
+                    $resultado = $conectar->prepare($updatesql);
+                    $resultado->bindParam(':psswd', $data["password"], PDO::PARAM_STR);
+                    $resultado->bindParam(':id', $data["id"], PDO::PARAM_INT);
+                    $resultado->execute();
+                    //$conectar->commit();
+                    echo json_encode(['success' => true]);
+                } else {
+                    echo json_encode(['success' => false, 'message' => 'Invalid input']);
+                }
+            } catch (PDOException $e) {
+                echo json_encode(['success' => false, 'message' => $e->getMessage()]);
             }
-            $updatesql = "UPDATE usuarios SET psswd= '$pass' WHERE id='$id'";
-            $resultado = $conectar->prepare($updatesql);
-            $resultado->execute();
-            echo json_encode('Actualizada');
-            //$conectar->commit();
         }
-        public static function ActualizarPerfil($id){
-            $json = file_get_contents('php://input');
-            $data = json_decode($json, true);
-            $conectar = Conexion::getInstance()->getConexion();
-            if ($data !== null) {
-                $nombre = htmlspecialchars($data["nombre"]);
-                $apellido = htmlspecialchars($data["apellido"]);
-                $cedula = htmlspecialchars($data["cedula"]);
-                $email = htmlspecialchars($data["correo"]);
+        public static function ActualizarPerfil($data){
+            try {
+                if ($data !== null) {
+                    $conectar = Conexion::getInstance()->getConexion();
+                    $nombre = htmlspecialchars($data["nombre"]);
+                    $apellido = htmlspecialchars($data["apellido"]);
+                    $cedula = htmlspecialchars($data["cedula"]);
+                    $email = htmlspecialchars($data["correo"]);
+                    $id = htmlspecialchars($data["id"]);
+                    $updatesql = "UPDATE usuarios  SET email= '$email',nombre= '$nombre',apellido= '$apellido',cedula= '$cedula' WHERE id='$id'";
+                    $resultado = $conectar->prepare($updatesql);
+                    $resultado->execute();
+                    Sesion::getInstance()->setSesion("email", $email);
+                    $_SESSION['nombre'] = $nombre;
+                    $_SESSION['apellido'] = $apellido;
+                    $_SESSION['cedula'] = $cedula;
+                    $_SESSION['correo'] = $email;
+                    //$conectar->commit();
+                    echo json_encode('Actualizado');
+                } else {
+                    echo json_encode(['success' => false, 'message' => 'Invalid input']);
+                }
+            } catch (PDOException $e) {
+                echo json_encode(['success' => false, 'message' => $e->getMessage()]);
             }
-
-            $updatesql = "UPDATE usuarios  SET email= '$email',nombre= '$nombre',apellido= '$apellido',cedula= '$cedula' WHERE id='$id'";
-            $resultado = $conectar->prepare($updatesql);
-            $resultado->execute();
-            Sesion::getInstance()->setSesion("email", $email);
-            $_SESSION['nombre'] = $nombre;
-            $_SESSION['apellido'] = $apellido;
-            $_SESSION['cedula'] = $cedula;
-            $_SESSION['correo'] = $email;
-            echo json_encode($_SESSION['nombre']);
-            //$conectar->commit();
         }
     }  
+
     class Eliminar{
         public static function BorrarUsuario($id)
         {

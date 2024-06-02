@@ -434,6 +434,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     <div class="card-body">
                         <p class="card-description">Por favor, complete los siguientes campos:</p>
                         <div class="form-row">
+                          <input type="hidden" name="profile" value="full">
                           <input type="hidden"  name="id" value="<?php echo $_SESSION['id']; ?>">
                           <div class="form-group col-md-6">
                               <label for="Name" class="text-bold">Nombre</label>
@@ -480,6 +481,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   <div class="card-body">
                       <p class="card-description">Por favor, complete los siguientes campos si desea modificar la contraseña:</p>
                       <div class="form-row">
+                          <input type="hidden" name="profile" value="pass">
                           <input type="hidden" name="id" value="<?php echo $_SESSION[ 'id' ]; ?>">
                           <div class="form-group col-md-12">
                               <label for="InputPassword" class="text-bold">Contraseña</label>
@@ -512,7 +514,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       data[key] = value;
     });
 
-    fetch('../../Acciones/RestUsers.php?profile=full&id='+data['id'], {
+    fetch('../../Acciones/RestUsers.php', {
 
       method: 'PUT',
       headers: {
@@ -528,10 +530,10 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
     })
     .catch((error) => {
       console.log(data);
-      console.log('Error:', error);
+      console.error('Error:', error);
     });
   });
-  document.getElementById('editPasswordForm').addEventListener('submit', function(event) {
+  document.getElementById('editPasswordForm').addEventListener('submit', async function(event) {
     event.preventDefault();
     const formData = new FormData(this);
     const data = {};
@@ -539,7 +541,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       data[key] = value;
     });
 
-    fetch('../../Acciones/RestUsers.php?profile=pass&id='+data['id'], {
+    fetch('../../Acciones/RestUsers.php', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
