@@ -291,14 +291,14 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 
           <div class="container-fluid py-4">
 
-            <!-- DataTales Example -->
+            <!-- DataTable -->
             <div class="card shadow mb-4">
               <div class="card-header py-3">
                 <button class="btn-crud btn-secondary btn-icon-split" id="agregar">
                   <span class="icon text-white-50">
                     <i class="fas fa-plus-circle"></i>
                   </span>
-                  <span class="text text-white">Agregar Bien</span>
+                  <span class="text text-white">Agregar Reponteciación</span>
                 </button>
               </div>
               <div class="card-body bg-darkwhite">
@@ -318,25 +318,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                         </tr>
                     </thead>
                     <tbody id="repoTableBody">
-                        <tr>
-                            
-                            <td>UTA123456</td>
-                            <td>Motor</td>
-                            <td>Motor de Arranque</td>
-                            <td>SN123456789</td>
-                            <td>Motor de arranque con nuevas mejoras</td>
-                            <td>2023-12-01</td>
-                            <td>
-                                <center>
-                                    <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </center>
-                            </td>
-                        </tr>
                     </tbody>
                     <tfoot>
                         <tr>
