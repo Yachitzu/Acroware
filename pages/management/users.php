@@ -666,7 +666,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         });
         const responseData = await response.json();
         const data = responseData.data;
-        console.log('Datos recibidos del servidor:', data)
 
         $('#dataTable').DataTable().clear().draw();
 
@@ -822,8 +821,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         }
         const responseUser = await response.json();
         const user = responseUser.data;
-        console.log(user)
-        // Llenar los campos del formulario con los detalles de la marca
+        // Llenar los campos del formulario con los detalles del usuario
 
         document.getElementById('emailE').value = user.email;
         document.getElementById('rolE').value = user.rol;
