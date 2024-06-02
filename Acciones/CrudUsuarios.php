@@ -2,33 +2,60 @@
 include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php');
 include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Sesion.php');
 Class Obtener{
-    public static function ObtenerUsuarios(){
-        try{
-            $conectar=Conexion::getInstance()->getConexion();
-
+    public static function ObtenerUsuarios() {
+        try {
+            $conectar = Conexion::getInstance()->getConexion();
+    
             // Obtener los parámetros enviados por DataTables
-            $start = isset($_GET['start']) ? $_GET['start'] : 0;
-            $length = isset($_GET['length']) ? $_GET['length'] : 10;
+            $start = isset($_GET['start']) ? intval($_GET['start']) : 0;
+            $length = isset($_GET['length']) ? intval($_GET['length']) : 10;
             $search = isset($_GET['search']['value']) ? $_GET['search']['value'] : '';
-            $orderColumnIndex = isset($_GET['order'][0]['column']) ? $_GET['order'][0]['column'] : 0;
+            $orderColumnIndex = isset($_GET['order'][0]['column']) ? intval($_GET['order'][0]['column']) : 0;
             $orderColumnName = isset($_GET['columns'][$orderColumnIndex]['data']) ? $_GET['columns'][$orderColumnIndex]['data'] : 'id';
             $orderDir = isset($_GET['order'][0]['dir']) ? $_GET['order'][0]['dir'] : 'asc';
-
-            $select="SELECT * FROM usuarios WHERE activo = 'si'";
-            if (!empty($search)) {
-                $query .= " AND (cedula LIKE '%$search%' OR nombre LIKE '%$search%' OR apellido LIKE '%$search%' OR email LIKE '%$search%' OR rol LIKE '%$search%' OR fechaCreacion LIKE '%$search%')";
+    
+            // Sanitizar entradas para evitar inyección SQL
+            $allowedColumns = ['cedula', 'nombre', 'apellido', 'email', 'rol', 'fecha_ingreso'];
+            if (!in_array($orderColumnName, $allowedColumns)) {
+                $orderColumnName = 'id';
             }
-            $query .= " ORDER BY " . $orderColumnName . " " . $orderDir . " LIMIT " . $start . ", " . $length;
-
+            $orderDir = $orderDir === 'desc' ? 'DESC' : 'ASC';
+    
+            // Consulta principal
+            $query = "SELECT * FROM usuarios WHERE activo = 'si'";
+            if (!empty($search)) {
+                $query .= " AND (cedula LIKE :search OR nombre LIKE :search OR apellido LIKE :search OR email LIKE :search OR rol LIKE :search OR fecha_ingreso LIKE :search)";
+            }
+            $query .= " ORDER BY " . $orderColumnName . " " . $orderDir . " LIMIT :start, :length";
+    
+            // Preparar y ejecutar consulta
             $resultado = $conectar->prepare($query);
+            if (!empty($search)) {
+                $searchParam = "%$search%";
+                $resultado->bindParam(':search', $searchParam, PDO::PARAM_STR);
+            }
+            $resultado->bindParam(':start', $start, PDO::PARAM_INT);
+            $resultado->bindParam(':length', $length, PDO::PARAM_INT);
             $resultado->execute();
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
+    
             // Obtener el total de registros sin filtrar para la paginación
-            $totalRegistros = $conectar->query("SELECT COUNT(*) FROM usuarios WHERE activo = 'si'")->fetchColumn();
-
+            $totalRegistrosQuery = "SELECT COUNT(*) FROM usuarios WHERE activo = 'si'";
+            $totalRegistros = $conectar->query($totalRegistrosQuery)->fetchColumn();
+    
             // Obtener el total de registros después de aplicar el filtro de búsqueda
-            $filtroRegistros = $conectar->query("SELECT COUNT(*) FROM usuarios WHERE activo = 'si' AND (cedula LIKE '%$search%' OR nombre LIKE '%$search%' OR apellido LIKE '%$search%' OR email LIKE '%$search%' OR rol LIKE '%$search%' OR fechaCreacion LIKE '%$search%')")->fetchColumn();
-
+            $filtroRegistrosQuery = "SELECT COUNT(*) FROM usuarios WHERE activo = 'si'";
+            if (!empty($search)) {
+                $filtroRegistrosQuery .= " AND (cedula LIKE :search OR nombre LIKE :search OR apellido LIKE :search OR email LIKE :search OR rol LIKE :search OR fecha_ingreso LIKE :search)";
+            }
+            $filtroRegistrosStmt = $conectar->prepare($filtroRegistrosQuery);
+            if (!empty($search)) {
+                $filtroRegistrosStmt->bindParam(':search', $searchParam, PDO::PARAM_STR);
+            }
+            $filtroRegistrosStmt->execute();
+            $filtroRegistros = $filtroRegistrosStmt->fetchColumn();
+    
+            // Respuesta JSON para DataTables
             echo json_encode([
                 'draw' => isset($_GET['draw']) ? intval($_GET['draw']) : 1,
                 'recordsTotal' => $totalRegistros,
@@ -39,6 +66,7 @@ Class Obtener{
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
         }
     }
+    
         public static function ObtenerById($id){
             try {
                 $conectar = Conexion::getInstance()->getConexion();

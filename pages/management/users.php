@@ -313,6 +313,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                         <th>Correo</th>
                         <th>Rol</th>
                         <th>Fecha de Ingreso</th>
+                        <th>Acciones</th>
                       </tr>
                     </thead>
                     <tbody id="usersTableBody">
@@ -325,6 +326,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                       <th>Correo</th>
                       <th>Rol</th>
                       <th>Fecha de Ingreso</th>
+                      <th>Acciones</th>
                       </tr>
                     </tfoot>
                     <tbody>
@@ -572,7 +574,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    const apiBaseUrl = '../../Acciones/RestUsuarios.php';
+    const apiBaseUrl = '../../Acciones/RestUsers.php';
 
     const usersTableBody = document.getElementById('usersTableBody');
     const agregarUserForm = document.getElementById('agregarUserForm');
@@ -611,7 +613,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         { "data": "apellido" },
         { "data": "email" },
         { "data": "rol" },
-        { "data": "fechaCreacion"},
+        { "data": "fecha_ingreso"},
         {
           "data": null,
           "defaultContent": "",
@@ -692,7 +694,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             "apellido": user.apellido,
             "email": user.email,
             "rol": rol,
-            "fechaCreacion": user.fecha_ingreso,
+            "fecha_ingreso": user.fecha_ingreso,
             "id": user.id
 
 
@@ -753,7 +755,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ email,rol })
+          body: JSON.stringify({ email,rol, id })
         });
 
         if (response.ok) {
