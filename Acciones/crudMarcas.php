@@ -23,7 +23,7 @@ class Obtener
                 $query .= " AND (nombre LIKE '%$search%' OR descripcion LIKE '%$search%' OR pais LIKE '%$search%' OR area LIKE '%$search%')";
             }
             $query .= " ORDER BY " . $orderColumnName . " " . $orderDir . " LIMIT " . $start . ", " . $length;
-
+            
             $resultado = $conectar->prepare($query);
             $resultado->execute();
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -57,6 +57,34 @@ class Obtener
             echo json_encode(['success' => true, 'data' => $data]);
         } catch (PDOException $e) {
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+
+    public static function ObtenerNombre(){
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = "SELECT * FROM marcas where activo='si'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+            $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            $dato;
+            $tabla = '';
+
+            foreach ($dato as $respuesta) {
+                $tabla .= '
+                    <option value="' . htmlspecialchars($respuesta['id']) . '">' . htmlspecialchars($respuesta['nombre']) . '</option>
+                ';
+            }
+            return [
+                'codigo' => 0,
+                'dato' => $tabla,
+            ];
+        } catch (PDOException $e) {
+            error_log('Error al listar marcas: ' . $e->getMessage());
+            return [
+                'codigo' => 1,
+                'mensaje' => 'Error al listar marcas: ' . $e->getMessage()
+            ];
         }
     }
 }
