@@ -677,7 +677,245 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 
  <!-- SCRIPT  DE FUNCIONES --> 
  <script>
-  
+  $(document).ready(function () {
+      $("#formAgregar").submit(function (e) {
+        e.preventDefault();
+        codigo_uta = $("#codigoUTAA").val();
+        nombre = $("#nombreA").val();
+        serie = $("#serieA").val();
+        id_marca = $("#marcaA").val();
+        modelo = $("#modeloA").val();
+        color = $("#colorA").val();
+        material = $("#materialA").val();
+        dimensiones = $("#dimensionesA").val();
+        condicion = $("#condicionA").val();
+        custodio = $("#custodioA").val();
+        valor = $("#valorA").val();
+        id_area_per = $("#areaA").val();
+        id_ubi_per = $("#ubicacionA").val();
+        $.ajax({
+          url: "../../Acciones/RestBienes_Mobiliarios.php",
+          type: "POST",
+          data: JSON.stringify({
+            codigo_uta: codigo_uta,
+            nombre: nombre,
+            serie: serie,
+            id_marca: id_marca,
+            modelo: modelo,
+            color: color,
+            material: material,
+            dimensiones: dimensiones,
+            condicion: condicion,
+            custodio: custodio,
+            valor: valor,
+            id_area_per: id_area_per,
+            id_ubi_per: id_ubi_per
+          }),
+          contentType: "application/json",
+          cache: false,
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            $("#modalCrudAgregar").modal('hide');
+            $("#codigoUTAA").val("");
+            $("#nombreA").val("");
+            $("#serieA").val("");
+            $("#marcaA").val("");
+            $("#modeloA").val("");
+            $("#colorA").val("");
+            $("#materialA").val("");
+            $("#dimensionesA").val("");
+            $("#condicionA").val("");
+            $("#custodioA").val("");
+            $("#valorA").val("");
+            $("#areaA").val("");
+            $("#ubicacionA").val("");
+            cargarTabla();
+          }
+        });
+      });
+    });
+
+    function cargarTabla() {
+      fetch('../../Acciones/RestBienes_Mobiliarios.php', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          const tbody = document.querySelector('#dataTable tbody');
+          if ($.fn.DataTable.isDataTable('#dataTable')) {
+            $('#dataTable').DataTable().destroy();
+          }
+          tbody.innerHTML = '';
+
+          if (data.codigo === 0) {
+            tbody.innerHTML = data.dato;
+          } else {
+            const tr = document.createElement('tr');
+            const td = document.createElement('td');
+            td.textContent = 'No se encontraron bienes mobiliarios.';
+            td.setAttribute('colspan', '16');
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+          }
+
+          $('#dataTable').DataTable({
+            scrollX: true,  // Permite el desplazamiento horizontal
+            fixedHeader: {
+                header: true,  // Fija la cabecera
+                footer: true   // Fija el pie de página
+            },
+            language: {
+              "decimal": "",
+              "emptyTable": "No hay información",
+              "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+              "infoEmpty": "Mostrando 0 to 0 of 0 entradas",
+              "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+              "infoPostFix": "",
+              "thousands": ",",
+              "lengthMenu": "Mostrar _MENU_ registros por página",
+              "loadingRecords": "Cargando...",
+              "processing": "Procesando...",
+              "search": "Buscar:",
+              "zeroRecords": "Sin resultados encontrados",
+              "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+              }
+            }
+          });
+          addEventListeners();
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          const tbody = document.querySelector('#dataTable tbody');
+          const tr = document.createElement('tr');
+          const td = document.createElement('td');
+          td.textContent = 'Error al cargar los datos.';
+          td.setAttribute('colspan', '16');
+          tr.appendChild(td);
+          tbody.appendChild(tr);
+        });
+    }
+
+    function addEventListeners() {
+      id = "";
+      $(document).on('click', '.editar', function () {
+        id = $(this).data("id");
+        fila = $(this).closest("tr");
+        codigo_uta = fila.find('td:eq(0)').text();
+        nombre = fila.find('td:eq(1)').text();
+        serie = fila.find('td:eq(2)').text();
+        modelo = fila.find('td:eq(4)').text();
+        color = fila.find('td:eq(5)').text();
+        material = fila.find('td:eq(6)').text();
+        dimensiones = fila.find('td:eq(7)').text();
+        condicion = fila.find('td:eq(8)').text();
+        custodio = fila.find('td:eq(9)').text();
+        valor = fila.find('td:eq(11)').text();
+        id_marca = fila.find('.id_marca').val();
+        id_area_per = fila.find('.id_area_per').val();
+        id_ubi_per = fila.find('.id_ubi_per').val();
+
+        $("#codigoUTAE").val(codigo_uta);
+        $("#nombreE").val(nombre);
+        $("#modeloE").val(modelo);
+        $("#marcaE").val(id_marca);
+        $("#areaE").val(id_area_per);
+        $("#ubicacionE").val(id_ubi_per);
+        $("#serieE").val(serie);
+        $("#colorE").val(color);
+        $("#materialE").val(material);
+        $("#dimensionesE").val(dimensiones);
+        $("#condicionE").val(condicion);
+        $("#custodioE").val(custodio);
+        $("#valorE").val(valor);
+        $("#modalCrudEditar").modal('show');
+      });
+
+      $("#formEditar").submit(function (e) {
+        e.preventDefault();
+        id;
+        codigo_uta = $("#codigoUTAE").val();
+        nombre = $("#nombreE").val();
+        modelo = $("#modeloE").val();
+        id_marca = $("#marcaE").val();
+        serie = $("#serieE").val();
+        color = $("#colorE").val();
+        material = $("#materialE").val();
+        dimensiones = $("#dimensionesE").val();
+        condicion = $("#condicionE").val();
+        custodio = $("#custodioE").val();
+        valor = $("#valorE").val();
+        id_area_per = $("#areaE").val();
+        id_ubi_per = $("#ubicacionE").val();
+
+        $.ajax({
+          url: "../../Acciones/RestBienes_Mobiliarios.php",
+          type: "PUT",
+          data: JSON.stringify({
+            id: id,
+            codigo_uta: codigo_uta,
+            nombre: nombre,
+            modelo: modelo,
+            id_marca: id_marca,
+            serie: serie,
+            color: color,
+            material: material,
+            dimensiones: dimensiones,
+            condicion: condicion,
+            custodio: custodio,
+            valor: valor,
+            id_area_per: id_area_per,
+            id_ubi_per: id_ubi_per
+          }),
+          contentType: "application/json",
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            $("#modalCrudEditar").modal('hide');
+            cargarTabla();
+          }
+        });
+      });
+
+      $(document).on('click', '.eliminar', function () {
+        id = $(this).data("id");
+        $("#modalCrudEliminar").modal('show');
+      });
+
+      $("#formEliminar").submit(function (e) {
+        e.preventDefault();
+
+        $.ajax({
+          url: "../../Acciones/RestBienes_Mobiliarios.php",
+          type: "DELETE",
+          data: JSON.stringify({
+            id: id
+          }),
+          contentType: "application/json",
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            $("#modalCrudEliminar").modal('hide');
+            cargarTabla();
+          }
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      cargarTabla();
+    });
+
   </script>
 
   <!-- plugins:js -->
