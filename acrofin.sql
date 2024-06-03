@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-05-2024 a las 03:59:42
+-- Tiempo de generación: 03-06-2024 a las 03:47:22
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `acroware`
+-- Base de datos: `das`
 --
 
 -- --------------------------------------------------------
@@ -51,11 +51,18 @@ CREATE TABLE `areas` (
   `id` int(11) NOT NULL,
   `nombre` varchar(60) DEFAULT NULL,
   `descripcion` varchar(500) DEFAULT NULL,
-  `piso` int(11) DEFAULT NULL,
+  `piso` varchar(50) DEFAULT NULL,
   `id_bloque_per` int(11) DEFAULT NULL,
   `id_usu_encargado` int(11) DEFAULT NULL,
   `activo` enum('si','no') NOT NULL DEFAULT 'si'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `areas`
+--
+
+INSERT INTO `areas` (`id`, `nombre`, `descripcion`, `piso`, `id_bloque_per`, `id_usu_encargado`, `activo`) VALUES
+(1, 'Aula', 'Primer Aula a la derecha subiendo las escaleras', '0', 1, 1, 'si');
 
 -- --------------------------------------------------------
 
@@ -102,6 +109,13 @@ CREATE TABLE `bienes_mobiliarios` (
   `activo` enum('si','no') NOT NULL DEFAULT 'si'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `bienes_mobiliarios`
+--
+
+INSERT INTO `bienes_mobiliarios` (`id`, `codigo_uta`, `nombre`, `serie`, `id_marca`, `modelo`, `color`, `material`, `dimensiones`, `condicion`, `custodio_actual`, `fecha_ingreso`, `valor_contable`, `id_area_per`, `id_ubi_per`, `activo`) VALUES
+(1, 'PC01-1', 'Escritorio', 'E001', 1, 'DES', 'Negro', 'PVC', '15x15', 'Buen Estado', 'Christian', '2024-05-28', 15, 1, 1, 'si');
+
 -- --------------------------------------------------------
 
 --
@@ -116,6 +130,13 @@ CREATE TABLE `bloques` (
   `pisos` int(11) DEFAULT NULL,
   `activo` enum('si','no') NOT NULL DEFAULT 'si'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `bloques`
+--
+
+INSERT INTO `bloques` (`id`, `nombre`, `descripcion`, `id_facultad_per`, `pisos`, `activo`) VALUES
+(1, 'Talleres Tecnologicos', 'Al lado del Edificio Financiero', 1, 2, 'si');
 
 -- --------------------------------------------------------
 
@@ -148,6 +169,13 @@ CREATE TABLE `facultades` (
   `activo` enum('si','no') NOT NULL DEFAULT 'si'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `facultades`
+--
+
+INSERT INTO `facultades` (`id`, `nombre`, `descripcion`, `campus`, `activo`) VALUES
+(1, 'FISEI', 'Al lado de la Facultad de Jurisprudencia', 'Huachi Chico', 'si');
+
 -- --------------------------------------------------------
 
 --
@@ -162,6 +190,38 @@ CREATE TABLE `marcas` (
   `area` varchar(60) DEFAULT NULL,
   `activo` enum('si','no') NOT NULL DEFAULT 'si'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `marcas`
+--
+
+INSERT INTO `marcas` (`id`, `nombre`, `descripcion`, `pais`, `area`, `activo`) VALUES
+(1, 'IKEA', 'Marca de Escritorios', 'Suecia', 'mobiliario', 'si');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `recordatorio`
+--
+
+CREATE TABLE `recordatorio` (
+  `id` int(11) NOT NULL,
+  `actividad` varchar(100) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
+  `usuario_id` int(11) NOT NULL,
+  `estado` enum('pendiente','finalizado','cancelado') NOT NULL DEFAULT 'pendiente'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `recordatorio`
+--
+
+INSERT INTO `recordatorio` (`id`, `actividad`, `fecha`, `usuario_id`, `estado`) VALUES
+(1, 'Nueva Actividad desde la BD', '2024-05-29 04:56:20', 1, 'pendiente'),
+(4, '1', '2024-05-29 22:23:00', 1, 'pendiente'),
+(5, '1', '2024-05-29 22:24:15', 1, 'pendiente'),
+(6, '1', '2024-05-31 13:09:02', 1, 'pendiente'),
+(7, '1', '2024-05-31 13:10:10', 1, 'pendiente');
 
 -- --------------------------------------------------------
 
@@ -189,7 +249,8 @@ CREATE TABLE `repotenciaciones` (
   `serie` varchar(20) DEFAULT NULL,
   `codigo_adi_uta` varchar(20) DEFAULT NULL,
   `detalle_repotenciacion` varchar(300) DEFAULT NULL,
-  `fecha_repotenciacion` timestamp NOT NULL DEFAULT current_timestamp()
+  `fecha_repotenciacion` timestamp NOT NULL DEFAULT current_timestamp(),
+  `activo` enum('si','no') NOT NULL DEFAULT 'si'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -222,6 +283,13 @@ CREATE TABLE `ubicaciones` (
   `activo` enum('si','no') NOT NULL DEFAULT 'si'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `ubicaciones`
+--
+
+INSERT INTO `ubicaciones` (`id`, `nombre`, `descripcion`, `id_area_per`, `activo`) VALUES
+(1, 'PC', 'Primer escritorio  al lado de la puerta', 1, 'si');
+
 -- --------------------------------------------------------
 
 --
@@ -239,6 +307,14 @@ CREATE TABLE `usuarios` (
   `fecha_ingreso` timestamp NOT NULL DEFAULT current_timestamp(),
   `activo` enum('si','no') NOT NULL DEFAULT 'si'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `cedula`, `email`, `psswd`, `rol`, `fecha_ingreso`, `activo`) VALUES
+(1, 'Christian', 'Lopez', '0803536341', 'clopez6341@uta.edu.ec', '15Diciembre001', 'admin', '2024-05-28 21:33:48', 'si'),
+(2, 'Diana', 'Quinga', '0803536333', 'c.ristian-lp@hotmail.com', '15Diciembre001', 'admin', '2024-05-28 21:33:48', 'si');
 
 --
 -- Índices para tablas volcadas
@@ -308,6 +384,13 @@ ALTER TABLE `marcas`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `recordatorio`
+--
+ALTER TABLE `recordatorio`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `usuario_id` (`usuario_id`);
+
+--
 -- Indices de la tabla `recuperar_password`
 --
 ALTER TABLE `recuperar_password`
@@ -337,7 +420,9 @@ ALTER TABLE `ubicaciones`
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_cedula` (`cedula`),
+  ADD UNIQUE KEY `unique_email` (`email`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -353,7 +438,7 @@ ALTER TABLE `actividades`
 -- AUTO_INCREMENT de la tabla `areas`
 --
 ALTER TABLE `areas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `bienes_informaticos`
@@ -365,13 +450,13 @@ ALTER TABLE `bienes_informaticos`
 -- AUTO_INCREMENT de la tabla `bienes_mobiliarios`
 --
 ALTER TABLE `bienes_mobiliarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `bloques`
 --
 ALTER TABLE `bloques`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `componentes`
@@ -383,13 +468,19 @@ ALTER TABLE `componentes`
 -- AUTO_INCREMENT de la tabla `facultades`
 --
 ALTER TABLE `facultades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `marcas`
 --
 ALTER TABLE `marcas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `recordatorio`
+--
+ALTER TABLE `recordatorio`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `recuperar_password`
@@ -413,13 +504,13 @@ ALTER TABLE `software`
 -- AUTO_INCREMENT de la tabla `ubicaciones`
 --
 ALTER TABLE `ubicaciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
@@ -469,6 +560,12 @@ ALTER TABLE `bloques`
 --
 ALTER TABLE `componentes`
   ADD CONSTRAINT `componentes_ibfk_1` FOREIGN KEY (`id_bien_infor_per`) REFERENCES `bienes_informaticos` (`id`);
+
+--
+-- Filtros para la tabla `recordatorio`
+--
+ALTER TABLE `recordatorio`
+  ADD CONSTRAINT `recordatorio_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `repotenciaciones`
