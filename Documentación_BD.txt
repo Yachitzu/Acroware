@@ -288,3 +288,4 @@ Ref: actividades.id_bien_info > bienes_informaticos.id
 Para la optimización se creó un campo de activo en la mayoria de tablas, que funciona como un booleano que permite almancenar información de forma permanente ya que cuando se elimina un registro este se pierde , en cambio con este aspecto podemos tener algo así como el historial de los registros.
 
 También se aumentó una tabla de recuperar_password que sirve para restaurar la contraseña del usuario mediante el correo institucional
+Para Manejar de una manera adecuada las actividades mediante notificaciones se creó una tabla llamada recordatorio que justamente permite cumplir con esta función de una manera eficiente.

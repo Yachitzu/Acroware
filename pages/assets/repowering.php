@@ -299,14 +299,14 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 
           <div class="container-fluid py-4">
 
-            <!-- DataTales Example -->
+            <!-- DataTable -->
             <div class="card shadow mb-4">
               <div class="card-header py-3">
                 <button class="btn-crud btn-secondary btn-icon-split" id="agregar">
                   <span class="icon text-white-50">
                     <i class="fas fa-plus-circle"></i>
                   </span>
-                  <span class="text text-white">Agregar Bien</span>
+                  <span class="text text-white">Agregar Reponteciación</span>
                 </button>
               </div>
               <div class="card-body bg-darkwhite">
@@ -325,26 +325,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody id="marcasTableBody">
-                        <tr>
-                            
-                            <td>UTA123456</td>
-                            <td>Motor</td>
-                            <td>Motor de Arranque</td>
-                            <td>SN123456789</td>
-                            <td>Motor de arranque con nuevas mejoras</td>
-                            <td>2023-12-01</td>
-                            <td>
-                                <center>
-                                    <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </center>
-                            </td>
-                        </tr>
+                    <tbody id="repoTableBody">
                     </tbody>
                     <tfoot>
                         <tr>
@@ -387,8 +368,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
   <!-- container-scroller -->
 
 <!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -424,7 +404,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="agregarMarcaForm" method="post">
+        <form class="forms-sample" id="agregarRepoForm" method="post">
           <div class="modal-body">
             <div class="grid-margin-modal">
                 <div class="card-body">
@@ -432,8 +412,8 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     sistema:</p>
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
-                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Código UTA" required>
+                            <label for="codigoC" class="text-bold">Codigo UTA</label>
+                            <input type="text" class="form-control" name="codigoC" id="codigoC" placeholder="Código UTA" required>
                         </div>
                     </div>
                     <div class="form-row">
@@ -442,29 +422,26 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                             <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre" required>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="codigoUTAC" class="text-bold">Serie</label>
-                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Serie" required>
+                            <label for="serieC" class="text-bold">Serie</label>
+                            <input type="text" class="form-control" name="serieC" id="serieC" placeholder="Serie" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <label for="facultad" class="text-bold">Componente</label>
-                            <select class="form-control" id="facultad" required>
-                                <option value="">Seleccione un Componente</option>
-                                <option value="PC01">PC 01</option>
-                                <option value="PC02">PC 02</option>
+                            <label for="componente" class="text-bold">Componente</label>
+                            <select class="form-control" id="ComponentesBox" required>
                             </select>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="Name" class="text-bold">Descripción</label>
-                            <textarea class="form-control" id="descripcionE" placeholder="Descripción"></textarea>
+                            <label for="detalleC" class="text-bold">Descripción</label>
+                            <textarea class="form-control" id="detalleC" placeholder="Descripción"></textarea>
                         </div>
                     </div>
                 </div>
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-bs-dismiss="modal"
+            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Repotenciación ">
           </div>
@@ -485,7 +462,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="eliminarMarcaForm">
+        <form class="forms-sample" id="eliminarRepotenciacionForm">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -499,7 +476,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Repotenciación ">
           </div>
@@ -519,7 +496,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="editarMarcaForm">
+        <form class="forms-sample" id="editarRepotenciacionForm">
           <div class="modal-body">
             <div class="grid-margin-modal">
                 <div class="card-body">
@@ -527,39 +504,36 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
-                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Código UTA" required>
+                            <label for="codigoE" class="text-bold">Codigo UTA</label>
+                            <input type="text" class="form-control" name="codigoE" id="codigoE" placeholder="Código UTA" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="nombreC" class="text-bold">Nombre</label>
-                            <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre" required>
+                            <label for="nombreE" class="text-bold">Nombre</label>
+                            <input type="text" class="form-control" name="nombreE" id="nombreE" placeholder="Nombre" required>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="codigoUTAC" class="text-bold">Serie</label>
-                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Serie" required>
+                            <label for="serieE" class="text-bold">Serie</label>
+                            <input type="text" class="form-control" name="serieE" id="serieE" placeholder="Serie" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <label for="facultad" class="text-bold">Componente</label>
-                            <select class="form-control" id="facultad" required>
-                                <option value="">Seleccione un Componente</option>
-                                <option value="PC01">PC 01</option>
-                                <option value="PC02">PC 02</option>
+                            <label for="componenteE" class="text-bold">Componente</label>
+                            <select class="form-control" id="ComponentesBoxE" required>
                             </select>
                         </div>
                         <div class="form-group col-md-12">
-                            <label for="Name" class="text-bold">Descripción</label>
-                            <textarea class="form-control" id="descripcionE" placeholder="Descripción"></textarea>
+                            <label for="detalleE" class="text-bold">Descripción</label>
+                            <textarea class="form-control" id="detalleE" placeholder="Descripción"></textarea>
                         </div>
                     </div>
                 </div>
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Repotenciación">
           </div>
@@ -567,6 +541,324 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       </div>
     </div>
   </div>
+
+  <!-- main script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const url = '../../Acciones/RestComponentes.php?nombres=1';
+
+      // Realiza la petición GET al servicio
+      fetch(url)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Error de conexión ' + response.statusText);
+          }
+          return response.json();
+        })
+        .then(data => {
+          // Obtener los elementos select
+          const comboBox1 = document.getElementById('ComponentesBox');
+          const comboBox2 = document.getElementById('ComponentesBoxE');
+
+          // Vaciar los combobox (en caso de que ya tengan opciones)
+          comboBox1.innerHTML = '<option value="">Seleccione una opción</option>';
+          comboBox2.innerHTML = '<option value="">Seleccione una opción</option>';
+
+          // Recorrer los datos y agregar cada opción a ambos combobox
+          data.forEach(componente => {
+            const option1 = document.createElement('option');
+            option1.value = componente.id; // Ajusta esto según la estructura de tu JSON
+            option1.text = componente.nombre; // Ajusta esto según la estructura de tu JSON
+            comboBox1.appendChild(option1);
+
+            const option2 = document.createElement('option');
+            option2.value = componente.id; // Ajusta esto según la estructura de tu JSON
+            option2.text = componente.nombre; // Ajusta esto según la estructura de tu JSON
+            comboBox2.appendChild(option2);
+          });
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+      const apiBaseUrl = '../../Acciones/RestRepotenciaciones.php';
+
+      const repoTableBody = document.getElementById('repoTableBody');
+      const agregarRepoForm = document.getElementById('agregarRepoForm');
+      const editarModal = new bootstrap.Modal(document.getElementById('modalCrud'));
+      const eliminarModal = new bootstrap.Modal(document.getElementById('modalCrudEliminar'));
+
+      let repotenciacionAEliminarId = null;
+      let componenteId = null;
+      let repotenciacionAEditarId = null;
+
+      $('#dataTable').DataTable({
+        "processing": false,
+        "serverSide": true,
+        "ajax": {
+          "url": apiBaseUrl,
+          "type": "GET",
+          "data": function (d) {
+            d.start = d.start || 0; // Indice de inicio para la paginación
+            d.length = d.length || 10; // Número de registros por página
+            d.draw = d.draw || 1; // Número de la solicitud de dibujo
+            d.search = d.search || {}; // Objeto de búsqueda
+            d.search.value = d.search.value || ""; // Valor de búsqueda
+            d.order = d.order || [0, 'asc']; // Orden de las columnas
+            return d;
+          },
+          "dataSrc": function (json) {
+            // Devuelve los datos de la respuesta JSON
+            return json.data;
+          },
+          "error": function (xhr, error, thrown) {
+            console.log('Error:', error);
+          }
+        },
+        "columns": [
+          { "data": "codigo_adi_uta" },
+          { "data": "componente" },
+          { "data": "nombre" },
+          { "data": "serie" },
+          { "data": "detalle_repotenciacion" },
+          { "data": "fecha_repotenciacion" },
+          {
+            "data": null,
+            "defaultContent": "",
+            "orderable": false,
+            "searchable": false,
+            "render": function (data, type, row) {
+              return `
+                          <center>          
+                              <button class="btn btn-warning btn-circle element-white editar" id="editar" onclick="showEditarModal(${row.id},${row.id_componente})">
+                                  <i class="fas fa-edit"></i>
+                              </button>
+                              <button class="btn btn-danger btn-circle eliminar" id="eliminar" onclick="showEliminarModal(${row.id},${row.id_componente})">
+                                  <i class="fas fa-trash"></i>
+                              </button>
+                          </center>
+                      `;
+            }
+          }
+        ],
+        "searching": true, // Habilita la búsqueda
+        "lengthChange": true, // Habilita el cambio de longitud
+        "lengthMenu": [10, 25, 50, 100], // Opciones de longitud de página
+        "paging": true, // Habilita la paginación
+        "info": true, // Habilita la información de la tabla
+        "ordering": true, // Habilita la ordenación
+        "order": [[0, 'asc']], // Columna inicial para ordenar
+        "language": {
+          // Personaliza los textos, por ejemplo:
+          "lengthMenu": "Mostrar _MENU_ registros por página",
+          "zeroRecords": "No se encontraron registros",
+          "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+          "infoEmpty": "Mostrando 0 a 0 de 0 registros",
+          "infoFiltered": "(filtrado de _MAX_ registros totales)",
+          "search": "Buscar:",
+          "paginate": {
+            "first": "Primero",
+            "last": "Último",
+            "next": "Siguiente",
+            "previous": "Anterior"
+          }
+        }
+      });
+
+      async function fetchRepotenciaciones() {
+        try {
+          const response = await fetch(apiBaseUrl, {
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+          const responseData = await response.json();
+          const data = responseData.data;
+          console.log('Datos recibidos del servidor:', data)
+
+          $('#dataTable').DataTable().clear().draw();
+
+          // Agregar filas a la tabla
+          data.forEach(repotenciacion => {
+            $('#dataTable').DataTable().row.add({
+
+              "codigo_adi_uta": repotenciacion.codigo_adi_uta,
+              "componente": repotenciacion.componente,
+              "nombre": repotenciacion.nombre,
+              "serie": repotenciacion.serie,
+              "detalle_repotenciacion": repotenciacion.detalle_repotenciacion,
+              "fecha_repotenciacion": repotenciacion.fecha_repotenciacion,
+              "id_componente": repotenciacion.id_componente,
+              "id": repotenciacion.id
+
+
+            }).draw();
+          });
+        } catch (error) {
+          console.error('Error fetching repotenciaciones:', error);
+        }
+      }
+
+      agregarRepoForm.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        
+        const codigo = document.getElementById('codigoC').value;
+        const nombre = document.getElementById('nombreC').value;
+        const serie = document.getElementById('serieC').value;
+        const componente = document.getElementById('ComponentesBox').value;
+        const detalle = document.getElementById('detalleC').value;
+
+        try {
+          const response = await fetch(apiBaseUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ codigo, nombre, serie, componente, detalle })
+          });
+
+          if (response.ok) {
+            // Si la solicitud es exitosa, recarga la lista de repotenciaciones
+            fetchRepotenciaciones();
+            // Limpia los campos del formulario
+            agregarRepoForm.reset();
+            // Cierra el modal
+            $('#modalCrudAgregar').modal('hide');
+          } else {
+            console.error('Error al agregar repotenciacion:', response.statusText);
+          }
+        } catch (error) {
+          console.error('Error al agregar repotenciacion:', error);
+        }
+      });
+
+
+
+      document.getElementById('editarRepotenciacionForm').addEventListener('submit', async function (event) {
+        event.preventDefault();
+        // Obtener los valores actualizados del formulario
+        const id = repotenciacionAEditarId;
+        const codigo = document.getElementById('codigoE').value;
+        const nombre = document.getElementById('nombreE').value;
+        const serie = document.getElementById('serieE').value;
+        const componente = document.getElementById('ComponentesBoxE').value;
+        const detalle = document.getElementById('detalleE').value;
+
+        try {
+          // Enviar la solicitud de edición al servidor
+          const response = await fetch(apiBaseUrl + `?id=${id}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id, codigo, nombre, serie, componente, detalle })
+          });
+
+          if (response.ok) {
+            const result = await response.json();
+            if (result.success) {
+              // Si la solicitud es exitosa, recarga la lista de repotenciaciones
+              await fetchRepotenciaciones();
+              // Cierra el modal de edición
+              editarModal.hide();
+            } else {
+              console.error('Error al editar repotenciacion:', result.message);
+            }
+          } else {
+            console.error('Error al editar repotenciacion:', response.statusText);
+          }
+        } catch (error) {
+          console.error('Error al editar repotenciacion:', error);
+        }
+      });
+
+
+      const eliminarRepotenciacionForm = document.getElementById('eliminarRepotenciacionForm');
+
+      eliminarRepotenciacionForm.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        try {
+          const id = repotenciacionAEliminarId;
+          const componente = componenteId;
+
+          if (!id) {
+            console.error('ID de repotenciacion a eliminar no está definido.');
+            return;
+          }
+
+          const response = await fetch(`${apiBaseUrl}?id=${id}&componente=${componente}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+
+          if (response.ok) {
+            const responseData = await response.json();
+            if (responseData.success) {
+              // Si la solicitud es exitosa, recarga la lista de repotenciaciones
+              await fetchRepotenciaciones();
+              // Cierra el modal de eliminación
+              eliminarModal.hide();
+
+            } else {
+              console.error('Error al eliminar repotenciacion:', responseData.message || response.statusText);
+              alert(responseData.message)
+            }
+          }
+        } catch (error) {
+          console.error('Error al eliminar repotenciacion:', error);
+        }
+      });
+
+      window.showEditarModal = async function (id,id_componente) {
+        try {
+          const response = await fetch(apiBaseUrl + `?id=${id}`);
+          if (!response.ok) {
+            throw new Error('Error al obtener detalles de la repotenciacion para editar');
+          }
+          const responseRepotenciacion = await response.json();
+          const repotenciacion = responseRepotenciacion.data;
+          console.log(repotenciacion)
+          // Llenar los campos del formulario con los detalles de la repotenciacion
+
+          document.getElementById('codigoE').value = repotenciacion.codigo_adi_uta;
+          document.getElementById('nombreE').value = repotenciacion.nombre;
+          document.getElementById('serieE').value = repotenciacion.serie;
+          document.getElementById('detalleE').value = repotenciacion.detalle_repotenciacion;
+          const selectedComponente = id_componente;
+          const componenteEInput = document.getElementById('ComponentesBoxE');
+
+          // Iteramos sobre cada opción en el campo de selección
+          for (let i = 0; i < componenteEInput.options.length; i++) {
+            // Si el valor de la opción coincide con el valor seleccionado previamente
+            if (componenteEInput.options[i].value === selectedComponente) {
+              // Marcamos esta opción como seleccionada
+              componenteEInput.options[i].selected = true;
+              // Salimos del bucle ya que hemos encontrado la opción correcta
+              break;
+            }
+          }
+          repotenciacionAEditarId = id;
+          // Mostrar el modal de edición
+          editarModal.show();
+        } catch (error) {
+          console.error(error);
+        }
+      };
+
+
+      window.showEliminarModal = function (id,id_componente) {
+        repotenciacionAEliminarId = id;
+        componenteId = id_componente;
+        eliminarModal.show()
+        console.log('Mostrar modal de eliminación para el ID:', id,' y ',id_componente);
+      };
+
+      fetchRepotenciaciones();
+    });
+  </script>
 
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>
