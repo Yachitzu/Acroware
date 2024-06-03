@@ -36,7 +36,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
     href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" />
 
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
 
 </head>
 
@@ -239,7 +239,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="assets-i.php">Bienes Informáticos</a></li>
-                
+
                 <li class="nav-item"> <a class="nav-link" href="repowering.php">Repotenciación</a></li>
                 <li class="nav-item"> <a class="nav-link" href="assets-m.php">Bienes Mobiliarios</a></li>
               </ul>
@@ -285,7 +285,8 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <div class="col-md-12">
               <div class="profile">
                 <div class="cover-image-gest d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5">
-                  <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase titleMain font-berthold">Bienes Informáticos</h1>
+                  <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase titleMain font-berthold">Bienes
+                    Informáticos</h1>
                   <div class="d-inline-flex mb-lg-5">
                     <p class="m-0 text-white"><a class="text-white" href="../../index.php">Inicio</a></p>
                     <p class="m-0 text-white px-2">/</p>
@@ -302,119 +303,121 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 
 
           <div class="container-fluid py-4">
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <button class="btn-crud btn-secondary btn-icon-split" id="agregar">
-                <span class="icon text-white-50">
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <button class="btn-crud btn-secondary btn-icon-split" id="agregar">
+                  <span class="icon text-white-50">
                     <i class="fas fa-plus-circle"></i>
-                </span>
-                <span class="text text-white">Agregar Bien</span>
-            </button>
-        </div>
-        <div class="card-body bg-darkwhite">
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
+                  </span>
+                  <span class="text text-white">Agregar Bien</span>
+                </button>
+              </div>
+              <div class="card-body bg-darkwhite">
+                <div class="table-responsive">
+                  <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%"
+                    cellspacing="0">
                     <thead>
-                        <tr>
-                            <th>Ver Más</th>
-                            <th>Codigo UTA</th>
-                            <th>Nombre</th>
-                            <th>Modelo</th>
-                            <th>Marca</th>
-                            <th>Acciones</th>
-                        </tr>
+                      <tr>
+                        <th>Ver Más</th>
+                        <th>Codigo UTA</th>
+                        <th>Nombre</th>
+                        <th>Modelo</th>
+                        <th>Marca</th>
+                        <th>Acciones</th>
+                      </tr>
                     </thead>
                     <tbody id="marcasTableBody">
-                        <tr>
-                            <td>
-                              <center>
-                                <button class="btn btn-info btn-circle element-white mas" id="mas">
-                                  <i class="fas fa-plus"></i>
-                                </button>
-                              </center>
-                            </td>
-                            <td>UTA123456</td>
-                            <td>Equipo de Computo</td>
-                            <td>XPS 13</td>
-                            <td>Dell</td>
-                            <td>
-                                <center>
-                                    <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </center>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                              <center>
-                                <button class="btn btn-info btn-circle element-white mas" id="mas">
-                                  <i class="fas fa-plus"></i>
-                                </button>
-                              </center>
-                            </td>
-                            <td>UTA123456</td>
-                            <td>Equipo de Computo</td>
-                            <td>XPS 13</td>
-                            <td>Dell</td>
-                            <td>
-                                <center>
-                                    <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </center>
-                            </td>
-                        </tr>
+                      <tr>
+                        <td>
+                          <center>
+                            <button class="btn btn-info btn-circle element-white mas" id="mas">
+                              <i class="fas fa-plus"></i>
+                            </button>
+                          </center>
+                        </td>
+                        <td>UTA123456</td>
+                        <td>Equipo de Computo</td>
+                        <td>XPS 13</td>
+                        <td>Dell</td>
+                        <td>
+                          <center>
+                            <button class="btn btn-warning btn-circle element-white editar" id="editar">
+                              <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-danger btn-circle eliminar" id="eliminar">
+                              <i class="fas fa-trash"></i>
+                            </button>
+                          </center>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <center>
+                            <button class="btn btn-info btn-circle element-white mas" id="mas">
+                              <i class="fas fa-plus"></i>
+                            </button>
+                          </center>
+                        </td>
+                        <td>UTA123456</td>
+                        <td>Equipo de Computo</td>
+                        <td>XPS 13</td>
+                        <td>Dell</td>
+                        <td>
+                          <center>
+                            <button class="btn btn-warning btn-circle element-white editar" id="editar">
+                              <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-danger btn-circle eliminar" id="eliminar">
+                              <i class="fas fa-trash"></i>
+                            </button>
+                          </center>
+                        </td>
+                      </tr>
                     </tbody>
                     <tfoot>
-                        <tr>
-                            <th>Ver Más</th>
-                            <th>Codigo UTA</th>
-                            <th>Nombre</th>
-                            <th>Modelo</th>
-                            <th>Marca</th>
-                            <th>Acciones</th>
-                        </tr>
+                      <tr>
+                        <th>Ver Más</th>
+                        <th>Codigo UTA</th>
+                        <th>Nombre</th>
+                        <th>Modelo</th>
+                        <th>Marca</th>
+                        <th>Acciones</th>
+                      </tr>
                     </tfoot>
-                </table>
+                  </table>
+                </div>
+              </div>
             </div>
-        </div>
-    </div>
-</div>
+          </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-<script>
-    $(document).ready(function() {
-        var table = $('#dataTable').DataTable();
+          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+          <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+          <script>
+            $(document).ready(function () {
+              var table = $('#dataTable').DataTable();
 
-        // Add event listener for opening and closing details
-        $('#dataTable tbody').on('click', 'button.mas', function () {
-            var tr = $(this).closest('tr');
-            var row = table.row(tr);
-            var btn = $(this);
+              // Add event listener for opening and closing details
+              $('#dataTable tbody').on('click', 'button.mas', function () {
+                var tr = $(this).closest('tr');
+                var row = table.row(tr);
+                var btn = $(this);
 
-            if (row.child.isShown()) {
-                // This row is already open - close it
-                row.child.hide();
-                btn.find('i').removeClass('fa-minus').addClass('fa-plus');
-            } else {
-                // Open this row
-                row.child(format(row.data())).show();
-                btn.find('i').removeClass('fa-plus').addClass('fa-minus');
-            }
-        });
+                if (row.child.isShown()) {
+                  // This row is already open - close it
+                  row.child.hide();
+                  btn.find('i').removeClass('fa-minus').addClass('fa-plus');
+                } else {
+                  // Open this row
+                  row.child(format(row.data())).show();
+                  btn.find('i').removeClass('fa-plus').addClass('fa-minus');
+                }
+              });
 
-        function format(rowData) {
-        // Function to return the details row HTML
-        // Use the appropriate indices from the original data for the additional info
-        var componentsTable = `
+              function format(rowData) {
+                // Function to return the details row HTML
+                // Use the appropriate indices from the original data for the additional info
+                var componentsTable = `
             <table class="table">
               <thead>
                 <tr>
@@ -465,7 +468,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             </table>
         `;
 
-        return `
+                return `
             <div class="additional-info">
                 <div class="row info-assets">
                   <div class="col-md-3"><strong>Serie:</strong>SN12345</div>
@@ -483,32 +486,32 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 ${componentsTable}
             </div>
         `;
-    }
+              }
 
-    // Event listener for adding components
-    $('#dataTable tbody').on('click', '.btn-add-component', function () {
-        $('#modalCrudAgregarComponente').modal('show');
-    });
+              // Event listener for adding components
+              $('#dataTable tbody').on('click', '.btn-add-component', function () {
+                $('#modalCrudAgregarComponente').modal('show');
+              });
 
-    // Form submission handler for adding components
-    $('#agregarComponenteForm').on('submit', function(event) {
-        event.preventDefault();
-        $('#modalCrudAgregarComponente').modal('hide');
-        alert('Componente agregado exitosamente.');
-    });
+              // Form submission handler for adding components
+              $('#agregarComponenteForm').on('submit', function (event) {
+                event.preventDefault();
+                $('#modalCrudAgregarComponente').modal('hide');
+                alert('Componente agregado exitosamente.');
+              });
 
-    $("#eliminarComponente").click(function(){
-        $("#modalCrudEliminarComponente").modal('show');
-    });
+              $("#eliminarComponente").click(function () {
+                $("#modalCrudEliminarComponente").modal('show');
+              });
 
-    $("#editarComponente").click(function(){
-        $("#modalCrudEditarComponente").modal('show');
-    });
+              $("#editarComponente").click(function () {
+                $("#modalCrudEditarComponente").modal('show');
+              });
 
-});
-</script>
+            });
+          </script>
 
-          
+
           <!-- /.container-fluid -->
 
         </div>
@@ -528,143 +531,155 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
   </div>
   <!-- container-scroller -->
 
-<!-- Create Modal for Adding Components -->
-<div class="modal fade modal-crud" id="modalCrudAgregarComponente" tabindex="-1" role="dialog"
-  aria-labelledby="modal-add-component-label" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-primary">
-        <h3 class="modal-title text-white" id="modal-add-component-label">Agregar Componente</h3>
-        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-          <i class="fas fa-times" class="element-white"></i>
-        </button>
-      </div>
-      <form class="forms-sample" id="agregarComponenteForm" method="post">
-        <div class="modal-body">
-          <div class="grid-margin-modal">
-            <div class="card-body">
-              <p class="card-description">Por favor, complete los siguientes campos para agregar un nuevo componente:</p>
-              <div class="form-row">
-                <div class="form-group col-md-12">
-                  <label for="nombreComponente" class="text-bold">Nombre</label>
-                  <input type="text" class="form-control" name="nombreComponente" id="nombreComponente" placeholder="Nombre" required>
+  <!-- Create Modal for Adding Components -->
+  <div class="modal fade modal-crud" id="modalCrudAgregarComponente" tabindex="-1" role="dialog"
+    aria-labelledby="modal-add-component-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h3 class="modal-title text-white" id="modal-add-component-label">Agregar Componente</h3>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
+        </div>
+        <form class="forms-sample" id="agregarComponenteForm" method="post">
+          <div class="modal-body">
+            <div class="grid-margin-modal">
+              <div class="card-body">
+                <p class="card-description">Por favor, complete los siguientes campos para agregar un nuevo componente:
+                </p>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="nombreComponente" class="text-bold">Nombre</label>
+                    <input type="text" class="form-control" name="nombreComponente" id="nombreComponente"
+                      placeholder="Nombre" required>
+                  </div>
                 </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-12">
-                  <label for="descripcionComponente" class="text-bold">Descripción</label>
-                  <input type="text" class="form-control" name="descripcionComponente" id="descripcionComponente" placeholder="Descripción" required>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="descripcionComponente" class="text-bold">Descripción</label>
+                    <input type="text" class="form-control" name="descripcionComponente" id="descripcionComponente"
+                      placeholder="Descripción" required>
+                  </div>
                 </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="serieComponente" class="text-bold">Serie</label>
-                  <input type="text" class="form-control" name="serieComponente" id="serieComponente" placeholder="Serie" required>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="serieComponente" class="text-bold">Serie</label>
+                    <input type="text" class="form-control" name="serieComponente" id="serieComponente"
+                      placeholder="Serie" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="codigoAdicionalComponente" class="text-bold">Código Adicional UTA</label>
+                    <input type="text" class="form-control" name="codigoAdicionalComponente"
+                      id="codigoAdicionalComponente" placeholder="Código Adicional UTA" required>
+                  </div>
                 </div>
-                <div class="form-group col-md-6">
-                  <label for="codigoAdicionalComponente" class="text-bold">Código Adicional UTA</label>
-                  <input type="text" class="form-control" name="codigoAdicionalComponente" id="codigoAdicionalComponente" placeholder="Código Adicional UTA" required>
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="repotenciadoComponente" class="text-bold">Repotenciado</label>
-                  <select class="form-control" id="repotenciadoComponente" name="repotenciadoComponente" required>
-                    <option value="">Seleccione</option>
-                    <option value="si">Sí</option>
-                    <option value="no">No</option>
-                  </select>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="activoComponente" class="text-bold">Activo</label>
-                  <select class="form-control" id="activoComponente" name="activoComponente" required>
-                    <option value="si">Sí</option>
-                    <option value="no">No</option>
-                  </select>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="repotenciadoComponente" class="text-bold">Repotenciado</label>
+                    <select class="form-control" id="repotenciadoComponente" name="repotenciadoComponente" required>
+                      <option value="">Seleccione</option>
+                      <option value="si">Sí</option>
+                      <option value="no">No</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="activoComponente" class="text-bold">Activo</label>
+                    <select class="form-control" id="activoComponente" name="activoComponente" required>
+                      <option value="si">Sí</option>
+                      <option value="no">No</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal" aria-label="Close" value="Cancelar">
-          <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Componente ">
-        </div>
-      </form>
+          <div class="modal-footer">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
+              aria-label="Close" value="Cancelar">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Componente ">
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Create Modal for Adding Components -->
-<div class="modal fade modal-crud" id="modalEditarComponente" tabindex="-1" role="dialog"
-  aria-labelledby="modal-edit-component-label" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-primary">
-        <h3 class="modal-title text-white" id="modal-edit-component-label">Editar Componente</h3>
-        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-          <i class="fas fa-times" class="element-white"></i>
-        </button>
-      </div>
-      <form class="forms-sample" id="agregarComponenteForm" method="post">
-        <div class="modal-body">
-          <div class="grid-margin-modal">
-            <div class="card-body">
-              <p class="card-description">Por favor, complete los siguientes campos para editar un nuevo componente:</p>
-              <div class="form-row">
-                <div class="form-group col-md-12">
-                  <label for="nombreComponente" class="text-bold">Nombre</label>
-                  <input type="text" class="form-control" name="nombreComponente" id="nombreComponente" placeholder="Nombre" required>
+  <!-- Create Modal for Adding Components -->
+  <div class="modal fade modal-crud" id="modalEditarComponente" tabindex="-1" role="dialog"
+    aria-labelledby="modal-edit-component-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h3 class="modal-title text-white" id="modal-edit-component-label">Editar Componente</h3>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
+        </div>
+        <form class="forms-sample" id="agregarComponenteForm" method="post">
+          <div class="modal-body">
+            <div class="grid-margin-modal">
+              <div class="card-body">
+                <p class="card-description">Por favor, complete los siguientes campos para editar un nuevo componente:
+                </p>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="nombreComponente" class="text-bold">Nombre</label>
+                    <input type="text" class="form-control" name="nombreComponente" id="nombreComponente"
+                      placeholder="Nombre" required>
+                  </div>
                 </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-12">
-                  <label for="descripcionComponente" class="text-bold">Descripción</label>
-                  <input type="text" class="form-control" name="descripcionComponente" id="descripcionComponente" placeholder="Descripción" required>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="descripcionComponente" class="text-bold">Descripción</label>
+                    <input type="text" class="form-control" name="descripcionComponente" id="descripcionComponente"
+                      placeholder="Descripción" required>
+                  </div>
                 </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="serieComponente" class="text-bold">Serie</label>
-                  <input type="text" class="form-control" name="serieComponente" id="serieComponente" placeholder="Serie" required>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="serieComponente" class="text-bold">Serie</label>
+                    <input type="text" class="form-control" name="serieComponente" id="serieComponente"
+                      placeholder="Serie" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="codigoAdicionalComponente" class="text-bold">Código Adicional UTA</label>
+                    <input type="text" class="form-control" name="codigoAdicionalComponente"
+                      id="codigoAdicionalComponente" placeholder="Código Adicional UTA" required>
+                  </div>
                 </div>
-                <div class="form-group col-md-6">
-                  <label for="codigoAdicionalComponente" class="text-bold">Código Adicional UTA</label>
-                  <input type="text" class="form-control" name="codigoAdicionalComponente" id="codigoAdicionalComponente" placeholder="Código Adicional UTA" required>
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="repotenciadoComponente" class="text-bold">Repotenciado</label>
-                  <select class="form-control" id="repotenciadoComponente" name="repotenciadoComponente" required>
-                    <option value="">Seleccione</option>
-                    <option value="si">Sí</option>
-                    <option value="no">No</option>
-                  </select>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="activoComponente" class="text-bold">Activo</label>
-                  <select class="form-control" id="activoComponente" name="activoComponente" required>
-                    <option value="si">Sí</option>
-                    <option value="no">No</option>
-                  </select>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="repotenciadoComponente" class="text-bold">Repotenciado</label>
+                    <select class="form-control" id="repotenciadoComponente" name="repotenciadoComponente" required>
+                      <option value="">Seleccione</option>
+                      <option value="si">Sí</option>
+                      <option value="no">No</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="activoComponente" class="text-bold">Activo</label>
+                    <select class="form-control" id="activoComponente" name="activoComponente" required>
+                      <option value="si">Sí</option>
+                      <option value="no">No</option>
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal" aria-label="Close" value="Cancelar">
-          <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Componente ">
-        </div>
-      </form>
+          <div class="modal-footer">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
+              aria-label="Close" value="Cancelar">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Componente ">
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Delete Modal-->
-<div class="modal fade modal-crud" id="modalCrudEliminarComponente" tabindex="-1" role="dialog" aria-labelledby="modal-delete-component-label"
-    aria-hidden="true">
+  <!-- Delete Modal-->
+  <div class="modal fade modal-crud" id="modalCrudEliminarComponente" tabindex="-1" role="dialog"
+    aria-labelledby="modal-delete-component-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
@@ -738,64 +753,68 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         <form class="forms-sample" id="agregarMarcaForm" method="post">
           <div class="modal-body">
             <div class="grid-margin-modal">
-                <div class="card-body">
-                    <p class="card-description">Por favor, complete los siguientes campos para agregar un nuevo bien al
-                    sistema:</p>
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
-                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Código UTA" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="nombreC" class="text-bold">Nombre</label>
-                            <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="codigoUTAC" class="text-bold">Serie</label>
-                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Serie" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="facultad" class="text-bold">Marca</label>
-                            <select class="form-control" id="facultad" required>
-                                <option value="">Seleccione una Marca</option>
-                                <option value="HP">HP</option>
-                                <option value="Dell">DELL</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="codigoUTAC" class="text-bold">Modelo</label>
-                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Modelo" required>
-                        </div> 
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="facultad" class="text-bold">Facultad</label>
-                            <select class="form-control" id="facultad" required>
-                                <option value="">Seleccione una Facultad</option>
-                                <option value="FISEI">Facultad de Ingenieria en Sistemas, Electronica e Industrial</option>
-                                <option value="FDA">Facultad de Diseño y Arquitectura</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="ubicación" class="text-bold">Ubicación</label>
-                            <select class="form-control" id="ubicación" required>
-                                <option value="">Seleccione una Ubicación</option>
-                                <option value="Aula01">Aula 01</option>
-                                <option value="Aula02">Aula 02</option>
-                            </select>
-                        </div>
-                    </div>
+              <div class="card-body">
+                <p class="card-description">Por favor, complete los siguientes campos para agregar un nuevo bien al
+                  sistema:</p>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
+                    <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Código UTA"
+                      required>
+                  </div>
                 </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="nombreC" class="text-bold">Nombre</label>
+                    <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="codigoUTAC" class="text-bold">Serie</label>
+                    <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Serie"
+                      required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="facultad" class="text-bold">Marca</label>
+                    <select class="form-control" id="facultad" required>
+                      <option value="">Seleccione una Marca</option>
+                      <option value="HP">HP</option>
+                      <option value="Dell">DELL</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="codigoUTAC" class="text-bold">Modelo</label>
+                    <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Modelo"
+                      required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="facultad" class="text-bold">Facultad</label>
+                    <select class="form-control" id="facultad" required>
+                      <option value="">Seleccione una Facultad</option>
+                      <option value="FISEI">Facultad de Ingenieria en Sistemas, Electronica e Industrial</option>
+                      <option value="FDA">Facultad de Diseño y Arquitectura</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="ubicación" class="text-bold">Ubicación</label>
+                    <select class="form-control" id="ubicación" required>
+                      <option value="">Seleccione una Ubicación</option>
+                      <option value="Aula01">Aula 01</option>
+                      <option value="Aula02">Aula 02</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="modal-footer">
             <input type="button" class="btn-crud btn-secondary text-white text-bold " data-bs-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
-            <input type="submit" class="btn-crud btn-primary text-bold agregarBien" value=" Agregar Bien "  id="agregarBien">
+            <input type="submit" class="btn-crud btn-primary text-bold agregarBien" value=" Agregar Bien "
+              id="agregarBien">
           </div>
         </form>
       </div>
@@ -848,34 +867,34 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        
-          <div class="modal-body">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-6 text-center">
-                  <img src="../../resources/images/logos/OIP.jpg" alt="Código QR" class="img-fluid">     
-                </div>
-                <div class="col-md-6">
-                  <ul>
-                    <li><strong>Código UTA:</strong> UTA123456</li>
-                    <li><strong>Nombre:</strong> Equipo de Computo</li>
-                    <li><strong>Modelo:</strong> XPS 13</li>
-                    <li><strong>Marca:</strong> Dell</li>
-                    <li><strong>Custodio:</strong> Juan Perez</li>
-                    <li><strong>Ubicación:</strong> Oficina-01</li>
-                  </ul>
-                </div>
+
+        <div class="modal-body">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6 text-center">
+                <img src="../../resources/images/logos/OIP.jpg" alt="Código QR" class="img-fluid">
+              </div>
+              <div class="col-md-6">
+                <ul>
+                  <li><strong>Código UTA:</strong> UTA123456</li>
+                  <li><strong>Nombre:</strong> Equipo de Computo</li>
+                  <li><strong>Modelo:</strong> XPS 13</li>
+                  <li><strong>Marca:</strong> Dell</li>
+                  <li><strong>Custodio:</strong> Juan Perez</li>
+                  <li><strong>Ubicación:</strong> Oficina-01</li>
+                </ul>
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
-              aria-label="Close" value="Cerrar Modal" id="cancelButton"> 
-            <button class="btn-crud btn-primary text-bold">
-              <i class="fas fa-download"></i> Descargar QR
-            </button>
-          </div>
+        <div class="modal-footer">
+          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+            aria-label="Close" value="Cerrar Modal" id="cancelButton">
+          <button class="btn-crud btn-primary text-bold">
+            <i class="fas fa-download"></i> Descargar QR
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -891,34 +910,34 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        
-          <div class="modal-body">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-6 text-center">
-                  <img src="../../resources/images/logos/OIP.jpg" alt="Código QR" class="img-fluid">     
-                </div>
-                <div class="col-md-6">
-                  <ul>
-                    <li><strong>Código UTA:</strong> UTA123456</li>
-                    <li><strong>Nombre:</strong> Equipo de Computo</li>
-                    <li><strong>Modelo:</strong> XPS 13</li>
-                    <li><strong>Marca:</strong> Dell</li>
-                    <li><strong>Custodio:</strong> Juan Perez</li>
-                    <li><strong>Ubicación:</strong> Oficina-01</li>
-                  </ul>
-                </div>
+
+        <div class="modal-body">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6 text-center">
+                <img src="../../resources/images/logos/OIP.jpg" alt="Código QR" class="img-fluid">
+              </div>
+              <div class="col-md-6">
+                <ul>
+                  <li><strong>Código UTA:</strong> UTA123456</li>
+                  <li><strong>Nombre:</strong> Equipo de Computo</li>
+                  <li><strong>Modelo:</strong> XPS 13</li>
+                  <li><strong>Marca:</strong> Dell</li>
+                  <li><strong>Custodio:</strong> Juan Perez</li>
+                  <li><strong>Ubicación:</strong> Oficina-01</li>
+                </ul>
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
-              aria-label="Close" value="Cerrar Modal" id="cancelButton"> 
-            <button class="btn-crud btn-primary text-bold">
-              <i class="fas fa-download"></i> Descargar QR
-            </button>
-          </div>
+        <div class="modal-footer">
+          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+            aria-label="Close" value="Cerrar Modal" id="cancelButton">
+          <button class="btn-crud btn-primary text-bold">
+            <i class="fas fa-download"></i> Descargar QR
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -938,57 +957,61 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         <form class="forms-sample" id="editarMarcaForm">
           <div class="modal-body">
             <div class="grid-margin-modal">
-                <div class="card-body">
-                    <p class="card-description">Por favor, complete los siguientes campos para editar la información del bien seleccionado:</p>
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
-                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Código UTA" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="nombreC" class="text-bold">Nombre</label>
-                            <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="codigoUTAC" class="text-bold">Serie</label>
-                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Serie" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="facultad" class="text-bold">Marca</label>
-                            <select class="form-control" id="facultad" required>
-                                <option value="">Seleccione una Marca</option>
-                                <option value="HP">HP</option>
-                                <option value="Dell">DELL</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="codigoUTAC" class="text-bold">Modelo</label>
-                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Modelo" required>
-                        </div> 
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="facultad" class="text-bold">Facultad</label>
-                            <select class="form-control" id="facultad" required>
-                                <option value="">Seleccione una Facultad</option>
-                                <option value="FISEI">Facultad de Ingenieria en Sistemas, Electronica e Industrial</option>
-                                <option value="FDA">Facultad de Diseño y Arquitectura</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="ubicación" class="text-bold">Ubicación</label>
-                            <select class="form-control" id="ubicación" required>
-                                <option value="">Seleccione una Ubicación</option>
-                                <option value="Aula01">Aula 01</option>
-                                <option value="Aula02">Aula 02</option>
-                            </select>
-                        </div>
-                    </div>
+              <div class="card-body">
+                <p class="card-description">Por favor, complete los siguientes campos para editar la información del
+                  bien seleccionado:</p>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
+                    <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Código UTA"
+                      required>
+                  </div>
                 </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="nombreC" class="text-bold">Nombre</label>
+                    <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="codigoUTAC" class="text-bold">Serie</label>
+                    <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Serie"
+                      required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="facultad" class="text-bold">Marca</label>
+                    <select class="form-control" id="facultad" required>
+                      <option value="">Seleccione una Marca</option>
+                      <option value="HP">HP</option>
+                      <option value="Dell">DELL</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="codigoUTAC" class="text-bold">Modelo</label>
+                    <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Modelo"
+                      required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="facultad" class="text-bold">Facultad</label>
+                    <select class="form-control" id="facultad" required>
+                      <option value="">Seleccione una Facultad</option>
+                      <option value="FISEI">Facultad de Ingenieria en Sistemas, Electronica e Industrial</option>
+                      <option value="FDA">Facultad de Diseño y Arquitectura</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="ubicación" class="text-bold">Ubicación</label>
+                    <select class="form-control" id="ubicación" required>
+                      <option value="">Seleccione una Ubicación</option>
+                      <option value="Aula01">Aula 01</option>
+                      <option value="Aula02">Aula 02</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="modal-footer">
