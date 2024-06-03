@@ -67,22 +67,22 @@ Class Obtener{
         }
     }
     
-        public static function ObtenerById($id){
-            try {
-                $conectar = Conexion::getInstance()->getConexion();
-                $select = "SELECT * FROM usuarios WHERE id = :id";
-                $resultado = $conectar->prepare($select);
-                $resultado->bindParam(':id', $id, PDO::PARAM_INT);
-                $resultado->execute();
-                $data = $resultado->fetch(PDO::FETCH_ASSOC);
-                echo json_encode(['success' => true, 'data' => $data]);
-            } catch (PDOException $e) {
-                echo json_encode(['success' => false, 'message' => $e->getMessage()]);
-            }
+    public static function ObtenerById($id){
+        try {
+            $conectar = Conexion::getInstance()->getConexion();
+            $select = "SELECT * FROM usuarios WHERE id = :id";
+            $resultado = $conectar->prepare($select);
+            $resultado->bindParam(':id', $id, PDO::PARAM_INT);
+            $resultado->execute();
+            $data = $resultado->fetch(PDO::FETCH_ASSOC);
+            echo json_encode(['success' => true, 'data' => $data]);
+        } catch (PDOException $e) {
+            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
         }
     }
-    Class Guardar{
-        public static function GuardarUsuario()
+}
+Class Guardar{
+    public static function GuardarUsuario()
     {
         try {
             $json = file_get_contents('php://input');
@@ -106,110 +106,110 @@ Class Obtener{
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
         }
     }
-    }
-    class Actualizar{
-        public static function ActualizarUsuario($id){
-            try {
-                $json = file_get_contents('php://input');
-                $data = json_decode($json, true);
-                if ($data !== null) {
-                    $email=$data["email"];
-                    $conectar = Conexion::getInstance()->getConexion();
-                    $updatesql = "UPDATE usuarios SET email = :email, rol = :rol WHERE id = :id";
-                    $resultado = $conectar->prepare($updatesql);
-                    $resultado->bindParam(':email', $data["email"], PDO::PARAM_STR);
-                    $resultado->bindParam(':rol', $data["rol"], PDO::PARAM_STR);
-                    $resultado->bindParam(':id', $id, PDO::PARAM_INT);
-                    $resultado->execute();
-                    Sesion::getInstance()->setSesion("email", $email);
-                    if ($_SESSION['id'] == $id) {
-                        $_SESSION['correo'] = $email;
-                    }
-                    
-                    echo json_encode(['success' => true]);
-                } else {
-                    echo json_encode(['success' => false, 'message' => 'Invalid input']);
-                }
-            } catch (PDOException $e) {
-                echo json_encode(['success' => false, 'message' => $e->getMessage()]);
-            }
-        }
-        public static function ActualizarContrasena($data){
-            try {
-                if ($data !== null) {
-                    $conectar = Conexion::getInstance()->getConexion();
-                    $updatesql = "UPDATE usuarios SET psswd = :psswd WHERE id = :id";
-                    $resultado = $conectar->prepare($updatesql);
-                    $resultado->bindParam(':psswd', $data["password"], PDO::PARAM_STR);
-                    $resultado->bindParam(':id', $data["id"], PDO::PARAM_INT);
-                    $resultado->execute();
-                    //$conectar->commit();
-                    echo json_encode(['success' => true]);
-                } else {
-                    echo json_encode(['success' => false, 'message' => 'Invalid input']);
-                }
-            } catch (PDOException $e) {
-                echo json_encode(['success' => false, 'message' => $e->getMessage()]);
-            }
-        }
-        public static function ActualizarPerfil($data){
-            try {
-                if ($data !== null) {
-                    $conectar = Conexion::getInstance()->getConexion();
-                    $nombre = htmlspecialchars($data["nombre"]);
-                    $apellido = htmlspecialchars($data["apellido"]);
-                    $cedula = htmlspecialchars($data["cedula"]);
-                    $email = htmlspecialchars($data["correo"]);
-                    $id = htmlspecialchars($data["id"]);
-                    $updatesql = "UPDATE usuarios  SET email= '$email',nombre= '$nombre',apellido= '$apellido',cedula= '$cedula' WHERE id='$id'";
-                    $resultado = $conectar->prepare($updatesql);
-                    $resultado->execute();
-                    Sesion::getInstance()->setSesion("email", $email);
-                    $_SESSION['nombre'] = $nombre;
-                    $_SESSION['apellido'] = $apellido;
-                    $_SESSION['cedula'] = $cedula;
-                    $_SESSION['correo'] = $email;
-                    //$conectar->commit();
-                    echo json_encode('Actualizado');
-                } else {
-                    echo json_encode(['success' => false, 'message' => 'Invalid input']);
-                }
-            } catch (PDOException $e) {
-                echo json_encode(['success' => false, 'message' => $e->getMessage()]);
-            }
-        }
-    }  
-
-    class Eliminar{
-        public static function BorrarUsuario($id)
-        {
-            try {
+}
+class Actualizar{
+    public static function ActualizarUsuario($id){
+        try {
+            $json = file_get_contents('php://input');
+            $data = json_decode($json, true);
+            if ($data !== null) {
+                $email=$data["email"];
                 $conectar = Conexion::getInstance()->getConexion();
-    
-                // Verificación si el usuario está siendo utilizado en aréa
-                $verif1 = $conectar->prepare("SELECT COUNT(*) FROM areas WHERE id_usu_encargado = :id");
-                $verif1->bindParam(':id', $id, PDO::PARAM_INT);
-                $verif1->execute();
-                $resultado1 = $verif1->fetchColumn();
-    
-                if ($resultado1 > 0 ) {
-                    echo json_encode(['success' => false, 'message' => 'No se puede eliminar, el usuario está siendo utilizado en otra(s) tablas(s)']);
-                } else {
-    
-                    $borrarSQL = "UPDATE usuarios SET activo = 'no' WHERE id = :id";
-                    $resultado = $conectar->prepare($borrarSQL);
-                    $resultado->bindParam(':id', $id, PDO::PARAM_INT);
-                    $resultado->execute();
-                    $rowCount = $resultado->rowCount();
-                    if ($rowCount > 0) {
-                        echo json_encode(['success' => true, 'message' => "Se eliminaron: $rowCount registros"]);
-                    } else {
-                        echo json_encode(['success' => false, 'message' => 'No records deleted']);
-                    }
+                $updatesql = "UPDATE usuarios SET email = :email, rol = :rol WHERE id = :id";
+                $resultado = $conectar->prepare($updatesql);
+                $resultado->bindParam(':email', $data["email"], PDO::PARAM_STR);
+                $resultado->bindParam(':rol', $data["rol"], PDO::PARAM_STR);
+                $resultado->bindParam(':id', $id, PDO::PARAM_INT);
+                $resultado->execute();
+                Sesion::getInstance()->setSesion("email", $email);
+                if ($_SESSION['id'] == $id) {
+                    $_SESSION['correo'] = $email;
                 }
-            } catch (PDOException $e) {
-                echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+                
+                echo json_encode(['success' => true]);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Invalid input']);
             }
+        } catch (PDOException $e) {
+            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
         }
     }
+    public static function ActualizarContrasena($data){
+        try {
+            if ($data !== null) {
+                $conectar = Conexion::getInstance()->getConexion();
+                $updatesql = "UPDATE usuarios SET psswd = :psswd WHERE id = :id";
+                $resultado = $conectar->prepare($updatesql);
+                $resultado->bindParam(':psswd', $data["password"], PDO::PARAM_STR);
+                $resultado->bindParam(':id', $data["id"], PDO::PARAM_INT);
+                $resultado->execute();
+                //$conectar->commit();
+                echo json_encode(['success' => true]);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Invalid input']);
+            }
+        } catch (PDOException $e) {
+            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+    public static function ActualizarPerfil($data){
+        try {
+            if ($data !== null) {
+                $conectar = Conexion::getInstance()->getConexion();
+                $nombre = htmlspecialchars($data["nombre"]);
+                $apellido = htmlspecialchars($data["apellido"]);
+                $cedula = htmlspecialchars($data["cedula"]);
+                $email = htmlspecialchars($data["correo"]);
+                $id = htmlspecialchars($data["id"]);
+                $updatesql = "UPDATE usuarios  SET email= '$email',nombre= '$nombre',apellido= '$apellido',cedula= '$cedula' WHERE id='$id'";
+                $resultado = $conectar->prepare($updatesql);
+                $resultado->execute();
+                Sesion::getInstance()->setSesion("email", $email);
+                $_SESSION['nombre'] = $nombre;
+                $_SESSION['apellido'] = $apellido;
+                $_SESSION['cedula'] = $cedula;
+                $_SESSION['correo'] = $email;
+                //$conectar->commit();
+                echo json_encode('Actualizado');
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Invalid input']);
+            }
+        } catch (PDOException $e) {
+            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+}  
+
+class Eliminar{
+    public static function BorrarUsuario($id)
+    {
+        try {
+            $conectar = Conexion::getInstance()->getConexion();
+
+            // Verificación si el usuario está siendo utilizado en aréa
+            $verif1 = $conectar->prepare("SELECT COUNT(*) FROM areas WHERE id_usu_encargado = :id");
+            $verif1->bindParam(':id', $id, PDO::PARAM_INT);
+            $verif1->execute();
+            $resultado1 = $verif1->fetchColumn();
+
+            if ($resultado1 > 0 ) {
+                echo json_encode(['success' => false, 'message' => 'No se puede eliminar, el usuario está siendo utilizado en otra(s) tablas(s)']);
+            } else {
+
+                $borrarSQL = "UPDATE usuarios SET activo = 'no' WHERE id = :id";
+                $resultado = $conectar->prepare($borrarSQL);
+                $resultado->bindParam(':id', $id, PDO::PARAM_INT);
+                $resultado->execute();
+                $rowCount = $resultado->rowCount();
+                if ($rowCount > 0) {
+                    echo json_encode(['success' => true, 'message' => "Se eliminaron: $rowCount registros"]);
+                } else {
+                    echo json_encode(['success' => false, 'message' => 'No records deleted']);
+                }
+            }
+        } catch (PDOException $e) {
+            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        }
+    }
+}
 ?>
