@@ -457,7 +457,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="agregarMarcaForm" method="post">
+        <form class="forms-sample" id="repBInformaticos" method="post">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -465,7 +465,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="areaC" class="text-bold">Área</label>
-                    <select class="form-control" name="areaC" id="areaC" required>
+                    <select class="form-control" name="areaI" id="areaC" required>
                       <option value="">Seleccione un Área</option>
                       <option value="tecnologico">Tecnológico</option>
                       <option value="mobiliario">Mobiliario</option>
@@ -473,7 +473,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   </div>
                     <div class="form-group col-md-6">
                         <label for="areaC" class="text-bold">Marca</label>
-                        <select class="form-control" name="areaC" id="areaC" required>
+                        <select class="form-control" name="areaI" id="areaC" required>
                         <option value="">Seleccione una marca</option>
                         <option value="*">Todos</option>
                           <?php
@@ -486,21 +486,21 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="fechaInicial" class="text-bold">Fecha Inicial</label>
-                        <input type="date" class="form-control" name="fechaInicial" id="fechaInicial" placeholder="Selecciona una fecha" required>
+                        <label for="fechaInicialI" class="text-bold">Fecha Inicial</label>
+                        <input type="date" class="form-control" name="fechaInicialI" id="fechaInicialI" placeholder="Selecciona una fecha" required>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="fechaFinal" class="text-bold">Fecha Final</label>
-                        <input type="date" class="form-control" name="fechaFinal" id="fechaFinal" placeholder="Selecciona una fecha" required>
+                        <label for="fechaFinalI" class="text-bold">Fecha Final</label>
+                        <input type="date" class="form-control" name="fechaFinalI" id="fechaFinalI" placeholder="Selecciona una fecha" required>
                     </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-12">
-                    <label for="areaC" class="text-bold">Tipo Archivo</label>
-                    <select class="form-control" name="areaC" id="areaC" required>
+                    <label for="tipoI" class="text-bold">Tipo Archivo</label>
+                    <select class="form-control" name="tipoI" id="tipoI" required>
                       <option value="">Seleccione un Tipo</option>
-                      <option value="pdf">PDF</option>
-                      <option value="excel">Excel</option>
+                      <option value="pdfI">PDF</option>
+                      <option value="excelI">Excel</option>
                     </select>
                   </div>
                 </div>
@@ -529,19 +529,22 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="agregarMarcaForm" method="post">
+        <form class="forms-sample" id="repBMobiliarios" method="post">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
                 <p class="card-description">Por favor, seleccione los siguientes filtros para generar un reporte:</p>
                 <div class="form-row">
                   <div class="form-group col-md-12">
-                    <label for="areaC" class="text-bold">Custodio</label>
-                    <select class="form-control" name="areaC" id="areaC" required>
+                    <label for="custodioM" class="text-bold">Custodio</label>
+                    <select class="form-control" name="custodioM" id="custodioM" required>
                       <option value="">Seleccione un Custodio</option>
                       <option value="*">Todos</option>
-                      <option value="tecnologico">Esteban Cifuentes</option>
-                      <option value="mobiliario">Estefania Mora</option>
+                      <?php
+                          include_once ("../../Acciones/crudMarcas.php");
+                          $users = Obtener::ObtenerCustodios();
+                          echo ($users['dato']);
+                      ?>
                     </select>
                   </div>
                 </div>
