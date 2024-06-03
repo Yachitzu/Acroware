@@ -582,6 +582,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       const eliminarModal = new bootstrap.Modal(document.getElementById('modalCrudEliminar'));
 
       let repotenciacionAEliminarId = null;
+      let componenteId = null;
       let repotenciacionAEditarId = null;
 
       $('#dataTable').DataTable({
@@ -622,10 +623,10 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             "render": function (data, type, row) {
               return `
                           <center>          
-                              <button class="btn btn-warning btn-circle element-white editar" id="editar" onclick="showEditarModal(${row.id})">
+                              <button class="btn btn-warning btn-circle element-white editar" id="editar" onclick="showEditarModal(${row.id},${row.id_componente})">
                                   <i class="fas fa-edit"></i>
                               </button>
-                              <button class="btn btn-danger btn-circle eliminar" id="eliminar" onclick="showEliminarModal(${row.id})">
+                              <button class="btn btn-danger btn-circle eliminar" id="eliminar" onclick="showEliminarModal(${row.id},${row.id_componente})">
                                   <i class="fas fa-trash"></i>
                               </button>
                           </center>
@@ -680,6 +681,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
               "serie": repotenciacion.serie,
               "detalle_repotenciacion": repotenciacion.detalle_repotenciacion,
               "fecha_repotenciacion": repotenciacion.fecha_repotenciacion,
+              "id_componente": repotenciacion.id_componente,
               "id": repotenciacion.id
 
 
@@ -770,13 +772,14 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         event.preventDefault();
         try {
           const id = repotenciacionAEliminarId;
+          const componente = componenteId;
 
           if (!id) {
             console.error('ID de repotenciacion a eliminar no está definido.');
             return;
           }
 
-          const response = await fetch(`${apiBaseUrl}?id=${id}`, {
+          const response = await fetch(`${apiBaseUrl}?id=${id}&componente=${componente}`, {
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json'
@@ -801,7 +804,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         }
       });
 
-      window.showEditarModal = async function (id) {
+      window.showEditarModal = async function (id,id_componente) {
         try {
           const response = await fetch(apiBaseUrl + `?id=${id}`);
           if (!response.ok) {
@@ -816,13 +819,13 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           document.getElementById('nombreE').value = repotenciacion.nombre;
           document.getElementById('serieE').value = repotenciacion.serie;
           document.getElementById('detalleE').value = repotenciacion.detalle_repotenciacion;
-          const selectedComponente = repotenciacion.componente;
+          const selectedComponente = id_componente;
           const componenteEInput = document.getElementById('ComponentesBoxE');
 
           // Iteramos sobre cada opción en el campo de selección
           for (let i = 0; i < componenteEInput.options.length; i++) {
             // Si el valor de la opción coincide con el valor seleccionado previamente
-            if (componenteEInput.options[i].text === selectedComponente) {
+            if (componenteEInput.options[i].value === selectedComponente) {
               // Marcamos esta opción como seleccionada
               componenteEInput.options[i].selected = true;
               // Salimos del bucle ya que hemos encontrado la opción correcta
@@ -838,10 +841,11 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       };
 
 
-      window.showEliminarModal = function (id) {
+      window.showEliminarModal = function (id,id_componente) {
         repotenciacionAEliminarId = id;
+        componenteId = id_componente;
         eliminarModal.show()
-        console.log('Mostrar modal de eliminación para el ID:', id);
+        console.log('Mostrar modal de eliminación para el ID:', id,' y ',id_componente);
       };
 
       fetchRepotenciaciones();

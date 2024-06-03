@@ -15,7 +15,7 @@ class Obtener{
             $orderDir = isset($_GET['order'][0]['dir']) ? $_GET['order'][0]['dir'] : 'asc';
 
             // Construir la consulta SQL con búsqueda y ordenamiento
-            $query = "SELECT repotenciaciones.*, componentes.nombre AS componente FROM repotenciaciones LEFT JOIN componentes ON repotenciaciones.id_componente = componentes.id WHERE repotenciaciones.activo = 'si'";
+            $query = "SELECT repotenciaciones.*, componentes.nombre AS componente,componentes.id AS id_componente FROM repotenciaciones LEFT JOIN componentes ON repotenciaciones.id_componente = componentes.id WHERE repotenciaciones.activo = 'si'";
 
             if (!empty($search)) {
                 $query .= " AND (repotenciaciones.nombre LIKE '%$search%' OR repotenciaciones.serie LIKE '%$search%' OR repotenciaciones.codigo_adi_uta LIKE '%$search%' OR repotenciaciones.detalle_repotenciacion LIKE '%$search%' OR repotenciaciones.fecha_repotenciacion LIKE '%$search%' OR componentes.nombre LIKE '%$search%')";
