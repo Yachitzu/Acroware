@@ -21,6 +21,15 @@ if (isset($_SESSION['email'])) {
         }
     }
 }
+
+$error = '';
+if (isset($_GET['error'])) {
+    if ($_GET['error'] == 'email') {
+        $error = 'Correo electrónico no encontrado.';
+    } elseif ($_GET['error'] == 'contrasena') {
+        $error = 'Contraseña incorrecta.';
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,10 +86,15 @@ if (isset($_SESSION['email'])) {
                                                 title="La contraseña debe tener entre 8 y 20 caracteres, al menos una letra mayúscula y un número. No se permiten caracteres especiales."
                                                 oninput="validatePassword(this)" required>
                                         </div>
-                                        <div class="form-group wow fadeIn">
-
+                                        
+                                        <div class="form-group wow fadeIn text-center">
+                                        <?php if ($error): ?>
+                                            <div id="error-message" style="color: red;">
+                                                <?= htmlspecialchars($error) ?>
+                                            </div>
+                                        <?php endif; ?>
                                         </div>
-                                        <button type="submit"
+                                        <button type="submit" 
                                             class="btn btn-primary btn-user btn-block font-weight-semi-bold text-white">
                                             Iniciar Sesión
                                         </button>
