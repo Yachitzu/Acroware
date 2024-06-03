@@ -438,14 +438,20 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                             <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre" required>
                         </div>
                         <div class="form-group col-md-6">
+                    <label for="codigoUTAC" class="text-bold">Serie</label>
+                    <input type="text" class="form-control" name="serieA" id="serieA" placeholder="Serie" required>
+                  </div>
+
+                        <div class="form-group col-md-6">
                             <label for="codigoUTAC" class="text-bold">Modelo</label>
                             <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Modelo" required>
                         </div>
+
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="facultad" class="text-bold">Marca</label>
-                            <select class="form-control" id="facultad" required>
+                            <select class="form-control" id="marcaA" required>
                                 <option value="">Seleccione una Marca</option>
                                 <option value="HP">HP</option>
                                 <option value="Dell">DELL</option>
