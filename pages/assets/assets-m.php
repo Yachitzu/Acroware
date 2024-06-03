@@ -308,60 +308,44 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Codigo UTA</th>
+                            <th>Código UTA</th>
                             <th>Nombre</th>
-                            <th>Modelo</th>
+                            <th>Serie</th>
                             <th>Marca</th>
+                            <th>Modelo</th>
                             <th>Color</th>
                             <th>Material</th>
                             <th>Dimensiones</th>
                             <th>Condición</th>
                             <th>Custodio</th>
-                            <th>Ubicación</th>
                             <th>Fecha Ingreso</th>
+                            <th>Valor Contable</th>
+                            <th>Ubicación</th>
+                            <th>Ubicación</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody id="marcasTableBody">
-                        <tr>
-                            <td>1</td>
-                            <td>UTA123456</td>
-                            <td>Producto Ejemplo</td>
-                            <td>Modelo X</td>
-                            <td>Marca Y</td>
-                            <td>Rojo</td>
-                            <td>Plástico</td>
-                            <td>10x20x30 cm</td>
-                            <td>Nuevo</td>
-                            <td>Juan Pérez</td>
-                            <td>Almacén 1</td>
-                            <td>2024-05-22</td>
-                            <td>
-                                <center>
-                                    <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </center>
-                            </td>
-                        </tr>
+
+                    <tbody id="bienesTableBody">
                     </tbody>
+
                     <tfoot>
                         <tr>
                             <th>ID</th>
-                            <th>Codigo UTA</th>
+                            <th>Código UTA</th>
                             <th>Nombre</th>
-                            <th>Modelo</th>
+                            <th>Serie</th>
                             <th>Marca</th>
+                            <th>Modelo</th>
                             <th>Color</th>
                             <th>Material</th>
                             <th>Dimensiones</th>
                             <th>Condición</th>
                             <th>Custodio</th>
-                            <th>Ubicación</th>
                             <th>Fecha Ingreso</th>
+                            <th>Valor Contable</th>
+                            <th>Ubicación</th>
+                            <th>Ubicación</th>
                             <th>Acciones</th>
                         </tr>
                     </tfoot>
@@ -374,7 +358,11 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             </div>
 
           </div>
+          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+          <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
           <!-- /.container-fluid -->
+
 
         </div>
         <!-- content-wrapper ends -->
@@ -419,7 +407,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       </div>
     </div>
   </div>
-
+<!-- BIENES MOBILIARIOS -->
   <!-- Create Modal-->
   <div class="modal fade modal-crud" id="modalCrudAgregar" tabindex="-1" role="dialog"
     aria-labelledby="modal-register-label" aria-hidden="true">
