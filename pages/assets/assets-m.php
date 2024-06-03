@@ -553,7 +553,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
   </div>
 
   <!-- Edit Modal-->
-  <div class="modal fade" id="modalCrud" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
+  <div class="modal fade" id="modalCrudEditar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
     aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -564,90 +564,105 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="editarMarcaForm">
+        <form class="forms-sample" id="formEditar">
           <div class="modal-body">
             <div class="grid-margin-modal">
-                <div class="card-body">
-                    <p class="card-description">Por favor, complete los siguientes campos para editar la información del bien seleccionado:</p>
-                  <div class="form-row">
-                        <div class="form-group col-md-12">
-                            <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
-                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Código UTA" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="nombreC" class="text-bold">Nombre</label>
-                            <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="codigoUTAC" class="text-bold">Modelo</label>
-                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Modelo" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="facultad" class="text-bold">Marca</label>
-                            <select class="form-control" id="facultad" required>
-                                <option value="">Seleccione una Marca</option>
-                                <option value="HP">HP</option>
-                                <option value="Dell">DELL</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="nombreC" class="text-bold">Color</label>
-                            <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Color"
-                            oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="nombreC" class="text-bold">Material</label>
-                            <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Material"
-                            oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="codigoUTAC" class="text-bold">Dimensiones</label>
-                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Dimensiones" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="ubicación" class="text-bold">Condición</label>
-                            <select class="form-control" id="ubicación" required>
-                                <option value="">Seleccione una condición</option>
-                                <option value="buen">Buen estado</option>
-                                <option value="mal">Mal Estado</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="ubicación" class="text-bold">Custodio</label>
-                            <select class="form-control" id="ubicación" required>
-                                <option value="">Seleccione un custodio</option>
-                                <option value="buen">Esteban Cifuentes</option>
-                                <option value="mal">Nik Frias</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="facultad" class="text-bold">Facultad</label>
-                            <select class="form-control" id="facultad" required>
-                                <option value="">Seleccione una Facultad</option>
-                                <option value="FISEI">Facultad de Ingenieria en Sistemas, Electronica e Industrial</option>
-                                <option value="FDA">Facultad de Diseño y Arquitectura</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="ubicación" class="text-bold">Ubicación</label>
-                            <select class="form-control" id="ubicación" required>
-                                <option value="">Seleccione una Ubicación</option>
-                                <option value="Aula01">Aula 01</option>
-                                <option value="Aula02">Aula 02</option>
-                            </select>
-                        </div>
-                    </div>
+              <div class="card-body">
+                <p class="card-description">Por favor, complete los siguientes campos para editar la información del
+                  bien seleccionado:</p>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
+                    <input type="text" class="form-control" name="codigoUTAE" id="codigoUTAE" placeholder="Código UTA"
+                      required>
+                  </div>
                 </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="nombreC" class="text-bold">Nombre</label>
+                    <input type="text" class="form-control" name="nombreE" id="nombreE" placeholder="Nombre" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="codigoUTAC" class="text-bold">Modelo</label>
+                    <input type="text" class="form-control" name="modeloE" id="modeloE" placeholder="Modelo" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="facultad" class="text-bold">Marca</label>
+                    <select class="form-control" id="marcaE" required>
+                      <?php
+                      include_once ("../../Acciones/crudBienes_Mobiliarios.php");
+                      $marcas = AccionesBienes_mobiliarios::listarMarcasInsertar();
+                      echo ($marcas['dato']);
+                      ?>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="nombreC" class="text-bold">Color</label>
+                    <input type="text" class="form-control" name="colorE" id="colorE" placeholder="Color"
+                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="nombreC" class="text-bold">Material</label>
+                    <input type="text" class="form-control" name="materialE" id="materialE" placeholder="Material"
+                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="codigoUTAC" class="text-bold">Dimensiones</label>
+                    <input type="text" class="form-control" name="dimensionesE" id="dimensionesE"
+                      placeholder="Dimensiones" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="ubicación" class="text-bold">Condición</label>
+                    <select class="form-control" id="condicionE" required>
+                      <option value="Buen estado">Buen estado</option>
+                      <option value="Mal Estado">Mal Estado</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="nombreC" class="text-bold">Custodio</label>
+                    <input type="text" class="form-control" name="custodioE" id="custodioE" placeholder="Custodio"
+                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="nombreC" class="text-bold">Serie</label>
+                    <input type="text" class="form-control" name="serieE" id="serieE" placeholder="Serie"
+                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="codigoUTAC" class="text-bold">Valor</label>
+                    <input type="number" class="form-control" name="valorE" id="valorE" placeholder="Valor" min="0"
+                      oninput="if(this.value < 1) this.value = 1;" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="facultad" class="text-bold">Areas</label>
+                    <select class="form-control" id="areaE" required>
+                      <?php
+                      $areas = AccionesBienes_mobiliarios::listarAreasInsertar();
+                      echo ($areas['dato']);
+                      ?>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="ubicación" class="text-bold">Ubicación</label>
+                    <select class="form-control" id="ubicacionE" required>
+                      <?php
+                      $ubicaciones = AccionesBienes_mobiliarios::listarUbicacionesInsertar();
+                      echo ($ubicaciones['dato']);
+                      ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="modal-footer">
@@ -659,6 +674,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       </div>
     </div>
   </div>
+
 
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>
