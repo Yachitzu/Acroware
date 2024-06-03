@@ -18,7 +18,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Gestión - Marca</title>
+  <title>Gestión - Usuarios</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="../../resources/vendors/feather/feather.css">
   <link rel="stylesheet" href="../../resources/vendors/ti-icons/css/themify-icons.css">
