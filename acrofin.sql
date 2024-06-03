@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-06-2024 a las 01:59:31
+-- Tiempo de generación: 03-06-2024 a las 03:47:22
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -81,7 +81,6 @@ CREATE TABLE `bienes_informaticos` (
   `id_ubi_per` int(11) DEFAULT NULL,
   `ip` varchar(20) DEFAULT NULL,
   `fecha_ingreso` date DEFAULT current_timestamp(),
-  `precio` float DEFAULT NULL,
   `activo` enum('si','no') NOT NULL DEFAULT 'si'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -94,12 +93,10 @@ CREATE TABLE `bienes_informaticos` (
 CREATE TABLE `bienes_mobiliarios` (
   `id` int(11) NOT NULL,
   `codigo_uta` varchar(30) DEFAULT NULL,
-  `bld_o_bca` varchar(3) DEFAULT NULL,
   `nombre` varchar(60) DEFAULT NULL,
   `serie` varchar(20) DEFAULT NULL,
   `id_marca` int(11) DEFAULT NULL,
   `modelo` varchar(50) DEFAULT NULL,
-  `marca` varchar(50) DEFAULT NULL,
   `color` varchar(30) DEFAULT NULL,
   `material` varchar(30) DEFAULT NULL,
   `dimensiones` varchar(70) DEFAULT NULL,
@@ -107,7 +104,6 @@ CREATE TABLE `bienes_mobiliarios` (
   `custodio_actual` varchar(250) DEFAULT NULL,
   `fecha_ingreso` date DEFAULT current_timestamp(),
   `valor_contable` float DEFAULT NULL,
-  `precio` float DEFAULT NULL,
   `id_area_per` int(11) DEFAULT NULL,
   `id_ubi_per` int(11) DEFAULT NULL,
   `activo` enum('si','no') NOT NULL DEFAULT 'si'
@@ -117,8 +113,8 @@ CREATE TABLE `bienes_mobiliarios` (
 -- Volcado de datos para la tabla `bienes_mobiliarios`
 --
 
-INSERT INTO `bienes_mobiliarios` (`id`, `codigo_uta`, `bld_o_bca`, `nombre`, `serie`, `id_marca`, `modelo`, `marca`, `color`, `material`, `dimensiones`, `condicion`, `custodio_actual`, `fecha_ingreso`, `valor_contable`, `precio`, `id_area_per`, `id_ubi_per`, `activo`) VALUES
-(1, 'PC01-1', 'bca', 'Escritorio', 'E001', 1, 'DES', 'DES', 'Negro', 'PVC', '15x15', 'Buen Estado', 'Christian', '2024-05-28', 15, 15, 1, 1, 'si');
+INSERT INTO `bienes_mobiliarios` (`id`, `codigo_uta`, `nombre`, `serie`, `id_marca`, `modelo`, `color`, `material`, `dimensiones`, `condicion`, `custodio_actual`, `fecha_ingreso`, `valor_contable`, `id_area_per`, `id_ubi_per`, `activo`) VALUES
+(1, 'PC01-1', 'Escritorio', 'E001', 1, 'DES', 'Negro', 'PVC', '15x15', 'Buen Estado', 'Christian', '2024-05-28', 15, 1, 1, 'si');
 
 -- --------------------------------------------------------
 
@@ -270,8 +266,7 @@ CREATE TABLE `software` (
   `tipo_licencia` varchar(50) DEFAULT NULL,
   `activado` varchar(2) DEFAULT NULL CHECK (`activado` in ('si','no')),
   `fecha_adqui` date DEFAULT current_timestamp(),
-  `fecha_activacion` date DEFAULT NULL,
-  `precio` float DEFAULT NULL
+  `fecha_activacion` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -425,7 +420,9 @@ ALTER TABLE `ubicaciones`
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_cedula` (`cedula`),
+  ADD UNIQUE KEY `unique_email` (`email`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
