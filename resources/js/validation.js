@@ -17,15 +17,15 @@ function validatePassword(input) {
 }
 
 function checkPasswordMatch() {
-    var password = document.getElementById("InputPassword").value;
-    var confirmPassword = document.getElementById("ConfirmPassword").value;
+    var password = document.getElementById("passwordC").value;
+    var confirmPassword = document.getElementById("conPasswordC").value;
     var errorDiv = document.getElementById("passwordMatchError");
 
     if (password !== confirmPassword) {
         errorDiv.style.display = "block";
-        document.getElementById("ConfirmPassword").setCustomValidity("Las contraseñas no coinciden.");
+        document.getElementById("conPasswordC").setCustomValidity("Las contraseñas no coinciden.");
     } else {
         errorDiv.style.display = "none";
-        document.getElementById("ConfirmPassword").setCustomValidity("");
+        document.getElementById("conPasswordC").setCustomValidity("");
     }
 }
