@@ -675,6 +675,10 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
     </div>
   </div>
 
+ <!-- SCRIPT  DE FUNCIONES --> 
+ <script>
+  
+  </script>
 
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>
