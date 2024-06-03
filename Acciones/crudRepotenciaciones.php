@@ -15,18 +15,10 @@ class Obtener{
             $orderDir = isset($_GET['order'][0]['dir']) ? $_GET['order'][0]['dir'] : 'asc';
 
             // Construir la consulta SQL con búsqueda y ordenamiento
-            $query = "SELECT repotenciaciones.*, componentes.nombre AS componente 
-                    FROM repotenciaciones 
-                    LEFT JOIN componentes ON repotenciaciones.id_componente = componentes.id 
-                    WHERE repotenciaciones.activo = 'si'";
+            $query = "SELECT repotenciaciones.*, componentes.nombre AS componente FROM repotenciaciones LEFT JOIN componentes ON repotenciaciones.id_componente = componentes.id WHERE repotenciaciones.activo = 'si'";
 
             if (!empty($search)) {
-                $query .= " AND (repotenciaciones.nombre LIKE '%$search%' 
-                        OR repotenciaciones.serie LIKE '%$search%' 
-                        OR repotenciaciones.codigo_adi_uta LIKE '%$search%' 
-                        OR repotenciaciones.detalle_repotenciacion LIKE '%$search%'
-                        OR repotenciaciones.fecha_repotenciacion LIKE '%$search%'
-                        OR componentes.nombre LIKE '%$search%')"; // Añadir búsqueda en el nombre del componente
+                $query .= " AND (repotenciaciones.nombre LIKE '%$search%' OR repotenciaciones.serie LIKE '%$search%' OR repotenciaciones.codigo_adi_uta LIKE '%$search%' OR repotenciaciones.detalle_repotenciacion LIKE '%$search%' OR repotenciaciones.fecha_repotenciacion LIKE '%$search%' OR componentes.nombre LIKE '%$search%')";
             }
             $query .= " ORDER BY " . $orderColumnName . " " . $orderDir . " LIMIT " . $start . ", " . $length;
 
@@ -38,9 +30,7 @@ class Obtener{
             $totalRegistros = $conectar->query("SELECT COUNT(*) FROM repotenciaciones WHERE activo = 'si'")->fetchColumn();
 
             // Obtener el total de registros después de aplicar el filtro de búsqueda
-            $filtroRegistros = $conectar->query("SELECT COUNT(*) FROM repotenciaciones LEFT JOIN componentes ON repotenciaciones.id_componente = componentes.id 
-            WHERE repotenciaciones.activo = 'si' AND (repotenciaciones.nombre LIKE '%$search%' OR repotenciaciones.serie LIKE '%$search%' OR repotenciaciones.codigo_adi_uta LIKE '%$search%' 
-            OR repotenciaciones.detalle_repotenciacion LIKE '%$search%' OR repotenciaciones.fecha_repotenciacion LIKE '%$search%' OR componentes.nombre LIKE :search)")->fetchColumn();
+            $filtroRegistros = $conectar->query("SELECT COUNT(*) FROM repotenciaciones LEFT JOIN componentes ON repotenciaciones.id_componente = componentes.id WHERE repotenciaciones.activo = 'si' AND (repotenciaciones.nombre LIKE '%$search%' OR repotenciaciones.serie LIKE '%$search%' OR repotenciaciones.codigo_adi_uta LIKE '%$search%' OR repotenciaciones.detalle_repotenciacion LIKE '%$search%' OR repotenciaciones.fecha_repotenciacion LIKE '%$search%' OR componentes.nombre LIKE '%$search')")->fetchColumn();
 
             echo json_encode([
                 'draw' => isset($_GET['draw']) ? intval($_GET['draw']) : 1,
@@ -100,9 +90,9 @@ class Actualizar{
                 $resultado = $conectar->prepare($updatesql);
                 $resultado->bindParam(':componente', $data["componente"], PDO::PARAM_STR);
                 $resultado->bindParam(':nombre', $data["nombre"], PDO::PARAM_STR);
-                $resultado->bindParam(':seri', $data["descripcion"], PDO::PARAM_STR);
-                $resultado->bindParam(':codigo', $data["pais"], PDO::PARAM_STR);
-                $resultado->bindParam(':detalle', $data["area"], PDO::PARAM_STR);
+                $resultado->bindParam(':serie', $data["serie"], PDO::PARAM_STR);
+                $resultado->bindParam(':codigo', $data["codigo"], PDO::PARAM_STR);
+                $resultado->bindParam(':detalle', $data["detalle"], PDO::PARAM_STR);
                 $resultado->bindParam(':id', $data['id'], PDO::PARAM_INT);
                 $resultado->execute();
                 echo json_encode(['success' => true]);
