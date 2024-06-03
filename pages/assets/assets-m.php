@@ -918,6 +918,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 
   </script>
 
+
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
