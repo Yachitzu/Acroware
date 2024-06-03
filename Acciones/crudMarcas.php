@@ -16,6 +16,7 @@ class Obtener
             $orderColumnName = isset($_GET['columns'][$orderColumnIndex]['data']) ? $_GET['columns'][$orderColumnIndex]['data'] : 'id';
             $orderDir = isset($_GET['order'][0]['dir']) ? $_GET['order'][0]['dir'] : 'asc';
 
+            
             // Construir la consulta SQL con búsqueda y ordenamiento
             $query = "SELECT * FROM marcas WHERE activo = 'si'";
             if (!empty($search)) {
