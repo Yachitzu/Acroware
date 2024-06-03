@@ -87,6 +87,34 @@ class Obtener
             ];
         }
     }
+
+    public static function ObtenerCustodios(){
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = "SELECT * FROM usuarios where activo='si'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+            $datos = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            $tabla = '';
+    
+            foreach ($datos as $respuesta) {
+                $tabla.= '
+                    <option value="'. htmlspecialchars($respuesta['id']). '">'. htmlspecialchars($respuesta['nombre']). ' '. htmlspecialchars($respuesta['apellido']) .'</option>
+                ';
+            }
+            return [
+                'codigo' => 0,
+                'dato' => $tabla,
+            ];
+        } catch (PDOException $e) {
+            error_log('Error al listar usuarios: '. $e->getMessage());
+            return [
+                'codigo' => 1,
+                'ensaje' => 'Error al listar usuarios: '. $e->getMessage()
+            ];
+        }
+    }
+
 }
 
 class Guardar
