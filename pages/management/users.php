@@ -393,79 +393,172 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
     </div>
   </div>
 
-  <!-- Create Modal-->
-  <div class="modal fade modal-crud" id="modalCrudAgregar" tabindex="-1" role="dialog"
-    aria-labelledby="modal-register-label" aria-hidden="true">
+<!-- Create Modal -->
+<div class="modal fade modal-crud" id="modalCrudAgregar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-primary">
-          <h3 class="modal-title text-white" id="modal-register-label">Agregar Usuario</h3>
-          <p class="modal">Ingrese los datos del Usuario:</p>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <i class="fas fa-times" class="element-white"></i>
-          </button>
-        </div>
-        <form class="forms-sample" id="agregarUserForm" method="post">
-          <div class="modal-body">
-            <div class="grid-margin-modal">
-              <div class="card-body">
-                <p class="card-description">Por favor, complete los siguientes campos para agregar un nuevo usuario al
-                  sistema:</p>
-                  <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="cedula" class="text-bold">Cédula</label>
-                        <input type="text" class="form-control" name="cedulaC" id="cedulaC" placeholder="Cédula" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);" required>
-                    </div>
-                  </div>
-                  <div class="form-row">
-                    <div class="form-group col-md-6">
-                      <label for="nombreC" class="text-bold">Nombre</label>
-                      <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                      <label for="nombreC" class="text-bold">Apellido</label>
-                      <input type="text" class="form-control" name="apellidoC" id="apellidoC" placeholder="Apellido" required>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label for="email" class="text-bold">Email</label>
-                        <input type="email" class="form-control" name="emailC" id="emailC" placeholder="Email" required>
-                    </div>
-                  </div>
-                  <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label for="rolC" class="text-bold">Rol</label>
-                        <select class="form-control" name="rolC" id="rolC" required>
-                            <option value="">Seleccione un rol</option>
-                            <option value="laboratorista">Laboratorista</option>
-                            <option value="admin">Administrador</option>
-                            <option value="estudiante">Estudiante en Prácticas</option>
-                            <option value="reportero">Generador de Reportes</option>
-                        </select>
-                    </div>
-                  </div>
-                  <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="passwordC" class="text-bold">Contraseña</label>
-                        <input type="password" class="form-control" name="passwordC" id="passwordC" placeholder="Contraseña" pattern="^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$" title="La contraseña debe tener entre 8 y 20 caracteres, al menos una letra mayúscula y un número. No se permiten caracteres especiales." oninput="validatePassword(this)" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="conPasswordC" class="text-bold">Confirmar Contraseña</label>
-                        <input type="password" class="form-control" name="conPasswordC" id="conPasswordC" placeholder="Contraseña" pattern="^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$" title="La contraseña debe tener entre 8 y 20 caracteres, al menos una letra mayúscula y un número. No se permiten caracteres especiales." oninput="validatePassword(this); checkPasswordMatch();" required>
-                        <div class="invalid-feedback" id="passwordMatchError" style="display: none;">Las contraseñas no coinciden.</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <h3 class="modal-title text-white" id="modal-register-label">Agregar Usuario</h3>
+                <p class="modal">Ingrese los datos del Usuario:</p>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <i class="fas fa-times" class="element-white"></i>
+                </button>
             </div>
-          <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-dismiss="modal"
-              aria-label="Close" value="Cancelar" id="cancelButton">
-            <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Usuario ">
-          </div>
-        </form>
-      </div>
+            <form class="forms-sample" id="agregarUserForm" method="post">
+                <div class="modal-body">
+                    <div class="grid-margin-modal">
+                        <div class="card-body">
+                            <p class="card-description">Por favor, complete los siguientes campos para agregar un nuevo usuario al sistema:</p>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="cedula" class="text-bold">Cédula</label>
+                                    <input type="text" class="form-control" name="cedulaC" id="cedulaC" placeholder="Cédula" minlength="10" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);" onblur="validarCedula();" required>
+                                    <span id="mensajeCedula" style="color: red;"></span>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="nombreC" class="text-bold">Nombre</label>
+                                    <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="apellidoC" class="text-bold">Apellido</label>
+                                    <input type="text" class="form-control" name="apellidoC" id="apellidoC" placeholder="Apellido" required>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label for="email" class="text-bold">Email</label>
+                                    <input type="email" class="form-control" name="emailC" id="emailC" placeholder="Email" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="rolC" class="text-bold">Rol</label>
+                                    <select class="form-control" name="rolC" id="rolC" required>
+                                        <option value="">Seleccione un rol</option>
+                                        <option value="laboratorista">Laboratorista</option>
+                                        <option value="admin">Administrador</option>
+                                        <option value="estudiante">Estudiante en Prácticas</option>
+                                        <option value="reportero">Generador de Reportes</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="passwordC" class="text-bold">Contraseña</label>
+                                    <input type="password" class="form-control" name="passwordC" id="passwordC" placeholder="Contraseña" pattern="^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$" title="La contraseña debe tener entre 8 y 20 caracteres, al menos una letra mayúscula y un número. No se permiten caracteres especiales." oninput="validatePassword(this)" required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="conPasswordC" class="text-bold">Confirmar Contraseña</label>
+                                    <input type="password" class="form-control" name="conPasswordC" id="conPasswordC" placeholder="Contraseña" pattern="^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$" title="La contraseña debe tener entre 8 y 20 caracteres, al menos una letra mayúscula y un número. No se permiten caracteres especiales." oninput="validatePassword(this); checkPasswordMatch();" required>
+                                    <div class="invalid-feedback" id="passwordMatchError" style="display: none;">Las contraseñas no coinciden.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
+                    <input type="submit" class="btn-crud btn-primary text-bold" value="Agregar Usuario">
+                </div>
+            </form>
+        </div>
     </div>
-  </div>
+</div>
+
+<script>
+    function validarCedula() {
+        var cedulaInput = document.getElementById('cedulaC').value;
+        var mensajeCedula = document.getElementById('mensajeCedula');
+
+        if (validarCedulaEcuador(cedulaInput)) {
+            mensajeCedula.textContent = '';
+            document.getElementById('cedulaC').setCustomValidity(''); // clear the invalid state
+            return true;
+        } else {
+            mensajeCedula.textContent = 'La cédula ingresada no es válida.';
+            document.getElementById('cedulaC').setCustomValidity('La cédula ingresada no es válida.'); // set the invalid state
+            return false;
+        }
+    }
+
+    function validarCedulaEcuador(cedula) {
+        if (cedula.length !== 10) {
+            return false;
+        }
+
+        if (!/^\d+$/.test(cedula)) {
+            return false;
+        }
+
+        var todosIguales = /^(\d)\1*$/.test(cedula);
+        if (todosIguales) {
+            return false;
+        }
+
+        var digitos = cedula.substr(0, 9);
+        var total = 0;
+        for (var i = 0; i < digitos.length; i++) {
+            var digito = parseInt(digitos[i]);
+            if (i % 2 === 0) {
+                digito *= 2;
+                if (digito > 9) {
+                    digito -= 9;
+                }
+            }
+            total += digito;
+        }
+        var verificador = (total % 10 === 0) ? 0 : (10 - (total % 10));
+
+        if (parseInt(cedula[9]) !== verificador) {
+            return false;
+        }
+
+        return true;
+    }
+
+    document.getElementById('agregarUserForm').addEventListener('submit', function(event) {
+        if (!validarCedula()) {
+            event.preventDefault();
+        }
+        checkPasswordMatch(); // call this to set the custom validity if passwords don't match
+        if (document.getElementById('conPasswordC').checkValidity() === false) {
+            event.preventDefault();
+        }
+    });
+
+    function validatePassword(input) {
+        input.value = input.value.replace(/[^A-Za-z0-9]/g, ''); // Elimina caracteres especiales
+        input.value = input.value.slice(0, 20); // Limita la longitud a 20 caracteres
+                          
+        if (input.value.length < 8) {
+            input.setCustomValidity("La contraseña debe tener al menos 8 caracteres.");
+        } else if (input.value.length > 20) {
+            input.setCustomValidity("La contraseña no puede tener más de 20 caracteres.");
+        } else if (!/[A-Z]/.test(input.value)) {
+            input.setCustomValidity("La contraseña debe contener al menos una letra mayúscula.");
+        } else if (!/\d/.test(input.value)) {
+            input.setCustomValidity("La contraseña debe contener al menos un número.");
+        } else {
+            input.setCustomValidity(""); // Restablece el mensaje de error personalizado
+        }
+    }
+
+    function checkPasswordMatch() {
+        var password = document.getElementById("passwordC").value;
+        var confirmPassword = document.getElementById("conPasswordC").value;
+        var errorDiv = document.getElementById("passwordMatchError");
+
+        if (password !== confirmPassword) {
+            errorDiv.style.display = "block";
+            document.getElementById("conPasswordC").setCustomValidity("Las contraseñas no coinciden.");
+        } else {
+            errorDiv.style.display = "none";
+            document.getElementById("conPasswordC").setCustomValidity("");
+        }
+    }
+</script>
+
+
 
   <!-- Delete Modal-->
   <div class="modal fade" id="modalCrudEliminar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
