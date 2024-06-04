@@ -34,6 +34,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
   <!-- endinject -->
   <link rel="shortcut icon"
     href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 
@@ -281,7 +282,8 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <div class="col-md-12">
               <div class="profile">
                 <div class="cover-image-gest d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5">
-                  <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase titleMain font-berthold">Bienes Mobiliarios</h1>
+                  <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase titleMain font-berthold">Bienes 
+                    Mobiliarios</h1>
                   <div class="d-inline-flex mb-lg-5">
                     <p class="m-0 text-white"><a class="text-white" href="../../index.php">Inicio</a></p>
                     <p class="m-0 text-white px-2">/</p>
@@ -314,75 +316,41 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%"
                     cellspacing="0">
                     <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Codigo UTA</th>
-                            <th>Nombre</th>
-                            <th>Modelo</th>
-                            <th>Marca</th>
-                            <th>Color</th>
-                            <th>Material</th>
-                            <th>Dimensiones</th>
-                            <th>Condición</th>
-                            <th>Custodio</th>
-                            <th>Ubicación</th>
-                            <th>Fecha Ingreso</th>
-                            <th>Acciones</th>
-                        </tr>
+                      <tr>
+                        <th>Código UTA</th>
+                        <th>Nombre</th>
+                        <th>Serie</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Color</th>
+                        <th>Material</th>
+                        <th>Dimensiones</th>
+                        <th>Condición</th>
+                        <th>Custodio</th>
+                        <th>Fecha Ingreso</th>
+                        <th>Valor Contable</th>
+                        <th>Áreas</th>
+                        <th>Ubicación</th>
+                        <th>Acciones</th>
+                      </tr>
                     </thead>
-                    <tbody id="marcasTableBody">
-                        <tr>
-                            <td>1</td>
-                            <td>UTA123456</td>
-                            <td>Producto Ejemplo</td>
-                            <td>Modelo X</td>
-                            <td>Marca Y</td>
-                            <td>Rojo</td>
-                            <td>Plástico</td>
-                            <td>10x20x30 cm</td>
-                            <td>Nuevo</td>
-                            <td>Juan Pérez</td>
-                            <td>Almacén 1</td>
-                            <td>2024-05-22</td>
-                            <td>
-                                <center>
-                                    <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </center>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>ID</th>
-                            <th>Codigo UTA</th>
-                            <th>Nombre</th>
-                            <th>Modelo</th>
-                            <th>Marca</th>
-                            <th>Color</th>
-                            <th>Material</th>
-                            <th>Dimensiones</th>
-                            <th>Condición</th>
-                            <th>Custodio</th>
-                            <th>Ubicación</th>
-                            <th>Fecha Ingreso</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </tfoot>
+
                     <tbody>
 
                     </tbody>
+
+                    
                   </table>
                 </div>
               </div>
             </div>
 
           </div>
+          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+          <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
           <!-- /.container-fluid -->
+
 
         </div>
         <!-- content-wrapper ends -->
@@ -427,7 +395,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       </div>
     </div>
   </div>
-
+<!-- BIENES MOBILIARIOS -->
   <!-- Create Modal-->
   <div class="modal fade modal-crud" id="modalCrudAgregar" tabindex="-1" role="dialog"
     aria-labelledby="modal-register-label" aria-hidden="true">
@@ -440,91 +408,110 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="agregarMarcaForm" method="post">
+
+        <form class="forms-sample" id="formAgregar">
           <div class="modal-body">
             <div class="grid-margin-modal">
-                <div class="card-body">
-                    <p class="card-description">Por favor, complete los siguientes campos para agregar un nuevo bien al
-                    sistema:</p>
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
-                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Código UTA" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="nombreC" class="text-bold">Nombre</label>
-                            <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="codigoUTAC" class="text-bold">Modelo</label>
-                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Modelo" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="facultad" class="text-bold">Marca</label>
-                            <select class="form-control" id="facultad" required>
-                                <option value="">Seleccione una Marca</option>
-                                <option value="HP">HP</option>
-                                <option value="Dell">DELL</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="nombreC" class="text-bold">Color</label>
-                            <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Color"
-                            oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="nombreC" class="text-bold">Material</label>
-                            <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Material"
-                            oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="codigoUTAC" class="text-bold">Dimensiones</label>
-                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Dimensiones" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="ubicación" class="text-bold">Condición</label>
-                            <select class="form-control" id="ubicación" required>
-                                <option value="">Seleccione una condición</option>
-                                <option value="buen">Buen estado</option>
-                                <option value="mal">Mal Estado</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="ubicación" class="text-bold">Custodio</label>
-                            <select class="form-control" id="ubicación" required>
-                                <option value="">Seleccione un custodio</option>
-                                <option value="buen">Esteban Cifuentes</option>
-                                <option value="mal">Nik Frias</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="facultad" class="text-bold">Facultad</label>
-                            <select class="form-control" id="facultad" required>
-                                <option value="">Seleccione una Facultad</option>
-                                <option value="FISEI">Facultad de Ingenieria en Sistemas, Electronica e Industrial</option>
-                                <option value="FDA">Facultad de Diseño y Arquitectura</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="ubicación" class="text-bold">Ubicación</label>
-                            <select class="form-control" id="ubicación" required>
-                                <option value="">Seleccione una Ubicación</option>
-                                <option value="Aula01">Aula 01</option>
-                                <option value="Aula02">Aula 02</option>
-                            </select>
-                        </div>
-                    </div>
+              <div class="card-body">
+                <p class="card-description">Por favor, complete los siguientes campos para agregar un nuevo bien al
+                  sistema:</p>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
+                    <input type="text" class="form-control" name="codigoUTAA" id="codigoUTAA" placeholder="Código UTA"
+                      required>
+                  </div>
                 </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="nombreC" class="text-bold">Nombre</label>
+                    <input type="text" class="form-control" name="nombreA" id="nombreA" placeholder="Nombre" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="codigoUTAC" class="text-bold">Modelo</label>
+                    <input type="text" class="form-control" name="modeloA" id="modeloA" placeholder="Modelo" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="facultad" class="text-bold">Marca</label>
+                    <select class="form-control" id="marcaA" required>
+                      <option value="">Seleccione una Marca</option>
+                      <?php
+                      include_once ("../../Acciones/crudBienes_Mobiliarios.php");
+                      $marcas = AccionesBienes_mobiliarios::listarMarcasInsertar();
+                      echo ($marcas['dato']);
+                      ?>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="nombreC" class="text-bold">Color</label>
+                    <input type="text" class="form-control" name="colorA" id="colorA" placeholder="Color"
+                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="nombreC" class="text-bold">Material</label>
+                    <input type="text" class="form-control" name="materialA" id="materialA" placeholder="Material"
+                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="codigoUTAC" class="text-bold">Dimensiones</label>
+                    <input type="text" class="form-control" name="dimensionesA" id="dimensionesA"
+                      placeholder="Dimensiones" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="ubicación" class="text-bold">Condición</label>
+                    <select class="form-control" id="condicionA" required>
+                      <option value="">Seleccione una condición</option>
+                      <option value="Buen estado">Buen estado</option>
+                      <option value="Mal Estado">Mal Estado</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="nombreC" class="text-bold">Custodio</label>
+                    <input type="text" class="form-control" name="custodioA" id="custodioA" placeholder="Custodio"
+                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="nombreC" class="text-bold">Serie</label>
+                    <input type="text" class="form-control" name="serieA" id="serieA" placeholder="Serie"
+                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="codigoUTAC" class="text-bold">Valor</label>
+                    <input type="number" class="form-control" name="valorA" id="valorA" placeholder="Valor" min="0"
+                      oninput="if(this.value < 1) this.value = 1;" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="facultad" class="text-bold">Areas</label>
+                    <select class="form-control" id="areaA" required>
+                      <option value="">Seleccione una área</option>
+                      <?php
+                      $areas = AccionesBienes_mobiliarios::listarAreasInsertar();
+                      echo ($areas['dato']);
+                      ?>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="ubicación" class="text-bold">Ubicación</label>
+                    <select class="form-control" id="ubicacionA" required>
+                      <option value="">Seleccione una Ubicación</option>
+                      <?php
+                      $ubicaciones = AccionesBienes_mobiliarios::listarUbicacionesInsertar();
+                      echo ($ubicaciones['dato']);
+                      ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="modal-footer">
@@ -533,6 +520,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Bien ">
           </div>
         </form>
+
       </div>
     </div>
   </div>
@@ -549,7 +537,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="eliminarMarcaForm">
+        <form class="forms-sample" id="formEliminar">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -571,8 +559,9 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       </div>
     </div>
   </div>
+
   <!-- Edit Modal-->
-  <div class="modal fade" id="modalCrud" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
+  <div class="modal fade" id="modalCrudEditar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
     aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -583,90 +572,105 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="editarMarcaForm">
+        <form class="forms-sample" id="formEditar">
           <div class="modal-body">
             <div class="grid-margin-modal">
-                <div class="card-body">
-                    <p class="card-description">Por favor, complete los siguientes campos para editar la información del bien seleccionado:</p>
-                  <div class="form-row">
-                        <div class="form-group col-md-12">
-                            <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
-                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Código UTA" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="nombreC" class="text-bold">Nombre</label>
-                            <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="codigoUTAC" class="text-bold">Modelo</label>
-                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Modelo" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="facultad" class="text-bold">Marca</label>
-                            <select class="form-control" id="facultad" required>
-                                <option value="">Seleccione una Marca</option>
-                                <option value="HP">HP</option>
-                                <option value="Dell">DELL</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="nombreC" class="text-bold">Color</label>
-                            <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Color"
-                            oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="nombreC" class="text-bold">Material</label>
-                            <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Material"
-                            oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="codigoUTAC" class="text-bold">Dimensiones</label>
-                            <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Dimensiones" required>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="ubicación" class="text-bold">Condición</label>
-                            <select class="form-control" id="ubicación" required>
-                                <option value="">Seleccione una condición</option>
-                                <option value="buen">Buen estado</option>
-                                <option value="mal">Mal Estado</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="ubicación" class="text-bold">Custodio</label>
-                            <select class="form-control" id="ubicación" required>
-                                <option value="">Seleccione un custodio</option>
-                                <option value="buen">Esteban Cifuentes</option>
-                                <option value="mal">Nik Frias</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="facultad" class="text-bold">Facultad</label>
-                            <select class="form-control" id="facultad" required>
-                                <option value="">Seleccione una Facultad</option>
-                                <option value="FISEI">Facultad de Ingenieria en Sistemas, Electronica e Industrial</option>
-                                <option value="FDA">Facultad de Diseño y Arquitectura</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="ubicación" class="text-bold">Ubicación</label>
-                            <select class="form-control" id="ubicación" required>
-                                <option value="">Seleccione una Ubicación</option>
-                                <option value="Aula01">Aula 01</option>
-                                <option value="Aula02">Aula 02</option>
-                            </select>
-                        </div>
-                    </div>
+              <div class="card-body">
+                <p class="card-description">Por favor, complete los siguientes campos para editar la información del
+                  bien seleccionado:</p>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
+                    <input type="text" class="form-control" name="codigoUTAE" id="codigoUTAE" placeholder="Código UTA"
+                      required>
+                  </div>
                 </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="nombreC" class="text-bold">Nombre</label>
+                    <input type="text" class="form-control" name="nombreE" id="nombreE" placeholder="Nombre" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="codigoUTAC" class="text-bold">Modelo</label>
+                    <input type="text" class="form-control" name="modeloE" id="modeloE" placeholder="Modelo" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="facultad" class="text-bold">Marca</label>
+                    <select class="form-control" id="marcaE" required>
+                      <?php
+                      include_once ("../../Acciones/crudBienes_Mobiliarios.php");
+                      $marcas = AccionesBienes_mobiliarios::listarMarcasInsertar();
+                      echo ($marcas['dato']);
+                      ?>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="nombreC" class="text-bold">Color</label>
+                    <input type="text" class="form-control" name="colorE" id="colorE" placeholder="Color"
+                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="nombreC" class="text-bold">Material</label>
+                    <input type="text" class="form-control" name="materialE" id="materialE" placeholder="Material"
+                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="codigoUTAC" class="text-bold">Dimensiones</label>
+                    <input type="text" class="form-control" name="dimensionesE" id="dimensionesE"
+                      placeholder="Dimensiones" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="ubicación" class="text-bold">Condición</label>
+                    <select class="form-control" id="condicionE" required>
+                      <option value="Buen estado">Buen estado</option>
+                      <option value="Mal Estado">Mal Estado</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="nombreC" class="text-bold">Custodio</label>
+                    <input type="text" class="form-control" name="custodioE" id="custodioE" placeholder="Custodio"
+                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="nombreC" class="text-bold">Serie</label>
+                    <input type="text" class="form-control" name="serieE" id="serieE" placeholder="Serie"
+                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="codigoUTAC" class="text-bold">Valor</label>
+                    <input type="number" class="form-control" name="valorE" id="valorE" placeholder="Valor" min="0"
+                      oninput="if(this.value < 1) this.value = 1;" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="facultad" class="text-bold">Areas</label>
+                    <select class="form-control" id="areaE" required>
+                      <?php
+                      $areas = AccionesBienes_mobiliarios::listarAreasInsertar();
+                      echo ($areas['dato']);
+                      ?>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="ubicación" class="text-bold">Ubicación</label>
+                    <select class="form-control" id="ubicacionE" required>
+                      <?php
+                      $ubicaciones = AccionesBienes_mobiliarios::listarUbicacionesInsertar();
+                      echo ($ubicaciones['dato']);
+                      ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="modal-footer">
@@ -678,6 +682,250 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       </div>
     </div>
   </div>
+
+ <!-- SCRIPT  DE FUNCIONES --> 
+ <script>
+  $(document).ready(function () {
+      $("#formAgregar").submit(function (e) {
+        e.preventDefault();
+        codigo_uta = $("#codigoUTAA").val();
+        nombre = $("#nombreA").val();
+        serie = $("#serieA").val();
+        id_marca = $("#marcaA").val();
+        modelo = $("#modeloA").val();
+        color = $("#colorA").val();
+        material = $("#materialA").val();
+        dimensiones = $("#dimensionesA").val();
+        condicion = $("#condicionA").val();
+        custodio = $("#custodioA").val();
+        valor = $("#valorA").val();
+        id_area_per = $("#areaA").val();
+        id_ubi_per = $("#ubicacionA").val();
+        $.ajax({
+          url: "../../Acciones/RestBienes_Mobiliarios.php",
+          type: "POST",
+          data: JSON.stringify({
+            codigo_uta: codigo_uta,
+            nombre: nombre,
+            serie: serie,
+            id_marca: id_marca,
+            modelo: modelo,
+            color: color,
+            material: material,
+            dimensiones: dimensiones,
+            condicion: condicion,
+            custodio: custodio,
+            valor: valor,
+            id_area_per: id_area_per,
+            id_ubi_per: id_ubi_per
+          }),
+          contentType: "application/json",
+          cache: false,
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            $("#modalCrudAgregar").modal('hide');
+            $("#codigoUTAA").val("");
+            $("#nombreA").val("");
+            $("#serieA").val("");
+            $("#marcaA").val("");
+            $("#modeloA").val("");
+            $("#colorA").val("");
+            $("#materialA").val("");
+            $("#dimensionesA").val("");
+            $("#condicionA").val("");
+            $("#custodioA").val("");
+            $("#valorA").val("");
+            $("#areaA").val("");
+            $("#ubicacionA").val("");
+            cargarTabla();
+          }
+        });
+      });
+    });
+
+    function cargarTabla() {
+      fetch('../../Acciones/RestBienes_Mobiliarios.php', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          const tbody = document.querySelector('#dataTable tbody');
+          if ($.fn.DataTable.isDataTable('#dataTable')) {
+            $('#dataTable').DataTable().destroy();
+          }
+          tbody.innerHTML = '';
+
+          if (data.codigo === 0) {
+            tbody.innerHTML = data.dato;
+          } else {
+            const tr = document.createElement('tr');
+            const td = document.createElement('td');
+            td.textContent = 'No se encontraron bienes mobiliarios.';
+            td.setAttribute('colspan', '16');
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+          }
+
+          $('#dataTable').DataTable({
+            scrollX: true,  // Permite el desplazamiento horizontal
+            fixedHeader: {
+                header: true,  // Fija la cabecera
+                footer: true   // Fija el pie de página
+            },
+            language: {
+              "decimal": "",
+              "emptyTable": "No hay información",
+              "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+              "infoEmpty": "Mostrando 0 to 0 of 0 entradas",
+              "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+              "infoPostFix": "",
+              "thousands": ",",
+              "lengthMenu": "Mostrar _MENU_ registros por página",
+              "loadingRecords": "Cargando...",
+              "processing": "Procesando...",
+              "search": "Buscar:",
+              "zeroRecords": "Sin resultados encontrados",
+              "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+              }
+            }
+          });
+          addEventListeners();
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          const tbody = document.querySelector('#dataTable tbody');
+          const tr = document.createElement('tr');
+          const td = document.createElement('td');
+          td.textContent = 'Error al cargar los datos.';
+          td.setAttribute('colspan', '16');
+          tr.appendChild(td);
+          tbody.appendChild(tr);
+        });
+    }
+
+    function addEventListeners() {
+      id = "";
+      $(document).on('click', '.editar', function () {
+        id = $(this).data("id");
+        fila = $(this).closest("tr");
+        codigo_uta = fila.find('td:eq(0)').text();
+        nombre = fila.find('td:eq(1)').text();
+        serie = fila.find('td:eq(2)').text();
+        modelo = fila.find('td:eq(4)').text();
+        color = fila.find('td:eq(5)').text();
+        material = fila.find('td:eq(6)').text();
+        dimensiones = fila.find('td:eq(7)').text();
+        condicion = fila.find('td:eq(8)').text();
+        custodio = fila.find('td:eq(9)').text();
+        valor = fila.find('td:eq(11)').text();
+        id_marca = fila.find('.id_marca').val();
+        id_area_per = fila.find('.id_area_per').val();
+        id_ubi_per = fila.find('.id_ubi_per').val();
+
+        $("#codigoUTAE").val(codigo_uta);
+        $("#nombreE").val(nombre);
+        $("#modeloE").val(modelo);
+        $("#marcaE").val(id_marca);
+        $("#areaE").val(id_area_per);
+        $("#ubicacionE").val(id_ubi_per);
+        $("#serieE").val(serie);
+        $("#colorE").val(color);
+        $("#materialE").val(material);
+        $("#dimensionesE").val(dimensiones);
+        $("#condicionE").val(condicion);
+        $("#custodioE").val(custodio);
+        $("#valorE").val(valor);
+        $("#modalCrudEditar").modal('show');
+      });
+
+      $("#formEditar").submit(function (e) {
+        e.preventDefault();
+        id;
+        codigo_uta = $("#codigoUTAE").val();
+        nombre = $("#nombreE").val();
+        modelo = $("#modeloE").val();
+        id_marca = $("#marcaE").val();
+        serie = $("#serieE").val();
+        color = $("#colorE").val();
+        material = $("#materialE").val();
+        dimensiones = $("#dimensionesE").val();
+        condicion = $("#condicionE").val();
+        custodio = $("#custodioE").val();
+        valor = $("#valorE").val();
+        id_area_per = $("#areaE").val();
+        id_ubi_per = $("#ubicacionE").val();
+
+        $.ajax({
+          url: "../../Acciones/RestBienes_Mobiliarios.php",
+          type: "PUT",
+          data: JSON.stringify({
+            id: id,
+            codigo_uta: codigo_uta,
+            nombre: nombre,
+            modelo: modelo,
+            id_marca: id_marca,
+            serie: serie,
+            color: color,
+            material: material,
+            dimensiones: dimensiones,
+            condicion: condicion,
+            custodio: custodio,
+            valor: valor,
+            id_area_per: id_area_per,
+            id_ubi_per: id_ubi_per
+          }),
+          contentType: "application/json",
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            $("#modalCrudEditar").modal('hide');
+            cargarTabla();
+          }
+        });
+      });
+
+      $(document).on('click', '.eliminar', function () {
+        id = $(this).data("id");
+        $("#modalCrudEliminar").modal('show');
+      });
+
+      $("#formEliminar").submit(function (e) {
+        e.preventDefault();
+
+        $.ajax({
+          url: "../../Acciones/RestBienes_Mobiliarios.php",
+          type: "DELETE",
+          data: JSON.stringify({
+            id: id
+          }),
+          contentType: "application/json",
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            $("#modalCrudEliminar").modal('hide');
+            cargarTabla();
+          }
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      cargarTabla();
+    });
+
+  </script>
+
 
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>
