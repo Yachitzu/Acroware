@@ -147,5 +147,32 @@ class AccionesBienes_mobiliarios
             ];
         }
     }
+
+    public static function insertarBienes_mobiliarios($codigo_uta, $nombre, $serie, $id_marca, $modelo, $color, $material, $dimensiones, $condicion, $custodio, $valor, $id_area_per, $id_ubi_per)
+    {
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = $conexion->prepare("INSERT INTO bienes_mobiliarios(codigo_uta,nombre,serie,id_marca,modelo,color,material,dimensiones,condicion,custodio_actual,valor_contable,id_area_per,id_ubi_per)
+        VALUES (:codigo_uta,:nombre,:serie,:id_marca,:modelo,:color,:material,:dimensiones,:condicion,:custodio_actual,:valor_contable,:id_area_per,:id_ubi_per)");
+            $consulta->bindParam(':codigo_uta', $codigo_uta);
+            $consulta->bindParam(':nombre', $nombre);
+            $consulta->bindParam(':serie', $serie);
+            $consulta->bindParam(':id_marca', $id_marca);
+            $consulta->bindParam(':modelo', $modelo);
+            $consulta->bindParam(':color', $color);
+            $consulta->bindParam(':material', $material);
+            $consulta->bindParam(':dimensiones', $dimensiones);
+            $consulta->bindParam(':condicion', $condicion);
+            $consulta->bindParam(':custodio_actual', $custodio);
+            $consulta->bindParam(':valor_contable', $valor);
+            $consulta->bindParam(':id_area_per', $id_area_per);
+            $consulta->bindParam(':id_ubi_per', $id_ubi_per);
+            $consulta->execute();
+            return 0;
+        } catch (PDOException $e) {
+            error_log('Error en insertarBienes_mobiliarios: ' . $e->getMessage());
+            return 2;
+        }
+    }
 }
 ?>
