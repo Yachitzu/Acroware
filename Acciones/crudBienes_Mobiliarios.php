@@ -203,5 +203,19 @@ class AccionesBienes_mobiliarios
             return 2;
         }
     }
+
+    public static function eliminarBienes_mobiliarios($id)
+    {
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = $conexion->prepare("UPDATE bienes_mobiliarios set activo= 'no' WHERE id= :id");
+            $consulta->bindParam(':id', $id);
+            $consulta->execute();
+            return 0;
+        } catch (PDOException $e) {
+            error_log('Error en eliminarBienes_mobiliarios: ' . $e->getMessage());
+            return 2;
+        }
+    }
 }
 ?>
