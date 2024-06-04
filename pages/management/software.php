@@ -580,6 +580,44 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
     </div>
   </div>
   <script>
+      document.getElementById('fecha_adquiA').addEventListener('change', function() {
+        var fecha_adqui = document.getElementById('fecha_adquiA').value;
+        document.getElementById('fecha_activacionA').min = fecha_adqui;
+    });
+
+    document.getElementById('fecha_activacionA').addEventListener('change', function() {
+        var fecha_activacion = document.getElementById('fecha_activacionA').value;
+        var fecha_adqui = document.getElementById('fecha_adquiA').value;
+        if (fecha_activacion < fecha_adqui) {
+            alert('La fecha final no puede ser anterior a la fecha inicial.');
+            document.getElementById('fecha_activacionA').value = '';
+        }
+        // if (fecha_activacion === fecha_adqui) {
+        //     alert('La fecha final no puede ser la misma que la fecha inicial.');
+        //     document.getElementById('fecha_activacion').value = '';
+        // }
+    });
+    </script>
+    <script>
+      document.getElementById('fecha_adquiE').addEventListener('change', function() {
+        var fecha_adqui = document.getElementById('fecha_adquiE').value;
+        document.getElementById('fecha_activacionE').min = fecha_adqui;
+    });
+
+    document.getElementById('fecha_activacionE').addEventListener('change', function() {
+        var fecha_activacion = document.getElementById('fecha_activacionA').value;
+        var fecha_adqui = document.getElementById('fecha_adquiE').value;
+        if (fecha_activacion < fecha_adqui) {
+            alert('La fecha final no puede ser anterior a la fecha inicial.');
+            document.getElementById('fecha_activacionE').value = '';
+        }
+        // if (fecha_activacion === fecha_adqui) {
+        //     alert('La fecha final no puede ser la misma que la fecha inicial.');
+        //     document.getElementById('fecha_activacion').value = '';
+        // }
+    });
+    </script>
+  <script>
     
     
     $(document).ready(function () {
