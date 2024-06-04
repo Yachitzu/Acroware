@@ -58,7 +58,17 @@ switch ($op) {
         }
         break;
     case "DELETE":
-       
+        $json_input = file_get_contents('php://input');
+        $data = json_decode($json_input, true);
+        $id = filter_var($data['id'], FILTER_SANITIZE_STRING);
+        $resultado = AccionesBienes_mobiliarios::eliminarBienes_mobiliarios($id);
+        if ($resultado === 0) {
+            http_response_code(200);
+            echo json_encode(["message" => "El bien mobiliario ha sido eliminado con éxito."]);
+        } else {
+            http_response_code(400);
+            echo json_encode(["message" => "No se pudo eliminar el bien mobiliario."]);
+        }
         break;
 }
 ?>
