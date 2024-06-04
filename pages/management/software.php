@@ -31,15 +31,21 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
   <!-- inject:css -->
   <link rel="stylesheet" href="../../resources/css/vertical-layout-light/style.css">
   <!-- endinject -->
-  <link rel="shortcut icon" href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" /> 
+  <link rel="shortcut icon"
+    href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
+
 <body>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.php -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="../../index.php"><img src="../../resources/images/logos/Acroware.png" class="mr-2" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="../../index.php"><img src="../../resources/images/logos/acroware-mini.png" alt="logo"/></a>
+        <a class="navbar-brand brand-logo mr-5" href="../../index.php"><img
+            src="../../resources/images/logos/Acroware.png" class="mr-2" alt="logo" /></a>
+        <a class="navbar-brand brand-logo-mini" href="../../index.php"><img
+            src="../../resources/images/logos/acroware-mini.png" alt="logo" /></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -48,17 +54,19 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         <ul class="navbar-nav mr-lg-2">
           <li class="nav-item nav-search d-none d-lg-block">
             <div class="input-group">
-              
+
             </div>
           </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
           <li class="nav-item dropdown">
-            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
+              data-toggle="dropdown">
               <i class="icon-bell mx-0"></i>
               <span class="count"></span>
             </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+              aria-labelledby="notificationDropdown">
               <p class="mb-0 font-weight-normal float-left dropdown-header">Notificaciones</p>
               <a class="dropdown-item preview-item">
                 <div class="preview-thumbnail">
@@ -77,14 +85,14 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           </li>
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="../../resources/images/faces/perfil1.png" alt="profile"/>
+              <img src="../../resources/images/faces/perfil1.png" alt="profile" />
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item"  href="../others/acount.php">
+              <a class="dropdown-item" href="../others/acount.php">
                 <i class="ti-settings text-primary"></i>
                 Editar Perfil
               </a>
-              <a class="dropdown-item"  href="#" data-toggle="modal" data-target="#logoutModal">
+              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                 <i class="ti-power-off text-primary"></i>
                 Cerrar Sesión
               </a>
@@ -96,7 +104,8 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             </a>
           </li>
         </ul>
-        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+          data-toggle="offcanvas">
           <span class="icon-menu"></span>
         </button>
       </div>
@@ -104,16 +113,18 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:partials/_settings-panel.php -->
-      
+
       <div id="right-sidebar" class="settings-panel">
         <i class="settings-close ti-close"></i>
         <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">Recordatorio</a>
+            <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab"
+              aria-controls="todo-section" aria-expanded="true">Recordatorio</a>
           </li>
         </ul>
         <div class="tab-content" id="setting-content">
-          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
+          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel"
+            aria-labelledby="todo-section">
             <div class="add-items d-flex px-3 mb-0">
               <form class="form w-100">
                 <div class="form-group d-flex">
@@ -176,7 +187,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       </div>
       <!-- partial -->
       <!-- partial:partials/_sidebar.php -->
-      <nav class="sidebar sidebar-offcanvas " id="sidebar">
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
             <a class="nav-link" href="../../index.php">
@@ -186,7 +197,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="users.php">
+            <a class="nav-link" href="../management/users.php">
               <i class="icon-head menu-icon"></i>
               <span class="menu-title">Usuarios</span>
             </a>
@@ -200,17 +211,17 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../places/faculty.php">Facultades</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../places/block.php">Bloques</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../places/area.php">Áreas</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../places/location.php">Ubicaciones</a></li>
+                <li class="nav-item"> <a class="nav-link" href="faculty.php">Facultades</a></li>
+                <li class="nav-item"> <a class="nav-link" href="block.php">Bloques</a></li>
+                <li class="nav-item"> <a class="nav-link" href="area.php">Áreas</a></li>
+                <li class="nav-item"> <a class="nav-link" href="location.php">Ubicaciones</a></li>
               </ul>
             </div>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="marca.php">
-                <i class="icon-bar-graph menu-icon"></i>
+            <a class="nav-link" href="../management/marca.php">
+              <i class="icon-bar-graph menu-icon"></i>
               <span class="menu-title">Marcas</span>
             </a>
           </li>
@@ -232,7 +243,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="software.php">
+            <a class="nav-link" href="../management/software.php">
               <i class="icon-grid-2 menu-icon"></i>
               <span class="menu-title">Software</span>
             </a>
@@ -259,159 +270,169 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             </a>
           </li>
 
+
         </ul>
       </nav>
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
 
-            <div class="row user">
-                <div class="col-md-12">
-                    <div class="profile">
-                        <div class="cover-image-gest d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5">
-                            <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase titleMain font-berthold">Software</h1>
-                            <div class="d-inline-flex mb-lg-5">
-                                <p class="m-0 text-white"><a class="text-white" href="../../index.php">Inicio</a></p>
-                                <p class="m-0 text-white px-2">/</p>
-                                <p class="m-0 text-white">Gestor de Software</p>
-                            </div>
-                        </div>
-                    </div>
+          <div class="row user">
+            <div class="col-md-12">
+              <div class="profile">
+                <div class="cover-image-gest d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5">
+                  <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase titleMain font-berthold">Software
+                  </h1>
+                  <div class="d-inline-flex mb-lg-5">
+                    <p class="m-0 text-white"><a class="text-white" href="../../index.php">Inicio</a></p>
+                    <p class="m-0 text-white px-2">/</p>
+                    <p class="m-0 text-white">Gestor de Software</p>
+                  </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="tile p-0">
-                    </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="tile p-0">
+              </div>
+            </div>
+          </div>
+
+
+          <div class="container-fluid py-4">
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <button class="btn-crud btn-secondary btn-icon-split" id="agregar">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-plus-circle"></i>
+                  </span>
+                  <span class="text text-white">Agregar Software</span>
+                </button>
+              </div>
+              <div class="card-body bg-darkwhite">
+                <div class="table-responsive">
+                  <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%"
+                    cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Proovedor</th>
+                        <th>Activado</th>
+                        <th>Tipo Licencia</th>
+                        <th>Fecha Adquisición</th>
+                        <th>Fecha Activación</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody >
+                        
+                    </tbody>                                
+                    <tfoot>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Proovedor</th>
+                        <th>Activado</th>
+                        <th>Tipo Licencia</th>
+                        <th>Fecha Adquisición</th>
+                        <th>Fecha Activación</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </tfoot>
+                  </table>
                 </div>
+              </div>
             </div>
 
-          
-            <div class="container-fluid py-4">
-            
-                <!-- DataTales Example -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <button class="btn-crud btn-secondary btn-icon-split" id="agregar">
-                            <span class="icon text-white-50">
-                                <i class="fas fa-plus-circle"></i> 
-                            </span>
-                            <span class="text text-white">Agregar Software</span>
-                        </button>
-                    </div>
-                    <div class="card-body bg-darkwhite">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Nombre</th>
-                                        <th>Proovedor</th>
-                                        <th>Tipo Licencia</th>
-                                        <th>Activado</th>
-                                        <th>Fecha Adquisición</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="softwareTableBody">
-                                    
-                                </tbody>                                
-                                <tfoot>
-                                    <tr>
-                                        <th>Nombre</th>
-                                        <th>Proovedor</th>
-                                        <th>Tipo Licencia</th>
-                                        <th>Activado</th>
-                                        <th>Fecha Adquisición</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </tfoot>
-                                <tbody>
-                                    
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <!-- /.container-fluid -->
+          </div>
+          <!-- /.container-fluid -->
 
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.php -->
         <footer class="footer">
           <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Acroware © 2024. Todos los derechos reservados.</span>
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Acroware © 2024. Todos los
+              derechos reservados.</span>
           </div>
-        </footer> 
+        </footer>
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
-    </div>   
+    </div>
     <!-- page-body-wrapper ends -->
   </div>
   <!-- container-scroller -->
 
 
+
   <!-- Logout Modal-->
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title text-primary" id="modal-register-label">¿Listo para partir?</h3>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <i class="fas fa-times" class="element-white"></i>
-                </button>
-            </div> 
-            <div class="modal-body">
-                <div class="card-body">
-                    <p class="card-description">Seleccione "Cerrar sesión" a continuación si está list@ para finalizar su sesión actual.</p>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
-                <a class="btn-crud btn-primary text-bold" href="../../cerrar.php">Cerrar Sesión</a>
-            </div>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title text-primary" id="modal-register-label">¿Listo para partir?</h3>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
         </div>
+        <div class="modal-body">
+          <div class="card-body">
+            <p class="card-description">Seleccione "Cerrar sesión" a continuación si está list@ para finalizar su sesión
+              actual.</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
+            aria-label="Close" value="Cancelar" id="cancelButton">
+          <a class="btn-crud btn-primary text-bold" href="../../cerrar.php">Cerrar Sesión</a>
+        </div>
+      </div>
     </div>
   </div>
 
+
   <!-- Create Modal-->
-  <div class="modal fade modal-crud" id="modalCrudAgregar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
+  <div class="modal fade modal-crud" id="modalCrudAgregar" tabindex="-1" role="dialog"
+    aria-labelledby="modal-register-label" aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header bg-primary">
-                <h3 class="modal-title text-white" id="modal-register-label">Agregar Software</h3>
-                <p class="modal">Ingrese los datos del Software:</p>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <i class="fas fa-times" class="element-white"></i>
-                </button>
-            </div> 
-            <form class="forms-sample" id='aggSoftware' method='post'>
-            <div class="modal-body">
-                <div class="grid-margin-modal">          
-                    <div class="card-body">
-                        <p class="card-description">Por favor, complete los siguientes campos para agregar un nuevo software al sistema:</p>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="Dni" class="text-bold">Proveedor</label>
-                                <input type="text" class="form-control" id="proveedor" placeholder="Proveedor" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
-                            </div>
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h3 class="modal-title text-white" id="modal-register-label">Agregar Software</h3>
+          <p class="modal">Ingrese los datos del Usuario:</p>
+          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
+        </div>
+        <form class="forms-sample" id="formAgregar">
+          <div class="modal-body">
+            <div class="grid-margin-modal">
+              <div class="card-body">
+                <p class="card-description">Por favor, complete los siguientes campos para agregar un nuevo software al
+                  sistema:</p>
+                  <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="Name" class="text-bold">Nombre</label>
-                                <input type="text" class="form-control" id="nombre_software" placeholder="Nombre" required>
+                                <input type="text" class="form-control" id="nombre_softwareA" placeholder="Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                             </div>
+                            <div class="form-group col-md-6">
+                                <label for="proveedor" class="text-bold">Proveedor</label>
+                                <input type="text" class="form-control" id="proveedorA" placeholder="Proveedor" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                            </div>
+                            
                         </div>
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="activo" class="text-bold">Activo</label>
                             <div class="form-check mx-4">
-                                <input class="form-check-input" type="radio" name="activo" id="si_activo" value="si" required>
+                                <input class="form-check-input" type="radio" name="activoA" id="si_activo" value="Si" required>
                                 <label class="form-check-label" for="si_activo">
                                     Sí
                                 </label>
                             </div>
                             <div class="form-check mx-4">
-                                <input class="form-check-input" type="radio" name="activo" id="no_activo" value="no" required>
+                                <input class="form-check-input" type="radio" name="activoA" id="no_activo" value="No" required>
                                 <label class="form-check-label" for="no_activo">
                                     No
                                 </label>
@@ -419,7 +440,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                         </div>
                           <div class="form-group col-md-6">
                               <label for="licencia" class="text-bold">Tipo Licencia</label>
-                              <select class="form-control" id="licencia" required>
+                              <select class="form-control" id="licenciaA" required>
                                   <option value="">Seleccione un Tipo</option>
                                   <option value="Dominio Público">Dominio Público</option>
                                   <option value="Codigo Abierto">Codigo Abierto</option>
@@ -429,97 +450,103 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                               </select>
                           </div>
                         </div>
-                        <div class="form-group col-md-12">
-                                <label for="Name" class="text-bold">Fecha de Adquisición</label>
-                                <input type="date" class="form-control" id="fecha_adqui" placeholder="Fecha de adquisición" required>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
-                <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Software ">
-            </div>
-          </form>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="modalCrudEliminar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header bg-primary">
-                <h3 class="modal-title text-white" id="modal-register-label">Eliminar Software </h3>
-                <p class="modal">Ingrese los datos del Software:</p>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <i class="fas fa-times" class="element-white"></i>
-                </button>
-            </div> 
-            <form class="forms-sample" id="eliminarSoftwareForm">
-            <div class="modal-body">
-                <div class="grid-margin-modal">          
-                    <div class="card-body">
-                        <p class="card-description">¿Está seguro de que desea eliminar el Software?</p>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <p class="text-danger"><small>Esta acción no se puede deshacer.</small></p>
+                                <label for="fecha_aqui" class="text-bold">Fecha Adquisición</label>
+                                <input type="date" class="form-control" name="fecha_adqui" id="fecha_adquiA" placeholder="Selecciona una fecha" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="fecha_activacionA" class="text-bold">Fecha Activación</label>
+                                <input type="date" class="form-control" name="fecha_activacionA" id="fecha_activacionA" placeholder="Selecciona una fecha" required>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
-                <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Software ">
-            </div>
-          </form>
-        </div>
+          <div class="modal-footer">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Software ">
+          </div>
+        </form>
+      </div>
     </div>
-</div>
+  </div>
 
-<div class="modal fade" id="modalCrud" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
+  <div class="modal fade" id="modalCrudEliminar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
+    aria-hidden="true">
     <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header bg-primary">
-                <h3 class="modal-title text-white" id="modal-register-label">Editar Software</h3>
-                <p class="modal">Ingrese los datos del Usuario:</p>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <i class="fas fa-times" class="element-white"></i>
-                </button>
-            </div> 
-            <form class="forms-sample" id='editarSoftwareForm'>
-            <div class="modal-body">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h3 class="modal-title text-white" id="modal-register-label">Eliminar Software </h3>
+          <p class="modal">Ingrese los datos del Usuario:</p>
+          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
+        </div>
+        <form class="forms-sample" id="formEliminar">
+          <div class="modal-body">
+            <div class="grid-margin-modal">
+              <div class="card-body">
+                <p class="card-description">¿Está seguro de que desea desactivar el software?</p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Software ">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalCrudEditar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h3 class="modal-title text-white" id="modal-register-label">Editar Software</h3>
+          <p class="modal">Ingrese los datos del Usuario:</p>
+          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
+        </div>
+        <form class="forms-sample" id="formEditar">
+        <div class="modal-body">
                 <div class="grid-margin-modal">          
                     <div class="card-body">
                         <p class="card-description">Por favor, complete los siguientes campos para editar la información del software seleccionado:</p>
                         <div class="form-row">
                           <div class="form-group col-md-6">
+                              <label for="Name" class="text-bold">Nombre</label>
+                              <input type="text" class="form-control" id="nombre_softwareE" placeholder="Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                          </div>
+                          <div class="form-group col-md-6">
                               <label for="Dni" class="text-bold">Proveedor</label>
                               <input type="text" class="form-control" id="proveedorE" placeholder="Proveedor" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                           </div>
-                          <div class="form-group col-md-6">
-                              <label for="Name" class="text-bold">Nombre</label>
-                              <input type="text" class="form-control" id="nombreE" placeholder="Nombre" required>
-                          </div>
+                          
                       </div>
                       <div class="form-row">
                         <div class="form-group col-md-6">
                           <label for="activoE" class="text-bold">Activo</label>
                           <div class="form-check mx-4">
-                              <input class="form-check-input" type="radio" name="activoE" id="si_activoE" value="si" required>
-                              <label class="form-check-label" for="si_activo">
+                              <input class="form-check-input" type="radio" name="activoE" id="si_activoE" value="Si" required>
+                              <label class="form-check-label" for="si_activoE">
                                   Sí
                               </label>
                           </div>
                           <div class="form-check mx-4">
-                              <input class="form-check-input" type="radio" name="activoE" id="no_activoE" value="no" required>
-                              <label class="form-check-label" for="no_activo">
+                              <input class="form-check-input" type="radio" name="activoE" id="no_activoE" value="No" required>
+                              <label class="form-check-label" for="no_activoE">
                                   No
                               </label>
                           </div>
                       </div>
                           <div class="form-group col-md-6">
-                              <label for="licencia" class="text-bold">Tipo Licencia</label>
+                              <label for="licenciaE" class="text-bold">Tipo Licencia</label>
                               <select class="form-control" id="licenciaE" required>
                                   <option value="">Seleccione un Tipo</option>
                                   <option value="Dominio Público">Dominio Público</option>
@@ -530,22 +557,229 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                               </select>
                           </div>
                       </div>
-                      <div class="form-group col-md-12">
-                                <label for="Name" class="text-bold">Fecha de Adquisición</label>
-                                <input type="date" class="form-control" id="fecha_adquiE" placeholder="Fecha de adquisición" required>
+                      <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="fecha_aqui" class="text-bold">Fecha Adquisición</label>
+                                <input type="date" class="form-control" name="fecha_adquiE" id="fecha_adquiE" placeholder="Selecciona una fecha" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="fecha_activacionA" class="text-bold">Fecha Activación</label>
+                                <input type="date" class="form-control" name="fecha_activacionE" id="fecha_activacionE" placeholder="Selecciona una fecha" required>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
-                <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Software ">
-            </div>
-          </form>
-        </div>
+          <div class="modal-footer">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Software ">
+          </div>
+        </form>
+      </div>
     </div>
-</div>
+  </div>
+  <script>
     
+    
+    $(document).ready(function () {
+      $("#formAgregar").submit(function (e) {
+        e.preventDefault();
+        nombre = $("#nombre_softwareA").val();
+        proveedor = $("#proveedorA").val();
+        activado= null;
+        let radios = document.getElementsByName('activoA');
+        for (var radio of radios) {
+          if (radio.checked) {
+            activado = radio.value;
+          }
+        }
+        tipo_licencia= $("#licenciaA").val();
+        fecha_adqui= $("#fecha_adquiA").val();
+        fecha_activacion= $("#fecha_activacionA").val();
+        $.ajax({
+          url: "../../Acciones/RestSoftware.php",
+          type: "POST",
+          data: JSON.stringify({
+            nombre: nombre,
+            proveedor: proveedor,
+            activado: activado,
+            tipo_licencia: tipo_licencia,
+            fecha_adqui : fecha_adqui,
+            fecha_activacion : fecha_activacion
+          }),
+          contentType: "application/json",
+          cache: false,
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            $("#modalCrudAgregar").modal('hide');
+            $("#nombre_softwareA").val("");
+            $("#proveedorA").val("");
+            $("#licenciaA").val("");
+            $("#fecha_adquiA").val("");
+            $("#fecha_activacionA").val("");
+            cargarTabla();
+          }
+        });
+      });
+    });
+
+    function cargarTabla() {
+      fetch('../../Acciones/RestSoftware.php', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          const tbody = document.querySelector('#dataTable tbody');
+          if ($.fn.DataTable.isDataTable('#dataTable')) {
+            $('#dataTable').DataTable().destroy();
+          }
+          tbody.innerHTML = '';
+
+          if (data.codigo === 0) {
+            tbody.innerHTML = data.dato;
+          } else {
+            const tr = document.createElement('tr');
+            const td = document.createElement('td');
+            td.textContent = 'No se encontraron software.';
+            td.setAttribute('colspan', '4');
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+          }
+
+          $('#dataTable').DataTable({
+            language: {
+              "decimal": "",
+              "emptyTable": "No hay información",
+              "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+              "infoEmpty": "Mostrando 0 to 0 of 0 entradas",
+              "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+              "infoPostFix": "",
+              "thousands": ",",
+              "lengthMenu": "Mostrar _MENU_ registros por página",
+              "loadingRecords": "Cargando...",
+              "processing": "Procesando...",
+              "search": "Buscar:",
+              "zeroRecords": "Sin resultados encontrados",
+              "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+              }
+            }
+          });
+          addEventListeners();
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          const tbody = document.querySelector('#dataTable tbody');
+          const tr = document.createElement('tr');
+          const td = document.createElement('td');
+          td.textContent = 'Error al cargar los datos.';
+          td.setAttribute('colspan', '4');
+          tr.appendChild(td);
+          tbody.appendChild(tr);
+        });
+    }
+
+
+    function addEventListeners() {
+      id = "";
+      $(document).on('click', '.editar', function () {
+        id = $(this).data("id");
+        fila = $(this).closest("tr");
+        nombre = fila.find('td:eq(0)').text();
+        proveedor = fila.find('td:eq(1)').text();
+        activado = fila.find('td:eq(2)').text();
+        licencia = fila.find('td:eq(3)').text();
+        fecha_adqui = fila.find('td:eq(4)').text();
+        fecha_activacion = fila.find('td:eq(5)').text();
+        $("#nombre_softwareE").val(nombre);
+        $("#proveedorE").val(proveedor);
+        if (activado==="Si") {
+          document.getElementById("si_activoE").checked = true;
+        }else{
+          document.getElementById("no_activoE").checked = true;
+        }
+        $("#licenciaE").val(licencia);
+        $("#fecha_adquiE").val(fecha_adqui);
+        $("#fecha_activacionE").val(fecha_activacion);
+        $("#modalCrudEditar").modal('show');
+      });
+
+      $("#formEditar").submit(function (e) {
+        e.preventDefault();
+        nombre = $("#nombre_softwareE").val();
+        proveedor = $("#proveedorE").val();
+        activadoE= null;
+        let radios = document.getElementsByName('activoE');
+        for (var radio of radios) {
+          if (radio.checked) {
+            activadoE = radio.value;
+          }
+        }
+        tipo_licencia= $("#licenciaE").val();
+        fecha_adqui= $("#fecha_adquiE").val();
+        fecha_activacion= $("#fecha_activacionE").val();
+        $.ajax({
+        url: "../../Acciones/RestSoftware.php",
+        type: "PUT",
+        data: JSON.stringify({
+          id: id,
+          nombre: nombre,
+          proveedor: proveedor,
+          activado: activadoE,
+          tipo_licencia: tipo_licencia,
+          fecha_adqui: fecha_adqui,
+          fecha_activacion: fecha_activacion
+        }),
+          contentType: "application/json",
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            $("#modalCrudEditar").modal('hide');
+            cargarTabla();
+          }
+        });
+      });
+
+      $(document).on('click', '.eliminar', function () {
+        id = $(this).data("id");
+        $("#modalCrudEliminar").modal('show');
+      });
+
+      $("#formEliminar").submit(function (e) {
+        e.preventDefault();
+
+        $.ajax({
+          url: "../../Acciones/RestSoftware.php",
+          type: "DELETE",
+          data: JSON.stringify({
+            id: id
+          }),
+          contentType: "application/json",
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            $("#modalCrudEliminar").modal('hide');
+            cargarTabla();
+          }
+        });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      cargarTabla();
+    });
+  </script>
 
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>
@@ -568,204 +802,12 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
   <script src="../../resources/js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
 
-    <!-- Page level plugins -->
-    <script src="../../resources/vendors/datatables/jquery.dataTables.min.js"></script>
-    <script src="../../resources/vendors/datatables/dataTables.bootstrap4.min.js"></script>
+  <!-- Page level plugins -->
+  <script src="../../resources/vendors/datatables/jquery.dataTables.min.js"></script>
+  <script src="../../resources/vendors/datatables/dataTables.bootstrap4.min.js"></script>
 
-
-    <!-- Page level custom scripts -->
-    <script src="../../resources/js/datatables-demo.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-    const apiBaseUrl = '../../Acciones/RestSoftware.php';
-    const softwareTableBody = document.getElementById('softwareTableBody');
-    const aggSoftware = document.getElementById('aggSoftware');
-    const editarModal = new bootstrap.Modal(document.getElementById('modalCrud'));
-    const eliminarModal = new bootstrap.Modal(document.getElementById('modalCrudEliminar'));
-    let softwareAEliminarId = null;
-    let softwareAEditarId = null;
-
-    async function fetchSoftware() {
-      try {
-        const response = await fetch(apiBaseUrl);
-        const data = await response.json();
-
-        softwareTableBody.innerHTML = '';
-        data.forEach(software => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${software.nombre_software}</td>
-            <td>${software.proveedor}</td>
-            <td>${software.tipo_licencia}</td>
-            <td>${software.activado}</td>
-            <td>${software.fecha_adqui}</td>
-            <td>
-            <center>          
-              <button class="btn btn-warning btn-circle element-white editar" id="editar" onclick="showEditarModal(${software.id})">
-                <i class="fas fa-edit" ></i>
-              </button>
-              <button class="btn btn-danger btn-circle eliminar" id="eliminar" onclick="showEliminarModal(${software.id})">
-                <i class="fas fa-trash"></i>
-              </button>
-            </center>
-            </td>
-          `;
-          softwareTableBody.appendChild(row);
-        });
-      } catch (error) {
-        console.error('Error fetching software:', error);
-      }
-    }
-
-  aggSoftware.addEventListener('submit', async function (event) {
-  event.preventDefault();
-  const nombre_software = document.getElementById('nombre_software').value;
-  const proveedor = document.getElementById('proveedor').value;
-  const tipo_licencia = document.getElementById('licencia').value;
-  let activo = null;
-  let radios = document.getElementsByName('activo');
-  for (var radio of radios) {
-    if (radio.checked) {
-      activo = radio.value;
-    }
-  }
-  const fecha_adqui = document.getElementById('fecha_adqui').value;
-  try {
-    const response = await fetch(apiBaseUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ nombre_software, proveedor, tipo_licencia, activo, fecha_adqui})
-    });
-
-    if (response.ok) {
-      // Si la solicitud es exitosa, recarga la lista de marcas
-      fetchSoftware();
-      // Limpia los campos del formulario
-      aggSoftware.reset();
-      // Cierra el modal
-      $('#modalCrudAgregar').modal('hide');
-    } else {
-      console.error('Error al agregar software:', response.statusText);
-    }
-  } catch (error) {
-    console.error('Error al agregar software:', error);
-  }
-});
-
-
-
-    document.getElementById('editarSoftwareForm').addEventListener('submit', async function (event) {
-      event.preventDefault();
-      // Obtener los valores actualizados del formulario
-      const id = softwareAEditarId;
-      const nombre_software = document.getElementById('nombreE').value;
-      const proveedor = document.getElementById('proveedorE').value;
-      const tipo_licencia = document.getElementById('licenciaE').value;
-      let activo = null;
-      let radios = document.getElementsByName('activoE');
-      for (var radio of radios) {
-        if (radio.checked) {
-          activo = radio.value;
-        }
-      }
-      const fecha_adqui = document.getElementById('fecha_adquiE').value;
-
-      try {
-        // Enviar la solicitud de edición al servidor
-        const response = await fetch(apiBaseUrl + `?id=${id}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ nombre_software,proveedor, tipo_licencia,activo,fecha_adqui })
-        });
-
-        if (response.ok) {
-          // Si la solicitud es exitosa, recarga la lista de software
-          fetchSoftware();
-          // Cierra el modal de edición
-          editarModal.hide();
-        } else {
-          console.error('Error al editar software:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error al editar software:', error);
-      }
-    });
-
-
-
-    const eliminarSoftwareForm = document.getElementById('eliminarSoftwareForm');
-
-    eliminarSoftwareForm.addEventListener('submit', async function (event) {
-      event.preventDefault();
-      try {
-        const id = softwareAEliminarId;
-        const response = await fetch(apiBaseUrl + `?id=${id}`, {
-          method: 'DELETE'
-        });
-
-        if (response.ok) {
-          // Si la solicitud es exitosa, recarga la lista de marcas
-          fetchSoftware();
-          // Cierra el modal de eliminación
-          eliminarModal.hide()
-        } else {
-          console.error('Error al eliminar software:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error al eliminar software:', error);
-      }
-    });
-    window.showEditarModal = async function (id) {
-      try {
-        const response = await fetch(apiBaseUrl + `?id=${id}`);
-        if (!response.ok) {
-          throw new Error('Error al obtener detalles del software para editar');
-        }
-        const software = await response.json();
-        //console.log(software[0].nombre_software)
-        // Llenar los campos del formulario con los detalles del software
-        document.getElementById('proveedorE').value = software[0].proveedor;
-        document.getElementById('nombreE').value = software[0].nombre_software;
-        document.getElementById('fecha_adquiE').value = software[0].fecha_adqui;
-        let radio = software[0].activado;
-        if (radio="Si") {
-          document.getElementById("si_activoE").checked = true;
-        }else{
-          document.getElementById("no_activoE").checked = true;
-
-        }
-        const licenciaSeleccionada = software[0].tipo_licencia;
-        const licenciaE = document.getElementById('licenciaE');
-        for (let i = 0; i < licenciaE.options.length; i++) {
-          // Si el valor de la opción coincide con el valor seleccionado previamente
-          if (licenciaE.options[i].value === licenciaSeleccionada) {
-            // Marcamos esta opción como seleccionada
-            licenciaE.options[i].selected = true;
-            // Salimos del bucle ya que hemos encontrado la opción correcta
-            break;
-          }
-        }
-        softwareAEditarId = id; 
-        // Mostrar el modal de edición
-        editarModal.show();
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-
-    window.showEliminarModal = function (id) {
-      softwareAEliminarId = id;
-      eliminarModal.show()
-      console.log('Mostrar modal de eliminación para el ID:', id);
-    };
-
-    fetchSoftware();
-  });
-</script>
+  <!-- Page level custom scripts -->
+  <script src="../../resources/js/datatables-demo.js"></script>
+</body>
 
 </html>
