@@ -426,6 +426,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         </div>
     </div>
   </div>
+
   <div class="modal fade" id="modalCrud" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -445,15 +446,16 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                           <input type="hidden"  name="id" value="<?php echo $_SESSION['id']; ?>">
                           <div class="form-group col-md-6">
                               <label for="Name" class="text-bold">Nombre</label>
-                              <input type="text" class="form-control" placeholder="Nombre" name="nombre" value="<?php echo $_SESSION['nombre']?>" required>
+                              <input type="text" class="form-control" placeholder="Nombre" name="nombre" value="<?php echo $_SESSION['nombre']?>"  oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                           </div>
                           <div class="form-group col-md-6">
                               <label for="LastName" class="text-bold">Apellido</label>
-                              <input type="text" class="form-control" placeholder="Apellido" name="apellido" value="<?php echo $_SESSION['apellido']?>" required>
+                              <input type="text" class="form-control" placeholder="Apellido" name="apellido" value="<?php echo $_SESSION['apellido']?>"  oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                           </div>
                           <div class="form-group col-md-12">
                               <label for="ID" class="text-bold">Cédula</label>
-                              <input type="text" class="form-control" placeholder="Cédula" name="cedula" value="<?php echo $_SESSION['cedula']?>" required>
+                              <input type="text" class="form-control" id="cedula" placeholder="Cédula" name="cedula" value="<?php echo $_SESSION['cedula']?>" minlength="10" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);" onblur="validarCedula();" required>
+                              <span id="mensajeCedula" style="color: red;"></span>
                           </div>
                           <div class="form-group col-md-12">
                               <label for="Email" class="text-bold">Correo Electrónico</label>
@@ -471,6 +473,103 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           </div>
       </div>
   </div>
+
+  <script>
+    function validarCedula() {
+        var cedulaInput = document.getElementById('cedula').value;
+        var mensajeCedula = document.getElementById('mensajeCedula');
+
+        if (validarCedulaEcuador(cedulaInput)) {
+            mensajeCedula.textContent = '';
+            document.getElementById('cedula').setCustomValidity(''); // clear the invalid state
+            return true;
+        } else {
+            mensajeCedula.textContent = 'La cédula ingresada no es válida.';
+            document.getElementById('cedula').setCustomValidity('La cédula ingresada no es válida.'); // set the invalid state
+            return false;
+        }
+    }
+
+    function validarCedulaEcuador(cedula) {
+        if (cedula.length !== 10) {
+            return false;
+        }
+
+        if (!/^\d+$/.test(cedula)) {
+            return false;
+        }
+
+        var todosIguales = /^(\d)\1*$/.test(cedula);
+        if (todosIguales) {
+            return false;
+        }
+
+        var digitos = cedula.substr(0, 9);
+        var total = 0;
+        for (var i = 0; i < digitos.length; i++) {
+            var digito = parseInt(digitos[i]);
+            if (i % 2 === 0) {
+                digito *= 2;
+                if (digito > 9) {
+                    digito -= 9;
+                }
+            }
+            total += digito;
+        }
+        var verificador = (total % 10 === 0) ? 0 : (10 - (total % 10));
+
+        if (parseInt(cedula[9]) !== verificador) {
+            return false;
+        }
+
+        return true;
+    }
+
+    document.getElementById('editProfileForm').addEventListener('submit', function(event) {
+        if (!validarCedula()) {
+            event.preventDefault();
+        }
+    });
+
+    document.getElementById('editPasswordForm').addEventListener('submit', function(event) {
+        checkPasswordMatch(); // Call this to set the custom validity if passwords don't match
+        if (document.getElementById('ConfirmPassword').checkValidity() === false) {
+            event.preventDefault();
+        }
+    });
+
+    function validatePassword(input) {
+        input.value = input.value.replace(/[^A-Za-z0-9]/g, ''); // Elimina caracteres especiales
+        input.value = input.value.slice(0, 20); // Limita la longitud a 20 caracteres
+                          
+        if (input.value.length < 8) {
+            input.setCustomValidity("La contraseña debe tener al menos 8 caracteres.");
+        } else if (input.value.length > 20) {
+            input.setCustomValidity("La contraseña no puede tener más de 20 caracteres.");
+        } else if (!/[A-Z]/.test(input.value)) {
+            input.setCustomValidity("La contraseña debe contener al menos una letra mayúscula.");
+        } else if (!/\d/.test(input.value)) {
+            input.setCustomValidity("La contraseña debe contener al menos un número.");
+        } else {
+            input.setCustomValidity(""); // Restablece el mensaje de error personalizado
+        }
+    }
+
+    function checkPasswordMatch() {
+        var password = document.getElementById("InputPassword").value;
+        var confirmPassword = document.getElementById("ConfirmPassword").value;
+        var errorDiv = document.getElementById("passwordMatchError");
+
+        if (password !== confirmPassword) {
+            errorDiv.style.display = "block";
+            document.getElementById("ConfirmPassword").setCustomValidity("Las contraseñas no coinciden.");
+        } else {
+            errorDiv.style.display = "none";
+            document.getElementById("ConfirmPassword").setCustomValidity("");
+        }
+    }
+</script>
+
 
 <div class="modal fade" id="modalCrudPass" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
   <div class="modal-dialog">
@@ -578,7 +677,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
   <!-- inject:js -->
   <script src="../../resources/js/off-canvas.js"></script>
   <script src="../../resources/js/modal.js"></script>
-  <script src="../../resources/js/validation.js"></script>
   <script src="../../resources/js/hoverable-collapse.js"></script>
   <script src="../../resources/js/template.js"></script>
   <script src="../../resources/js/settings.js"></script>
