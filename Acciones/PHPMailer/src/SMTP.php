@@ -278,51 +278,33 @@ class SMTP
         if ($level > $this->do_debug) {
             return;
         }
-        //Is this a PSR-3 logger?
+        $debug_output = ''; // Variable para almacenar la salida de depuración
+        // Is this a PSR-3 logger?
         if ($this->Debugoutput instanceof \Psr\Log\LoggerInterface) {
-            //Remove trailing line breaks potentially added by calls to SMTP::client_send()
-            $this->Debugoutput->debug(rtrim($str, "\r\n"));
-
-            return;
+            // Remove trailing line breaks potentially added by calls to SMTP::client_send()
+            $debug_output = rtrim($str, "\r\n");
+        } else {
+            switch ($this->Debugoutput) {
+                case 'error_log':
+                    // Don't output, just log
+                    /** @noinspection ForgottenDebugOutputInspection */
+                    $debug_output = $str;
+                    break;
+                case 'html':
+                    // Cleans up output a bit for a better looking, HTML-safe output
+                    $debug_output = gmdate('Y-m-d H:i:s') . ' ' . htmlentities(preg_replace('/[\r\n]+/', '', $str), ENT_QUOTES, 'UTF-8') . "<br>\n";
+                    break;
+                case 'echo':
+                default:
+                    // Normalize line breaks
+                    $str = preg_replace('/\r\n|\r/m', "\n", $str);
+                    $debug_output = gmdate('Y-m-d H:i:s') . "\t" . trim(str_replace("\n", "\n                   \t                  ", trim($str))) . "\n";
+            }
         }
-        //Avoid clash with built-in function names
-        if (is_callable($this->Debugoutput) && !in_array($this->Debugoutput, ['error_log', 'html', 'echo'])) {
-            call_user_func($this->Debugoutput, $str, $level);
-
-            return;
-        }
-        switch ($this->Debugoutput) {
-            case 'error_log':
-                //Don't output, just log
-                /** @noinspection ForgottenDebugOutputInspection */
-                error_log($str);
-                break;
-            case 'html':
-                //Cleans up output a bit for a better looking, HTML-safe output
-                echo gmdate('Y-m-d H:i:s'), ' ', htmlentities(
-                    preg_replace('/[\r\n]+/', '', $str),
-                    ENT_QUOTES,
-                    'UTF-8'
-                ), "<br>\n";
-                break;
-            case 'echo':
-            default:
-                //Normalize line breaks
-                $str = preg_replace('/\r\n|\r/m', "\n", $str);
-                echo gmdate('Y-m-d H:i:s'),
-                "\t",
-                    //Trim trailing space
-                trim(
-                    //Indent for readability, except for trailing break
-                    str_replace(
-                        "\n",
-                        "\n                   \t                  ",
-                        trim($str)
-                    )
-                ),
-                "\n";
-        }
+        // Retornar la salida de depuración para su manejo
+        return $debug_output;
     }
+
 
     /**
      * Connect to an SMTP server.

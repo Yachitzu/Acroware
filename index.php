@@ -254,6 +254,13 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               <span class="menu-title">Software</span>
             </a>
           </li>
+          
+          <li class="nav-item">
+            <a class="nav-link" href="pages/others/report.php">
+              <i class="icon-paper menu-icon"></i>
+              <span class="menu-title">Reporte</span>
+            </a>
+          </li>
 
           <li class="nav-item">
             <a class="nav-link" href="pages/others/QR.php">
@@ -264,7 +271,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
           <li class="nav-item">
             <a class="nav-link" href="pages/others/acount.php">
-              <i class="icon-paper menu-icon"></i>
+              <i class="icon-head menu-icon"></i>
               <span class="menu-title">Cuenta</span>
             </a>
           </li>

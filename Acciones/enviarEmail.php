@@ -21,7 +21,7 @@ class Email
             $mail->Password = 'Acr@ware';
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
-
+            $mail->CharSet = 'UTF-8';
             $mail->setFrom('acroware2002@outlook.com', 'Acroware');
             $mail->addAddress($email);
             $mail->Subject = $asunto;

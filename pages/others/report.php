@@ -18,7 +18,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Gestión - Marca</title>
+  <title>Reportes</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="../../resources/vendors/feather/feather.css">
   <link rel="stylesheet" href="../../resources/vendors/ti-icons/css/themify-icons.css">
@@ -187,91 +187,91 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       </div>
       <!-- partial -->
       <!-- partial:partials/_sidebar.php -->
-      <nav class="sidebar sidebar-offcanvas " id="sidebar">
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="../../index.php">
-              <i class="icon-grid menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
-            </a>
-          </li>
+        <nav class="sidebar sidebar-offcanvas " id="sidebar">
+            <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="../../index.php">
+                <i class="icon-grid menu-icon"></i>
+                <span class="menu-title">Dashboard</span>
+                </a>
+            </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="users.php">
-              <i class="icon-head menu-icon"></i>
-              <span class="menu-title">Usuarios</span>
-            </a>
-          </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../management/users.php">
+                <i class="icon-head menu-icon"></i>
+                <span class="menu-title">Usuarios</span>
+                </a>
+            </li>
 
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <i class="icon-columns menu-icon"></i>
-              <span class="menu-title">Lugares</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../places/faculty.php">Facultades</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../places/block.php">Bloques</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../places/area.php">Áreas</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../places/location.php">Ubicaciones</a></li>
-              </ul>
-            </div>
-          </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <i class="icon-columns menu-icon"></i>
+                <span class="menu-title">Lugares</span>
+                <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="../places/faculty.php">Facultades</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="../places/block.php">Bloques</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="../places/area.php">Áreas</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="../places/location.php">Ubicaciones</a></li>
+                </ul>
+                </div>
+            </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="marca.php">
-              <i class="icon-bar-graph menu-icon"></i>
-              <span class="menu-title">Marcas</span>
-            </a>
-          </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../management/marca.php">
+                <i class="icon-bar-graph menu-icon"></i>
+                <span class="menu-title">Marcas</span>
+                </a>
+            </li>
 
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="ui-basic">
-              <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">Inventario</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="auth">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.php">Bienes Informáticos</a></li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="ui-basic">
+                <i class="icon-layout menu-icon"></i>
+                <span class="menu-title">Inventario</span>
+                <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="auth">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.php">Bienes Informáticos</a></li>
 
-                <li class="nav-item"> <a class="nav-link" href="../assets/repowering.php">Repotenciación</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.php">Bienes Mobiliarios</a></li>
-              </ul>
-            </div>
-          </li>
+                    <li class="nav-item"> <a class="nav-link" href="../assets/repowering.php">Repotenciación</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.php">Bienes Mobiliarios</a></li>
+                </ul>
+                </div>
+            </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="software.php">
-              <i class="icon-grid-2 menu-icon"></i>
-              <span class="menu-title">Software</span>
-            </a>
-          </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../management/software.php">
+                <i class="icon-grid-2 menu-icon"></i>
+                <span class="menu-title">Software</span>
+                </a>
+            </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="../others/report.php">
-              <i class="icon-paper menu-icon"></i>
-              <span class="menu-title">Reportes</span>
-            </a>
-          </li>
+            <li class="nav-item">
+                <a class="nav-link" href="report.php">
+                    <i class="icon-paper menu-icon"></i>
+                    <span class="menu-title">Reportes</span>
+                </a>
+            </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="../others/QR.php">
-              <i class="icon-contract menu-icon"></i>
-              <span class="menu-title">Escaneo QR</span>
-            </a>
-          </li>
+            <li class="nav-item">
+                <a class="nav-link" href="QR.php">
+                <i class="icon-contract menu-icon"></i>
+                <span class="menu-title">Escaneo QR</span>
+                </a>
+            </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="../others/acount.php">
-              <i class="icon-head menu-icon"></i>
-              <span class="menu-title">Cuenta</span>
-            </a>
-          </li>
+            <li class="nav-item">
+                <a class="nav-link" href="acount.php">
+                    <i class="icon-head menu-icon"></i>
+                <span class="menu-title">Cuenta</span>
+                </a>
+            </li>
 
-        </ul>
-      </nav>
+            </ul>
+        </nav>
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -280,11 +280,11 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <div class="col-md-12">
               <div class="profile">
                 <div class="cover-image-gest d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5">
-                  <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase titleMain font-berthold">Marcas</h1>
+                  <h1 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase titleMain font-berthold">Reportes</h1>
                   <div class="d-inline-flex mb-lg-5">
                     <p class="m-0 text-white"><a class="text-white" href="../../index.php">Inicio</a></p>
                     <p class="m-0 text-white px-2">/</p>
-                    <p class="m-0 text-white">Gestor de Marcas</p>
+                    <p class="m-0 text-white">Registro de Reportes</p>
                   </div>
                 </div>
               </div>
@@ -301,39 +301,93 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
               <div class="card-header py-3">
-                <button class="btn-crud btn-secondary btn-icon-split" id="agregar">
-                  <span class="icon text-white-50">
-                    <i class="fas fa-plus-circle"></i>
-                  </span>
-                  <span class="text text-white">Agregar Marca</span>
-                </button>
+              <div class="row">
+                <!-- Card 1: Bienes Informáticos -->
+                <div class="col-md-4 stretch-card transparent">
+                    <div class="card card-dark-blue">
+                        <div class="card-body">
+                            <p class="mb-4 font-berthold-small">Bienes Informáticos</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="fs-30 mb-2"><i class="ti-desktop"></i> </p>
+                                <button class="btn btn-primary text-bold generar-reporte-info" id="generar-reporte-info">
+                                    Generar Reporte  <i class="fas fa-file-alt"></i>
+                                </button>
+                            </div>
+                            <p>Tipo Reporte</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2: Bienes Mobiliarios -->
+                <div class="col-md-4 stretch-card transparent">
+                    <div class="card card-light-danger">
+                        <div class="card-body">
+                            <p class="mb-4 font-berthold-small">Bienes Mobiliarios</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="fs-30 mb-2"><i class="ti-panel"></i> </p>
+                                <button class="btn btn-primary text-bold generar-reporte-mobi" id="generar-reporte-mobi">
+                                    Generar Reporte  <i class="fas fa-file-alt"></i>
+                                </button>
+                            </div>
+                            <p>Tipo Reporte</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3: Software -->
+                <div class="col-md-4 stretch-card transparent">
+                    <div class="card card-light-blue">
+                        <div class="card-body">
+                            <p class="mb-4 font-berthold-small">Software</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="fs-30 mb-2"><i class="ti-layers"></i> </p>
+                                <button class="btn btn-primary text-bold generar-reporte-sof" id="generar-reporte-sof">
+                                    Generar Reporte  <i class="fas fa-file-alt"></i>
+                                </button>
+                            </div>
+                            <p>Tipo Reporte</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
               </div>
               <div class="card-body bg-darkwhite">
                 <div class="table-responsive">
                   <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%"
                     cellspacing="0">
                     <thead>
-                      <tr>
-
-                        <th>Nombre</th>
-                        <th>País Origen</th>
-                        <th>Área</th>
-                        <th>Descripción</th>
-                        <th>Acciones</th>
-
-                      </tr>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Tipo Reporte</th>
+                            <th>Extensión</th>
+                            <th>Fecha Generación</th>
+                            <th>Usuario</th>
+                            <th>Acción</th>
+                        </tr>
                     </thead>
-                    <tbody id="marcasTableBody">
+                    <tbody>
+                        <tr>
+                            <th>Reporte_Bienes01</th>
+                            <th>B. Informaticos</th>
+                            <th>PDF</th>
+                            <th>2024/05/15</th>
+                            <th>Christian</th>
+                            <th>
+                                <center>
+                                    <button class="btn btn-danger btn-circle eliminar" data-id="' . $respuesta['id'] . '" id="eliminar">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </center>
+                            </th>
+                        </tr>
                     </tbody>
                     <tfoot>
-                      <tr>
-
-                        <th>Nombre</th>
-                        <th>País Origen</th>
-                        <th>Área</th>
-                        <th>Descripción</th>
-                        <th>Acciones</th>
-                      </tr>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Tipo Reporte</th>
+                            <th>Extensión</th>
+                            <th>Fecha Generación</th>
+                            <th>Usuario</th>
+                            <th>Acción</th>
+                        </tr>
                     </tfoot>
                     <tbody>
 
@@ -392,12 +446,12 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
   </div>
 
   <!-- Create Modal-->
-  <div class="modal fade modal-crud" id="modalCrudAgregar" tabindex="-1" role="dialog"
+  <div class="modal fade modal-crud" id="modalInfo" tabindex="-1" role="dialog"
     aria-labelledby="modal-register-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
-          <h3 class="modal-title text-white" id="modal-register-label">Agregar Marca</h3>
+          <h3 class="modal-title text-white" id="modal-register-label">Reportes B. Informáticos</h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
@@ -407,13 +461,8 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
-                <p class="card-description">Por favor, complete los siguientes campos para agregar una nueva marca al
-                  sistema:</p>
+                <p class="card-description">Por favor, complete los siguientes campos para generar un reporte:</p>
                 <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="nombreC" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre" required>
-                  </div>
                   <div class="form-group col-md-6">
                     <label for="areaC" class="text-bold">Área</label>
                     <select class="form-control" name="areaC" id="areaC" required>
@@ -422,18 +471,33 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                       <option value="mobiliario">Mobiliario</option>
                     </select>
                   </div>
-
+                    <div class="form-group col-md-6">
+                        <label for="areaC" class="text-bold">Marca</label>
+                        <select class="form-control" name="areaC" id="areaC" required>
+                        <option value="">Seleccione un Área</option>
+                        <option value="tecnologico">DELL</option>
+                        <option value="mobiliario">HP</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="fechaInicial" class="text-bold">Fecha Inicial</label>
+                        <input type="date" class="form-control" name="fechaInicial" id="fechaInicial" placeholder="Selecciona una fecha" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="fechaFinal" class="text-bold">Fecha Final</label>
+                        <input type="date" class="form-control" name="fechaFinal" id="fechaFinal" placeholder="Selecciona una fecha" required>
+                    </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-12">
-                    <label for="paisC" class="text-bold">País</label>
-                    <input type="text" class="form-control" name="paisC" id="paisC" placeholder="País"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
-                  </div>
-                  <div class="form-group col-md-12">
-                    <label for="descripcionC" class="text-bold">Descripción</label>
-                    <textarea class="form-control" name="descripcionC" id="descripcionC"
-                      placeholder="Descripción"></textarea>
+                    <label for="areaC" class="text-bold">Tipo Archivo</label>
+                    <select class="form-control" name="areaC" id="areaC" required>
+                      <option value="">Seleccione un Tipo</option>
+                      <option value="tecnologico">PDF</option>
+                      <option value="tecnologico">Excel</option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -442,47 +506,233 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           <div class="modal-footer">
             <input type="button" class="btn-crud btn-secondary text-white text-bold " data-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
-            <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Marca ">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Generar Reporte ">
           </div>
         </form>
       </div>
     </div>
   </div>
 
-  <!-- Delete Modal-->
-  <div class="modal fade" id="modalCrudEliminar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
-    aria-hidden="true">
+  <!-- Create Modal-->
+  <div class="modal fade modal-crud" id="modalMobi" tabindex="-1" role="dialog"
+    aria-labelledby="modal-register-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
-          <h3 class="modal-title text-white" id="modal-register-label">Eliminar Marca </h3>
+          <h3 class="modal-title text-white" id="modal-register-label">Reportes B. Mobiliarios</h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="eliminarMarcaForm">
+        <form class="forms-sample" id="agregarMarcaForm" method="post">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
-                <p class="card-description">¿Está seguro de que desea eliminar la Marca?</p>
+                <p class="card-description">Por favor, seleccione los siguientes filtros para generar un reporte:</p>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="areaC" class="text-bold">Custodio</label>
+                    <select class="form-control" name="areaC" id="areaC" required>
+                      <option value="">Seleccione un Custodio</option>
+                      <option value="tecnologico">Todos</option>
+                      <option value="tecnologico">Esteban Cifuentes</option>
+                      <option value="mobiliario">Estefania Mora</option>
+                    </select>
+                  </div>
+                </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <p class="text-danger"><small>Esta acción no se puede deshacer.</small></p>
+                    <label for="areaC" class="text-bold">Área</label>
+                    <select class="form-control" name="areaC" id="areaC" required>
+                      <option value="">Seleccione un Área</option>
+                      <option value="tecnologico">Todos</option>
+                      <option value="tecnologico">Tecnológico</option>
+                      <option value="mobiliario">Mobiliario</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="areaC" class="text-bold">Marca</label>
+                    <select class="form-control" name="areaC" id="areaC" required>
+                      <option value="">Seleccione una Marca</option>
+                      <option value="tecnologico">Todos</option>
+                      <option value="tecnologico">DELL</option>
+                      <option value="mobiliario">HP</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="fechaInicial" class="text-bold">Fecha Inicial</label>
+                        <input type="date" class="form-control" name="fechaInicial" id="fechaInicial" placeholder="Selecciona una fecha" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="fechaFinal" class="text-bold">Fecha Final</label>
+                        <input type="date" class="form-control" name="fechaFinal" id="fechaFinal" placeholder="Selecciona una fecha" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="areaC" class="text-bold">Tipo Archivo</label>
+                        <select class="form-control" name="areaC" id="areaC" required>
+                        <option value="">Seleccione un Tipo</option>
+                        <option value="tecnologico">PDF</option>
+                        <option value="tecnologico">Excel</option>
+                        </select>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-dismiss="modal"
+              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Generar Reporte ">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Create Modal-->
+  <div class="modal fade modal-crud" id="modalInfo" tabindex="-1" role="dialog"
+    aria-labelledby="modal-register-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h3 class="modal-title text-white" id="modal-register-label">Reportes B. Informáticos</h3>
+          <p class="modal">Ingrese los datos del Usuario:</p>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
+        </div>
+        <form class="forms-sample" id="agregarMarcaForm" method="post">
+          <div class="modal-body">
+            <div class="grid-margin-modal">
+              <div class="card-body">
+                <p class="card-description">Por favor, seleccione los siguientes filtros para generar un reporte:</p>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="areaC" class="text-bold">Área</label>
+                    <select class="form-control" name="areaC" id="areaC" required>
+                      <option value="">Seleccione un Área</option>
+                      <option value="tecnologico">Tecnológico</option>
+                      <option value="mobiliario">Mobiliario</option>
+                    </select>
+                  </div>
+                    <div class="form-group col-md-6">
+                        <label for="areaC" class="text-bold">Marca</label>
+                        <select class="form-control" name="areaC" id="areaC" required>
+                        <option value="">Seleccione un Área</option>
+                        <option value="tecnologico">DELL</option>
+                        <option value="mobiliario">HP</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="fechaInicial" class="text-bold">Fecha Inicial</label>
+                        <input type="date" class="form-control" name="fechaInicial" id="fechaInicial" placeholder="Selecciona una fecha" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="fechaFinal" class="text-bold">Fecha Final</label>
+                        <input type="date" class="form-control" name="fechaFinal" id="fechaFinal" placeholder="Selecciona una fecha" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="areaC" class="text-bold">Tipo Archivo</label>
+                    <select class="form-control" name="areaC" id="areaC" required>
+                      <option value="">Seleccione un Tipo</option>
+                      <option value="tecnologico">PDF</option>
+                      <option value="tecnologico">Excel</option>
+                    </select>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
+            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
-            <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Marca ">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Generar Reporte ">
           </div>
         </form>
       </div>
     </div>
   </div>
+
+  <!-- Create Modal-->
+  <div class="modal fade modal-crud" id="modalSoft" tabindex="-1" role="dialog"
+    aria-labelledby="modal-register-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h3 class="modal-title text-white" id="modal-register-label">Reportes Software</h3>
+          <p class="modal">Ingrese los datos del Usuario:</p>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
+        </div>
+        <form class="forms-sample" id="agregarMarcaForm" method="post">
+          <div class="modal-body">
+            <div class="grid-margin-modal">
+              <div class="card-body">
+                <p class="card-description">Por favor, seleccione los siguientes filtros para generar un reporte:</p>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="areaC" class="text-bold">Tipo Licencia</label>
+                    <select class="form-control" name="areaC" id="areaC" required>
+                      <option value="">Seleccione un Custodio</option>
+                      <option value="tecnologico">Gratuito</option>
+                      <option value="tecnologico">Privado</option>
+                      <option value="mobiliario">Todos</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="areaC" class="text-bold">Activado</label>
+                    <select class="form-control" name="areaC" id="areaC" required>
+                      <option value="">Seleccione un estado</option>
+                      <option value="tecnologico">Si</option>
+                      <option value="tecnologico">No</option>
+                      <option value="mobiliario">Todos</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="fechaInicial" class="text-bold">Fecha Inicial</label>
+                        <input type="date" class="form-control" name="fechaInicial" id="fechaInicial" placeholder="Selecciona una fecha" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="fechaFinal" class="text-bold">Fecha Final</label>
+                        <input type="date" class="form-control" name="fechaFinal" id="fechaFinal" placeholder="Selecciona una fecha" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="areaC" class="text-bold">Tipo Archivo</label>
+                        <select class="form-control" name="areaC" id="areaC" required>
+                        <option value="">Seleccione un Tipo</option>
+                        <option value="tecnologico">PDF</option>
+                        <option value="tecnologico">Excel</option>
+                        </select>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-dismiss="modal"
+              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="submit" class="btn-crud btn-primary text-bold" value=" Generar Reporte ">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- Edit Modal-->
   <div class="modal fade" id="modalCrudEditar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
     aria-hidden="true">
@@ -542,6 +792,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 
 
 
+
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
@@ -573,6 +824,24 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 
 
 <script>
+    document.getElementById('fechaInicial').addEventListener('change', function() {
+        var fechaInicial = document.getElementById('fechaInicial').value;
+        document.getElementById('fechaFinal').min = fechaInicial;
+    });
+
+    document.getElementById('fechaFinal').addEventListener('change', function() {
+        var fechaFinal = document.getElementById('fechaFinal').value;
+        var fechaInicial = document.getElementById('fechaInicial').value;
+        if (fechaFinal < fechaInicial) {
+            alert('La fecha final no puede ser anterior a la fecha inicial.');
+            document.getElementById('fechaFinal').value = '';
+        }
+        if (fechaFinal === fechaInicial) {
+            alert('La fecha final no puede ser la misma que la fecha inicial.');
+            document.getElementById('fechaFinal').value = '';
+        }
+    });
+
   document.addEventListener('DOMContentLoaded', function () {
     const apiBaseUrl = '../../Acciones/RestMarcas.php';
 

@@ -178,84 +178,91 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       </div>
       <!-- partial -->
       <!-- partial:partials/_sidebar.php -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="../../index.php">
-              <i class="icon-grid menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
-            </a>
-          </li>
+      <nav class="sidebar sidebar-offcanvas " id="sidebar">
+            <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="../../index.php">
+                <i class="icon-grid menu-icon"></i>
+                <span class="menu-title">Dashboard</span>
+                </a>
+            </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="../management/users.php">
-              <i class="icon-head menu-icon"></i>
-              <span class="menu-title">Usuarios</span>
-            </a>
-          </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../management/users.php">
+                <i class="icon-head menu-icon"></i>
+                <span class="menu-title">Usuarios</span>
+                </a>
+            </li>
 
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-              <i class="icon-columns menu-icon"></i>
-              <span class="menu-title">Lugares</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../places/faculty.php">Facultades</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../places/block.php">Bloques</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../places/area.php">Áreas</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../places/location.php">Ubicaciones</a></li>
-              </ul>
-            </div>
-          </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <i class="icon-columns menu-icon"></i>
+                <span class="menu-title">Lugares</span>
+                <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="../places/faculty.php">Facultades</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="../places/block.php">Bloques</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="../places/area.php">Áreas</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="../places/location.php">Ubicaciones</a></li>
+                </ul>
+                </div>
+            </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="../management/marca.php">
+            <li class="nav-item">
+                <a class="nav-link" href="../management/marca.php">
                 <i class="icon-bar-graph menu-icon"></i>
-              <span class="menu-title">Marcas</span>
-            </a>
-          </li>
+                <span class="menu-title">Marcas</span>
+                </a>
+            </li>
 
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="ui-basic">
-              <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">Inventario</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="auth">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.php">Bienes Informáticos</a></li>
-                
-                <li class="nav-item"> <a class="nav-link" href="../assets/repowering.php">Repotenciación</a></li>
-                <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.php">Bienes Mobiliarios</a></li>
-              </ul>
-            </div>
-          </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="ui-basic">
+                <i class="icon-layout menu-icon"></i>
+                <span class="menu-title">Inventario</span>
+                <i class="menu-arrow"></i>
+                </a>
+                <div class="collapse" id="auth">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.php">Bienes Informáticos</a></li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="../management/software.php">
-              <i class="icon-grid-2 menu-icon"></i>
-              <span class="menu-title">Software</span>
-            </a>
-          </li>
+                    <li class="nav-item"> <a class="nav-link" href="../assets/repowering.php">Repotenciación</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.php">Bienes Mobiliarios</a></li>
+                </ul>
+                </div>
+            </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="QR.php">
-              <i class="icon-contract menu-icon"></i>
-              <span class="menu-title">Escaneo QR</span>
-            </a>
-          </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../management/software.php">
+                <i class="icon-grid-2 menu-icon"></i>
+                <span class="menu-title">Software</span>
+                </a>
+            </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="acount.php">
-              <i class="icon-paper menu-icon"></i>
-              <span class="menu-title">Cuenta</span>
-            </a>
-          </li>
+            <li class="nav-item">
+                <a class="nav-link" href="report.php">
+                    <i class="icon-paper menu-icon"></i>
+                    <span class="menu-title">Reportes</span>
+                </a>
+            </li>
 
-        </ul>
-      </nav>
+            <li class="nav-item">
+                <a class="nav-link" href="QR.php">
+                <i class="icon-contract menu-icon"></i>
+                <span class="menu-title">Escaneo QR</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="acount.php">
+                    <i class="icon-head menu-icon"></i>
+                <span class="menu-title">Cuenta</span>
+                </a>
+            </li>
+
+            </ul>
+        </nav>
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
@@ -434,6 +441,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     <div class="card-body">
                         <p class="card-description">Por favor, complete los siguientes campos:</p>
                         <div class="form-row">
+                          <input type="hidden" name="profile" value="full">
                           <input type="hidden"  name="id" value="<?php echo $_SESSION['id']; ?>">
                           <div class="form-group col-md-6">
                               <label for="Name" class="text-bold">Nombre</label>
@@ -480,7 +488,8 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   <div class="card-body">
                       <p class="card-description">Por favor, complete los siguientes campos si desea modificar la contraseña:</p>
                       <div class="form-row">
-                          <input type="hidden" name="id" value="<?php echo $_SESSION[ 'id' ]; ?>">
+                          <input type="hidden" name="profile" value="pass">
+                          <input type="hidden" name="id" value="<?php echo $_SESSION['id']; ?>">
                           <div class="form-group col-md-12">
                               <label for="InputPassword" class="text-bold">Contraseña</label>
                               <input type="password" class="form-control" id="InputPassword" name="password" placeholder="Contraseña" pattern="^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$" title="La contraseña debe tener entre 8 y 20 caracteres, al menos una letra mayúscula y un número. No se permiten caracteres especiales." oninput="validatePassword(this)" required>
@@ -512,7 +521,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       data[key] = value;
     });
 
-    fetch('../../Acciones/RestUsers.php?profile=full&id='+data['id'], {
+    fetch('../../Acciones/RestUsers.php', {
 
       method: 'PUT',
       headers: {
@@ -528,10 +537,10 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
     })
     .catch((error) => {
       console.log(data);
-      console.log('Error:', error);
+      console.error('Error:', error);
     });
   });
-  document.getElementById('editPasswordForm').addEventListener('submit', function(event) {
+  document.getElementById('editPasswordForm').addEventListener('submit', async function(event) {
     event.preventDefault();
     const formData = new FormData(this);
     const data = {};
@@ -539,7 +548,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       data[key] = value;
     });
 
-    fetch('../../Acciones/RestUsers.php?profile=pass&id='+data['id'], {
+    fetch('../../Acciones/RestUsers.php', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
