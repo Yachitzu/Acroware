@@ -457,7 +457,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="agregarMarcaForm" method="post">
+        <form class="forms-sample" id="repBInformaticos" method="post">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -465,7 +465,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="areaC" class="text-bold">Área</label>
-                    <select class="form-control" name="areaC" id="areaC" required>
+                    <select class="form-control" name="areaI" id="areaC" required>
                       <option value="">Seleccione un Área</option>
                       <option value="tecnologico">Tecnológico</option>
                       <option value="mobiliario">Mobiliario</option>
@@ -473,30 +473,34 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   </div>
                     <div class="form-group col-md-6">
                         <label for="areaC" class="text-bold">Marca</label>
-                        <select class="form-control" name="areaC" id="areaC" required>
-                        <option value="">Seleccione un Área</option>
-                        <option value="tecnologico">DELL</option>
-                        <option value="mobiliario">HP</option>
+                        <select class="form-control" name="areaI" id="areaC" required>
+                        <option value="">Seleccione una marca</option>
+                        <option value="*">Todos</option>
+                          <?php
+                          include_once ("../../Acciones/crudMarcas.php");
+                          $marcas = Obtener::ObtenerNombre();
+                          echo ($marcas['dato']);
+                          ?>
                         </select>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="fechaInicial" class="text-bold">Fecha Inicial</label>
-                        <input type="date" class="form-control" name="fechaInicial" id="fechaInicial" placeholder="Selecciona una fecha" required>
+                        <label for="fechaInicialI" class="text-bold">Fecha Inicial</label>
+                        <input type="date" class="form-control" name="fechaInicialI" id="fechaInicialI" placeholder="Selecciona una fecha" required>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="fechaFinal" class="text-bold">Fecha Final</label>
-                        <input type="date" class="form-control" name="fechaFinal" id="fechaFinal" placeholder="Selecciona una fecha" required>
+                        <label for="fechaFinalI" class="text-bold">Fecha Final</label>
+                        <input type="date" class="form-control" name="fechaFinalI" id="fechaFinalI" placeholder="Selecciona una fecha" required>
                     </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-12">
-                    <label for="areaC" class="text-bold">Tipo Archivo</label>
-                    <select class="form-control" name="areaC" id="areaC" required>
+                    <label for="tipoI" class="text-bold">Tipo Archivo</label>
+                    <select class="form-control" name="tipoI" id="tipoI" required>
                       <option value="">Seleccione un Tipo</option>
-                      <option value="tecnologico">PDF</option>
-                      <option value="tecnologico">Excel</option>
+                      <option value="pdfI">PDF</option>
+                      <option value="excelI">Excel</option>
                     </select>
                   </div>
                 </div>
@@ -525,19 +529,22 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="agregarMarcaForm" method="post">
+        <form class="forms-sample" id="repBMobiliarios" method="post">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
                 <p class="card-description">Por favor, seleccione los siguientes filtros para generar un reporte:</p>
                 <div class="form-row">
                   <div class="form-group col-md-12">
-                    <label for="areaC" class="text-bold">Custodio</label>
-                    <select class="form-control" name="areaC" id="areaC" required>
+                    <label for="custodioM" class="text-bold">Custodio</label>
+                    <select class="form-control" name="custodioM" id="custodioM" required>
                       <option value="">Seleccione un Custodio</option>
-                      <option value="tecnologico">Todos</option>
-                      <option value="tecnologico">Esteban Cifuentes</option>
-                      <option value="mobiliario">Estefania Mora</option>
+                      <option value="*">Todos</option>
+                      <?php
+                          include_once ("../../Acciones/crudMarcas.php");
+                          $users = Obtener::ObtenerCustodios();
+                          echo ($users['dato']);
+                      ?>
                     </select>
                   </div>
                 </div>
@@ -546,7 +553,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     <label for="areaC" class="text-bold">Área</label>
                     <select class="form-control" name="areaC" id="areaC" required>
                       <option value="">Seleccione un Área</option>
-                      <option value="tecnologico">Todos</option>
+                      <option value="*">Todos</option>
                       <option value="tecnologico">Tecnológico</option>
                       <option value="mobiliario">Mobiliario</option>
                     </select>
@@ -555,9 +562,12 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     <label for="areaC" class="text-bold">Marca</label>
                     <select class="form-control" name="areaC" id="areaC" required>
                       <option value="">Seleccione una Marca</option>
-                      <option value="tecnologico">Todos</option>
-                      <option value="tecnologico">DELL</option>
-                      <option value="mobiliario">HP</option>
+                      <option value="*">Todos</option>
+                      <?php
+                          include_once ("../../Acciones/crudMarcas.php");
+                          $marcas = Obtener::ObtenerNombre();
+                          echo ($marcas['dato']);
+                      ?>
                     </select>
                   </div>
                 </div>
@@ -576,79 +586,10 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                         <label for="areaC" class="text-bold">Tipo Archivo</label>
                         <select class="form-control" name="areaC" id="areaC" required>
                         <option value="">Seleccione un Tipo</option>
-                        <option value="tecnologico">PDF</option>
-                        <option value="tecnologico">Excel</option>
+                        <option value="pdf">PDF</option>
+                        <option value="excel">Excel</option>
                         </select>
                     </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-dismiss="modal"
-              aria-label="Close" value="Cancelar" id="cancelButton">
-            <input type="submit" class="btn-crud btn-primary text-bold" value=" Generar Reporte ">
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- Create Modal-->
-  <div class="modal fade modal-crud" id="modalInfo" tabindex="-1" role="dialog"
-    aria-labelledby="modal-register-label" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-primary">
-          <h3 class="modal-title text-white" id="modal-register-label">Reportes B. Informáticos</h3>
-          <p class="modal">Ingrese los datos del Usuario:</p>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <i class="fas fa-times" class="element-white"></i>
-          </button>
-        </div>
-        <form class="forms-sample" id="agregarMarcaForm" method="post">
-          <div class="modal-body">
-            <div class="grid-margin-modal">
-              <div class="card-body">
-                <p class="card-description">Por favor, seleccione los siguientes filtros para generar un reporte:</p>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="areaC" class="text-bold">Área</label>
-                    <select class="form-control" name="areaC" id="areaC" required>
-                      <option value="">Seleccione un Área</option>
-                      <option value="tecnologico">Tecnológico</option>
-                      <option value="mobiliario">Mobiliario</option>
-                    </select>
-                  </div>
-                    <div class="form-group col-md-6">
-                        <label for="areaC" class="text-bold">Marca</label>
-                        <select class="form-control" name="areaC" id="areaC" required>
-                        <option value="">Seleccione un Área</option>
-                        <option value="tecnologico">DELL</option>
-                        <option value="mobiliario">HP</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="fechaInicial" class="text-bold">Fecha Inicial</label>
-                        <input type="date" class="form-control" name="fechaInicial" id="fechaInicial" placeholder="Selecciona una fecha" required>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="fechaFinal" class="text-bold">Fecha Final</label>
-                        <input type="date" class="form-control" name="fechaFinal" id="fechaFinal" placeholder="Selecciona una fecha" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-12">
-                    <label for="areaC" class="text-bold">Tipo Archivo</label>
-                    <select class="form-control" name="areaC" id="areaC" required>
-                      <option value="">Seleccione un Tipo</option>
-                      <option value="tecnologico">PDF</option>
-                      <option value="tecnologico">Excel</option>
-                    </select>
-                  </div>
                 </div>
               </div>
             </div>
@@ -684,19 +625,17 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   <div class="form-group col-md-6">
                     <label for="areaC" class="text-bold">Tipo Licencia</label>
                     <select class="form-control" name="areaC" id="areaC" required>
-                      <option value="">Seleccione un Custodio</option>
-                      <option value="tecnologico">Gratuito</option>
-                      <option value="tecnologico">Privado</option>
-                      <option value="mobiliario">Todos</option>
+                      <option value="">Seleccione una licencia</option>
+                      <option value="*">Todos</option>
                     </select>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="areaC" class="text-bold">Activado</label>
                     <select class="form-control" name="areaC" id="areaC" required>
                       <option value="">Seleccione un estado</option>
-                      <option value="tecnologico">Si</option>
-                      <option value="tecnologico">No</option>
-                      <option value="mobiliario">Todos</option>
+                      <option value="*">Todos</option>
+                      <option value="si">Si</option>
+                      <option value="no">No</option>
                     </select>
                   </div>
                 </div>
@@ -715,8 +654,8 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                         <label for="areaC" class="text-bold">Tipo Archivo</label>
                         <select class="form-control" name="areaC" id="areaC" required>
                         <option value="">Seleccione un Tipo</option>
-                        <option value="tecnologico">PDF</option>
-                        <option value="tecnologico">Excel</option>
+                        <option value="pdf">PDF</option>
+                        <option value="excel">Excel</option>
                         </select>
                     </div>
                 </div>
@@ -732,66 +671,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       </div>
     </div>
   </div>
-
-  <!-- Edit Modal-->
-  <div class="modal fade" id="modalCrudEditar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
-    aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-primary">
-          <h3 class="modal-title text-white" id="modal-register-label">Editar Marca</h3>
-          <p class="modal">Ingrese los datos del Usuario:</p>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <i class="fas fa-times" class="element-white"></i>
-          </button>
-        </div>
-        <form class="forms-sample" id="editarMarcaForm">
-          <div class="modal-body">
-            <div class="grid-margin-modal">
-              <div class="card-body">
-                <p class="card-description">Por favor, complete los siguientes campos para editar la información de la
-                  marca seleccionada:</p>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="nombre" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" id="nombreE" placeholder="Nombre" required>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="area" class="text-bold">Área</label>
-                    <select class="form-control" id="areaE" required>
-                      <option value="">Seleccione un Área</option>
-                      <option value="tecnologico">Tecnológico</option>
-                      <option value="mobiliario">Mobiliario</option>
-                    </select>
-                  </div>
-
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-12">
-                    <label for="pais" class="text-bold">País</label>
-                    <input type="text" class="form-control" id="paisE" placeholder="País"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
-                  </div>
-                  <div class="form-group col-md-12">
-                    <label for="descripcion" class="text-bold">Descripción</label>
-                    <textarea class="form-control" id="descripcionE" placeholder="Descripción"></textarea>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
-              aria-label="Close" value="Cancelar" id="cancelButton">
-            <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Marca ">
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-
-
 
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>

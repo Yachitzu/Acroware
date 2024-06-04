@@ -1,88 +1,118 @@
 <?php
 include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php');
-Class Obtener{
-        public static function ObtenerSoftware(){
-            $conectar=Conexion::getInstance()->getConexion();
-            $select="SELECT * FROM software";
-            $resultado=$conectar->prepare($select);
-            $resultado->execute();
-            $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
-            echo(json_encode($data));
-        }
-        public static function ObtenerById($id){
-            $bd = Conexion::getInstance()->getConexion();
-            $id = $id;
-            $array = array();
-            $resultado = $bd->query("SELECT * FROM software WHERE id = '$id'");
-
-            while ($row = $resultado->fetch()) {
-                $e = array();
-                $e["id"] = $row[0];
-                $e["nombre_software"] = $row[1];
-                $e["proveedor"] = $row[2];
-                $e["tipo_licencia"] = $row[3];
-                $e["activado"] = $row[4];
-                $e["fecha_adqui"] = $row[5];
-                array_push($array, $e);
-            }
-            echo json_encode($array);
-        }
-    }
-    Class Guardar{
-        public static function GuardarSoftware()
+class AccionesSoftware
+{
+    public static function listarSoftware()
     {
-        $json = file_get_contents('php://input');
-        $data = json_decode($json, true);
-        $conectar = Conexion::getInstance()->getConexion();
-        echo($data);
-        if ($data !== null) {
-            $nombre_software = $data["nombre_software"];
-            $proveedor = $data["proveedor"];
-            $tipo_licencia = $data["tipo_licencia"];
-            $activado = $data["activo"];
-            $fecha_adqui = $data["fecha_adqui"];
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = "SELECT * FROM software";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+            $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            $dato;
+            $tabla = '';
 
+            foreach ($dato as $respuesta) {
+                $tabla .= '
+                    <tr>
+                        
+                        <td ">' . htmlspecialchars($respuesta['nombre_software']) . '</td>
+                        <td ">' . htmlspecialchars($respuesta['proveedor']) . '</td>
+                        <td ">' . htmlspecialchars($respuesta['activado']) . '</td>
+                        <td ">' . htmlspecialchars($respuesta['tipo_licencia']) . '</td>
+                        <td ">' . htmlspecialchars($respuesta['fecha_adqui']) . '</td>
+                        <td ">' . htmlspecialchars($respuesta['fecha_activacion']) . '</td>
+                        <td class="mdl-data-table__cell">
+                            <center>
+                            <button class="btn btn-warning btn-circle element-white editar" data-id="' . $respuesta['id'] . '" id="editar">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-danger btn-circle eliminar" data-id="' . $respuesta['id'] . '" id="eliminar">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                            </center>
+                        </td>
+                    </tr>
+                ';
+            }
+            return [
+                'codigo' => 0,
+                'dato' => $tabla,
+            ];
+        } catch (PDOException $e) {
+            error_log('Error al listar software: ' . $e->getMessage());
+            return [
+                'codigo' => 1,
+                'mensaje' => 'Error al listar software: ' . $e->getMessage()
+            ];
         }
+    }
 
-        $insertarSql = "INSERT INTO software(nombre_software,proveedor,tipo_licencia,activado, fecha_adqui)VALUES('$nombre_software','$proveedor','$tipo_licencia','$activado','$fecha_adqui')";
-        $resultado = $conectar->prepare($insertarSql);
+    public static function insertarSoftware($nombre_software, $proveedor, $activado, $tipo_licencia, $fecha_adqui, $fecha_activacion)
+{
+    try {
+        $conexion = Conexion::getInstance()->getConexion();
+        $consulta = "SELECT * FROM software where BINARY nombre_software = :nombre and proveedor = :proveedor and tipo_licencia = :tipo_licencia";
+        $resultado = $conexion->prepare($consulta);
+        $resultado->bindParam(':nombre', $nombre_software);
+        $resultado->bindParam(':proveedor', $proveedor);
+        $resultado->bindParam(':tipo_licencia', $tipo_licencia);
         $resultado->execute();
-        //$conectar->commit();
+        if ($resultado->fetch()) {
+            echo ("El software ya existe");
+            return 1;
+        } else {
+            $consulta = $conexion->prepare("INSERT INTO software (nombre_software, proveedor, activado, tipo_licencia, fecha_adqui, fecha_activacion) values (:nombre_software, :proveedor, :activado, :tipo_licencia, :fecha_adqui, :fecha_activacion)");
+            $consulta->bindParam(':nombre_software', $nombre_software);
+            $consulta->bindParam(':proveedor', $proveedor);
+            $consulta->bindParam(':tipo_licencia', $tipo_licencia);
+            $consulta->bindParam(':activado', $activado);
+            $consulta->bindParam(':fecha_adqui', $fecha_adqui);
+            $consulta->bindParam(':fecha_activacion', $fecha_activacion);
+            $consulta->execute();
+            return 0;
+        }
+    } catch (PDOException $e) {
+        error_log('Error en insertar Software: '. $e->getMessage());
+        return 2;
     }
-    }
-    class Actualizar{
-        public static function ActualizarSoftware($id){
-            $json = file_get_contents('php://input');
-            $data = json_decode($json, true);
-            $conectar = Conexion::getInstance()->getConexion();
-            if ($data !== null) {
-                $nombre_software = $data["nombre_software"];
-                $proveedor = $data["proveedor"];
-                $tipo_licencia = $data["tipo_licencia"];
-                $activado = $data["activo"];
-                $fecha_adqui = $data["fecha_adqui"];
-            }
+}
 
-            $updatesql = "UPDATE software  set nombre_software= '$nombre_software',proveedor= '$proveedor',tipo_licencia='$tipo_licencia',activado='$activado',fecha_adqui='$fecha_adqui'  Where id='$id'";
-            $resultado = $conectar->prepare($updatesql);
-            $resultado->execute();
-            echo json_encode($resultado);
-            //$conectar->commit();
-        }
-    }  
-    class Eliminar{
-        public static function BorrarSoftware($id)
-        {
-            $conectar = Conexion::getInstance()->getConexion();
-            $borrarSQL = "DELETE FROM software WHERE id ='$id'";
-            $resultado = $conectar->prepare($borrarSQL);
-            $resultado->execute();
-            //$conectar->commit();
-            if ($resultado->rowCount() > 0) {
-                echo json_encode("Se eliminaron: " . $resultado->rowCount() . " registros");
-            } else {
-                echo json_encode(false);
-            }
+    public static function actualizarSoftware($id, $nombre_software, $proveedor, $activado, $tipo_licencia, $fecha_adqui, $fecha_activacion)
+    {
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = $conexion->prepare("UPDATE software  set nombre_software = :nombre_software, proveedor = :proveedor , activado = :activado, tipo_licencia = :tipo_licencia, fecha_adqui = :fecha_adqui, fecha_activacion = :fecha_activacion where id = :id");
+            $consulta->bindParam(':id', $id);
+            $consulta->bindParam(':nombre_software', $nombre_software);
+            $consulta->bindParam(':proveedor', $proveedor);
+            $consulta->bindParam(':tipo_licencia', $tipo_licencia);
+            $consulta->bindParam(':activado', $activado);
+            $consulta->bindParam(':fecha_adqui', $fecha_adqui);
+            $consulta->bindParam(':fecha_activacion', $fecha_activacion);
+            $consulta->execute();
+            return 0;
+        } catch (PDOException $e) {
+            error_log('Error en actualizar software: ' . $e->getMessage());
+            return 2;
         }
     }
+
+    public static function eliminarSoftware($id)
+    {
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+                $consulta = $conexion->prepare("UPDATE software  set activado= 'No' where id=:id");
+                $consulta->bindParam(':id', $id);
+                $consulta->execute();
+                return 0;
+           
+        } catch (PDOException $e) {
+            error_log('Error en eliminar Software: ' . $e->getMessage());
+            return 2;
+        }
+    }
+
+}
 ?>
