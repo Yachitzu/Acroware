@@ -605,7 +605,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
     });
 
     document.getElementById('fecha_activacionE').addEventListener('change', function() {
-        var fecha_activacion = document.getElementById('fecha_activacionA').value;
+        var fecha_activacion = document.getElementById('fecha_activacionE').value;
         var fecha_adqui = document.getElementById('fecha_adquiE').value;
         if (fecha_activacion < fecha_adqui) {
             alert('La fecha final no puede ser anterior a la fecha inicial.');
