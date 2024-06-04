@@ -174,5 +174,34 @@ class AccionesBienes_mobiliarios
             return 2;
         }
     }
+
+    public static function actualizarBienes_mobiliarios($id,$codigo_uta, $nombre, $serie, $id_marca, $modelo, $color, $material, $dimensiones, $condicion, $custodio, $valor, $id_area_per, $id_ubi_per)
+    {
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = $conexion->prepare("UPDATE bienes_mobiliarios SET codigo_uta= :codigo_uta, nombre= :nombre, serie= :serie, id_marca= :id_marca,
+        modelo= :modelo, color= :color, material= :material, dimensiones= :dimensiones, condicion= :condicion, custodio_actual= :custodio_actual, valor_contable= :valor_contable, 
+        id_area_per= :id_area_per, id_ubi_per= :id_ubi_per WHERE id= :id");
+            $consulta->bindParam(':id', $id);
+            $consulta->bindParam(':codigo_uta', $codigo_uta);
+            $consulta->bindParam(':nombre', $nombre);
+            $consulta->bindParam(':serie', $serie);
+            $consulta->bindParam(':id_marca', $id_marca);
+            $consulta->bindParam(':modelo', $modelo);
+            $consulta->bindParam(':color', $color);
+            $consulta->bindParam(':material', $material);
+            $consulta->bindParam(':dimensiones', $dimensiones);
+            $consulta->bindParam(':condicion', $condicion);
+            $consulta->bindParam(':custodio_actual', $custodio);
+            $consulta->bindParam(':valor_contable', $valor);
+            $consulta->bindParam(':id_area_per', $id_area_per);
+            $consulta->bindParam(':id_ubi_per', $id_ubi_per);
+            $consulta->execute();
+            return 0;
+        } catch (PDOException $e) {
+            error_log('Error en actualizarBienes_mobiliarios: ' . $e->getMessage());
+            return 2;
+        }
+    }
 }
 ?>
