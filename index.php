@@ -733,38 +733,38 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 var usuarioId = <?php echo $usuario_id; ?>;
             </script>
             <div class="col-md-5 grid-margin stretch-card">
-    <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">Recordatorio</h4>
-            <div class="list-wrapper pt-2">
-                <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
-                    <?php if (is_array($recordatorios) && count($recordatorios) > 0): ?>
-                        <?php foreach ($recordatorios as $recordatorio): ?>
-                            <li data-id="<?php echo $recordatorio['id']; ?>">
-                                <div class="form-check form-check-flat">
-                                    <label class="form-check-label">
-                                        <input class="checkbox" type="checkbox">
-                                        <?php echo htmlspecialchars($recordatorio['actividad']); ?>
-                                    </label>
-                                </div>
-                                <i class="remove ti-close"></i>
-                            </li>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <li>No se encontraron recordatorios pendientes.</li>
-                    <?php endif; ?>
-                </ul>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Recordatorio</h4>
+                        <div class="list-wrapper pt-2">
+                            <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
+                                <?php if (is_array($recordatorios) && count($recordatorios) > 0): ?>
+                                    <?php foreach ($recordatorios as $recordatorio): ?>
+                                        <li data-id="<?php echo $recordatorio['id']; ?>">
+                                            <div class="form-check form-check-flat">
+                                                <label class="form-check-label">
+                                                    <input class="checkbox" type="checkbox">
+                                                    <?php echo htmlspecialchars($recordatorio['actividad']); ?>
+                                                </label>
+                                            </div>
+                                            <i class="remove ti-close"></i>
+                                        </li>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <li>No se encontraron recordatorios pendientes.</li>
+                                <?php endif; ?>
+                            </ul>
+                        </div>
+                        <div class="add-items d-flex mb-0 mt-2">
+                          <form id="add-todo-form" class="d-flex w-100">
+                            <input type="hidden" class="form-control todo-list-input_id" name="usuario_id" value="<?php echo $usuario_id; ?>">
+                            <input type="text" class="form-control todo-list-input" name="actividad" placeholder="Agregar nueva actividad">
+                            <button type="submit" class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i class="icon-circle-plus"></i></button>
+                          </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="add-items d-flex mb-0 mt-2">
-              <form id="add-todo-form" class="d-flex w-100">
-                <input type="hidden" class="form-control todo-list-input" name="usuario_id" value="<?php echo $usuario_id; ?>">
-                <input type="text" class="form-control todo-list-input" name="actividad" placeholder="Agregar nueva actividad">
-                <button type="submit" class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i class="icon-circle-plus"></i></button>
-              </form>
-            </div>
-        </div>
-    </div>
-</div>
 
           </div>
         </div>
