@@ -144,7 +144,8 @@ function obtenerAreasPorBloque($bloqueId) {
         $conexion = Conexion::getInstance()->getConexion();
 
         // Consulta SQL para obtener los detalles de las áreas correspondientes al bloque seleccionado
-        $query = "SELECT areas.id, areas.nombre, areas.descripcion, areas.piso, bloques.nombre AS nombre_bloque
+        $query = "SELECT areas.id, areas.nombre, areas.descripcion, areas.piso, bloques.nombre AS nombre_bloque,
+                  (SELECT COUNT(*) FROM ubicaciones WHERE ubicaciones.id_area_per = areas.id) AS total_ubicaciones
                   FROM areas
                   INNER JOIN bloques ON areas.id_bloque_per = bloques.id
                   WHERE areas.id_bloque_per = :bloqueId";
