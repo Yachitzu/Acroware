@@ -7,7 +7,7 @@
         private function __construct(){
             $host = "localhost";
             $user = "root";
-            $password = "";
+            $password = "15diciembre001";
             $database = "das";
 
             try {
