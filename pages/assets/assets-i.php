@@ -364,7 +364,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 
   <!-- Create Modal for Adding Components -->
   <div class="modal fade modal-crud" id="modalCrudAgregarComponente" tabindex="-1" role="dialog"
-    aria-labelledby="modal-add-component-label" aria-hidden="true">
+    aria-labelledby="modal-add-register-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
@@ -414,20 +414,14 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                       <option value="no">No</option>
                     </select>
                   </div>
-                  <div class="form-group col-md-6">
-                    <label for="activoComponente" class="text-bold">Activo</label>
-                    <select class="form-control" id="activoComponente" name="activoComponente" required>
-                      <option value="si">Sí</option>
-                      <option value="no">No</option>
-                    </select>
-                  </div>
+
                 </div>
               </div>
             </div>
           </div>
           <div class="modal-footer">
             <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
-              aria-label="Close" value="Cancelar">
+              aria-label="Close" value="Cancelar" id="cancelButton">>
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Componente ">
           </div>
         </form>
@@ -446,7 +440,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="agregarComponenteForm" method="post">
+        <form class="forms-sample" id="editarComponenteForm" method="post">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -454,46 +448,40 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 </p>
                 <div class="form-row">
                   <div class="form-group col-md-12">
-                    <label for="nombreComponente" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" name="nombreComponente" id="nombreComponente"
+                    <label for="nombreComponenteE" class="text-bold">Nombre</label>
+                    <input type="text" class="form-control" name="nombreComponenteE" id="nombreComponenteE"
                       placeholder="Nombre" required>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-12">
-                    <label for="descripcionComponente" class="text-bold">Descripción</label>
-                    <input type="text" class="form-control" name="descripcionComponente" id="descripcionComponente"
+                    <label for="descripcionComponenteE" class="text-bold">Descripción</label>
+                    <input type="text" class="form-control" name="descripcionComponenteE" id="descripcionComponenteE"
                       placeholder="Descripción" required>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="serieComponente" class="text-bold">Serie</label>
-                    <input type="text" class="form-control" name="serieComponente" id="serieComponente"
+                    <label for="serieComponenteE" class="text-bold">Serie</label>
+                    <input type="text" class="form-control" name="serieComponenteE" id="serieComponenteE"
                       placeholder="Serie" required>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="codigoAdicionalComponente" class="text-bold">Código Adicional UTA</label>
-                    <input type="text" class="form-control" name="codigoAdicionalComponente"
-                      id="codigoAdicionalComponente" placeholder="Código Adicional UTA" required>
+                    <label for="codigoAdicionalComponenteE" class="text-bold">Código Adicional UTA</label>
+                    <input type="text" class="form-control" name="codigoAdicionalComponenteE"
+                      id="codigoAdicionalComponenteE" placeholder="Código Adicional UTA" required>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="repotenciadoComponente" class="text-bold">Repotenciado</label>
-                    <select class="form-control" id="repotenciadoComponente" name="repotenciadoComponente" required>
+                    <label for="repotenciadoComponenteE" class="text-bold">Repotenciado</label>
+                    <select class="form-control" id="repotenciadoComponenteE" name="repotenciadoComponenteE" required>
                       <option value="">Seleccione</option>
                       <option value="si">Sí</option>
                       <option value="no">No</option>
                     </select>
                   </div>
-                  <div class="form-group col-md-6">
-                    <label for="activoComponente" class="text-bold">Activo</label>
-                    <select class="form-control" id="activoComponente" name="activoComponente" required>
-                      <option value="si">Sí</option>
-                      <option value="no">No</option>
-                    </select>
-                  </div>
+
                 </div>
               </div>
             </div>
@@ -1152,26 +1140,138 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           }
         });
 
+
+
+        const agregarComponenteForm = document.getElementById('agregarComponenteForm');
+
+        let componenteAEliminarId = null;
+        let componenteAEditarId = null;
         // Event listener for adding components
         $('#dataTable tbody').on('click', '.btn-add-component', function () {
           $('#modalCrudAgregarComponente').modal('show');
         });
 
+
         // Form submission handler for adding components
-        $('#agregarComponenteForm').on('submit', function (event) {
+        $('#agregarComponenteForm').on('submit', async function (event) {
           event.preventDefault();
-          $('#modalCrudAgregarComponente').modal('hide');
-          alert('Componente agregado exitosamente.');
+          var btn = $('button.mas');
+          var id = btn.data('id');
+          const nombre = document.getElementById('nombreComponente').value;
+          const descripcion = document.getElementById('descripcionComponente').value;
+          const serie = document.getElementById('serieComponente').value;
+          const codigo_adi_uta = document.getElementById('codigoAdicionalComponente').value;
+          const repotenciado = document.getElementById('repotenciadoComponente').value;
+          const id_bien_infor_per = id;
+          try {
+            const response = await fetch('../../Acciones/RestComponentes.php', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ nombre, descripcion, serie, codigo_adi_uta, repotenciado, id_bien_infor_per })
+            });
+
+            if (response.ok) {
+              cargarTabla();
+              agregarComponenteForm.reset();
+              $('#modalCrudAgregarComponente').modal('hide');
+            } else {
+              console.error('Error al agregar componente: ', response.statusText);
+            }
+          } catch (error) {
+            console.error('Error al cargar componente: ', error)
+          }
+
         });
+
+
 
         $("#eliminarComponente").click(function () {
           $("#modalCrudEliminarComponente").modal('show');
         });
 
-        $("#editarComponente").click(function () {
-          $("#modalCrudEditarComponente").modal('show');
+        document.getElementById('editarComponenteForm').addEventListener('submit', async function (event) {
+          event.preventDefault();
+          var btn = $('button.mas');
+          var idBien = btn.data('id');
+          const id = componenteAEditarId;
+          console.log('Esta id: xd: '+id);
+          const nombre = document.getElementById('nombreComponenteE').value;
+          const descripcion = document.getElementById('descripcionComponenteE').value;
+          const serie = document.getElementById('serieComponenteE').value;
+          const codigo_adi_uta = document.getElementById('codigoAdicionalComponenteE').value;
+          const repotenciado = document.getElementById('repotenciadoComponenteE').value;
+          const id_bien_infor_per = idBien;
+          try {
+            // Enviar la solicitud de edición al servidor
+            const response = await fetch('../../Acciones/RestComponentes.php' + `?id=${id}`, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ id, nombre, descripcion, serie, codigo_adi_uta, repotenciado, id_bien_infor_per })
+            });
+
+            if (response.ok) {
+              const result = await response.json();
+              if (result.success) {
+                // Si la solicitud es exitosa, recarga la lista de marcas
+                await cargarTabla();
+                // Cierra el modal de edición
+                $("#modalCrudEditarComponente").modal('hide');
+              } else {
+                console.error('Error al editar componente:', result.message);
+              }
+            } else {
+              console.error('Error al editar componente:', response.statusText);
+            }
+          } catch (error) {
+            console.error('Error al editar componente:', error);
+          }
         });
+
+
+        window.showEditarModalComponente = async function (id) {
+          try {
+            const response = await fetch('../../Acciones/RestComponentes.php' + `?id=${id}`);
+            if (!response.ok) {
+              throw new Error('Error al obtener detalles de componentes para editar');
+            }
+            const responseComponente = await response.json();
+            const componente = responseComponente.data;
+            console.log(componente)
+            // Llenar los campos del formulario con los detalles de la componente
+
+            document.getElementById('nombreComponenteE').value = componente.nombre;
+            document.getElementById('descripcionComponenteE').value = componente.descripcion;
+            document.getElementById('serieComponenteE').value = componente.serie;
+            document.getElementById('codigoAdicionalComponenteE').value = componente.codigo_adi_uta;
+            const selectedRepotenciado = componente.repotenciado;
+            const repotenciadoEInput = document.getElementById('repotenciadoComponenteE');
+
+            // Iteramos sobre cada opción en el campo de selección
+            for (let i = 0; i < repotenciadoEInput.options.length; i++) {
+              // Si el valor de la opción coincide con el valor seleccionado previamente
+              if (repotenciadoEInput.options[i].value === selectedRepotenciado) {
+                // Marcamos esta opción como seleccionada
+                repotenciadoEInput.options[i].selected = true;
+                // Salimos del bucle ya que hemos encontrado la opción correcta
+                break;
+              }
+            }
+            componenteAEditarId = id;
+            // Mostrar el modal de edición
+            $("#modalCrudEditarComponente").modal('show');
+          } catch (error) {
+            console.error(error);
+          }
+        };
+
+
       }
+
+      
     });
   </script>
 

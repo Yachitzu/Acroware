@@ -1,15 +1,15 @@
 <?php
-include_once('crudComponentes.php');
+include_once ('crudComponentes.php');
 header('Content-Type: application/json');
 $opc = $_SERVER["REQUEST_METHOD"];
 switch ($opc) {
     case 'GET':
         if (isset($_GET['id']) && !empty($_GET['id'])) {
-            Obtener::ObtenerById();
+            Obtener::ObtenerById($_GET['id']);
         } else {
-            if(isset($_GET['nombres'])){
+            if (isset($_GET['nombres'])) {
                 Obtener::ObtenerNombres();
-            }else{
+            } else {
                 Obtener::ObtenerComponente();
             }
         }

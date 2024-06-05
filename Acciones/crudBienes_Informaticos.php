@@ -72,7 +72,7 @@ class AccionesBienes_Informaticos
                 <td>' . htmlspecialchars($componente['activo']) . '</td>
                 <td>
                     <center>
-                        <button class="btn btn-warning btn-circle element-white editarComponente" data-id="' . $componente['id'] . '" data-toggle="modal" data-target="#modalCrudEditarComponente">
+                        <button class="btn btn-warning btn-circle element-white editarComponente" data-id="' . $componente['id'] . '" data-toggle="modal" onclick="showEditarModalComponente('. $componente['id'].')">
                             <i class="fas fa-edit"></i>
                         </button>
                         <button class="btn btn-danger btn-circle eliminarComponente" data-id="' . $componente['id'] . '" data-toggle="modal" data-target="#modalCrudEliminarComponente">
