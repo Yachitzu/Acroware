@@ -367,10 +367,34 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               </div>
             </div>
           </div>
+            <?php
+                // Incluir el archivo de funciones
+                include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/Acciones/recordatorios/procesar_seleccion.php');
+
+                // Obtener opciones de facultades
+                $facultades = obtenerFacultades();
+            ?>
           <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
               <div class="card position-relative">
                 <div class="card-body">
+                  <form id="seleccion-form" method="POST" action="Acciones/recordatorios/procesar_seleccion.php">
+                      <div class="form-row">
+                        <div class="form-group col-md-5">
+                          <select id="facultad" name="facultad" class="form-control" required>
+                            <option value="">Selecciona una facultad</option>
+                            <?php foreach ($facultades as $facultad): ?>
+                              <option value="<?php echo $facultad['id']; ?>"><?php echo htmlspecialchars($facultad['nombre']); ?></option>
+                            <?php endforeach; ?>
+                          </select>
+                        </div>
+                        <div class="form-group col-md-5">
+                          <select id="bloque" name="bloque" class="form-control" required disabled>
+                            <option value="">Selecciona una facultad primero</option>
+                          </select>
+                        </div>
+                      </div>
+                  </form>
                   <div id="detailedReports" class="carousel slide detailed-report-carousel position-static pt-2"
                     data-ride="carousel">
                     <div class="carousel-inner">
@@ -688,6 +712,109 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               </div>
             </div>
           </div>
+          <script>
+              document.getElementById('facultad').addEventListener('change', function() {
+                  var facultadId = this.value;
+                  var bloqueSelect = document.getElementById('bloque');
+                  var button = document.querySelector('button[type="submit"]');
+                  if (facultadId) {
+                      bloqueSelect.innerHTML = '<option value="">Cargando...</option>';
+                      button.disabled = true;
+                      fetch('Acciones/recordatorios/procesar_seleccion.php?accion=obtenerBloques&facultad=' + facultadId)
+                          .then(response => response.json())
+                          .then(data => {
+                              bloqueSelect.innerHTML = '<option value="">Selecciona un bloque</option>';
+                              data.forEach(bloque => {
+                                  var option = document.createElement('option');
+                                  option.value = bloque.id;
+                                  option.textContent = bloque.nombre;
+                                  bloqueSelect.appendChild(option);
+                              });
+                              bloqueSelect.disabled = false;
+                              button.disabled = false;
+                          })
+                          .catch(error => {
+                              console.error('Error al obtener bloques:', error);
+                              bloqueSelect.innerHTML = '<option value="">Error al cargar los bloques</option>';
+                          });
+                  } else {
+                      bloqueSelect.innerHTML = '<option value="">Selecciona una facultad primero</option>';
+                      bloqueSelect.disabled = true;
+                      button.disabled = true;
+                  }
+              });
+
+              document.getElementById('bloque').addEventListener('change', function() {
+                  var bloqueId = this.value;
+                  if (bloqueId) {
+                      var facultadId = document.getElementById('facultad').value;
+                      fetch('Acciones/contador.php?facultad=' + facultadId + '&bloque=' + bloqueId)
+                          .then(response => response.json())
+                          .then(data => {
+                              var carouselItems = document.querySelector('.carousel-inner');
+                              carouselItems.innerHTML = '';
+
+                              Object.keys(data).forEach(piso => {
+                                  var areas = data[piso];
+                                  var carouselItem = document.createElement('div');
+                                  carouselItem.classList.add('carousel-item');
+
+                                  var areasHTML = areas.map(area => `
+                                      <tr>
+                                          <td class="text-muted">${area.nombre}</td>
+                                          <td class="w-100 px-0">
+                                              <div class="progress progress-md mx-4">
+                                                  <div class="progress-bar bg-primary" role="progressbar" style="width: 100%"
+                                                      aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                              </div>
+                                          </td>
+                                          <td>
+                                              <h5 class="font-weight-bold mb-0">25</h5>
+                                          </td>
+                                      </tr>
+                                  `).join('');
+
+                                  var innerHTML = `
+                                      <div class="row">
+                                          <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">
+                                              <div class="ml-xl-4 mt-3">
+                                                  <p class="card-title">Detalles por Áreas</p>
+                                                  <h1 class="text-primary">${piso}</h1>
+                                                  <h3 class="font-weight-500 mb-xl-4 text-primary">${areas[0].nombre_bloque}</h3>
+                                                  <p class="mb-2 mb-xl-0">¡Bienvenido a nuestra sección de Información por Áreas! Aquí encontrarás un desglose detallado de los bienes mobiliarios, tecnológicos y software disponibles en cada Área de nuestra Facultad.</p>
+                                              </div>
+                                          </div>
+                                          <div class="col-md-12 col-xl-9">
+                                              <div class="row">
+                                                  <div class="col-md-6 border-right">
+                                                      <div class="table-responsive mb-3 mb-md-0 mt-3">
+                                                          <table class="table table-borderless report-table">
+                                                              ${areasHTML}
+                                                          </table>
+                                                      </div>
+                                                  </div>
+                                                  <div class="col-md-6 mt-3">
+                                                      <canvas id="south-america-chart"></canvas>
+                                                      <div id="south-america-legend"></div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>`;
+                                  carouselItem.innerHTML = innerHTML;
+                                  carouselItems.appendChild(carouselItem);
+                              });
+                              // Marcar el primer elemento como activo
+                              carouselItems.querySelector('.carousel-item').classList.add('active');
+                          })
+                          .catch(error => {
+                              console.error('Error al obtener áreas:', error);
+                              // Puedes mostrar un mensaje de error en caso de fallo
+                          });
+                  } else {
+                      // Si no se selecciona ningún bloque, se puede mostrar un mensaje o realizar alguna acción
+                  }
+              });
+          </script>
           <div class="row">
             <div class="col-md-7 grid-margin stretch-card">
                 <div class="card">
@@ -809,7 +936,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       </div>
     </div>
   </div>
-
 
 
   <!-- plugins:js -->

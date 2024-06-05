@@ -1114,7 +1114,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                                             <div class="col-md-3"><strong>Ubicación:</strong> ${detalle.nombre_ubicacion}</div>
                                             <div class="col-md-3"><strong>Fecha Ingreso:</strong> ${detalle.fecha_ingreso}</div>
                                         </div>
-                                        <button class="btn-crud btn-primary btn-icon-split btn-add-component" data-toggle="modal" data-target="#modalCrudAgregarComponente"> 
+                                        <button class="btn-crud btn-primary btn-icon-split btn-add-component agregarComponente" id="agregarComponente" data-toggle="modal" data-target="#modalCrudAgregarComponente"> 
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-plus-circle"></i>
                                             </span>
@@ -1147,8 +1147,8 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         let componenteAEliminarId = null;
         let componenteAEditarId = null;
         // Event listener for adding components
-        $('#dataTable tbody').on('click', '.btn-add-component', function () {
-          $('#modalCrudAgregarComponente').modal('show');
+        $("#agregarComponente").click(function () {
+          $("#modalCrudAgregarComponente").modal('show');
         });
 
 
