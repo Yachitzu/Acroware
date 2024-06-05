@@ -30,7 +30,8 @@ class AccionesBienes_Informaticos
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = $conexion->prepare("SELECT * FROM bienes_informaticos WHERE id = :id");
+            $consulta = $conexion->prepare("SELECT bienes_informaticos.*,ubicaciones.nombre AS nombre_ubicacion from bienes_informaticos
+            LEFT JOIN ubicaciones ON bienes_informaticos.id_ubi_per = ubicaciones.id where bienes_informaticos.id = :id AND bienes_informaticos.activo='si'");
             $consulta->bindParam(':id', $id);
             $consulta->execute();
             $dato = $consulta->fetch(PDO::FETCH_ASSOC);

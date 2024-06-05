@@ -436,7 +436,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
   </div>
 
   <!-- Create Modal for Adding Components -->
-  <div class="modal fade modal-crud" id="modalEditarComponente" tabindex="-1" role="dialog"
+  <div class="modal fade modal-crud" id="modalCrudEditarComponente" tabindex="-1" role="dialog"
     aria-labelledby="modal-edit-component-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -860,20 +860,36 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       </div>
     </div>
   </div>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
   <script>
     $(document).ready(function () {
+      // Inicializa la tabla pero no la guardes en una variable
+      // porque se reconstruirá después de cada carga de datos.
+      $('#dataTable').DataTable();
+
+      // Cargar la tabla cuando se cargue el DOM
+      cargarTabla();
+
       $("#AgregarBienes").click(function () {
         $("#modalCrudAgregarBienes").modal('show');
       });
+
       $("#formAgregarBienes").submit(function (e) {
         e.preventDefault();
-        codigo_uta = $("#codigoUTAA").val();
-        nombre = $("#nombreA").val();
-        serie = $("#serieA").val();
-        id_marca = $("#marcaA").val();
-        modelo = $("#modeloA").val();
-        id_area_per = $("#areaA").val();
-        id_ubi_per = $("#ubicacionA").val();
+        let codigo_uta = $("#codigoUTAA").val();
+        let nombre = $("#nombreA").val();
+        let serie = $("#serieA").val();
+        let id_marca = $("#marcaA").val();
+        let modelo = $("#modeloA").val();
+        let id_area_per = $("#areaA").val();
+        let id_ubi_per = $("#ubicacionA").val();
+
         $.ajax({
           url: "../../Acciones/RestBienes_Informaticos.php",
           type: "POST",
@@ -904,223 +920,210 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           }
         });
       });
-    });
 
-    function cargarTabla() {
-      fetch('../../Acciones/RestBienes_Informaticos.php', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-        .then(response => response.json())
-        .then(data => {
-          const tbody = document.querySelector('#dataTable tbody');
-          if ($.fn.DataTable.isDataTable('#dataTable')) {
-            $('#dataTable').DataTable().destroy();
+      function cargarTabla() {
+        fetch('../../Acciones/RestBienes_Informaticos.php?op=GET', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
           }
-          tbody.innerHTML = '';
+        })
+          .then(response => response.json())
+          .then(data => {
+            const tbody = document.querySelector('#dataTable tbody');
+            if ($.fn.DataTable.isDataTable('#dataTable')) {
+              $('#dataTable').DataTable().destroy();
+            }
+            tbody.innerHTML = '';
 
-          if (data.codigo === 0) {
-            data.datos.forEach(respuesta => {
+            if (data.codigo === 0) {
+              data.datos.forEach(respuesta => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                  <td>
+                      <center>
+                          <button class="btn btn-info btn-circle element-white mas" id="mas" data-id="${respuesta.id}">
+                              <i class="fas fa-plus"></i>
+                          </button>
+                      </center>
+                  </td>
+                  <td>${respuesta.codigo_uta}</td>
+                  <td>${respuesta.nombre}</td>
+                  <td>${respuesta.modelo}</td>
+                  <td>${respuesta.nombre_marca}</td>
+                  <td class="mdl-data-table__cell">
+                      <center>
+                          <button class="btn btn-warning btn-circle element-white editar" data-id="${respuesta.id}">
+                              <i class="fas fa-edit"></i>
+                          </button>
+                          <button class="btn btn-danger btn-circle eliminar" data-id="${respuesta.id}">
+                              <i class="fas fa-trash"></i>
+                          </button>
+                      </center>
+                  </td>
+                  <input type="hidden" class="serie" value="${respuesta.serie}">
+                  <input type="hidden" class="id_marca" value="${respuesta.id_marca}">
+                  <input type="hidden" class="id_area_per" value="${respuesta.id_area_per}">
+                  <input type="hidden" class="id_ubi_per" value="${respuesta.id_ubi_per}">
+              `;
+                tbody.appendChild(tr);
+              });
+            } else {
               const tr = document.createElement('tr');
-              tr.innerHTML = `
-                    <td>
-                        <center>
-                            <button class="btn btn-info btn-circle element-white mas" id="mas" data-id="${respuesta.id}">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </center>
-                    </td>
-                    <td>${respuesta.codigo_uta}</td>
-                    <td>${respuesta.nombre}</td>
-                    <td>${respuesta.modelo}</td>
-                    <td>${respuesta.nombre_marca}</td>
-                    <td class="mdl-data-table__cell">
-                        <center>
-                            <button class="btn btn-warning btn-circle element-white editar" data-id="${respuesta.id}">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-danger btn-circle eliminar" data-id="${respuesta.id}">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </center>
-                    </td>
-                    <input type="hidden" class="serie" value="${respuesta.serie}">
-                    <input type="hidden" class="id_marca" value="${respuesta.id_marca}">
-                    <input type="hidden" class="id_area_per" value="${respuesta.id_area_per}">
-                    <input type="hidden" class="id_ubi_per" value="${respuesta.id_ubi_per}">
-                `;
+              const td = document.createElement('td');
+              td.textContent = 'No se encontraron facultades.';
+              td.setAttribute('colspan', '6');
+              tr.appendChild(td);
               tbody.appendChild(tr);
+            }
+
+            $('#dataTable').DataTable({
+              language: {
+                "decimal": "",
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                "infoEmpty": "Mostrando 0 to 0 of 0 entradas",
+                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                  "first": "Primero",
+                  "last": "Último",
+                  "next": "Siguiente",
+                  "previous": "Anterior"
+                }
+              }
             });
-          } else {
+
+            // Agregar event listeners a los botones después de cargar la tabla
+            addEventListeners();
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            const tbody = document.querySelector('#dataTable tbody');
             const tr = document.createElement('tr');
             const td = document.createElement('td');
-            td.textContent = 'No se encontraron facultades.';
+            td.textContent = 'Error al cargar los datos.';
             td.setAttribute('colspan', '6');
             tr.appendChild(td);
             tbody.appendChild(tr);
-          }
+          });
+      }
 
-          $('#dataTable').DataTable({
-            language: {
-              "decimal": "",
-              "emptyTable": "No hay información",
-              "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
-              "infoEmpty": "Mostrando 0 to 0 of 0 entradas",
-              "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-              "infoPostFix": "",
-              "thousands": ",",
-              "lengthMenu": "Mostrar _MENU_ registros por página",
-              "loadingRecords": "Cargando...",
-              "processing": "Procesando...",
-              "search": "Buscar:",
-              "zeroRecords": "Sin resultados encontrados",
-              "paginate": {
-                "first": "Primero",
-                "last": "Último",
-                "next": "Siguiente",
-                "previous": "Anterior"
-              }
+      function addEventListeners() {
+        let id = "";
+        $(document).on('click', '.editar', function () {
+          id = $(this).data("id");
+          let fila = $(this).closest("tr");
+          let codigo_uta = fila.find('td:eq(1)').text();
+          let nombre = fila.find('td:eq(2)').text();
+          let modelo = fila.find('td:eq(3)').text();
+          let id_marca = fila.find('.id_marca').val();
+          let serie = fila.find('.serie').val();
+          let id_area_per = fila.find('.id_area_per').val();
+          let id_ubi_per = fila.find('.id_ubi_per').val();
+
+          $("#codigoUTAE").val(codigo_uta);
+          $("#nombreE").val(nombre);
+          $("#modeloE").val(modelo);
+          $("#marcaE").val(id_marca);
+          $("#areaE").val(id_area_per);
+          $("#ubicacionE").val(id_ubi_per);
+          $("#serieE").val(serie);
+          $("#modalCrudEditarBienes").modal('show');
+        });
+
+        $("#formEditarBienes").submit(function (e) {
+          e.preventDefault();
+          let codigo_uta = $("#codigoUTAE").val();
+          let nombre = $("#nombreE").val();
+          let modelo = $("#modeloE").val();
+          let id_marca = $("#marcaE").val();
+          let serie = $("#serieE").val();
+          let id_area_per = $("#areaE").val();
+          let id_ubi_per = $("#ubicacionE").val();
+
+          $.ajax({
+            url: "../../Acciones/RestBienes_Informaticos.php",
+            type: "PUT",
+            data: JSON.stringify({
+              id: id,
+              codigo_uta: codigo_uta,
+              nombre: nombre,
+              modelo: modelo,
+              id_marca: id_marca,
+              serie: serie,
+              id_area_per: id_area_per,
+              id_ubi_per: id_ubi_per
+            }),
+            contentType: "application/json",
+            error: function (error) {
+              console.error("Error en la solicitud AJAX", error);
+            },
+            complete: function () {
+              $("#modalCrudEditarBienes").modal('hide');
+              cargarTabla();
             }
           });
-          addEventListeners();
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          const tbody = document.querySelector('#dataTable tbody');
-          const tr = document.createElement('tr');
-          const td = document.createElement('td');
-          td.textContent = 'Error al cargar los datos.';
-          td.setAttribute('colspan', '6');
-          tr.appendChild(td);
-          tbody.appendChild(tr);
         });
-    }
 
-    function addEventListeners() {
-      id = "";
-      $(document).on('click', '.editar', function () {
-        id = $(this).data("id");
-        fila = $(this).closest("tr");
-        codigo_uta = fila.find('td:eq(1)').text();
-        nombre = fila.find('td:eq(2)').text();
-        modelo = fila.find('td:eq(3)').text();
-        id_marca = fila.find('.id_marca').val();
-        serie = fila.find('.serie').val();
-        id_area_per = fila.find('.id_area_per').val();
-        id_ubi_per = fila.find('.id_ubi_per').val();
-
-        $("#codigoUTAE").val(codigo_uta);
-        $("#nombreE").val(nombre);
-        $("#modeloE").val(modelo);
-        $("#marcaE").val(id_marca);
-        $("#areaE").val(id_area_per);
-        $("#ubicacionE").val(id_ubi_per);
-        $("#serieE").val(serie);
-        $("#modalCrudEditarBienes").modal('show');
-      });
-
-      $("#formEditarBienes").submit(function (e) {
-        e.preventDefault();
-        id;
-        codigo_uta = $("#codigoUTAE").val();
-        nombre = $("#nombreE").val();
-        modelo = $("#modeloE").val();
-        id_marca = $("#marcaE").val();
-        serie = $("#serieE").val();
-        id_area_per = $("#areaE").val();
-        id_ubi_per = $("#ubicacionE").val();
-
-        $.ajax({
-          url: "../../Acciones/RestBienes_Informaticos.php",
-          type: "PUT",
-          data: JSON.stringify({
-            id: id,
-            codigo_uta: codigo_uta,
-            nombre: nombre,
-            modelo: modelo,
-            id_marca: id_marca,
-            serie: serie,
-            id_area_per: id_area_per,
-            id_ubi_per: id_ubi_per
-          }),
-          contentType: "application/json",
-          error: function (error) {
-            console.error("Error en la solicitud AJAX", error);
-          },
-          complete: function () {
-            $("#modalCrudEditarBienes").modal('hide');
-            cargarTabla();
-          }
+        $(document).on('click', '.eliminar', function () {
+          id = $(this).data("id");
+          $("#modalCrudEliminarBienes").modal('show');
         });
-      });
 
-      $(document).on('click', '.eliminar', function () {
-        id = $(this).data("id");
-        $("#modalCrudEliminarBienes").modal('show');
-      });
+        $("#formEliminarBienes").submit(function (e) {
+          e.preventDefault();
 
-      $("#formEliminarBienes").submit(function (e) {
-        e.preventDefault();
-
-        $.ajax({
-          url: "../../Acciones/RestBienes_Informaticos.php",
-          type: "DELETE",
-          data: JSON.stringify({
-            id: id
-          }),
-          contentType: "application/json",
-          error: function (error) {
-            console.error("Error en la solicitud AJAX", error);
-          },
-          complete: function () {
-            $("#modalCrudEliminarBienes").modal('hide');
-            cargarTabla();
-          }
-        });
-      });
-    }
-
-    document.addEventListener('DOMContentLoaded', function () {
-      cargarTabla();
-    });
-  </script>
-  
-
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script type="text/javascript" charset="utf8"
-    src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-  <script>
-    $(document).ready(function () {
-      var table = $('#dataTable').DataTable();
-
-      $('#dataTable tbody').on('click', 'button.mas', function () {
-        var btn = $(this);
-        var tr = btn.closest('tr');
-        var row = table.row(tr);
-        var id = btn.data('id');  // Aquí se obtiene el ID del atributo data-id del botón
-
-        if (row.child.isShown()) {
-          row.child.hide();
-          btn.find('i').removeClass('fa-minus').addClass('fa-plus');
-        } else {
           $.ajax({
-            url: '../../Acciones/DetallesInformaticos.php',
-            method: 'GET',
-            data: { id: id },
-            success: function (response) {
-              try {
-                response = JSON.parse(response);
-                if (response.codigo === 0) {
-                  var detalle = response.dato;
-                  var detalleHtml = `
+            url: "../../Acciones/RestBienes_Informaticos.php",
+            type: "DELETE",
+            data: JSON.stringify({
+              id: id
+            }),
+            contentType: "application/json",
+            error: function (error) {
+              console.error("Error en la solicitud AJAX", error);
+            },
+            complete: function () {
+              $("#modalCrudEliminarBienes").modal('hide');
+              cargarTabla();
+            }
+          });
+        });
+
+        // Listener para el botón "mas"
+        $('#dataTable tbody').on('click', 'button.mas', function () {
+          var btn = $(this);
+          var tr = btn.closest('tr');
+          var row = $('#dataTable').DataTable().row(tr);
+          var id = btn.data('id');  // Aquí se obtiene el ID del atributo data-id del botón
+
+          if (row.child.isShown()) {
+            row.child.hide();
+            btn.find('i').removeClass('fa-minus').addClass('fa-plus');
+          } else {
+            $.ajax({
+              url: '../../Acciones/DetallesInformaticos.php',
+              method: 'GET',
+              data: { id: id },
+              success: function (response) {
+                try {
+                  response = JSON.parse(response);
+                  if (response.codigo === 0) {
+                    var detalle = response.dato;
+                    var detalleHtml = `
                                     <div class="additional-info">
                                         <!-- Aquí se incluyen los detalles adicionales -->
                                         <div class="row info-assets">
                                             <div class="col-md-3"><strong>Serie:</strong> ${detalle.serie}</div>
                                             <div class="col-md-3"><strong>Custodio:</strong> ${detalle.custodio}</div>
-                                            <div class="col-md-3"><strong>Ubicación:</strong> ${detalle.ubicacion}</div>
+                                            <div class="col-md-3"><strong>Ubicación:</strong> ${detalle.nombre_ubicacion}</div>
                                             <div class="col-md-3"><strong>Fecha Ingreso:</strong> ${detalle.fecha_ingreso}</div>
                                         </div>
                                         <button class="btn-crud btn-primary btn-icon-split btn-add-component" data-toggle="modal" data-target="#modalCrudAgregarComponente"> 
@@ -1132,45 +1135,45 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                                         ${detalle.componentsTable} <!-- Aquí se incluye la tabla de componentes -->
                                     </div>
                                 `;
-                  row.child(detalleHtml).show();
-                  btn.find('i').removeClass('fa-plus').addClass('fa-minus');
-                } else {
-                  console.error('Error al obtener detalles del bien informático:', response.mensaje);
+                    row.child(detalleHtml).show();
+                    btn.find('i').removeClass('fa-plus').addClass('fa-minus');
+                  } else {
+                    console.error('Error al obtener detalles del bien informático:', response.mensaje);
+                  }
+                } catch (e) {
+                  console.error('Error al parsear JSON:', e);
+                  console.error('Respuesta recibida:', response);
                 }
-              } catch (e) {
-                console.error('Error al parsear JSON:', e);
-                console.error('Respuesta recibida:', response);
+              },
+              error: function (xhr, status, error) {
+                console.error('Error en la solicitud AJAX:', error);
               }
-            },
-            error: function (xhr, status, error) {
-              console.error('Error en la solicitud AJAX:', error);
-            }
-          });
-        }
-      });
+            });
+          }
+        });
 
-      // Event listener for adding components
-      $('#dataTable tbody').on('click', '.btn-add-component', function () {
-        $('#modalCrudAgregarComponente').modal('show');
-      });
+        // Event listener for adding components
+        $('#dataTable tbody').on('click', '.btn-add-component', function () {
+          $('#modalCrudAgregarComponente').modal('show');
+        });
 
-      // Form submission handler for adding components
-      $('#agregarComponenteForm').on('submit', function (event) {
-        event.preventDefault();
-        $('#modalCrudAgregarComponente').modal('hide');
-        alert('Componente agregado exitosamente.');
-      });
+        // Form submission handler for adding components
+        $('#agregarComponenteForm').on('submit', function (event) {
+          event.preventDefault();
+          $('#modalCrudAgregarComponente').modal('hide');
+          alert('Componente agregado exitosamente.');
+        });
 
-      $("#eliminarComponente").click(function () {
-        $("#modalCrudEliminarComponente").modal('show');
-      });
+        $("#eliminarComponente").click(function () {
+          $("#modalCrudEliminarComponente").modal('show');
+        });
 
-      $("#editarComponente").click(function () {
-        $("#modalCrudEditarComponente").modal('show');
-      });
+        $("#editarComponente").click(function () {
+          $("#modalCrudEditarComponente").modal('show');
+        });
+      }
     });
   </script>
-
 
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>
