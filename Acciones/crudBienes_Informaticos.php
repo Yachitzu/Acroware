@@ -3,86 +3,53 @@ include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion
 class AccionesBienes_Informaticos
 {
     public static function listarBienes_Informaticos()
-{
-    try {
-        $conexion = Conexion::getInstance()->getConexion();
-        $consulta = $conexion->prepare("SELECT bienes_informaticos.*, marcas.nombre AS nombre_marca 
-        FROM bienes_informaticos
-        LEFT JOIN marcas ON bienes_informaticos.id_marca = marcas.id
-        WHERE bienes_informaticos.activo='si'");
-        $consulta->execute();
-        $dato = $consulta->fetchAll(PDO::FETCH_ASSOC);
+    {
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = $conexion->prepare("SELECT bienes_informaticos.*, marcas.nombre AS nombre_marca 
+            FROM bienes_informaticos
+            LEFT JOIN marcas ON bienes_informaticos.id_marca = marcas.id
+            WHERE bienes_informaticos.activo='si'");
+            $consulta->execute();
+            $dato = $consulta->fetchAll(PDO::FETCH_ASSOC);
 
-        $tabla = '';
-
-        foreach ($dato as $respuesta) {
-            $tabla .= '
-                <tr>
-                    <td>
-                        <center>
-                        <button class="btn btn-info btn-circle element-white mas" id="mas" data-id="' . htmlspecialchars($respuesta['id']) . '">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                        </center>
-                    </td>
-                    <td>' . htmlspecialchars($respuesta['codigo_uta']) . '</td>
-                    <td>' . htmlspecialchars($respuesta['nombre']) . '</td>
-                    <td>' . htmlspecialchars($respuesta['modelo']) . '</td>
-                    <td>' . htmlspecialchars($respuesta['nombre_marca']) . '</td>
-                    <td class="mdl-data-table__cell">
-                        <center>
-                        <button class="btn btn-warning btn-circle element-white editar" data-id="' . htmlspecialchars($respuesta['id']) . '">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn btn-danger btn-circle eliminar" data-id="' . htmlspecialchars($respuesta['id']) . '">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                        </center>
-                    </td>
-                    <input type="hidden" class="serie" value="' . htmlspecialchars($respuesta['serie']) . '">
-                    <input type="hidden" class="id_marca" value="' . htmlspecialchars($respuesta['id_marca']) . '">
-                    <input type="hidden" class="id_area_per" value="' . htmlspecialchars($respuesta['id_area_per']) . '">
-                    <input type="hidden" class="id_ubi_per" value="' . htmlspecialchars($respuesta['id_ubi_per']) . '">
-                </tr>
-            ';
-        }
-        return [
-            'codigo' => 0,
-            'dato' => $tabla,
-        ];
-    } catch (PDOException $e) {
-        error_log('Error al listar bienes informaticos: ' . $e->getMessage());
-        return [
-            'codigo' => 1,
-            'mensaje' => 'Error al listar bienes informaticos: ' . $e->getMessage()
-        ];
-    }
-}
-
-public static function obtenerDetalleBienes_Informaticos($id)
-{
-    try {
-        $conexion = Conexion::getInstance()->getConexion();
-        $consulta = $conexion->prepare("SELECT * FROM bienes_informaticos WHERE id = :id");
-        $consulta->bindParam(':id', $id);
-        $consulta->execute();
-        $dato = $consulta->fetch(PDO::FETCH_ASSOC);
-        
-        if (!$dato) {
-            return [
+            return json_encode([
+                'codigo' => 0,
+                'datos' => $dato
+            ]);
+        } catch (PDOException $e) {
+            error_log('Error al listar bienes informaticos: ' . $e->getMessage());
+            return json_encode([
                 'codigo' => 1,
-                'mensaje' => 'Bien informático no encontrado'
-            ];
+                'mensaje' => 'Error al listar bienes informaticos: ' . $e->getMessage()
+            ]);
         }
-        
-        // Ajusta el nombre de la columna a la correcta en tu base de datos
-        $consultaComponentes = $conexion->prepare("SELECT * FROM componentes WHERE id_bien_infor_per = :id");
-        $consultaComponentes->bindParam(':id', $id);
-        $consultaComponentes->execute();
-        $componentes = $consultaComponentes->fetchAll(PDO::FETCH_ASSOC);
+    }
 
-        // Formatear los componentes en una tabla
-        $componentsTable = '<table class="table">
+    public static function obtenerDetalleBienes_Informaticos($id)
+    {
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = $conexion->prepare("SELECT * FROM bienes_informaticos WHERE id = :id");
+            $consulta->bindParam(':id', $id);
+            $consulta->execute();
+            $dato = $consulta->fetch(PDO::FETCH_ASSOC);
+
+            if (!$dato) {
+                return [
+                    'codigo' => 1,
+                    'mensaje' => 'Bien informático no encontrado'
+                ];
+            }
+
+            // Ajusta el nombre de la columna a la correcta en tu base de datos
+            $consultaComponentes = $conexion->prepare("SELECT * FROM componentes WHERE id_bien_infor_per = :id");
+            $consultaComponentes->bindParam(':id', $id);
+            $consultaComponentes->execute();
+            $componentes = $consultaComponentes->fetchAll(PDO::FETCH_ASSOC);
+
+            // Formatear los componentes en una tabla
+            $componentsTable = '<table class="table">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -95,8 +62,8 @@ public static function obtenerDetalleBienes_Informaticos($id)
             </thead>
             <tbody>';
 
-        foreach ($componentes as $componente) {
-            $componentsTable .= '<tr>
+            foreach ($componentes as $componente) {
+                $componentsTable .= '<tr>
                 <td>' . htmlspecialchars($componente['nombre']) . '</td>
                 <td>' . htmlspecialchars($componente['descripcion']) . '</td>
                 <td>' . htmlspecialchars($componente['serie']) . '</td>
@@ -113,25 +80,25 @@ public static function obtenerDetalleBienes_Informaticos($id)
                     </center>
                 </td>
             </tr>';
+            }
+
+            $componentsTable .= '</tbody></table>';
+
+            // Agregar la tabla de componentes al array de datos
+            $dato['componentsTable'] = $componentsTable;
+
+            return [
+                'codigo' => 0,
+                'dato' => $dato,
+            ];
+        } catch (PDOException $e) {
+            error_log('Error al obtener detalle de bienes informaticos: ' . $e->getMessage());
+            return [
+                'codigo' => 1,
+                'mensaje' => 'Error al obtener detalle de bienes informaticos: ' . $e->getMessage()
+            ];
         }
-
-        $componentsTable .= '</tbody></table>';
-
-        // Agregar la tabla de componentes al array de datos
-        $dato['componentsTable'] = $componentsTable;
-
-        return [
-            'codigo' => 0,
-            'dato' => $dato,
-        ];
-    } catch (PDOException $e) {
-        error_log('Error al obtener detalle de bienes informaticos: ' . $e->getMessage());
-        return [
-            'codigo' => 1,
-            'mensaje' => 'Error al obtener detalle de bienes informaticos: ' . $e->getMessage()
-        ];
     }
-}
 
 
 

@@ -3,8 +3,9 @@ include_once ("crudBienes_Informaticos.php");
 $op = $_SERVER["REQUEST_METHOD"];
 switch ($op) {
     case 'GET':
+        header('Content-Type: application/json');
         $resultado = AccionesBienes_Informaticos::listarBienes_Informaticos();
-        echo json_encode($resultado);
+        echo $resultado;
         break;
     case 'POST':
         $json_input = file_get_contents('php://input');

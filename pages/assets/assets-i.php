@@ -297,45 +297,46 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 
           <div class="container-fluid py-4">
             <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <button class="btn-crud btn-secondary btn-icon-split" id="AgregarBienes">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-plus-circle"></i>
-                        </span>
-                        <span class="text text-white">Agregar Bien</span>
-                    </button>
+              <div class="card-header py-3">
+                <button class="btn-crud btn-secondary btn-icon-split" id="AgregarBienes">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-plus-circle"></i>
+                  </span>
+                  <span class="text text-white">Agregar Bien</span>
+                </button>
+              </div>
+              <div class="card-body bg-darkwhite">
+                <div class="table-responsive">
+                  <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%"
+                    cellspacing="0">
+                    <thead>
+                      <tr>
+                        <th>Ver Más</th>
+                        <th>Codigo UTA</th>
+                        <th>Nombre</th>
+                        <th>Modelo</th>
+                        <th>Marca</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody id="bienesTableBody">
+                      <!-- Aquí se insertará la lista de bienes informáticos -->
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>Ver Más</th>
+                        <th>Codigo UTA</th>
+                        <th>Nombre</th>
+                        <th>Modelo</th>
+                        <th>Marca</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </tfoot>
+                  </table>
                 </div>
-                <div class="card-body bg-darkwhite">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Ver Más</th>
-                                    <th>Codigo UTA</th>
-                                    <th>Nombre</th>
-                                    <th>Modelo</th>
-                                    <th>Marca</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody id="bienesTableBody">
-                                <!-- Aquí se insertará la lista de bienes informáticos -->
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>Ver Más</th>
-                                    <th>Codigo UTA</th>
-                                    <th>Nombre</th>
-                                    <th>Modelo</th>
-                                    <th>Marca</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
+              </div>
             </div>
-        </div>
+          </div>
 
 
           <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -921,7 +922,37 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           tbody.innerHTML = '';
 
           if (data.codigo === 0) {
-            tbody.innerHTML = data.dato;
+            data.datos.forEach(respuesta => {
+              const tr = document.createElement('tr');
+              tr.innerHTML = `
+                    <td>
+                        <center>
+                            <button class="btn btn-info btn-circle element-white mas" id="mas" data-id="${respuesta.id}">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </center>
+                    </td>
+                    <td>${respuesta.codigo_uta}</td>
+                    <td>${respuesta.nombre}</td>
+                    <td>${respuesta.modelo}</td>
+                    <td>${respuesta.nombre_marca}</td>
+                    <td class="mdl-data-table__cell">
+                        <center>
+                            <button class="btn btn-warning btn-circle element-white editar" data-id="${respuesta.id}">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn btn-danger btn-circle eliminar" data-id="${respuesta.id}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </center>
+                    </td>
+                    <input type="hidden" class="serie" value="${respuesta.serie}">
+                    <input type="hidden" class="id_marca" value="${respuesta.id_marca}">
+                    <input type="hidden" class="id_area_per" value="${respuesta.id_area_per}">
+                    <input type="hidden" class="id_ubi_per" value="${respuesta.id_ubi_per}">
+                `;
+              tbody.appendChild(tr);
+            });
           } else {
             const tr = document.createElement('tr');
             const td = document.createElement('td');
@@ -966,7 +997,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           tbody.appendChild(tr);
         });
     }
-
 
     function addEventListeners() {
       id = "";
@@ -1056,33 +1086,35 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       cargarTabla();
     });
   </script>
+  
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-<script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+  <script>
     $(document).ready(function () {
-        var table = $('#dataTable').DataTable();
+      var table = $('#dataTable').DataTable();
 
-        $('#dataTable tbody').on('click', 'button.mas', function () {
-            var btn = $(this);
-            var tr = btn.closest('tr');
-            var row = table.row(tr);
-            var id = btn.data('id');  // Aquí se obtiene el ID del atributo data-id del botón
+      $('#dataTable tbody').on('click', 'button.mas', function () {
+        var btn = $(this);
+        var tr = btn.closest('tr');
+        var row = table.row(tr);
+        var id = btn.data('id');  // Aquí se obtiene el ID del atributo data-id del botón
 
-            if (row.child.isShown()) {
-                row.child.hide();
-                btn.find('i').removeClass('fa-minus').addClass('fa-plus');
-            } else {
-                $.ajax({
-                    url: '../../Acciones/DetallesInformaticos.php',
-                    method: 'GET',
-                    data: { id: id },
-                    success: function (response) {
-                        try {
-                            response = JSON.parse(response);
-                            if (response.codigo === 0) {
-                                var detalle = response.dato;
-                                var detalleHtml = `
+        if (row.child.isShown()) {
+          row.child.hide();
+          btn.find('i').removeClass('fa-minus').addClass('fa-plus');
+        } else {
+          $.ajax({
+            url: '../../Acciones/DetallesInformaticos.php',
+            method: 'GET',
+            data: { id: id },
+            success: function (response) {
+              try {
+                response = JSON.parse(response);
+                if (response.codigo === 0) {
+                  var detalle = response.dato;
+                  var detalleHtml = `
                                     <div class="additional-info">
                                         <!-- Aquí se incluyen los detalles adicionales -->
                                         <div class="row info-assets">
@@ -1100,44 +1132,44 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                                         ${detalle.componentsTable} <!-- Aquí se incluye la tabla de componentes -->
                                     </div>
                                 `;
-                                row.child(detalleHtml).show();
-                                btn.find('i').removeClass('fa-plus').addClass('fa-minus');
-                            } else {
-                                console.error('Error al obtener detalles del bien informático:', response.mensaje);
-                            }
-                        } catch (e) {
-                            console.error('Error al parsear JSON:', e);
-                            console.error('Respuesta recibida:', response);
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.error('Error en la solicitud AJAX:', error);
-                    }
-                });
+                  row.child(detalleHtml).show();
+                  btn.find('i').removeClass('fa-plus').addClass('fa-minus');
+                } else {
+                  console.error('Error al obtener detalles del bien informático:', response.mensaje);
+                }
+              } catch (e) {
+                console.error('Error al parsear JSON:', e);
+                console.error('Respuesta recibida:', response);
+              }
+            },
+            error: function (xhr, status, error) {
+              console.error('Error en la solicitud AJAX:', error);
             }
-        });
+          });
+        }
+      });
 
-        // Event listener for adding components
-        $('#dataTable tbody').on('click', '.btn-add-component', function () {
-            $('#modalCrudAgregarComponente').modal('show');
-        });
+      // Event listener for adding components
+      $('#dataTable tbody').on('click', '.btn-add-component', function () {
+        $('#modalCrudAgregarComponente').modal('show');
+      });
 
-        // Form submission handler for adding components
-        $('#agregarComponenteForm').on('submit', function (event) {
-            event.preventDefault();
-            $('#modalCrudAgregarComponente').modal('hide');
-            alert('Componente agregado exitosamente.');
-        });
+      // Form submission handler for adding components
+      $('#agregarComponenteForm').on('submit', function (event) {
+        event.preventDefault();
+        $('#modalCrudAgregarComponente').modal('hide');
+        alert('Componente agregado exitosamente.');
+      });
 
-        $("#eliminarComponente").click(function () {
-            $("#modalCrudEliminarComponente").modal('show');
-        });
+      $("#eliminarComponente").click(function () {
+        $("#modalCrudEliminarComponente").modal('show');
+      });
 
-        $("#editarComponente").click(function () {
-            $("#modalCrudEditarComponente").modal('show');
-        });
+      $("#editarComponente").click(function () {
+        $("#modalCrudEditarComponente").modal('show');
+      });
     });
-</script>
+  </script>
 
 
   <!-- plugins:js -->
