@@ -38,4 +38,11 @@ $(document).ready(function(){
         $("#modalSoft").modal('show');
     });
 
+    $("#agregarComponente").click(function(){
+        $("#modalCrudAgregarComponente").modal('show');
+    });
+
+
+
+
 });
