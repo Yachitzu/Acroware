@@ -728,8 +728,6 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
     $(document).ready(function() {
       $('#reporteSW').on('click', function(e) {
         e.preventDefault();
-        var formData = $('#reporteSW').serialize();
-        var tipoArchivo = $(this).val();
         tipoLicencia = $('#licenciaSW').val();
         tipoActivo = $('#activoSW').val();
         tipoReporte= $('#tipoArchivoSW').val();
