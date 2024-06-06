@@ -177,28 +177,48 @@ class Actualizar{
     }
     public static function ActualizarPerfil($data){
         try {
-            if ($data !== null) {
+            if ($data!== null) {
                 $conectar = Conexion::getInstance()->getConexion();
-                $nombre = htmlspecialchars($data["nombre"]);
-                $apellido = htmlspecialchars($data["apellido"]);
-                $cedula = htmlspecialchars($data["cedula"]);
-                $email = htmlspecialchars($data["correo"]);
-                $id = htmlspecialchars($data["id"]);
-                $updatesql = "UPDATE usuarios  SET email= '$email',nombre= '$nombre',apellido= '$apellido',cedula= '$cedula' WHERE id='$id'";
-                $resultado = $conectar->prepare($updatesql);
-                $resultado->execute();
-                Sesion::getInstance()->setSesion("email", $email);
-                $_SESSION['nombre'] = $nombre;
-                $_SESSION['apellido'] = $apellido;
-                $_SESSION['cedula'] = $cedula;
-                $_SESSION['correo'] = $email;
-                //$conectar->commit();
-                echo json_encode('Actualizado');
+                
+                // Consulta para buscar si ya existe un usuario con el mismo correo electrónico
+                $buscarSql = "SELECT * FROM usuarios WHERE email = :email AND id!= :id";
+                $buscarResultado = $conectar->prepare($buscarSql);
+                $buscarResultado->bindParam(':email', $data["correo"], PDO::PARAM_STR);
+                $buscarResultado->bindParam(':id', $data["id"], PDO::PARAM_STR);
+                $buscarResultado->execute();
+                if ($buscarResultado->rowCount() > 0) {
+                    echo json_encode(['success' => false, 'essage' => 'El correo electrónico ya está en uso']);
+                } else {
+                    // Consulta para buscar si ya existe un usuario con la misma cédula
+                    $buscarCedulaSql = "SELECT * FROM usuarios WHERE cedula = :cedula AND id!= :id";
+                    $buscarCedulaResultado = $conectar->prepare($buscarCedulaSql);
+                    $buscarCedulaResultado->bindParam(':cedula', $data["cedula"], PDO::PARAM_STR);
+                    $buscarCedulaResultado->bindParam(':id', $data["id"], PDO::PARAM_STR);
+                    $buscarCedulaResultado->execute();
+                    if ($buscarCedulaResultado->rowCount() > 0) {
+                        echo json_encode(['success' => false, 'essage' => 'La cédula ya está en uso']);
+                    } else {
+                        $nombre = htmlspecialchars($data["nombre"]);
+                        $apellido = htmlspecialchars($data["apellido"]);
+                        $cedula = htmlspecialchars($data["cedula"]);
+                        $email = htmlspecialchars($data["correo"]);
+                        $id = htmlspecialchars($data["id"]);
+                        $updatesql = "UPDATE usuarios  SET email= '$email',nombre= '$nombre',apellido= '$apellido', cedula= '$cedula' WHERE id='$id'";
+                        $resultado = $conectar->prepare($updatesql);
+                        $resultado->execute();
+                        Sesion::getInstance()->setSesion("email", $email);
+                        $_SESSION['nombre'] = $nombre;
+                        $_SESSION['apellido'] = $apellido;
+                        $_SESSION['correo'] = $email;
+                        $_SESSION['cedula'] = $cedula;
+                        echo json_encode('Actualizado');
+                    }
+                }
             } else {
-                echo json_encode(['success' => false, 'message' => 'Invalid input']);
+                echo json_encode(['success' => false, 'essage' => 'Invalid input']);
             }
         } catch (PDOException $e) {
-            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            echo json_encode(['success' => false, 'essage' => $e->getMessage()]);
         }
     }
 }  
