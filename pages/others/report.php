@@ -467,8 +467,11 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     <label for="areaC" class="text-bold">Área</label>
                     <select class="form-control" name="areaI" id="areaC" required>
                       <option value="">Seleccione un Área</option>
-                      <option value="tecnologico">Tecnológico</option>
-                      <option value="mobiliario">Mobiliario</option>
+                          <?php
+                            include_once ("../../Acciones/crudMarcas.php");
+                            $areas = Obtener::ObtenerArea();
+                            echo ($areas['dato']);
+                          ?>
                     </select>
                   </div>
                     <div class="form-group col-md-6">
@@ -554,8 +557,11 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     <select class="form-control" name="areaC" id="areaC" required>
                       <option value="">Seleccione un Área</option>
                       <option value="any">Todos</option>
-                      <option value="tecnologico">Tecnológico</option>
-                      <option value="mobiliario">Mobiliario</option>
+                      <?php
+                          include_once ("../../Acciones/crudMarcas.php");
+                          $areas = Obtener::ObtenerArea();
+                          echo ($areas['dato']);
+                      ?>
                     </select>
                   </div>
                   <div class="form-group col-md-6">
@@ -586,8 +592,8 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                         <label for="areaC" class="text-bold">Tipo Archivo</label>
                         <select class="form-control" name="areaC" id="areaC" required>
                         <option value="">Seleccione un Tipo</option>
-                        <option value="pdf">PDF</option>
-                        <option value="excel">Excel</option>
+                        <option value="pdfM">PDF</option>
+                        <option value="excelM">Excel</option>
                         </select>
                     </div>
                 </div>
