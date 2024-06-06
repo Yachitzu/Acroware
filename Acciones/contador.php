@@ -138,4 +138,72 @@ function obtenerRecordatoriosPendientes($usuario_id) {
     }
 }
 
+function obtenerAreasPorBloque($bloqueId) {
+    try {
+        // Obtenemos una instancia de la conexión
+        $conexion = Conexion::getInstance()->getConexion();
+
+        // Consulta SQL para obtener los detalles de las áreas correspondientes al bloque seleccionado
+        $query = "SELECT areas.id, areas.nombre, areas.descripcion, areas.piso, bloques.nombre AS nombre_bloque
+                  FROM areas
+                  INNER JOIN bloques ON areas.id_bloque_per = bloques.id
+                  WHERE areas.id_bloque_per = :bloqueId";
+
+        $stmt = $conexion->prepare($query);
+        $stmt->bindParam(':bloqueId', $bloqueId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        $areasPorPiso = array();
+
+        // Verificar si se encontraron áreas
+        if ($stmt->rowCount() > 0) {
+            // Recorrer los resultados y agregarlos al array $areasPorPiso
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                // Convertir el número del piso en su equivalente textual
+                $nombre_piso = convertirNumeroAPiso($row['piso']);
+                if (!isset($areasPorPiso[$nombre_piso])) {
+                    $areasPorPiso[$nombre_piso] = array();
+                }
+                $areasPorPiso[$nombre_piso][] = $row;
+            }
+        }
+
+        // Devolver los detalles de las áreas en formato JSON
+        return json_encode($areasPorPiso);
+    } catch (PDOException $e) {
+        // Manejo de errores: registrar el error en un log para depuración
+        error_log($e->getMessage(), 3, 'app_errors.log');
+
+        // Retornar un array vacío para evitar errores
+        return json_encode([]);
+    }
+}
+
+// Función para convertir el número de piso a nombre de piso
+function convertirNumeroAPiso($numeroPiso) {
+    switch ($numeroPiso) {
+        case 0:
+            return 'Planta Baja';
+        case 1:
+            return 'Primer Piso';
+        case 2:
+            return 'Segundo Piso';
+        case 3:
+            return 'Tercer Piso';
+        case 4:
+            return 'Cuarto Piso';
+        case 4:
+            return 'Quinto Piso';
+        
+        default:
+            return 'Piso Desconocido';
+    }
+}
+
+// Ejemplo de uso de la función para obtener detalles de áreas por bloque
+if (isset($_GET['bloque'])) {
+    $bloqueId = $_GET['bloque'];
+    echo obtenerAreasPorBloque($bloqueId);
+}
+
 ?>
