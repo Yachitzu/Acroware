@@ -419,11 +419,11 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="nombreC" class="text-bold">Nombre</label>
-                                    <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre"  oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                                    <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="apellidoC" class="text-bold">Apellido</label>
-                                    <input type="text" class="form-control" name="apellidoC" id="apellidoC" placeholder="Apellido"  oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                                    <input type="text" class="form-control" name="apellidoC" id="apellidoC" placeholder="Apellido" required>
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label for="email" class="text-bold">Email</label>
@@ -655,6 +655,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
   <!-- inject:js -->
   <script src="../../resources/js/off-canvas.js"></script>
   <script src="../../resources/js/modal.js"></script>
+  <script src="../../resources/js/validation.js"></script>
   <script src="../../resources/js/hoverable-collapse.js"></script>
   <script src="../../resources/js/template.js"></script>
   <script src="../../resources/js/settings.js"></script>
@@ -848,9 +849,11 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           $('#modalCrudAgregar').modal('hide');
         } else {
           console.error('Error al agregar usuario:', response.statusText);
+          alert("Ya existe un usuario con esa cédula/correo");
         }
       } catch (error) {
         console.error('Error al agregar usuario:', error);
+        alert("Ya existe un usuario con esa cédula/correo");
       }
     });
 
@@ -882,12 +885,15 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             editarModal.hide();
           } else {
             console.error('Error al editar usuario:', result.message);
+            alert("No puede usar un correo repetido");
           }
         } else {
           console.error('Error al editar usuario:', response.statusText);
+          alert("No puede usar un correo repetido");
         }
       } catch (error) {
         console.error('Error al editar usuario:', error);
+        alert("No puede usar un correo repetido");
       }
     });
 

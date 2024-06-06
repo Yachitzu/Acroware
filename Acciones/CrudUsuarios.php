@@ -187,7 +187,7 @@ class Actualizar{
                 $buscarResultado->bindParam(':id', $data["id"], PDO::PARAM_STR);
                 $buscarResultado->execute();
                 if ($buscarResultado->rowCount() > 0) {
-                    echo json_encode(['success' => false, 'essage' => 'El correo electrónico ya está en uso']);
+                    echo json_encode(['success' => false, 'message' => 'El correo electrónico ya está en uso']);
                 } else {
                     // Consulta para buscar si ya existe un usuario con la misma cédula
                     $buscarCedulaSql = "SELECT * FROM usuarios WHERE cedula = :cedula AND id!= :id";
@@ -196,7 +196,7 @@ class Actualizar{
                     $buscarCedulaResultado->bindParam(':id', $data["id"], PDO::PARAM_STR);
                     $buscarCedulaResultado->execute();
                     if ($buscarCedulaResultado->rowCount() > 0) {
-                        echo json_encode(['success' => false, 'essage' => 'La cédula ya está en uso']);
+                        echo json_encode(['success' => false, 'message' => 'La cédula ya está en uso']);
                     } else {
                         $nombre = htmlspecialchars($data["nombre"]);
                         $apellido = htmlspecialchars($data["apellido"]);
@@ -215,10 +215,10 @@ class Actualizar{
                     }
                 }
             } else {
-                echo json_encode(['success' => false, 'essage' => 'Invalid input']);
+                echo json_encode(['success' => false, 'message' => 'Invalid input']);
             }
         } catch (PDOException $e) {
-            echo json_encode(['success' => false, 'essage' => $e->getMessage()]);
+            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
         }
     }
 }  
