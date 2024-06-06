@@ -37,6 +37,9 @@ class AccionesAreas
                         </button>
                             </center>
                         </td>
+                        <input type="hidden" class="id_usu_encargado" value="' . htmlspecialchars($respuesta['id_usu_encargado']) . '">
+                        <input type="hidden" class="id_bloque_per" value="' . htmlspecialchars($respuesta['id_bloque_per']) . '">
+
                     </tr>
                 ';
             }
@@ -86,37 +89,7 @@ class AccionesAreas
         }
     }
 
-    public static function listarBloquesEditar()
-    {
-        try {
-            $conexion = Conexion::getInstance()->getConexion();
-            $consulta = "SELECT bloques.*, facultades.nombre AS nombre_facultad 
-            FROM bloques 
-            INNER JOIN facultades ON bloques.id_facultad_per = facultades.id
-            WHERE bloques.activo = 'si'";
-            $resultado = $conexion->prepare($consulta);
-            $resultado->execute();
-            $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
-            $dato;
-            $tabla = '';
-
-            foreach ($dato as $respuesta) {
-                $tabla .= '
-                    <option value="' . htmlspecialchars($respuesta['nombre']) . '">' . htmlspecialchars($respuesta['nombre']).'-'.htmlspecialchars($respuesta['nombre_facultad']).'</option>
-                ';
-            }
-            return [
-                'codigo' => 0,
-                'dato' => $tabla,
-            ];
-        } catch (PDOException $e) {
-            error_log('Error al listar Facultades: ' . $e->getMessage());
-            return [
-                'codigo' => 1,
-                'mensaje' => 'Error al listar facultades: ' . $e->getMessage()
-            ];
-        }
-    }
+   
 
     public static function listarUsuariosInsertar()
     {
@@ -147,35 +120,7 @@ class AccionesAreas
         }
     }
 
-    public static function listarUsuariosEditar()
-    {
-        try {
-            $conexion = Conexion::getInstance()->getConexion();
-            $consulta = "SELECT * FROM usuarios WHERE rol='laboratorista' AND activo = 'si'";
-            $resultado = $conexion->prepare($consulta);
-            $resultado->execute();
-            $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
-            $dato;
-            $tabla = '';
-
-            foreach ($dato as $respuesta) {
-                $tabla .= '
-                    <option value="' . htmlspecialchars($respuesta['nombre']) . '">' . htmlspecialchars($respuesta['nombre']).'</option>
-                ';
-            }
-            return [
-                'codigo' => 0,
-                'dato' => $tabla,
-            ];
-        } catch (PDOException $e) {
-            error_log('Error al listar Facultades: ' . $e->getMessage());
-            return [
-                'codigo' => 1,
-                'mensaje' => 'Error al listar facultades: ' . $e->getMessage()
-            ];
-        }
-    }
-
+    
     public static function insertarAreas($nombre, $descripcion, $piso, $id_bloque_per, $id_usu_encargado)
     {
         try {
@@ -214,7 +159,7 @@ class AccionesAreas
                 echo ("El área ya existe.");
                 return 1;
             } else {
-                $bloques = $conexion->prepare("SELECT id FROM bloques WHERE nombre= :nombre_bloque");
+                /* $bloques = $conexion->prepare("SELECT id FROM bloques WHERE nombre= :nombre_bloque");
                 $bloques->bindParam(':nombre_bloque', $id_bloque_per);
                 $bloques->execute();
                 $dato_bloque = $bloques->fetch(PDO::FETCH_ASSOC);
@@ -222,15 +167,15 @@ class AccionesAreas
                 $usuario = $conexion->prepare("SELECT id FROM usuarios WHERE nombre= :nombre_usuario");
                 $usuario->bindParam(':nombre_usuario', $id_usu_encargado);
                 $usuario->execute();
-                $dato_usuario = $usuario->fetch(PDO::FETCH_ASSOC);
+                $dato_usuario = $usuario->fetch(PDO::FETCH_ASSOC); */
                 
                 $consulta = $conexion->prepare("UPDATE areas SET nombre= :nombre, descripcion= :descripcion, piso= :piso, id_bloque_per= :id_bloque_per, id_usu_encargado= :id_usu_encargado WHERE id=:id");
                 $consulta->bindParam(":id", $id);
                 $consulta->bindParam(":nombre", $nombre);
                 $consulta->bindParam(':descripcion', $descripcion);
                 $consulta->bindParam(':piso', $piso);
-                $consulta->bindParam(':id_bloque_per', $dato_bloque['id']);
-                $consulta->bindParam(':id_usu_encargado', $dato_usuario['id']);
+                $consulta->bindParam(':id_bloque_per', $id_bloque_per);
+                $consulta->bindParam(':id_usu_encargado', $id_usu_encargado);
                 $consulta->execute();
                 return 0;
             }
