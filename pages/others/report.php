@@ -621,7 +621,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="reporteSwForm" method="post">
+        <form action= "../../Acciones/ReporteSW.php" class="forms-sample" id="reporteSwForm" method="post" target="_blank">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -629,7 +629,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="areaC" class="text-bold">Tipo Licencia</label>
-                    <select class="form-control" name="areaC" id="licenciaSW" required>
+                    <select class="form-control" name="licenciaSW" id="licenciaSW" required>
                       <option value="">Seleccione una licencia</option>
                       <option value="any">Todos</option>
                       <option value="Dominio Público">Dominio Público</option>
@@ -640,8 +640,8 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     </select>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="areaC" class="text-bold">Activado</label>
-                    <select class="form-control" name="areaC" id="activoSW" required>
+                    <label for="activoSW" class="text-bold">Activado</label>
+                    <select class="form-control" name="activoSW" id="activoSW" required>
                       <option value="">Seleccione un estado</option>
                       <option value="any">Todos</option>
                       <option value="si">Si</option>
@@ -652,20 +652,20 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="fechaInicial" class="text-bold">Fecha Inicial</label>
-                        <input type="date" class="form-control" name="fechaInicial" id="fechaInicial" placeholder="Selecciona una fecha" required>
+                        <input type="date" class="form-control" name="fechaInicialSW" id="fechaInicialSW" placeholder="Selecciona una fecha" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="fechaFinal" class="text-bold">Fecha Final</label>
-                        <input type="date" class="form-control" name="fechaFinal" id="fechaFinal" placeholder="Selecciona una fecha" required>
+                        <input type="date" class="form-control" name="fechaFinalSW" id="fechaFinalSW" placeholder="Selecciona una fecha" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label for="areaC" class="text-bold" >Tipo Archivo</label>
-                        <select class="form-control" name="areaC" id="tipoArchivoSW" required>
+                        <select class="form-control" name="tipoArchivoSW" id="tipoArchivoSW" required>
                           <option value="">Seleccione un Tipo</option>
-                          <option value="pdfSW">PDF</option>
-                          <option value="excelSW">Excel</option>
+                          <option value="pdf">PDF</option>
+                          <option value="excel">Excel</option>
                         </select>
                     </div>
                 </div>
@@ -712,49 +712,42 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 </body>
 
 
-<script>
-    document.getElementById('fechaInicial').addEventListener('change', function() {
-        var fechaInicial = document.getElementById('fechaInicial').value;
-        document.getElementById('fechaFinal').min = fechaInicial;
-    });
+  <script>
+    document.getElementById('fechaInicialSW').addEventListener('change', function() {
+      var fecha_adqui = document.getElementById('fechaInicialSW').value;
+      document.getElementById('fechaFinalSW').min = fecha_adqui;
+  });
 
-    document.getElementById('fechaFinal').addEventListener('change', function() {
-        var fechaFinal = document.getElementById('fechaFinal').value;
-        var fechaInicial = document.getElementById('fechaInicial').value;
-        if (fechaFinal < fechaInicial) {
-            alert('La fecha final no puede ser anterior a la fecha inicial.');
-            document.getElementById('fechaFinal').value = '';
-        }
-        // if (fechaFinal === fechaInicial) {
-        //     alert('La fecha final no puede ser la misma que la fecha inicial.');
-        //     document.getElementById('fechaFinal').value = '';
-        // }
-    });
+  document.getElementById('fechaFinalSW').addEventListener('change', function() {
+      var fecha_activacion = document.getElementById('fechaFinalSW').value;
+      var fecha_adqui = document.getElementById('fechaInicialSW').value;
+      if (fecha_activacion < fecha_adqui) {
+          alert('La fecha final no puede ser anterior a la fecha inicial.');
+          document.getElementById('fechaFinalSW').value = '';
+      }
+      // if (fecha_activacion === fecha_adqui) {
+      //     alert('La fecha final no puede ser la misma que la fecha inicial.');
+      //     document.getElementById('fecha_activacion').value = '';
+      // }
+  });
+  </script>
+    <script>
+    //   document.getElementById('fecha_adquiE').addEventListener('change', function() {
+    //     var fecha_adqui = document.getElementById('fecha_adquiE').value;
+    //     document.getElementById('fecha_activacionE').min = fecha_adqui;
+    // });
 
-    $(document).ready(function() {
-      $('#reporteSW').on('click', function(e) {
-        e.preventDefault();
-        tipoLicencia = $('#licenciaSW').val();
-        tipoActivo = $('#activoSW').val();
-        tipoReporte= $('#tipoArchivoSW').val();
-        fechaIni = $('#fechaInicial').val();
-        fechaFinal = $('#fechaFinal').val();
-        alert(tipoLicencia + " " + tipoActivo + " " + tipoReporte + " " + fechaIni + " " + );
-        $.ajax({
-          type: 'POST',
-          url: 'ruta/al/archivo/que/procesa/la/solicitud', // reemplaza con la ruta correcta
-          data: formData + '&tipoArchivo=' + tipoArchivo,
-          success: function(response) {
-            // código a ejecutar cuando se completa la solicitud
-            console.log(response);
-          },
-          error: function(xhr, status, error) {
-            // código a ejecutar cuando ocurre un error
-            console.log(error);
-          }
-        });
-      });
-    });
-</script>
-
+    // document.getElementById('fecha_activacionE').addEventListener('change', function() {
+    //     var fecha_activacion = document.getElementById('fecha_activacionE').value;
+    //     var fecha_adqui = document.getElementById('fecha_adquiE').value;
+    //     if (fecha_activacion < fecha_adqui) {
+    //         alert('La fecha final no puede ser anterior a la fecha inicial.');
+    //         document.getElementById('fecha_activacionE').value = '';
+    //     }
+    //     // if (fecha_activacion === fecha_adqui) {
+    //     //     alert('La fecha final no puede ser la misma que la fecha inicial.');
+    //     //     document.getElementById('fecha_activacion').value = '';
+    //     // }
+    // });
+    </script>
 </html>
