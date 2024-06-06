@@ -238,20 +238,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   <h3 class="font-weight-bold">¡Bienvenido a Acroware!</h3>
                   <h6 class="font-weight-normal mb-0">¡Gestión Inteligente!</h6>
                 </div>
-                <div class="col-12 col-xl-4">
-                  <div class="justify-content-end d-flex">
-                    <div class="dropdown flex-md-grow-1 flex-xl-grow-0">
-                      <button class="btn btn-sm btn-light bg-white dropdown-toggle" type="button" id="dropdownMenuDate2"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <i class="mdi mdi-calendar"></i> Hoy (08 Abril 2024)
-                      </button>
-                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuDate2">
-                        <a class="dropdown-item" href="#">Enero - Junio</a>
-                        <a class="dropdown-item" href="#">Junio - Diciembre</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                
               </div>
             </div>
           </div>
