@@ -153,6 +153,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Redirigir a una página de confirmación
         header('Location:login.php');
         exit();
+    }else {
+        // Redirigir a una página de error si el correo no existe
+        header('Location: invalido.php');
+        exit();
     }
 }
 ?>

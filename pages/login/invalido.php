@@ -39,7 +39,7 @@
                                 <div class="p-5">
                                     <div class="text-center wow fadeIn">
                                         <h1 class="h4 text-gray-900 mb-2 font-berthold">¡Algo ha fallado!</h1>
-                                        <p class="mb-4">El enlace de restablecimiento es inválido o ha expirado.</p>
+                                        <p class="mb-4">El correo ingresado no esta registrado.</p>
                                     </div>
                                     <form class="user" action="forgot.php">
                                         <button type="submit"
