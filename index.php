@@ -403,8 +403,8 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                           <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">
                             <div class="ml-xl-4 mt-3">
                               <p class="card-title">Detalles por Áreas</p>
-                              <h1 class="text-primary">Planta Baja</h1>
-                              <h3 class="font-weight-500 mb-xl-4 text-primary">Segundo Bloque</h3>
+                              <h1 class="text-primary">---</h1>
+                              <h3 class="font-weight-500 mb-xl-4 text-primary">---</h3>
                               <p class="mb-2 mb-xl-0">¡Bienvenido a nuestra sección de Información por Áreas! Aquí
                                 encontrarás un desglose detallado de los bienes mobiliarios, tecnológicos y software
                                 disponibles en cada Área de nuestra Facultad.</p>
@@ -416,84 +416,35 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                                 <div class="table-responsive mb-3 mb-md-0 mt-3">
                                   <table class="table table-borderless report-table">
                                     <tr>
-                                      <td class="text-muted">Laboratorio 1</td>
+                                      <td class="text-muted">---</td>
                                       <td class="w-100 px-0">
                                         <div class="progress progress-md mx-4">
-                                          <div class="progress-bar bg-primary" role="progressbar" style="width: 25%"
+                                          <div class="progress-bar bg-primary" role="progressbar" style="width: 0%"
                                             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                       </td>
                                       <td>
-                                        <h5 class="font-weight-bold mb-0">25</h5>
+                                        <h5 class="font-weight-bold mb-0">0</h5>
                                       </td>
                                     </tr>
                                     <tr>
-                                      <td class="text-muted">Laboratorio 3</td>
+                                      <td class="text-muted">---</td>
                                       <td class="w-100 px-0">
                                         <div class="progress progress-md mx-4">
-                                          <div class="progress-bar bg-warning" role="progressbar" style="width: 25%"
+                                          <div class="progress-bar bg-warning" role="progressbar" style="width: 0%"
                                             aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                       </td>
                                       <td>
-                                        <h5 class="font-weight-bold mb-0">25</h5>
+                                        <h5 class="font-weight-bold mb-0">0</h5>
                                       </td>
                                     </tr>
-                                    <tr>
-                                      <td class="text-muted">Oficina 1</td>
-                                      <td class="w-100 px-0">
-                                        <div class="progress progress-md mx-4">
-                                          <div class="progress-bar bg-danger" role="progressbar" style="width: 5%"
-                                            aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <h5 class="font-weight-bold mb-0">5</h5>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td class="text-muted">Laboratorio CTT</td>
-                                      <td class="w-100 px-0">
-                                        <div class="progress progress-md mx-4">
-                                          <div class="progress-bar bg-info" role="progressbar" style="width: 25%"
-                                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <h5 class="font-weight-bold mb-0">25</h5>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td class="text-muted">Oficina 2</td>
-                                      <td class="w-100 px-0">
-                                        <div class="progress progress-md mx-4">
-                                          <div class="progress-bar bg-primary" role="progressbar" style="width: 10%"
-                                            aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <h5 class="font-weight-bold mb-0">10</h5>
-                                      </td>
-                                    </tr>
-                                    <tr>
-                                      <td class="text-muted">Oficina 3</td>
-                                      <td class="w-100 px-0">
-                                        <div class="progress progress-md mx-4">
-                                          <div class="progress-bar bg-danger" role="progressbar" style="width: 10%"
-                                            aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                      </td>
-                                      <td>
-                                        <h5 class="font-weight-bold mb-0">10</h5>
-                                      </td>
-                                    </tr>
+                                    
+                                    
                                   </table>
                                 </div>
                               </div>
-                              <div class="col-md-6 mt-3">
-                                  <canvas id="floor-managers-chart"></canvas>
-                                  <div id="floor-managers-legend"></div>
-                              </div>
+                              
                             </div>
                           </div>
                         </div>
@@ -577,109 +528,151 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     });
 
     document.getElementById('bloque').addEventListener('change', function() {
-        var bloqueId = this.value;
-        if (bloqueId) {
-            var facultadId = document.getElementById('facultad').value;
-            fetch('Acciones/contador.php?facultad=' + facultadId + '&bloque=' + bloqueId)
-                .then(response => response.json())
-                .then(data => {
-                    var carouselItems = document.querySelector('.carousel-inner');
-                    carouselItems.innerHTML = '';
+    var bloqueId = this.value;
+    if (bloqueId) {
+        var facultadId = document.getElementById('facultad').value;
+        fetch('Acciones/contador.php?facultad=' + facultadId + '&bloque=' + bloqueId)
+            .then(response => response.json())
+            .then(data => {
+                var carouselItems = document.querySelector('.carousel-inner');
+                carouselItems.innerHTML = '';
 
-                    // Colores para las barras de progreso
-                    var colors = ['bg-primary', 'bg-warning', 'bg-danger', 'bg-info'];
-                    var colorIndex = 0;
+                var areasPorPiso = data.areasPorPiso;
+                var areasPorEncargado = data.areasPorEncargado;
 
-                    Object.keys(data).forEach(piso => {
-                        var areas = data[piso];
-                        var carouselItem = document.createElement('div');
-                        carouselItem.classList.add('carousel-item');
+                // Colores para las barras de progreso
+                var colors = ['bg-primary', 'bg-warning', 'bg-danger', 'bg-info'];
+                var colorIndex = 0;
 
-                        var areasHTML = areas.map(area => {
-                            // Seleccionar color y avanzar el índice
-                            var progressBarColor = colors[colorIndex % colors.length];
-                            colorIndex++;
+                Object.keys(areasPorPiso).forEach(piso => {
+                    var areas = areasPorPiso[piso];
+                    var carouselItem = document.createElement('div');
+                    carouselItem.classList.add('carousel-item');
 
-                            return `
-                                <tr>
-                                    <td class="text-muted">${area.nombre}</td>
-                                    <td class="w-100 px-0">
-                                        <div class="progress progress-md mx-4">
-                                            <div class="progress-bar ${progressBarColor}" role="progressbar" style="width: ${area.total_ubicaciones}%"
-                                                 aria-valuenow="${area.total_ubicaciones}" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <h5 class="font-weight-bold mb-0">${area.total_ubicaciones}</h5>
-                                    </td>
-                                </tr>
-                            `;
-                        }).join('');
+                    var areasHTML = areas.map(area => {
+                        // Seleccionar color y avanzar el índice
+                        var progressBarColor = colors[colorIndex % colors.length];
+                        colorIndex++;
 
-                        var innerHTML = `
-                            <div class="row">
-                                <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">
-                                    <div class="ml-xl-4 mt-3">
-                                        <p class="card-title">Detalles por Áreas</p>
-                                        <h1 class="text-primary">${piso}</h1>
-                                        <h3 class="font-weight-500 mb-xl-4 text-primary">${areas[0].nombre_bloque}</h3>
-                                        <p class="mb-2 mb-xl-0">¡Bienvenido a nuestra sección de Información por Áreas! Aquí encontrarás un desglose detallado de los bienes mobiliarios, tecnológicos y software disponibles en cada Área de nuestra Facultad.</p>
+                        return `
+                            <tr>
+                                <td class="text-muted">${area.nombre}</td>
+                                <td class="w-100 px-0">
+                                    <div class="progress progress-md mx-4">
+                                        <div class="progress-bar ${progressBarColor}" role="progressbar" style="width: 100%"
+                                             aria-valuenow="${area.total_ubicaciones}" aria-valuemin="0" aria-valuemax="25"></div>
                                     </div>
+                                </td>
+                                <td>
+                                    <h5 class="font-weight-bold mb-0">${area.total_ubicaciones}</h5>
+                                </td>
+                            </tr>
+                        `;
+                    }).join('');
+
+                    var innerHTML = `
+                        <div class="row">
+                            <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">
+                                <div class="ml-xl-4 mt-3">
+                                    <p class="card-title">Detalles por Áreas</p>
+                                    <h1 class="text-primary">${piso}</h1>
+                                    <h3 class="font-weight-500 mb-xl-4 text-primary">${areas[0].nombre_bloque}</h3>
+                                    <p class="mb-2 mb-xl-0">¡Bienvenido a nuestra sección de Información por Áreas! Aquí encontrarás un desglose detallado de los bienes mobiliarios, tecnológicos y software disponibles en cada Área de nuestra Facultad.</p>
                                 </div>
-                                <div class="col-md-12 col-xl-9">
-                                    <div class="row">
-                                        <div class="col-md-6 border-right">
-                                            <div class="table-responsive mb-3 mb-md-0 mt-3">
-                                                <table class="table table-borderless report-table">
-                                                    ${areasHTML}
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6 mt-3">
-                                          <canvas id="floor-managers-chart-${piso}"></canvas>
-                                          <div id="floor-managers-legend"></div>
+                            </div>
+                            <div class="col-md-12 col-xl-9">
+                                <div class="row">
+                                    <div class="col-md-6 border-right">
+                                        <div class="table-responsive mb-3 mb-md-0 mt-3">
+                                            <table class="table table-borderless report-table">
+                                                ${areasHTML}
+                                            </table>
                                         </div>
                                     </div>
+                                    <div class="col-md-6 mt-3">
+                                      <canvas id="floor-managers-chart-${piso}"></canvas>
+                                      <div id="floor-managers-legend-${piso}"></div>
+                                    </div>
                                 </div>
-                            </div>`;
-                        carouselItem.innerHTML = innerHTML;
-                        carouselItems.appendChild(carouselItem);
+                            </div>
+                        </div>`;
+                    carouselItem.innerHTML = innerHTML;
+                    carouselItems.appendChild(carouselItem);
 
-                        // Inicializar el gráfico
-                        var ctx = document.getElementById(`floor-managers-chart-${piso}`).getContext('2d');
-                        new Chart(ctx, {
-                            type: 'bar', // Cambia el tipo de gráfico según tus necesidades
-                            data: {
-                                labels: areas.map(area => area.nombre),
-                                datasets: [{
-                                    label: 'Total Ubicaciones',
-                                    data: areas.map(area => area.total_ubicaciones),
-                                    backgroundColor: colors.slice(0, areas.length),
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                scales: {
-                                    y: {
-                                        beginAtZero: true
-                                    }
+                    // Inicializar el gráfico
+                    var ctx = document.getElementById(`floor-managers-chart-${piso}`).getContext('2d');
+                    var floorManagersChart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: areasPorEncargado[piso].map(enc => enc.encargado),
+                            datasets: [{
+                                data: areasPorEncargado[piso].map(enc => enc.total_areas),
+                                backgroundColor: ['#4B49AC', '#FFC100', '#248AFD', '#28B463', '#E74C3C'],
+                                borderColor: 'rgba(0,0,0,0)'
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: true,
+                            cutoutPercentage: 78,
+                            elements: {
+                                arc: {
+                                    borderWidth: 4
                                 }
-                            }
-                        });
-                    });
+                            },
+                            legend: {
+                                display: false
+                            },
+                            tooltips: {
+                                enabled: true
+                            },
+                            legendCallback: function(chart) {
+                                var text = [];
+                                chart.data.labels.forEach((label, index) => {
+                                    var value = chart.data.datasets[0].data[index];
+                                    text.push('<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' + chart.data.datasets[0].backgroundColor[index] + '"></div><p class="mb-0">' + label + '</p></div>');
+                                    text.push('<p class="mb-0">' + value + '</p>');
+                                    text.push('</div>');
+                                });
+                                return text.join("");
+                            },
+                        },
+                        plugins: [{
+                            beforeDraw: function(chart) {
+                                var width = chart.chart.width,
+                                    height = chart.chart.height,
+                                    ctx = chart.chart.ctx;
 
-                    // Marcar el primer elemento como activo
-                    carouselItems.querySelector('.carousel-item').classList.add('active');
-                })
-                .catch(error => {
-                    console.error('Error al obtener áreas:', error);
-                    // Puedes mostrar un mensaje de error en caso de fallo
+                                ctx.restore();
+                                var fontSize = 3.125;
+                                ctx.font = "500 " + fontSize + "em sans-serif";
+                                ctx.textBaseline = "middle";
+                                ctx.fillStyle = "#13381B";
+
+                                var text = chart.data.datasets[0].data.reduce((a, b) => a + b, 0),
+                                    textX = Math.round((width - ctx.measureText(text).width) / 2),
+                                    textY = height / 2;
+
+                                ctx.fillText(text, textX, textY);
+                                ctx.save();
+                            }
+                        }]
+                    });
+                    document.getElementById(`floor-managers-legend-${piso}`).innerHTML = floorManagersChart.generateLegend();
                 });
-        } else {
-            // Si no se selecciona ningún bloque, se puede mostrar un mensaje o realizar alguna acción
-        }
-    });
+
+                // Marcar el primer elemento como activo
+                carouselItems.querySelector('.carousel-item').classList.add('active');
+            })
+            .catch(error => {
+                console.error('Error al obtener áreas:', error);
+                // Puedes mostrar un mensaje de error en caso de fallo
+            });
+    } else {
+        // Si no se selecciona ningún bloque, se puede mostrar un mensaje o realizar alguna acción
+    }
+});
+
           </script>
           <div class="row">
             <div class="col-md-7 grid-margin stretch-card">
