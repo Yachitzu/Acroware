@@ -38,8 +38,8 @@ if ($op == "POST" && $_POST["tipoArchivoI"] == "pdf") {
          $this->Cell(40, 10, utf8_decode('NOMBRE'), 1, 0, 'C', 1);
          $this->Cell(50, 10, utf8_decode('FECHA DE ADQUISICIÓN'), 1, 0, 'C', 1);
          $this->Cell(55, 10, utf8_decode('ÁREA'), 1, 0, 'C', 1);
-         $this->Cell(55, 10, utf8_decode('UBICACIÓN'), 1, 0, 'C', 1);
-         $this->Cell(30, 10, utf8_decode('IP'), 1, 1, 'C', 1);
+         $this->Cell(55, 10, utf8_decode('UBICACIÓN'), 1, 1, 'C', 1);
+        // $this->Cell(30, 10, utf8_decode('IP'), 1, 1, 'C', 1);
       }
    
       // Pie de página
@@ -153,8 +153,8 @@ foreach ($dato as $respuesta) {
     $pdf->Cell(40, 10, utf8_decode($respuesta['nombre']), 1, 0, 'C', 0);
     $pdf->Cell(50, 10, utf8_decode($respuesta['fecha_ingreso']), 1, 0, 'C', 0);
     $pdf->Cell(55, 10, utf8_decode($respuesta['nombre_area']), 1, 0, 'C', 0); // nombre del área
-    $pdf->Cell(55, 10, utf8_decode($respuesta['nombre_ubicacion']), 1, 0, 'C', 0); // nombre de la ubicación
-    $pdf->Cell(30, 10, utf8_decode($respuesta['ip']), 1, 1, 'C', 0);
+    $pdf->Cell(55, 10, utf8_decode($respuesta['nombre_ubicacion']), 1, 1, 'C', 0); // nombre de la ubicación
+    //$pdf->Cell(30, 10, utf8_decode($respuesta['ip']), 1, 1, 'C', 0);
 }
    
    
@@ -272,7 +272,7 @@ foreach ($dato as $respuesta) {
         utf8_encode($respuesta['modelo']),
         utf8_encode($respuesta['nombre_area']),
         utf8_encode($respuesta['nombre_ubicacion']),
-        utf8_encode($respuesta['ip']),
+        //utf8_encode($respuesta['ip']),
         utf8_encode($respuesta['fecha_ingreso']),
         utf8_encode($respuesta['precio']),
         utf8_encode($respuesta['activo'])));
