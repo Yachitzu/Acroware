@@ -60,10 +60,10 @@ class Obtener
         }
     }
 
-    public static function ObtenerNombre(){
+    public static function ObtenerNombreT(){
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = "SELECT * FROM marcas where activo='si'";
+            $consulta = "SELECT * FROM marcas where activo='si' and area='tecnologico'";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
             $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -87,7 +87,33 @@ class Obtener
             ];
         }
     }
+    public static function ObtenerNombreM(){
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = "SELECT * FROM marcas where activo='si' and area='mobiliario'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+            $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            $dato;
+            $tabla = '';
 
+            foreach ($dato as $respuesta) {
+                $tabla .= '
+                    <option value="' . htmlspecialchars($respuesta['id']) . '">' . htmlspecialchars($respuesta['nombre']) . '</option>
+                ';
+            }
+            return [
+                'codigo' => 0,
+                'dato' => $tabla,
+            ];
+        } catch (PDOException $e) {
+            error_log('Error al listar marcas: ' . $e->getMessage());
+            return [
+                'codigo' => 1,
+                'mensaje' => 'Error al listar marcas: ' . $e->getMessage()
+            ];
+        }
+    }
     public static function ObtenerCustodios(){
         try {
             $conexion = Conexion::getInstance()->getConexion();
@@ -111,6 +137,35 @@ class Obtener
             return [
                 'codigo' => 1,
                 'ensaje' => 'Error al listar usuarios: '. $e->getMessage()
+            ];
+        }
+    }
+
+    
+    public static function ObtenerArea(){
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = "SELECT * FROM areas where activo='si'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+            $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            $dato;
+            $tabla = '';
+
+            foreach ($dato as $respuesta) {
+                $tabla .= '
+                    <option value="' . htmlspecialchars($respuesta['id']) . '">' . htmlspecialchars($respuesta['nombre']) . '</option>
+                ';
+            }
+            return [
+                'codigo' => 0,
+                'dato' => $tabla,
+            ];
+        } catch (PDOException $e) {
+            error_log('Error al listar áreas: ' . $e->getMessage());
+            return [
+                'codigo' => 1,
+                'mensaje' => 'Error al listar áreas: ' . $e->getMessage()
             ];
         }
     }

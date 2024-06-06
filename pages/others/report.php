@@ -8,7 +8,9 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 } else {
   $_SESSION['email'];
 }
-
+require_once '../../Acciones/contador.php';
+$usuario_id = $_SESSION['id'];
+$recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,30 +61,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
-          <li class="nav-item dropdown">
-            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
-              data-toggle="dropdown">
-              <i class="icon-bell mx-0"></i>
-              <span class="count"></span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-              aria-labelledby="notificationDropdown">
-              <p class="mb-0 font-weight-normal float-left dropdown-header">Notificaciones</p>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-success">
-                    <i class="ti-info-alt mx-0"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content">
-                  <h6 class="preview-subject font-weight-normal">Error generación de etiqueta</h6>
-                  <p class="font-weight-light small-text mb-0 text-muted">
-                    Justo ahora
-                  </p>
-                </div>
-              </a>
-            </div>
-          </li>
+          
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
               <img src="../../resources/images/faces/perfil1.png" alt="profile" />
@@ -100,7 +79,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           </li>
           <li class="nav-item nav-settings d-none d-lg-flex">
             <a class="nav-link" href="#">
-              <i class="icon-ellipsis"></i>
+              <i class="fa fa-tasks"></i> 
             </a>
           </li>
         </ul>
@@ -116,74 +95,45 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 
       <div id="right-sidebar" class="settings-panel">
         <i class="settings-close ti-close"></i>
-        <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab"
-              aria-controls="todo-section" aria-expanded="true">Recordatorio</a>
-          </li>
-        </ul>
-        <div class="tab-content" id="setting-content">
-          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel"
-            aria-labelledby="todo-section">
-            <div class="add-items d-flex px-3 mb-0">
-              <form class="form w-100">
-                <div class="form-group d-flex">
-                  <input type="text" class="form-control todo-list-input" placeholder="Agregar actividad">
-                  <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task">Agregar</button>
-                </div>
-              </form>
-            </div>
-            <div class="list-wrapper px-3">
-              <ul class="d-flex flex-column-reverse todo-list">
-                <li>
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="checkbox" type="checkbox">
-                      Reunión de equipo
-                    </label>
+          <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
+              <li class="nav-item">
+                  <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab"
+                    aria-controls="todo-section" aria-expanded="true">Recordatorio</a>
+              </li>
+          </ul>
+          <div class="tab-content" id="setting-content">
+              <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel"
+                aria-labelledby="todo-section">
+                  <div class="add-items d-flex px-3 mb-0">
+                      <form class="form w-100">
+                          <div class="form-group d-flex">
+                              <input type="text" class="form-control todo-list-input" placeholder="Agregar actividad">
+                              <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task">Agregar</button>
+                              <input type="hidden" class="todo-list-input_id" name="usuario_id" value="<?php echo $usuario_id; ?>">
+                          </div>
+                      </form>
                   </div>
-                  <i class="remove ti-close"></i>
-                </li>
-                <li>
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="checkbox" type="checkbox">
-                      Preparar una presentación
-                    </label>
+                  <div class="list-wrapper px-3">
+                      <ul class="d-flex flex-column-reverse todo-list">
+                          <?php if (is_array($recordatorios) && count($recordatorios) > 0): ?>
+                              <?php foreach ($recordatorios as $recordatorio): ?>
+                                  <li data-id="<?php echo $recordatorio['id']; ?>">
+                                      <div class="form-check">
+                                          <label class="form-check-label">
+                                              <input class="checkbox" type="checkbox" <?php echo $recordatorio['estado'] == 'finalizado' ? 'checked' : ''; ?>>
+                                              <?php echo htmlspecialchars($recordatorio['actividad']); ?>
+                                          </label>
+                                      </div>
+                                      <i class="remove ti-close"></i>
+                                  </li>
+                              <?php endforeach; ?>
+                          <?php else: ?>
+                              <li>No se encontraron recordatorios pendientes.</li>
+                          <?php endif; ?>
+                      </ul>
                   </div>
-                  <i class="remove ti-close"></i>
-                </li>
-                <li>
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="checkbox" type="checkbox">
-                      Generar todas las etiquetas de laboratorio 1
-                    </label>
-                  </div>
-                  <i class="remove ti-close"></i>
-                </li>
-                <li class="Completo">
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="checkbox" type="checkbox" checked>
-                      Visualización de etiquetas
-                    </label>
-                  </div>
-                  <i class="remove ti-close"></i>
-                </li>
-                <li class="Completo">
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="checkbox" type="checkbox" checked>
-                      Revisión de proyectos
-                    </label>
-                  </div>
-                  <i class="remove ti-close"></i>
-                </li>
-              </ul>
-            </div>
+              </div>
           </div>
-        </div>
       </div>
       <!-- partial -->
       <!-- partial:partials/_sidebar.php -->
@@ -351,7 +301,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
               </div>
               <div class="card-body bg-darkwhite">
                 <div class="table-responsive">
-                  <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%"
+                  <!-- <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%"
                     cellspacing="0">
                     <thead>
                         <tr>
@@ -392,7 +342,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     <tbody>
 
                     </tbody>
-                  </table>
+                  </table> -->
                 </div>
               </div>
             </div>
@@ -457,7 +407,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="repBInformaticos" method="post">
+        <form class="forms-sample" id="repBInformaticos" method="post" action= "../../Acciones/ReporteBI.php" target="_blank">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -467,18 +417,22 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     <label for="areaC" class="text-bold">Área</label>
                     <select class="form-control" name="areaI" id="areaC" required>
                       <option value="">Seleccione un Área</option>
-                      <option value="tecnologico">Tecnológico</option>
-                      <option value="mobiliario">Mobiliario</option>
+                          <option value="any">Todos</option>
+                          <?php
+                            include_once ("../../Acciones/crudMarcas.php");
+                            $areas = Obtener::ObtenerArea();
+                            echo ($areas['dato']);
+                          ?>
                     </select>
                   </div>
                     <div class="form-group col-md-6">
                         <label for="areaC" class="text-bold">Marca</label>
-                        <select class="form-control" name="areaI" id="areaC" required>
+                        <select class="form-control" name="marcaI" id="areaC" required>
                         <option value="">Seleccione una marca</option>
-                        <option value="*">Todos</option>
+                        <option value="any">Todos</option>
                           <?php
                           include_once ("../../Acciones/crudMarcas.php");
-                          $marcas = Obtener::ObtenerNombre();
+                          $marcas = Obtener::ObtenerNombreT();
                           echo ($marcas['dato']);
                           ?>
                         </select>
@@ -497,10 +451,10 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="tipoI" class="text-bold">Tipo Archivo</label>
-                    <select class="form-control" name="tipoI" id="tipoI" required>
+                    <select class="form-control" name="tipoArchivoI" id="tipoI" required>
                       <option value="">Seleccione un Tipo</option>
-                      <option value="pdfI">PDF</option>
-                      <option value="excelI">Excel</option>
+                      <option value="pdf">PDF</option>
+                      <option value="excel">Excel</option>
                     </select>
                   </div>
                 </div>
@@ -529,7 +483,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="repBMobiliarios" method="post">
+        <form class="forms-sample" id="repBMobiliarios" method="post" action= "../../Acciones/ReporteBM.php" target="_blank">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -539,7 +493,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     <label for="custodioM" class="text-bold">Custodio</label>
                     <select class="form-control" name="custodioM" id="custodioM" required>
                       <option value="">Seleccione un Custodio</option>
-                      <option value="*">Todos</option>
+                      <option value="any">Todos</option>
                       <?php
                           include_once ("../../Acciones/crudMarcas.php");
                           $users = Obtener::ObtenerCustodios();
@@ -551,21 +505,24 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="areaC" class="text-bold">Área</label>
-                    <select class="form-control" name="areaC" id="areaC" required>
+                    <select class="form-control" name="areaM" id="areaC" required>
                       <option value="">Seleccione un Área</option>
-                      <option value="*">Todos</option>
-                      <option value="tecnologico">Tecnológico</option>
-                      <option value="mobiliario">Mobiliario</option>
+                      <option value="any">Todos</option>
+                      <?php
+                          include_once ("../../Acciones/crudMarcas.php");
+                          $areas = Obtener::ObtenerArea();
+                          echo ($areas['dato']);
+                      ?>
                     </select>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="areaC" class="text-bold">Marca</label>
-                    <select class="form-control" name="areaC" id="areaC" required>
+                    <select class="form-control" name="marcaM" id="areaC" required>
                       <option value="">Seleccione una Marca</option>
-                      <option value="*">Todos</option>
+                      <option value="any">Todos</option>
                       <?php
                           include_once ("../../Acciones/crudMarcas.php");
-                          $marcas = Obtener::ObtenerNombre();
+                          $marcas = Obtener::ObtenerNombreM();
                           echo ($marcas['dato']);
                       ?>
                     </select>
@@ -574,17 +531,17 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="fechaInicial" class="text-bold">Fecha Inicial</label>
-                        <input type="date" class="form-control" name="fechaInicial" id="fechaInicial" placeholder="Selecciona una fecha" required>
+                        <input type="date" class="form-control" name="fechaInicialM" id="fechaInicialM" placeholder="Selecciona una fecha" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="fechaFinal" class="text-bold">Fecha Final</label>
-                        <input type="date" class="form-control" name="fechaFinal" id="fechaFinal" placeholder="Selecciona una fecha" required>
+                        <input type="date" class="form-control" name="fechaFinalM" id="fechaFinalM" placeholder="Selecciona una fecha" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label for="areaC" class="text-bold">Tipo Archivo</label>
-                        <select class="form-control" name="areaC" id="areaC" required>
+                        <select class="form-control" name="tipoArchivoBM" id="areaC" required>
                         <option value="">Seleccione un Tipo</option>
                         <option value="pdf">PDF</option>
                         <option value="excel">Excel</option>
@@ -611,12 +568,11 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <h3 class="modal-title text-white" id="modal-register-label">Reportes Software</h3>
-          <p class="modal">Ingrese los datos del Usuario:</p>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="agregarMarcaForm" method="post">
+        <form action= "../../Acciones/ReporteSW.php" class="forms-sample" id="reporteSwForm" method="post" target="_blank">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -624,16 +580,21 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="areaC" class="text-bold">Tipo Licencia</label>
-                    <select class="form-control" name="areaC" id="areaC" required>
+                    <select class="form-control" name="licenciaSW" id="licenciaSW" required>
                       <option value="">Seleccione una licencia</option>
-                      <option value="*">Todos</option>
+                      <option value="any">Todos</option>
+                      <option value="Dominio Público">Dominio Público</option>
+                      <option value="Codigo Abierto">Codigo Abierto</option>
+                      <option value="Suscripción">Suscripción</option>
+                      <option value="Propietario">Propietario</option>
+                      <option value="Gratuito">Gratuito</option>
                     </select>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="areaC" class="text-bold">Activado</label>
-                    <select class="form-control" name="areaC" id="areaC" required>
+                    <label for="activoSW" class="text-bold">Activado</label>
+                    <select class="form-control" name="activoSW" id="activoSW" required>
                       <option value="">Seleccione un estado</option>
-                      <option value="*">Todos</option>
+                      <option value="any">Todos</option>
                       <option value="si">Si</option>
                       <option value="no">No</option>
                     </select>
@@ -642,20 +603,20 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="fechaInicial" class="text-bold">Fecha Inicial</label>
-                        <input type="date" class="form-control" name="fechaInicial" id="fechaInicial" placeholder="Selecciona una fecha" required>
+                        <input type="date" class="form-control" name="fechaInicialSW" id="fechaInicialSW" placeholder="Selecciona una fecha" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="fechaFinal" class="text-bold">Fecha Final</label>
-                        <input type="date" class="form-control" name="fechaFinal" id="fechaFinal" placeholder="Selecciona una fecha" required>
+                        <input type="date" class="form-control" name="fechaFinalSW" id="fechaFinalSW" placeholder="Selecciona una fecha" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <label for="areaC" class="text-bold">Tipo Archivo</label>
-                        <select class="form-control" name="areaC" id="areaC" required>
-                        <option value="">Seleccione un Tipo</option>
-                        <option value="pdf">PDF</option>
-                        <option value="excel">Excel</option>
+                        <label for="areaC" class="text-bold" >Tipo Archivo</label>
+                        <select class="form-control" name="tipoArchivoSW" id="tipoArchivoSW" required>
+                          <option value="">Seleccione un Tipo</option>
+                          <option value="pdf">PDF</option>
+                          <option value="excel">Excel</option>
                         </select>
                     </div>
                 </div>
@@ -665,13 +626,13 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           <div class="modal-footer">
             <input type="button" class="btn-crud btn-secondary text-white text-bold " data-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
-            <input type="submit" class="btn-crud btn-primary text-bold" value=" Generar Reporte ">
+            <input type="submit" class="btn-crud btn-primary text-bold" id='reporteSW' value=" Generar Reporte ">
           </div>
         </form>
       </div>
     </div>
   </div>
-
+  
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
@@ -688,6 +649,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
   <script src="../../resources/js/hoverable-collapse.js"></script>
   <script src="../../resources/js/template.js"></script>
   <script src="../../resources/js/settings.js"></script>
+  <script src="../../resources/js/todolist.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script src="../../resources/js/Chart.roundedBarCharts.js"></script>
@@ -702,291 +664,51 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 </body>
 
 
-<script>
-    document.getElementById('fechaInicial').addEventListener('change', function() {
-        var fechaInicial = document.getElementById('fechaInicial').value;
-        document.getElementById('fechaFinal').min = fechaInicial;
-    });
-
-    document.getElementById('fechaFinal').addEventListener('change', function() {
-        var fechaFinal = document.getElementById('fechaFinal').value;
-        var fechaInicial = document.getElementById('fechaInicial').value;
-        if (fechaFinal < fechaInicial) {
-            alert('La fecha final no puede ser anterior a la fecha inicial.');
-            document.getElementById('fechaFinal').value = '';
-        }
-        if (fechaFinal === fechaInicial) {
-            alert('La fecha final no puede ser la misma que la fecha inicial.');
-            document.getElementById('fechaFinal').value = '';
-        }
-    });
-
-  document.addEventListener('DOMContentLoaded', function () {
-    const apiBaseUrl = '../../Acciones/RestMarcas.php';
-
-    const marcasTableBody = document.getElementById('marcasTableBody');
-    const agregarMarcaForm = document.getElementById('agregarMarcaForm');
-    const editarModal = new bootstrap.Modal(document.getElementById('modalCrudEditar'));
-    const eliminarModal = new bootstrap.Modal(document.getElementById('modalCrudEliminar'));
-
-    let marcaAEliminarId = null;
-    let marcaAEditarId = null;
-
-    $('#dataTable').DataTable({
-      "processing": false,
-      "serverSide": true,
-      "ajax": {
-        "url": apiBaseUrl,
-        "type": "GET",
-        "data": function (d) {
-          d.start = d.start || 0; // Indice de inicio para la paginación
-          d.length = d.length || 10; // Número de registros por página
-          d.draw = d.draw || 1; // Número de la solicitud de dibujo
-          d.search = d.search || {}; // Objeto de búsqueda
-          d.search.value = d.search.value || ""; // Valor de búsqueda
-          d.order = d.order || [0, 'asc']; // Orden de las columnas
-          return d;
-        },
-        "dataSrc": function (json) {
-          // Devuelve los datos de la respuesta JSON
-          return json.data;
-        },
-        "error": function (xhr, error, thrown) {
-          console.log('Error:', error);
-        }
-      },
-      "columns": [
-        { "data": "nombre" },
-        { "data": "pais" },
-        { "data": "area" },
-        { "data": "descripcion" },
-        {
-          "data": null,
-          "defaultContent": "",
-          "orderable": false,
-          "searchable": false,
-          "render": function (data, type, row) {
-            return `
-                        <center>          
-                            <button class="btn btn-warning btn-circle element-white editar" id="editar" onclick="showEditarModal(${row.id})">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-danger btn-circle eliminar" id="eliminar" onclick="showEliminarModal(${row.id})">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </center>
-                    `;
-          }
-        }
-      ],
-      "searching": true, // Habilita la búsqueda
-      "lengthChange": true, // Habilita el cambio de longitud
-      "lengthMenu": [10, 25, 50, 100], // Opciones de longitud de página
-      "paging": true, // Habilita la paginación
-      "info": true, // Habilita la información de la tabla
-      "ordering": true, // Habilita la ordenación
-      "order": [[0, 'asc']], // Columna inicial para ordenar
-      "language": {
-        // Personaliza los textos, por ejemplo:
-        "lengthMenu": "Mostrar _MENU_ registros por página",
-        "zeroRecords": "No se encontraron registros",
-        "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
-        "infoEmpty": "Mostrando 0 a 0 de 0 registros",
-        "infoFiltered": "(filtrado de _MAX_ registros totales)",
-        "search": "Buscar:",
-        "paginate": {
-          "first": "Primero",
-          "last": "Último",
-          "next": "Siguiente",
-          "previous": "Anterior"
-        }
-      }
-    });
-
-    async function fetchMarcas() {
-      try {
-        const response = await fetch(apiBaseUrl, {
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-        const responseData = await response.json();
-        const data = responseData.data;
-        console.log('Datos recibidos del servidor:', data)
-
-        $('#dataTable').DataTable().clear().draw();
-
-        // Agregar filas a la tabla
-        data.forEach(marca => {
-          $('#dataTable').DataTable().row.add({
-
-            "nombre": marca.nombre,
-            "pais": marca.pais,
-            "area": marca.area,
-            "descripcion": marca.descripcion,
-            "id": marca.id
-
-
-          }).draw();
-        });
-      } catch (error) {
-        console.error('Error fetching marcas:', error);
-      }
-    }
-
-    agregarMarcaForm.addEventListener('submit', async function (event) {
-      event.preventDefault();
-
-      const nombre = document.getElementById('nombreC').value;
-      const pais = document.getElementById('paisC').value;
-      const descripcion = document.getElementById('descripcionC').value;
-      const area = document.getElementById('areaC').value;
-
-      try {
-        const response = await fetch(apiBaseUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ nombre, descripcion, pais, area })
-        });
-
-        if (response.ok) {
-          // Si la solicitud es exitosa, recarga la lista de marcas
-          fetchMarcas();
-          // Limpia los campos del formulario
-          agregarMarcaForm.reset();
-          // Cierra el modal
-          $('#modalCrudAgregar').modal('hide');
-        } else {
-          console.error('Error al agregar marca:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error al agregar marca:', error);
-      }
-    });
-
-
-
-    document.getElementById('editarMarcaForm').addEventListener('submit', async function (event) {
-      event.preventDefault();
-      // Obtener los valores actualizados del formulario
-      const id = marcaAEditarId;
-      const nombre = document.getElementById('nombreE').value;
-      const pais = document.getElementById('paisE').value;
-      const descripcion = document.getElementById('descripcionE').value;
-      const area = document.getElementById('areaE').value;
-
-      try {
-        // Enviar la solicitud de edición al servidor
-        const response = await fetch(apiBaseUrl + `?id=${id}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ id, nombre, descripcion, pais, area })
-        });
-
-        if (response.ok) {
-          const result = await response.json();
-          if (result.success) {
-            // Si la solicitud es exitosa, recarga la lista de marcas
-            await fetchMarcas();
-            // Cierra el modal de edición
-            editarModal.hide();
-          } else {
-            console.error('Error al editar marca:', result.message);
-          }
-        } else {
-          console.error('Error al editar marca:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error al editar marca:', error);
-      }
-    });
-
-
-    const eliminarMarcaForm = document.getElementById('eliminarMarcaForm');
-
-    eliminarMarcaForm.addEventListener('submit', async function (event) {
-      event.preventDefault();
-      try {
-        const id = marcaAEliminarId;
-
-        if (!id) {
-          console.error('ID de marca a eliminar no está definido.');
-          return;
-        }
-
-        const response = await fetch(`${apiBaseUrl}?id=${id}`, {
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-
-        if (response.ok) {
-          const responseData = await response.json();
-          if (responseData.success) {
-            // Si la solicitud es exitosa, recarga la lista de marcas
-            await fetchMarcas();
-            // Cierra el modal de eliminación
-            eliminarModal.hide();
-
-          } else {
-            console.error('Error al eliminar marca:', responseData.message || response.statusText);
-            alert(responseData.message)
-          }
-        }
-      } catch (error) {
-        console.error('Error al eliminar marca:', error);
-      }
-    });
-
-    window.showEditarModal = async function (id) {
-      try {
-        const response = await fetch(apiBaseUrl + `?id=${id}`);
-        if (!response.ok) {
-          throw new Error('Error al obtener detalles de la marca para editar');
-        }
-        const responseMarca = await response.json();
-        const marca = responseMarca.data;
-        console.log(marca)
-        // Llenar los campos del formulario con los detalles de la marca
-
-        document.getElementById('nombreE').value = marca.nombre;
-        document.getElementById('paisE').value = marca.pais;
-        document.getElementById('descripcionE').value = marca.descripcion;
-        const selectedArea = marca.area;
-        const areaEInput = document.getElementById('areaE');
-
-        // Iteramos sobre cada opción en el campo de selección
-        for (let i = 0; i < areaEInput.options.length; i++) {
-          // Si el valor de la opción coincide con el valor seleccionado previamente
-          if (areaEInput.options[i].value === selectedArea) {
-            // Marcamos esta opción como seleccionada
-            areaEInput.options[i].selected = true;
-            // Salimos del bucle ya que hemos encontrado la opción correcta
-            break;
-          }
-        }
-        marcaAEditarId = id;
-        // Mostrar el modal de edición
-        editarModal.show();
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-
-    window.showEliminarModal = function (id) {
-      marcaAEliminarId = id;
-      eliminarModal.show()
-      console.log('Mostrar modal de eliminación para el ID:', id);
-    };
-
-    fetchMarcas();
+  <script>
+    document.getElementById('fechaInicialSW').addEventListener('change', function() {
+      var fecha_adqui = document.getElementById('fechaInicialSW').value;
+      document.getElementById('fechaFinalSW').min = fecha_adqui;
   });
-</script>
+
+  document.getElementById('fechaFinalSW').addEventListener('change', function() {
+      var fecha_activacion = document.getElementById('fechaFinalSW').value;
+      var fecha_adqui = document.getElementById('fechaInicialSW').value;
+      if (fecha_activacion < fecha_adqui) {
+          alert('La fecha final no puede ser anterior a la fecha inicial.');
+          document.getElementById('fechaFinalSW').value = '';
+      }
+ feature-funcionReportes
+  });
+  </script>
+  <script>
+    document.getElementById('fechaInicialI').addEventListener('change', function() {
+      var fecha_adqui = document.getElementById('fechaInicialI').value;
+      document.getElementById('fechaFinalI').min = fecha_adqui;
+  });
+
+  document.getElementById('fechaFinalI').addEventListener('change', function() {
+      var fecha_activacion = document.getElementById('fechaFinalI').value;
+      var fecha_adqui = document.getElementById('fechaInicialI').value;
+      if (fecha_activacion < fecha_adqui) {
+          alert('La fecha final no puede ser anterior a la fecha inicial.');
+          document.getElementById('fechaFinalI').value = '';
+      }
+  });
+  </script>
+  <script>
+    document.getElementById('fechaInicialM').addEventListener('change', function() {
+      var fecha_adqui = document.getElementById('fechaInicialM').value;
+      document.getElementById('fechaFinalM').min = fecha_adqui;
+  });
+
+  document.getElementById('fechaFinalM').addEventListener('change', function() {
+      var fecha_activacion = document.getElementById('fechaFinalM').value;
+      var fecha_adqui = document.getElementById('fechaInicialM').value;
+      if (fecha_activacion < fecha_adqui) {
+          alert('La fecha final no puede ser anterior a la fecha inicial.');
+          document.getElementById('fechaFinalM').value = '';
+      }
+  });
+  </script>
 
 </html>

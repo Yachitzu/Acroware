@@ -8,7 +8,9 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 } else {
   $_SESSION['email'];
 }
-
+require_once '../../Acciones/contador.php';
+$usuario_id = $_SESSION['id'];
+$recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,30 +61,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
-          <li class="nav-item dropdown">
-            <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
-              data-toggle="dropdown">
-              <i class="icon-bell mx-0"></i>
-              <span class="count"></span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-              aria-labelledby="notificationDropdown">
-              <p class="mb-0 font-weight-normal float-left dropdown-header">Notificaciones</p>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-success">
-                    <i class="ti-info-alt mx-0"></i>
-                  </div>
-                </div>
-                <div class="preview-item-content">
-                  <h6 class="preview-subject font-weight-normal">Error generación de etiqueta</h6>
-                  <p class="font-weight-light small-text mb-0 text-muted">
-                    Justo ahora
-                  </p>
-                </div>
-              </a>
-            </div>
-          </li>
+          
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
               <img src="../../resources/images/faces/perfil1.png" alt="profile" />
@@ -100,7 +79,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           </li>
           <li class="nav-item nav-settings d-none d-lg-flex">
             <a class="nav-link" href="#">
-              <i class="icon-ellipsis"></i>
+            <i class="fa fa-tasks"></i> 
             </a>
           </li>
         </ul>
@@ -116,74 +95,45 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 
       <div id="right-sidebar" class="settings-panel">
         <i class="settings-close ti-close"></i>
-        <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab"
-              aria-controls="todo-section" aria-expanded="true">Recordatorio</a>
-          </li>
-        </ul>
-        <div class="tab-content" id="setting-content">
-          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel"
-            aria-labelledby="todo-section">
-            <div class="add-items d-flex px-3 mb-0">
-              <form class="form w-100">
-                <div class="form-group d-flex">
-                  <input type="text" class="form-control todo-list-input" placeholder="Agregar actividad">
-                  <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task">Agregar</button>
-                </div>
-              </form>
-            </div>
-            <div class="list-wrapper px-3">
-              <ul class="d-flex flex-column-reverse todo-list">
-                <li>
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="checkbox" type="checkbox">
-                      Reunión de equipo
-                    </label>
+          <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
+              <li class="nav-item">
+                  <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab"
+                    aria-controls="todo-section" aria-expanded="true">Recordatorio</a>
+              </li>
+          </ul>
+          <div class="tab-content" id="setting-content">
+              <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel"
+                aria-labelledby="todo-section">
+                  <div class="add-items d-flex px-3 mb-0">
+                      <form class="form w-100">
+                          <div class="form-group d-flex">
+                              <input type="text" class="form-control todo-list-input" placeholder="Agregar actividad">
+                              <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task">Agregar</button>
+                              <input type="hidden" class="todo-list-input_id" name="usuario_id" value="<?php echo $usuario_id; ?>">
+                          </div>
+                      </form>
                   </div>
-                  <i class="remove ti-close"></i>
-                </li>
-                <li>
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="checkbox" type="checkbox">
-                      Preparar una presentación
-                    </label>
+                  <div class="list-wrapper px-3">
+                      <ul class="d-flex flex-column-reverse todo-list">
+                          <?php if (is_array($recordatorios) && count($recordatorios) > 0): ?>
+                              <?php foreach ($recordatorios as $recordatorio): ?>
+                                  <li data-id="<?php echo $recordatorio['id']; ?>">
+                                      <div class="form-check">
+                                          <label class="form-check-label">
+                                              <input class="checkbox" type="checkbox" <?php echo $recordatorio['estado'] == 'finalizado' ? 'checked' : ''; ?>>
+                                              <?php echo htmlspecialchars($recordatorio['actividad']); ?>
+                                          </label>
+                                      </div>
+                                      <i class="remove ti-close"></i>
+                                  </li>
+                              <?php endforeach; ?>
+                          <?php else: ?>
+                              <li>No se encontraron recordatorios pendientes.</li>
+                          <?php endif; ?>
+                      </ul>
                   </div>
-                  <i class="remove ti-close"></i>
-                </li>
-                <li>
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="checkbox" type="checkbox">
-                      Generar todas las etiquetas de laboratorio 1
-                    </label>
-                  </div>
-                  <i class="remove ti-close"></i>
-                </li>
-                <li class="Completo">
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="checkbox" type="checkbox" checked>
-                      Visualización de etiquetas
-                    </label>
-                  </div>
-                  <i class="remove ti-close"></i>
-                </li>
-                <li class="Completo">
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input class="checkbox" type="checkbox" checked>
-                      Revisión de proyectos
-                    </label>
-                  </div>
-                  <i class="remove ti-close"></i>
-                </li>
-              </ul>
-            </div>
+              </div>
           </div>
-        </div>
       </div>
       <!-- partial -->
       <!-- partial:partials/_sidebar.php -->
@@ -235,7 +185,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.php">Bienes Informáticos</a></li>
-                
+
                 <li class="nav-item"> <a class="nav-link" href="../assets/repowering.php">Repotenciación</a></li>
                 <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.php">Bienes Mobiliarios</a></li>
               </ul>
@@ -530,7 +480,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     <label for="bloque" class="text-bold">Bloque Pertenece</label>
                     <select class="form-control" id="bloqueE" required>
                       <?php
-                      $bloques = AccionesAreas::listarBloquesEditar();
+                      $bloques = AccionesAreas::listarBloquesInsertar();
                       echo ($bloques['dato']);
                       ?>
                     </select>
@@ -547,8 +497,8 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     <label for="usuario" class="text-bold">Laboratorista Encargado</label>
                     <select class="form-control" id="usuarioE" required>
                       <?php
-                      $bloques = AccionesAreas::listarUsuariosEditar();
-                      echo ($bloques['dato']);
+                      $usuarios = AccionesAreas::listarUsuariosInsertar();
+                      echo ($usuarios['dato']);
                       ?>
                     </select>
                   </div>
@@ -677,23 +627,16 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         fila = $(this).closest("tr");
         nombre = fila.find('td:eq(0)').text();
         descripcion = fila.find('td:eq(1)').text();
-        id_bloque_per = fila.find('td:eq(2)').text();
-        piso = fila.find('td:eq(3)').text();
-        id_usu_encargado = fila.find('td:eq(4)').text();
+        id_bloque_per = fila.find('.id_bloque_per').val();
+        piso = fila.find('td:eq(4)').text();
+        id_usu_encargado = fila.find('.id_usu_encargado').val();
+        
         $("#nombreE").val(nombre);
         $("#descripcionE").val(descripcion);
-        $("#bloqueE option").each(function () {
-          if ($(this).text() === id_bloque_per) {
-            $(this).prop('selected', true);
-          }
-        });
+        $("#bloqueE").val(id_bloque_per);
+        $("#usuarioE").val(id_usu_encargado);
         $("#pisoE option").each(function () {
           if ($(this).text() === piso) {
-            $(this).prop('selected', true);
-          }
-        });
-        $("#usuarioE option").each(function () {
-          if ($(this).text() === id_usu_encargado) {
             $(this).prop('selected', true);
           }
         });
@@ -719,6 +662,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             id_bloque_per: id_bloque_per,
             id_usu_encargado: id_usu_encargado
           }), contentType: "application/json",
+          cache: false,
           error: function (error) {
             console.error("Error en la solicitud AJAX", error);
           },
@@ -775,6 +719,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
   <script src="../../resources/js/hoverable-collapse.js"></script>
   <script src="../../resources/js/template.js"></script>
   <script src="../../resources/js/settings.js"></script>
+  <script src="../../resources/js/todolist.js"></script>
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script src="../../resources/js/Chart.roundedBarCharts.js"></script>
