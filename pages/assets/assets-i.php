@@ -39,7 +39,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
 
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
 
@@ -488,7 +487,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       <div class="modal-content">
         <div class="modal-header">
           <h3 class="modal-title text-primary" id="modal-register-label">¿Listo para partir?</h3>
-          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
@@ -499,7 +498,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           </div>
         </div>
         <div class="modal-footer">
-          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
             aria-label="Close" value="Cancelar" id="cancelButton">
           <a class="btn-crud btn-primary text-bold" href="../../cerrar.php">Cerrar Sesión</a>
         </div>
@@ -515,7 +514,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         <div class="modal-header bg-primary">
           <h3 class="modal-title text-white" id="modal-register-label">Agregar Bien</h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
-          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
@@ -585,7 +584,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-bs-dismiss="modal"
+            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold agregarBien" value=" Agregar Bien ">
           </div>
@@ -602,7 +601,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         <div class="modal-header bg-primary">
           <h3 class="modal-title text-white" id="modal-register-label">Eliminar Bien </h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
-          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
@@ -620,7 +619,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Bien ">
           </div>
@@ -637,7 +636,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         <div class="modal-header bg-primary">
           <h3 class="modal-title text-white" id="modal-register-label">Editar Bien</h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
-          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
@@ -703,7 +702,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold editarBien" value=" Editar Bien">
           </div>
@@ -902,6 +901,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   <input type="hidden" class="serie" value="${respuesta.serie}">
                   <input type="hidden" class="id_marca" value="${respuesta.id_marca}">
                   <input type="hidden" class="id_area_per" value="${respuesta.id_area_per}">
+                  <input type="hidden" class="id_bien" value="${respuesta.id}">
                   <input type="hidden" class="id_ubi_per" value="${respuesta.id_ubi_per}">
               `;
                 tbody.appendChild(tr);
@@ -1034,7 +1034,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             }
           });
         });
-
+        
         let currentId = null;
         // Listener para el botón "mas"
         $('#dataTable tbody').on('click', 'button.mas', function () {
@@ -1062,7 +1062,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                                         <!-- Aquí se incluyen los detalles adicionales -->
                                         <div class="row info-assets">
                                             <div class="col-md-3"><strong>Serie:</strong> ${detalle.serie}</div>
-                                            <div class="col-md-3"><strong>Custodio:</strong> ${detalle.custodio}</div>
                                             <div class="col-md-3"><strong>Ubicación:</strong> ${detalle.nombre_ubicacion}</div>
                                             <div class="col-md-3"><strong>Fecha Ingreso:</strong> ${detalle.fecha_ingreso}</div>
                                         </div>
@@ -1101,6 +1100,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         let componenteAEditarId = null;
         // Event listener for adding components
         $('#dataTable tbody').on('click', '.btn-add-component', function () {
+          
           $('#modalCrudAgregarComponente').modal('show');
         });
 
@@ -1110,6 +1110,8 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         // Form submission handler for adding components
         $('#agregarComponenteForm').on('submit', async function (event) {
           event.preventDefault();
+          
+          var id = currentId;
 
           if (isSubmitting) {
     console.log('Ya se está procesando una solicitud. Por favor, espera.');
@@ -1119,14 +1121,14 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
   isSubmitting = true;
           
           
-          var id = currentId;
+          
           console.log(id);
           const nombre = document.getElementById('nombreComponente').value;
           const descripcion = document.getElementById('descripcionComponente').value;
           const serie = document.getElementById('serieComponente').value;
           const codigo_adi_uta = document.getElementById('codigoAdicionalComponente').value;
           const repotenciado = document.getElementById('repotenciadoComponente').value;
-          const id_bien_infor_per = id;
+          const id_bien_infor_per = id; 
           try {
             const response = await fetch('../../Acciones/RestComponentes.php', {
               method: 'POST',

@@ -430,8 +430,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="nombreC" class="text-bold">Serie</label>
-                    <input type="text" class="form-control" name="serieA" id="serieA" placeholder="Serie"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                    <input type="text" class="form-control" name="serieA" id="serieA" placeholder="Serie" required>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="codigoUTAC" class="text-bold">Valor</label>
