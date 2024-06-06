@@ -39,6 +39,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
 
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
 
@@ -204,13 +205,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="../others/report.php">
-              <i class="icon-paper menu-icon"></i>
-              <span class="menu-title">Reportes</span>
-            </a>
-          </li>
-
-          <li class="nav-item">
             <a class="nav-link" href="../others/QR.php">
               <i class="icon-contract menu-icon"></i>
               <span class="menu-title">Escaneo QR</span>
@@ -219,11 +213,10 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
           <li class="nav-item">
             <a class="nav-link" href="../others/acount.php">
-              <i class="icon-head menu-icon"></i>
+              <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Cuenta</span>
             </a>
           </li>
-
 
         </ul>
       </nav>
@@ -255,7 +248,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           <div class="container-fluid py-4">
             <div class="card shadow mb-4">
               <div class="card-header py-3">
-                <button class="btn-crud btn-secondary btn-icon-split" id="agregar">
+                <button class="btn-crud btn-secondary btn-icon-split" id="AgregarBienes">
                   <span class="icon text-white-50">
                     <i class="fas fa-plus-circle"></i>
                   </span>
@@ -276,53 +269,8 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                         <th>Acciones</th>
                       </tr>
                     </thead>
-                    <tbody id="marcasTableBody">
-                      <tr>
-                        <td>
-                          <center>
-                            <button class="btn btn-info btn-circle element-white mas" id="mas">
-                              <i class="fas fa-plus"></i>
-                            </button>
-                          </center>
-                        </td>
-                        <td>UTA123456</td>
-                        <td>Equipo de Computo</td>
-                        <td>XPS 13</td>
-                        <td>Dell</td>
-                        <td>
-                          <center>
-                            <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                              <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                              <i class="fas fa-trash"></i>
-                            </button>
-                          </center>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <center>
-                            <button class="btn btn-info btn-circle element-white mas" id="mas">
-                              <i class="fas fa-plus"></i>
-                            </button>
-                          </center>
-                        </td>
-                        <td>UTA123456</td>
-                        <td>Equipo de Computo</td>
-                        <td>XPS 13</td>
-                        <td>Dell</td>
-                        <td>
-                          <center>
-                            <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                              <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                              <i class="fas fa-trash"></i>
-                            </button>
-                          </center>
-                        </td>
-                      </tr>
+                    <tbody id="bienesTableBody">
+                      <!-- Aquí se insertará la lista de bienes informáticos -->
                     </tbody>
                     <tfoot>
                       <tr>
@@ -340,127 +288,10 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </div>
           </div>
 
+
           <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
           <script type="text/javascript" charset="utf8"
             src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-          <script>
-            $(document).ready(function () {
-              var table = $('#dataTable').DataTable();
-
-              // Add event listener for opening and closing details
-              $('#dataTable tbody').on('click', 'button.mas', function () {
-                var tr = $(this).closest('tr');
-                var row = table.row(tr);
-                var btn = $(this);
-
-                if (row.child.isShown()) {
-                  // This row is already open - close it
-                  row.child.hide();
-                  btn.find('i').removeClass('fa-minus').addClass('fa-plus');
-                } else {
-                  // Open this row
-                  row.child(format(row.data())).show();
-                  btn.find('i').removeClass('fa-plus').addClass('fa-minus');
-                }
-              });
-
-              function format(rowData) {
-                // Function to return the details row HTML
-                // Use the appropriate indices from the original data for the additional info
-                var componentsTable = `
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>Descripción</th>
-                  <th>Serie</th>
-                  <th>Código UTA</th>
-                  <th>Activo</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Componente 1</td>
-                  <td>Descripción del componente 1</td>
-                  <td>SN123</td>
-                  <td>ADI456</td>
-                  <th>Si</th>
-                  <th>
-                    <center>
-                      <button class="btn btn-warning btn-circle element-white editar" id="editar">
-                        <i class="fas fa-edit"></i>
-                      </button>
-                      <button class="btn btn-danger btn-circle eliminar" id="eliminar">
-                        <i class="fas fa-trash"></i>
-                      </button>
-                    </center>
-                  </th>
-                </tr>
-                <tr>
-                  <td>Componente 2</td>
-                  <td>Descripción del componente 2</td>
-                  <td>SN789</td>
-                  <td>ADI101</td>
-                  <th>Si</th>
-                  <th>
-                    <center>
-                      <button class="btn btn-warning btn-circle element-white editarComponente" id="editarComponente" data-toggle="modal" data-target="#modalCrudEditarComponente">
-                        <i class="fas fa-edit"></i>
-                      </button>
-                      <button class="btn btn-danger btn-circle eliminarComponente" id="eliminarComponente" data-toggle="modal" data-target="#modalCrudEliminarComponente">
-                        <i class="fas fa-trash"></i>
-                      </button>
-                    </center>
-                  </th>
-                </tr>
-              </tbody>
-            </table>
-        `;
-
-                return `
-            <div class="additional-info">
-                <div class="row info-assets">
-                  <div class="col-md-3"><strong>Serie:</strong>SN12345</div>
-                  <div class="col-md-3"><strong>Custodio:</strong>Juan Perez</div>
-                  <div class="col-md-3"><strong>Ubicación:</strong>Oficina 101</div>
-                  <div class="col-md-3"><strong>Fecha Ingreso:</strong>2024-05-22</div>
-                </div>
-
-                <button class="btn-crud btn-primary btn-icon-split" id="agregar" data-toggle="modal" data-target="#modalCrudAgregarComponente"> 
-                    <span class="icon text-white-50">
-                        <i class="fas fa-plus-circle"></i>
-                    </span>
-                    <span class="text text-white">Agregar Componente</span>
-                </button>
-                ${componentsTable}
-            </div>
-        `;
-              }
-
-              // Event listener for adding components
-              $('#dataTable tbody').on('click', '.btn-add-component', function () {
-                $('#modalCrudAgregarComponente').modal('show');
-              });
-
-              // Form submission handler for adding components
-              $('#agregarComponenteForm').on('submit', function (event) {
-                event.preventDefault();
-                $('#modalCrudAgregarComponente').modal('hide');
-                alert('Componente agregado exitosamente.');
-              });
-
-              $("#eliminarComponente").click(function () {
-                $("#modalCrudEliminarComponente").modal('show');
-              });
-
-              $("#editarComponente").click(function () {
-                $("#modalCrudEditarComponente").modal('show');
-              });
-
-            });
-          </script>
-
 
           <!-- /.container-fluid -->
 
@@ -483,7 +314,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
   <!-- Create Modal for Adding Components -->
   <div class="modal fade modal-crud" id="modalCrudAgregarComponente" tabindex="-1" role="dialog"
-    aria-labelledby="modal-add-component-label" aria-hidden="true">
+    aria-labelledby="modal-add-register-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
@@ -533,20 +364,14 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                       <option value="no">No</option>
                     </select>
                   </div>
-                  <div class="form-group col-md-6">
-                    <label for="activoComponente" class="text-bold">Activo</label>
-                    <select class="form-control" id="activoComponente" name="activoComponente" required>
-                      <option value="si">Sí</option>
-                      <option value="no">No</option>
-                    </select>
-                  </div>
+
                 </div>
               </div>
             </div>
           </div>
           <div class="modal-footer">
             <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
-              aria-label="Close" value="Cancelar">
+              aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Componente ">
           </div>
         </form>
@@ -555,17 +380,17 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
   </div>
 
   <!-- Create Modal for Adding Components -->
-  <div class="modal fade modal-crud" id="modalEditarComponente" tabindex="-1" role="dialog"
+  <div class="modal fade modal-crud" id="modalCrudEditarComponente" tabindex="-1" role="dialog"
     aria-labelledby="modal-edit-component-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <h3 class="modal-title text-white" id="modal-edit-component-label">Editar Componente</h3>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="agregarComponenteForm" method="post">
+        <form class="forms-sample" id="editarComponenteForm" method="post">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -573,52 +398,46 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 </p>
                 <div class="form-row">
                   <div class="form-group col-md-12">
-                    <label for="nombreComponente" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" name="nombreComponente" id="nombreComponente"
+                    <label for="nombreComponenteE" class="text-bold">Nombre</label>
+                    <input type="text" class="form-control" name="nombreComponenteE" id="nombreComponenteE"
                       placeholder="Nombre" required>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-12">
-                    <label for="descripcionComponente" class="text-bold">Descripción</label>
-                    <input type="text" class="form-control" name="descripcionComponente" id="descripcionComponente"
+                    <label for="descripcionComponenteE" class="text-bold">Descripción</label>
+                    <input type="text" class="form-control" name="descripcionComponenteE" id="descripcionComponenteE"
                       placeholder="Descripción" required>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="serieComponente" class="text-bold">Serie</label>
-                    <input type="text" class="form-control" name="serieComponente" id="serieComponente"
+                    <label for="serieComponenteE" class="text-bold">Serie</label>
+                    <input type="text" class="form-control" name="serieComponenteE" id="serieComponenteE"
                       placeholder="Serie" required>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="codigoAdicionalComponente" class="text-bold">Código Adicional UTA</label>
-                    <input type="text" class="form-control" name="codigoAdicionalComponente"
-                      id="codigoAdicionalComponente" placeholder="Código Adicional UTA" required>
+                    <label for="codigoAdicionalComponenteE" class="text-bold">Código Adicional UTA</label>
+                    <input type="text" class="form-control" name="codigoAdicionalComponenteE"
+                      id="codigoAdicionalComponenteE" placeholder="Código Adicional UTA" required>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="repotenciadoComponente" class="text-bold">Repotenciado</label>
-                    <select class="form-control" id="repotenciadoComponente" name="repotenciadoComponente" required>
+                    <label for="repotenciadoComponenteE" class="text-bold">Repotenciado</label>
+                    <select class="form-control" id="repotenciadoComponenteE" name="repotenciadoComponenteE" required>
                       <option value="">Seleccione</option>
                       <option value="si">Sí</option>
                       <option value="no">No</option>
                     </select>
                   </div>
-                  <div class="form-group col-md-6">
-                    <label for="activoComponente" class="text-bold">Activo</label>
-                    <select class="form-control" id="activoComponente" name="activoComponente" required>
-                      <option value="si">Sí</option>
-                      <option value="no">No</option>
-                    </select>
-                  </div>
+
                 </div>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
               aria-label="Close" value="Cancelar">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Componente ">
           </div>
@@ -635,11 +454,11 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         <div class="modal-header bg-primary">
           <h3 class="modal-title text-white" id="modal-delete-component-label">Eliminar Componente </h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="eliminarMarcaForm">
+        <form class="forms-sample" id="eliminarComponenteForm">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -669,7 +488,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       <div class="modal-content">
         <div class="modal-header">
           <h3 class="modal-title text-primary" id="modal-register-label">¿Listo para partir?</h3>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
@@ -687,20 +506,20 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       </div>
     </div>
   </div>
-
+  <!-- BIENES INFORMÁTICOS -->
   <!-- Create Modal-->
-  <div class="modal fade modal-crud" id="modalCrudAgregar" tabindex="-1" role="dialog"
+  <div class="modal fade modal-crud" id="modalCrudAgregarBienes" tabindex="-1" role="dialog"
     aria-labelledby="modal-register-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <h3 class="modal-title text-white" id="modal-register-label">Agregar Bien</h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="agregarMarcaForm" method="post">
+        <form class="forms-sample" id="formAgregarBienes">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -709,51 +528,56 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
-                    <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Código UTA"
+                    <input type="text" class="form-control" name="codigoUTAA" id="codigoUTAA" placeholder="Código UTA"
                       required>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="nombreC" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre" required>
+                    <input type="text" class="form-control" name="nombreA" id="nombreA" placeholder="Nombre" required>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="codigoUTAC" class="text-bold">Serie</label>
-                    <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Serie"
-                      required>
+                    <input type="text" class="form-control" name="serieA" id="serieA" placeholder="Serie" required>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="facultad" class="text-bold">Marca</label>
-                    <select class="form-control" id="facultad" required>
+                    <select class="form-control" id="marcaA" required>
                       <option value="">Seleccione una Marca</option>
-                      <option value="HP">HP</option>
-                      <option value="Dell">DELL</option>
+                      <?php
+                      include_once ("../../Acciones/crudBienes_Informaticos.php");
+                      $marcas = AccionesBienes_Informaticos::listarMarcasInsertar();
+                      echo ($marcas['dato']);
+                      ?>
                     </select>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="codigoUTAC" class="text-bold">Modelo</label>
-                    <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Modelo"
-                      required>
+                    <input type="text" class="form-control" name="modeloA" id="modeloA" placeholder="Modelo" required>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="facultad" class="text-bold">Facultad</label>
-                    <select class="form-control" id="facultad" required>
-                      <option value="">Seleccione una Facultad</option>
-                      <option value="FISEI">Facultad de Ingenieria en Sistemas, Electronica e Industrial</option>
-                      <option value="FDA">Facultad de Diseño y Arquitectura</option>
+                    <label for="facultad" class="text-bold">Areas</label>
+                    <select class="form-control" id="areaA" required>
+                      <option value="">Seleccione una área</option>
+                      <?php
+                      $areas = AccionesBienes_Informaticos::listarAreasInsertar();
+                      echo ($areas['dato']);
+                      ?>
                     </select>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="ubicación" class="text-bold">Ubicación</label>
-                    <select class="form-control" id="ubicación" required>
+                    <select class="form-control" id="ubicacionA" required>
                       <option value="">Seleccione una Ubicación</option>
-                      <option value="Aula01">Aula 01</option>
-                      <option value="Aula02">Aula 02</option>
+                      <?php
+                      $ubicaciones = AccionesBienes_Informaticos::listarUbicacionesInsertar();
+                      echo ($ubicaciones['dato']);
+                      ?>
                     </select>
                   </div>
                 </div>
@@ -763,8 +587,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           <div class="modal-footer">
             <input type="button" class="btn-crud btn-secondary text-white text-bold " data-bs-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
-            <input type="submit" class="btn-crud btn-primary text-bold agregarBien" value=" Agregar Bien "
-              id="agregarBien">
+            <input type="submit" class="btn-crud btn-primary text-bold agregarBien" value=" Agregar Bien ">
           </div>
         </form>
       </div>
@@ -772,18 +595,18 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
   </div>
 
   <!-- Delete Modal-->
-  <div class="modal fade" id="modalCrudEliminar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
-    aria-hidden="true">
+  <div class="modal fade" id="modalCrudEliminarBienes" tabindex="-1" role="dialog"
+    aria-labelledby="modal-register-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <h3 class="modal-title text-white" id="modal-register-label">Eliminar Bien </h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="eliminarMarcaForm">
+        <form class="forms-sample" id="formEliminarBienes">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -806,6 +629,90 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     </div>
   </div>
 
+  <!-- Edit Modal-->
+  <div class="modal fade" id="modalCrudEditarBienes" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h3 class="modal-title text-white" id="modal-register-label">Editar Bien</h3>
+          <p class="modal">Ingrese los datos del Usuario:</p>
+          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
+        </div>
+        <form class="forms-sample" id="formEditarBienes">
+          <div class="modal-body">
+            <div class="grid-margin-modal">
+              <div class="card-body">
+                <p class="card-description">Por favor, complete los siguientes campos para editar la información del
+                  bien seleccionado:</p>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
+                    <input type="text" class="form-control" name="codigoUTAE" id="codigoUTAE" placeholder="Código UTA"
+                      required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="nombreC" class="text-bold">Nombre</label>
+                    <input type="text" class="form-control" name="nombreE" id="nombreE" placeholder="Nombre" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="codigoUTAC" class="text-bold">Serie</label>
+                    <input type="text" class="form-control" name="serieE" id="serieE" placeholder="Serie" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="facultad" class="text-bold">Marca</label>
+                    <select class="form-control" id="marcaE" required>
+                      <?php
+                      $marcasE = AccionesBienes_Informaticos::listarMarcasInsertar();
+                      echo ($marcasE['dato']);
+                      ?>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="codigoUTAC" class="text-bold">Modelo</label>
+                    <input type="text" class="form-control" name="modeloE" id="modeloE" placeholder="Modelo" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="facultad" class="text-bold">Areas</label>
+                    <select class="form-control" id="areaE" required>
+                      <?php
+                      $areasE = AccionesBienes_Informaticos::listarAreasInsertar();
+                      echo ($areasE['dato']);
+                      ?>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="ubicación" class="text-bold">Ubicación</label>
+                    <select class="form-control" id="ubicacionE" required>
+                      <?php
+                      $ubicacionesE = AccionesBienes_Informaticos::listarUbicacionesInsertar();
+                      echo ($ubicacionesE['dato']);
+                      ?>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="submit" class="btn-crud btn-primary text-bold editarBien" value=" Editar Bien">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- CODIGO QR -->
+
   <div class="modal fade" id="modalQR" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
     aria-hidden="true">
     <div class="modal-dialog">
@@ -813,7 +720,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         <div class="modal-header bg-primary">
           <h3 class="modal-title text-white" id="modal-register-label"> QR Bien Informático </h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
@@ -856,7 +763,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         <div class="modal-header bg-primary">
           <h3 class="modal-title text-white" id="modal-register-label"> QR Bien Informático </h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
@@ -892,87 +799,473 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     </div>
   </div>
 
-  <!-- Edit Modal-->
-  <div class="modal fade" id="modalCrud" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
-    aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-primary">
-          <h3 class="modal-title text-white" id="modal-register-label">Editar Bien</h3>
-          <p class="modal">Ingrese los datos del Usuario:</p>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <i class="fas fa-times" class="element-white"></i>
-          </button>
-        </div>
-        <form class="forms-sample" id="editarMarcaForm">
-          <div class="modal-body">
-            <div class="grid-margin-modal">
-              <div class="card-body">
-                <p class="card-description">Por favor, complete los siguientes campos para editar la información del
-                  bien seleccionado:</p>
-                <div class="form-row">
-                  <div class="form-group col-md-12">
-                    <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
-                    <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Código UTA"
-                      required>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="nombreC" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre" required>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="codigoUTAC" class="text-bold">Serie</label>
-                    <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Serie"
-                      required>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="facultad" class="text-bold">Marca</label>
-                    <select class="form-control" id="facultad" required>
-                      <option value="">Seleccione una Marca</option>
-                      <option value="HP">HP</option>
-                      <option value="Dell">DELL</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="codigoUTAC" class="text-bold">Modelo</label>
-                    <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Modelo"
-                      required>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="facultad" class="text-bold">Facultad</label>
-                    <select class="form-control" id="facultad" required>
-                      <option value="">Seleccione una Facultad</option>
-                      <option value="FISEI">Facultad de Ingenieria en Sistemas, Electronica e Industrial</option>
-                      <option value="FDA">Facultad de Diseño y Arquitectura</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="ubicación" class="text-bold">Ubicación</label>
-                    <select class="form-control" id="ubicación" required>
-                      <option value="">Seleccione una Ubicación</option>
-                      <option value="Aula01">Aula 01</option>
-                      <option value="Aula02">Aula 02</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
-              aria-label="Close" value="Cancelar" id="cancelButton">
-            <input type="submit" class="btn-crud btn-primary text-bold editarBien" id="editarBien" value=" Editar Bien">
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      // Inicializa la tabla pero no la guardes en una variable
+      // porque se reconstruirá después de cada carga de datos.
+      $('#dataTable').DataTable();
+
+      // Cargar la tabla cuando se cargue el DOM
+      cargarTabla();
+
+      $("#AgregarBienes").click(function () {
+        $("#modalCrudAgregarBienes").modal('show');
+      });
+
+      $("#formAgregarBienes").submit(function (e) {
+        e.preventDefault();
+        let codigo_uta = $("#codigoUTAA").val();
+        let nombre = $("#nombreA").val();
+        let serie = $("#serieA").val();
+        let id_marca = $("#marcaA").val();
+        let modelo = $("#modeloA").val();
+        let id_area_per = $("#areaA").val();
+        let id_ubi_per = $("#ubicacionA").val();
+
+        $.ajax({
+          url: "../../Acciones/RestBienes_Informaticos.php",
+          type: "POST",
+          data: JSON.stringify({
+            codigo_uta: codigo_uta,
+            nombre: nombre,
+            serie: serie,
+            id_marca: id_marca,
+            modelo: modelo,
+            id_area_per: id_area_per,
+            id_ubi_per: id_ubi_per
+          }),
+          contentType: "application/json",
+          cache: false,
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
+            $("#modalCrudAgregarBienes").modal('hide');
+            $("#codigoUTAA").val("");
+            $("#nombreA").val("");
+            $("#serieA").val("");
+            $("#marcaA").val("");
+            $("#modeloA").val("");
+            $("#areaA").val("");
+            $("#ubicacionA").val("");
+            cargarTabla();
+          }
+        });
+      });
+
+      function cargarTabla() {
+        fetch('../../Acciones/RestBienes_Informaticos.php?op=GET', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+          .then(response => response.json())
+          .then(data => {
+            const tbody = document.querySelector('#dataTable tbody');
+            if ($.fn.DataTable.isDataTable('#dataTable')) {
+              $('#dataTable').DataTable().destroy();
+            }
+            tbody.innerHTML = '';
+
+            if (data.codigo === 0) {
+              data.datos.forEach(respuesta => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                  <td>
+                      <center>
+                          <button class="btn btn-info btn-circle element-white mas" id="mas" data-id="${respuesta.id}">
+                              <i class="fas fa-plus"></i>
+                          </button>
+                      </center>
+                  </td>
+                  <td>${respuesta.codigo_uta}</td>
+                  <td>${respuesta.nombre}</td>
+                  <td>${respuesta.modelo}</td>
+                  <td>${respuesta.nombre_marca}</td>
+                  <td class="mdl-data-table__cell">
+                      <center>
+                          <button class="btn btn-warning btn-circle element-white editar" data-id="${respuesta.id}">
+                              <i class="fas fa-edit"></i>
+                          </button>
+                          <button class="btn btn-danger btn-circle eliminar" data-id="${respuesta.id}">
+                              <i class="fas fa-trash"></i>
+                          </button>
+                      </center>
+                  </td>
+                  <input type="hidden" class="serie" value="${respuesta.serie}">
+                  <input type="hidden" class="id_marca" value="${respuesta.id_marca}">
+                  <input type="hidden" class="id_area_per" value="${respuesta.id_area_per}">
+                  <input type="hidden" class="id_ubi_per" value="${respuesta.id_ubi_per}">
+              `;
+                tbody.appendChild(tr);
+              });
+            } else {
+              const tr = document.createElement('tr');
+              const td = document.createElement('td');
+              td.textContent = 'No se encontraron facultades.';
+              td.setAttribute('colspan', '6');
+              tr.appendChild(td);
+              tbody.appendChild(tr);
+            }
+
+            $('#dataTable').DataTable({
+              language: {
+                "decimal": "",
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                "infoEmpty": "Mostrando 0 to 0 of 0 entradas",
+                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                  "first": "Primero",
+                  "last": "Último",
+                  "next": "Siguiente",
+                  "previous": "Anterior"
+                }
+              }
+            });
+
+            // Agregar event listeners a los botones después de cargar la tabla
+            addEventListeners();
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            const tbody = document.querySelector('#dataTable tbody');
+            const tr = document.createElement('tr');
+            const td = document.createElement('td');
+            td.textContent = 'Error al cargar los datos.';
+            td.setAttribute('colspan', '6');
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+          });
+      }
+
+      function addEventListeners() {
+        let id = "";
+        $(document).on('click', '.editar', function () {
+          id = $(this).data("id");
+          let fila = $(this).closest("tr");
+          let codigo_uta = fila.find('td:eq(1)').text();
+          let nombre = fila.find('td:eq(2)').text();
+          let modelo = fila.find('td:eq(3)').text();
+          let id_marca = fila.find('.id_marca').val();
+          let serie = fila.find('.serie').val();
+          let id_area_per = fila.find('.id_area_per').val();
+          let id_ubi_per = fila.find('.id_ubi_per').val();
+
+          $("#codigoUTAE").val(codigo_uta);
+          $("#nombreE").val(nombre);
+          $("#modeloE").val(modelo);
+          $("#marcaE").val(id_marca);
+          $("#areaE").val(id_area_per);
+          $("#ubicacionE").val(id_ubi_per);
+          $("#serieE").val(serie);
+          $("#modalCrudEditarBienes").modal('show');
+        });
+
+        $("#formEditarBienes").submit(function (e) {
+          e.preventDefault();
+          let codigo_uta = $("#codigoUTAE").val();
+          let nombre = $("#nombreE").val();
+          let modelo = $("#modeloE").val();
+          let id_marca = $("#marcaE").val();
+          let serie = $("#serieE").val();
+          let id_area_per = $("#areaE").val();
+          let id_ubi_per = $("#ubicacionE").val();
+
+          $.ajax({
+            url: "../../Acciones/RestBienes_Informaticos.php",
+            type: "PUT",
+            data: JSON.stringify({
+              id: id,
+              codigo_uta: codigo_uta,
+              nombre: nombre,
+              modelo: modelo,
+              id_marca: id_marca,
+              serie: serie,
+              id_area_per: id_area_per,
+              id_ubi_per: id_ubi_per
+            }),
+            contentType: "application/json",
+            error: function (error) {
+              console.error("Error en la solicitud AJAX", error);
+            },
+            complete: function () {
+              $("#modalCrudEditarBienes").modal('hide');
+              cargarTabla();
+            }
+          });
+        });
+
+        $(document).on('click', '.eliminar', function () {
+          id = $(this).data("id");
+          $("#modalCrudEliminarBienes").modal('show');
+        });
+
+        $("#formEliminarBienes").submit(function (e) {
+          e.preventDefault();
+
+          $.ajax({
+            url: "../../Acciones/RestBienes_Informaticos.php",
+            type: "DELETE",
+            data: JSON.stringify({
+              id: id
+            }),
+            contentType: "application/json",
+            error: function (error) {
+              console.error("Error en la solicitud AJAX", error);
+            },
+            complete: function () {
+              $("#modalCrudEliminarBienes").modal('hide');
+              cargarTabla();
+            }
+          });
+        });
+
+        // Listener para el botón "mas"
+        $('#dataTable tbody').on('click', 'button.mas', function () {
+          var btn = $(this);
+          var tr = btn.closest('tr');
+          var row = $('#dataTable').DataTable().row(tr);
+          var id = btn.data('id');  // Aquí se obtiene el ID del atributo data-id del botón
+
+          if (row.child.isShown()) {
+            row.child.hide();
+            btn.find('i').removeClass('fa-minus').addClass('fa-plus');
+          } else {
+            $.ajax({
+              url: '../../Acciones/DetallesInformaticos.php',
+              method: 'GET',
+              data: { id: id },
+              success: function (response) {
+                try {
+                  response = JSON.parse(response);
+                  if (response.codigo === 0) {
+                    var detalle = response.dato;
+                    var detalleHtml = `
+                                    <div class="additional-info">
+                                        <!-- Aquí se incluyen los detalles adicionales -->
+                                        <div class="row info-assets">
+                                            <div class="col-md-3"><strong>Serie:</strong> ${detalle.serie}</div>
+                                            <div class="col-md-3"><strong>Custodio:</strong> ${detalle.custodio}</div>
+                                            <div class="col-md-3"><strong>Ubicación:</strong> ${detalle.nombre_ubicacion}</div>
+                                            <div class="col-md-3"><strong>Fecha Ingreso:</strong> ${detalle.fecha_ingreso}</div>
+                                        </div>
+                                        <button class="btn-crud btn-primary btn-icon-split btn-add-component " id="agregarComponente" data-toggle="modal" data-target="#modalCrudAgregarComponente"> 
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-plus-circle"></i>
+                                            </span>
+                                            <span class="text text-white">Agregar Componente</span>
+                                        </button>
+                                        ${detalle.componentsTable} <!-- Aquí se incluye la tabla de componentes -->
+                                    </div>
+                                `;
+                    row.child(detalleHtml).show();
+                    btn.find('i').removeClass('fa-plus').addClass('fa-minus');
+                  } else {
+                    console.error('Error al obtener detalles del bien informático:', response.mensaje);
+                  }
+                } catch (e) {
+                  console.error('Error al parsear JSON:', e);
+                  console.error('Respuesta recibida:', response);
+                }
+              },
+              error: function (xhr, status, error) {
+                console.error('Error en la solicitud AJAX:', error);
+              }
+            });
+          }
+        });
+
+
+
+        const agregarComponenteForm = document.getElementById('agregarComponenteForm');
+
+        let componenteAEliminarId = null;
+        let componenteAEditarId = null;
+        // Event listener for adding components
+        $('#dataTable tbody').on('click', '.btn-add-component', function () {
+          $('#modalCrudAgregarComponente').modal('show');
+        });
+
+
+        // Form submission handler for adding components
+        $('#agregarComponenteForm').on('submit', async function (event) {
+          event.preventDefault();
+          var btn = $('button.mas');
+          var id = btn.data('id');
+          const nombre = document.getElementById('nombreComponente').value;
+          const descripcion = document.getElementById('descripcionComponente').value;
+          const serie = document.getElementById('serieComponente').value;
+          const codigo_adi_uta = document.getElementById('codigoAdicionalComponente').value;
+          const repotenciado = document.getElementById('repotenciadoComponente').value;
+          const id_bien_infor_per = id;
+          try {
+            const response = await fetch('../../Acciones/RestComponentes.php', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ nombre, descripcion, serie, codigo_adi_uta, repotenciado, id_bien_infor_per })
+            });
+
+            if (response.ok) {
+              cargarTabla();
+              agregarComponenteForm.reset();
+
+              $('#modalCrudAgregarComponente').modal('hide');
+              $('body').removeClass('modal-open');
+              $('.modal-backdrop').remove();
+            } else {
+              console.error('Error al agregar componente: ', response.statusText);
+            }
+          } catch (error) {
+            console.error('Error al cargar componente: ', error)
+          }
+
+        });
+
+
+
+
+
+        document.getElementById('editarComponenteForm').addEventListener('submit', async function (event) {
+          event.preventDefault();
+          var btn = $('button.mas');
+          var idBien = btn.data('id');
+          const id = componenteAEditarId;
+          console.log('Esta id: xd: ' + id);
+          const nombre = document.getElementById('nombreComponenteE').value;
+          const descripcion = document.getElementById('descripcionComponenteE').value;
+          const serie = document.getElementById('serieComponenteE').value;
+          const codigo_adi_uta = document.getElementById('codigoAdicionalComponenteE').value;
+          const repotenciado = document.getElementById('repotenciadoComponenteE').value;
+          const id_bien_infor_per = idBien;
+          try {
+            // Enviar la solicitud de edición al servidor
+            const response = await fetch('../../Acciones/RestComponentes.php' + `?id=${id}`, {
+              method: 'PUT',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ id, nombre, descripcion, serie, codigo_adi_uta, repotenciado, id_bien_infor_per })
+            });
+
+            if (response.ok) {
+              const result = await response.json();
+              if (result.success) {
+                // Si la solicitud es exitosa, recarga la lista de marcas
+                await cargarTabla();
+                // Cierra el modal de edición
+                $("#modalCrudEditarComponente").modal('hide');
+              } else {
+                console.error('Error al editar componente:', result.message);
+              }
+            } else {
+              console.error('Error al editar componente:', response.statusText);
+            }
+          } catch (error) {
+            console.error('Error al editar componente:', error);
+          }
+        });
+
+
+        window.showEditarModalComponente = async function (id) {
+          try {
+            const response = await fetch('../../Acciones/RestComponentes.php' + `?id=${id}`);
+            if (!response.ok) {
+              throw new Error('Error al obtener detalles de componentes para editar');
+            }
+            const responseComponente = await response.json();
+            const componente = responseComponente.data;
+            console.log(componente)
+            // Llenar los campos del formulario con los detalles de la componente
+
+            document.getElementById('nombreComponenteE').value = componente.nombre;
+            document.getElementById('descripcionComponenteE').value = componente.descripcion;
+            document.getElementById('serieComponenteE').value = componente.serie;
+            document.getElementById('codigoAdicionalComponenteE').value = componente.codigo_adi_uta;
+            const selectedRepotenciado = componente.repotenciado;
+            const repotenciadoEInput = document.getElementById('repotenciadoComponenteE');
+
+            // Iteramos sobre cada opción en el campo de selección
+            for (let i = 0; i < repotenciadoEInput.options.length; i++) {
+              // Si el valor de la opción coincide con el valor seleccionado previamente
+              if (repotenciadoEInput.options[i].value === selectedRepotenciado) {
+                // Marcamos esta opción como seleccionada
+                repotenciadoEInput.options[i].selected = true;
+                // Salimos del bucle ya que hemos encontrado la opción correcta
+                break;
+              }
+            }
+            componenteAEditarId = id;
+
+            // Mostrar el modal de edición
+            $("#modalCrudEditarComponente").modal('show');
+          } catch (error) {
+            console.error(error);
+          }
+        };
+      }
+
+      const eliminarComponenteForm = document.getElementById('eliminarComponenteForm');
+      eliminarComponenteForm.addEventListener('submit', async function (event) {
+        try {
+          const id = componenteAEliminarId;
+
+          if (!id) {
+            console.error('ID de componente a eliminar no está definido.');
+            return;
+          }
+
+          const response = await fetch('../../Acciones/RestComponentes.php' + `?id=${id}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+
+          if (response.ok) {
+            const responseData = await response.json();
+            if (responseData.success) {
+              // Si la solicitud es exitosa, recarga la lista de marcas
+              await cargarTabla();
+              // Cierra el modal de eliminación
+              $("#modalCrudEliminarComponente").modal('hide');
+
+            } else {
+              console.error('Error al eliminar componente:', responseData.message || response.statusText);
+              alert(responseData.message)
+            }
+          }
+        } catch (error) {
+          console.error('Error al eliminar componente:', error);
+        }
+      });
+
+      window.showEliminarModalComponente = function (id) {
+        componenteAEliminarId = id;
+        $("#modalCrudEliminarComponente").modal('show');
+        console.log('Mostrar modal de eliminación para componente con id: ', id);
+
+      }
+    });
+
+
+  </script>
 
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>
