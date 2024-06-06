@@ -457,7 +457,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="repBInformaticos" method="post">
+        <form class="forms-sample" id="repBInformaticos" method="post" action= "../../Acciones/ReporteBI.php" target="_blank">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -467,6 +467,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     <label for="areaC" class="text-bold">Área</label>
                     <select class="form-control" name="areaI" id="areaC" required>
                       <option value="">Seleccione un Área</option>
+                          <option value="any">Todos</option>
                           <?php
                             include_once ("../../Acciones/crudMarcas.php");
                             $areas = Obtener::ObtenerArea();
@@ -476,12 +477,12 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   </div>
                     <div class="form-group col-md-6">
                         <label for="areaC" class="text-bold">Marca</label>
-                        <select class="form-control" name="areaI" id="areaC" required>
+                        <select class="form-control" name="marcaI" id="areaC" required>
                         <option value="">Seleccione una marca</option>
                         <option value="any">Todos</option>
                           <?php
                           include_once ("../../Acciones/crudMarcas.php");
-                          $marcas = Obtener::ObtenerNombre();
+                          $marcas = Obtener::ObtenerNombreT();
                           echo ($marcas['dato']);
                           ?>
                         </select>
@@ -500,10 +501,10 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="tipoI" class="text-bold">Tipo Archivo</label>
-                    <select class="form-control" name="tipoI" id="tipoI" required>
+                    <select class="form-control" name="tipoArchivoI" id="tipoI" required>
                       <option value="">Seleccione un Tipo</option>
-                      <option value="pdfI">PDF</option>
-                      <option value="excelI">Excel</option>
+                      <option value="pdf">PDF</option>
+                      <option value="excel">Excel</option>
                     </select>
                   </div>
                 </div>
@@ -532,7 +533,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="repBMobiliarios" method="post">
+        <form class="forms-sample" id="repBMobiliarios" method="post" action= "../../Acciones/ReporteBM.php" target="_blank">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -554,7 +555,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="areaC" class="text-bold">Área</label>
-                    <select class="form-control" name="areaC" id="areaC" required>
+                    <select class="form-control" name="areaM" id="areaC" required>
                       <option value="">Seleccione un Área</option>
                       <option value="any">Todos</option>
                       <?php
@@ -566,12 +567,12 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                   </div>
                   <div class="form-group col-md-6">
                     <label for="areaC" class="text-bold">Marca</label>
-                    <select class="form-control" name="areaC" id="areaC" required>
+                    <select class="form-control" name="marcaM" id="areaC" required>
                       <option value="">Seleccione una Marca</option>
                       <option value="any">Todos</option>
                       <?php
                           include_once ("../../Acciones/crudMarcas.php");
-                          $marcas = Obtener::ObtenerNombre();
+                          $marcas = Obtener::ObtenerNombreM();
                           echo ($marcas['dato']);
                       ?>
                     </select>
@@ -580,20 +581,20 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="fechaInicial" class="text-bold">Fecha Inicial</label>
-                        <input type="date" class="form-control" name="fechaInicial" id="fechaInicial" placeholder="Selecciona una fecha" required>
+                        <input type="date" class="form-control" name="fechaInicialM" id="fechaInicial" placeholder="Selecciona una fecha" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="fechaFinal" class="text-bold">Fecha Final</label>
-                        <input type="date" class="form-control" name="fechaFinal" id="fechaFinal" placeholder="Selecciona una fecha" required>
+                        <input type="date" class="form-control" name="fechaFinalM" id="fechaFinal" placeholder="Selecciona una fecha" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label for="areaC" class="text-bold">Tipo Archivo</label>
-                        <select class="form-control" name="areaC" id="areaC" required>
+                        <select class="form-control" name="tipoArchivoBM" id="areaC" required>
                         <option value="">Seleccione un Tipo</option>
-                        <option value="pdfM">PDF</option>
-                        <option value="excelM">Excel</option>
+                        <option value="pdf">PDF</option>
+                        <option value="excel">Excel</option>
                         </select>
                     </div>
                 </div>
@@ -732,22 +733,22 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
   });
   </script>
     <script>
-    //   document.getElementById('fecha_adquiE').addEventListener('change', function() {
-    //     var fecha_adqui = document.getElementById('fecha_adquiE').value;
-    //     document.getElementById('fecha_activacionE').min = fecha_adqui;
-    // });
+      document.getElementById('fechaInicialI').addEventListener('change', function() {
+        var fecha_adqui = document.getElementById('fechaInicialI').value;
+        document.getElementById('fechaFinalI').min = fecha_adqui;
+    });
 
-    // document.getElementById('fecha_activacionE').addEventListener('change', function() {
-    //     var fecha_activacion = document.getElementById('fecha_activacionE').value;
-    //     var fecha_adqui = document.getElementById('fecha_adquiE').value;
-    //     if (fecha_activacion < fecha_adqui) {
-    //         alert('La fecha final no puede ser anterior a la fecha inicial.');
-    //         document.getElementById('fecha_activacionE').value = '';
-    //     }
-    //     // if (fecha_activacion === fecha_adqui) {
-    //     //     alert('La fecha final no puede ser la misma que la fecha inicial.');
-    //     //     document.getElementById('fecha_activacion').value = '';
-    //     // }
-    // });
+    document.getElementById('fechaFinalI').addEventListener('change', function() {
+        var fecha_activacion = document.getElementById('fechaFinalI').value;
+        var fecha_adqui = document.getElementById('fechaInicialI').value;
+        if (fecha_activacion < fecha_adqui) {
+            alert('La fecha final no puede ser anterior a la fecha inicial.');
+            document.getElementById('fechaFinalI').value = '';
+        }
+        // if (fecha_activacion === fecha_adqui) {
+        //     alert('La fecha final no puede ser la misma que la fecha inicial.');
+        //     document.getElementById('fecha_activacion').value = '';
+        // }
+    });
     </script>
 </html>
