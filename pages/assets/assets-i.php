@@ -1035,12 +1035,14 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           });
         });
 
+        let currentId = null;
         // Listener para el botón "mas"
         $('#dataTable tbody').on('click', 'button.mas', function () {
           var btn = $(this);
           var tr = btn.closest('tr');
           var row = $('#dataTable').DataTable().row(tr);
           var id = btn.data('id');  // Aquí se obtiene el ID del atributo data-id del botón
+          currentId = id;
 
           if (row.child.isShown()) {
             row.child.hide();
@@ -1091,6 +1093,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         });
 
 
+        
 
         const agregarComponenteForm = document.getElementById('agregarComponenteForm');
 
@@ -1102,11 +1105,22 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         });
 
 
+
+        let isSubmitting = false;
         // Form submission handler for adding components
         $('#agregarComponenteForm').on('submit', async function (event) {
           event.preventDefault();
-          var btn = $('button.mas');
-          var id = btn.data('id');
+
+          if (isSubmitting) {
+    console.log('Ya se está procesando una solicitud. Por favor, espera.');
+    return;
+  }
+
+  isSubmitting = true;
+          
+          
+          var id = currentId;
+          console.log(id);
           const nombre = document.getElementById('nombreComponente').value;
           const descripcion = document.getElementById('descripcionComponente').value;
           const serie = document.getElementById('serieComponente').value;
@@ -1134,7 +1148,11 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             }
           } catch (error) {
             console.error('Error al cargar componente: ', error)
-          }
+          } finally {
+          // Rehabilitar el botón de envío
+          isSubmitting = false; 
+          
+        }
 
         });
 
