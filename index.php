@@ -108,7 +108,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           </li>
           <li class="nav-item nav-settings d-none d-lg-flex">
             <a class="nav-link" href="#">
-            <i class="fa fa-tasks"></i> 
+              <i class="fa fa-tasks"></i> 
             </a>
           </li>
         </ul>
