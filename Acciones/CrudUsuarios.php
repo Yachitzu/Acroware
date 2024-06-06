@@ -129,7 +129,15 @@ class Actualizar{
             if ($data !== null) {
                 $email=$data["email"];
                 $conectar = Conexion::getInstance()->getConexion();
-                $updatesql = "UPDATE usuarios SET email = :email, rol = :rol WHERE id = :id";
+                $buscarSql = "SELECT * FROM usuarios WHERE email = :email and id!=:id";
+                $buscarResultado = $conectar->prepare($buscarSql);
+                $buscarResultado->bindParam(':email', $data["email"], PDO::PARAM_STR);
+                $buscarResultado->bindParam(':id', $data["id"], PDO::PARAM_STR);
+                $buscarResultado->execute();
+    
+                if ($buscarResultado->rowCount() > 0) {
+                    echo json_encode(['success' => false, 'message' => 'El usuario ya existe']);
+                } else {$updatesql = "UPDATE usuarios SET email = :email, rol = :rol WHERE id = :id";
                 $resultado = $conectar->prepare($updatesql);
                 $resultado->bindParam(':email', $data["email"], PDO::PARAM_STR);
                 $resultado->bindParam(':rol', $data["rol"], PDO::PARAM_STR);
@@ -141,6 +149,7 @@ class Actualizar{
                 }
                 
                 echo json_encode(['success' => true]);
+            }
             } else {
                 echo json_encode(['success' => false, 'message' => 'Invalid input']);
             }
