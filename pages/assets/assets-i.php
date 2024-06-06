@@ -369,7 +369,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <h3 class="modal-title text-white" id="modal-add-component-label">Agregar Componente</h3>
-          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
@@ -420,8 +420,8 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
-              aria-label="Close" value="Cancelar" id="cancelButton">>
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
+              aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Componente ">
           </div>
         </form>
@@ -1114,7 +1114,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                                             <div class="col-md-3"><strong>Ubicación:</strong> ${detalle.nombre_ubicacion}</div>
                                             <div class="col-md-3"><strong>Fecha Ingreso:</strong> ${detalle.fecha_ingreso}</div>
                                         </div>
-                                        <button class="btn-crud btn-primary btn-icon-split btn-add-component agregarComponente" id="agregarComponente" data-toggle="modal" data-target="#modalCrudAgregarComponente"> 
+                                        <button class="btn-crud btn-primary btn-icon-split btn-add-component " id="agregarComponente" data-toggle="modal" data-target="#modalCrudAgregarComponente"> 
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-plus-circle"></i>
                                             </span>
@@ -1147,8 +1147,8 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         let componenteAEliminarId = null;
         let componenteAEditarId = null;
         // Event listener for adding components
-        $("#agregarComponente").click(function () {
-          $("#modalCrudAgregarComponente").modal('show');
+        $('#dataTable tbody').on('click', '.btn-add-component', function () {
+          $('#modalCrudAgregarComponente').modal('show');
         });
 
 
@@ -1175,7 +1175,10 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             if (response.ok) {
               cargarTabla();
               agregarComponenteForm.reset();
+
               $('#modalCrudAgregarComponente').modal('hide');
+              $('body').removeClass('modal-open');
+              $('.modal-backdrop').remove();
             } else {
               console.error('Error al agregar componente: ', response.statusText);
             }
