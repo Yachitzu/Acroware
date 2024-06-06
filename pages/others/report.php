@@ -726,6 +726,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           alert('La fecha final no puede ser anterior a la fecha inicial.');
           document.getElementById('fechaFinalSW').value = '';
       }
+ feature-funcionReportes
   });
   </script>
   <script>
@@ -758,4 +759,5 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       }
   });
   </script>
+
 </html>
