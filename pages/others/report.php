@@ -581,11 +581,11 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="fechaInicial" class="text-bold">Fecha Inicial</label>
-                        <input type="date" class="form-control" name="fechaInicialM" id="fechaInicial" placeholder="Selecciona una fecha" required>
+                        <input type="date" class="form-control" name="fechaInicialM" id="fechaInicialM" placeholder="Selecciona una fecha" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="fechaFinal" class="text-bold">Fecha Final</label>
-                        <input type="date" class="form-control" name="fechaFinalM" id="fechaFinal" placeholder="Selecciona una fecha" required>
+                        <input type="date" class="form-control" name="fechaFinalM" id="fechaFinalM" placeholder="Selecciona una fecha" required>
                     </div>
                 </div>
                 <div class="form-row">
