@@ -83,12 +83,25 @@ Class Obtener{
 }
 Class Guardar{
     public static function GuardarUsuario()
-    {
-        try {
-            $json = file_get_contents('php://input');
-            $data = json_decode($json, true);
-            if ($data !== null) {
-                $conectar = Conexion::getInstance()->getConexion();
+{
+    try {
+        $json = file_get_contents('php://input');
+        $data = json_decode($json, true);
+
+        if ($data !== null) {
+            $conectar = Conexion::getInstance()->getConexion();
+
+            // Consulta para buscar si ya existe un usuario con la cédula o email
+            $buscarSql = "SELECT * FROM usuarios WHERE cedula = :cedula OR email = :email";
+            $buscarResultado = $conectar->prepare($buscarSql);
+            $buscarResultado->bindParam(':cedula', $data["cedula"], PDO::PARAM_STR);
+            $buscarResultado->bindParam(':email', $data["email"], PDO::PARAM_STR);
+            $buscarResultado->execute();
+
+            if ($buscarResultado->rowCount() > 0) {
+                echo json_encode(['success' => false, 'message' => 'El usuario ya existe']);
+            } else {
+                // Si no existe, se procede a insertar el usuario
                 $insertarSql = "INSERT INTO usuarios(nombre, apellido, cedula, email, rol, psswd) VALUES (:nombre, :apellido, :cedula, :email, :rol, :psswd)";
                 $resultado = $conectar->prepare($insertarSql);
                 $resultado->bindParam(':nombre', $data["nombre"], PDO::PARAM_STR);
@@ -99,13 +112,14 @@ Class Guardar{
                 $resultado->bindParam(':psswd', $data["psswd"], PDO::PARAM_STR);
                 $resultado->execute();
                 echo json_encode(['success' => true]);
-            } else {
-                echo json_encode(['success' => false, 'message' => 'Invalid input']);
             }
-        } catch (PDOException $e) {
-            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Invalid input']);
         }
+    } catch (PDOException $e) {
+        echo json_encode(['success' => false, 'message' => $e->getMessage()]);
     }
+}
 }
 class Actualizar{
     public static function ActualizarUsuario($id){
