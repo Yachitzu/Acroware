@@ -508,7 +508,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="eliminarMarcaForm">
+        <form class="forms-sample" id="eliminarComponenteForm">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -1187,16 +1187,14 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
 
 
 
-        $("#eliminarComponente").click(function () {
-          $("#modalCrudEliminarComponente").modal('show');
-        });
+
 
         document.getElementById('editarComponenteForm').addEventListener('submit', async function (event) {
           event.preventDefault();
           var btn = $('button.mas');
           var idBien = btn.data('id');
           const id = componenteAEditarId;
-          console.log('Esta id: xd: '+id);
+          console.log('Esta id: xd: ' + id);
           const nombre = document.getElementById('nombreComponenteE').value;
           const descripcion = document.getElementById('descripcionComponenteE').value;
           const serie = document.getElementById('serieComponenteE').value;
@@ -1261,18 +1259,59 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
               }
             }
             componenteAEditarId = id;
+
             // Mostrar el modal de edición
             $("#modalCrudEditarComponente").modal('show');
           } catch (error) {
             console.error(error);
           }
         };
-
-
       }
 
-      
+      const eliminarComponenteForm = document.getElementById('eliminarComponenteForm');
+      eliminarComponenteForm.addEventListener('submit', async function (event) {
+        try {
+          const id = componenteAEliminarId;
+
+          if (!id) {
+            console.error('ID de componente a eliminar no está definido.');
+            return;
+          }
+
+          const response = await fetch('../../Acciones/RestComponentes.php' + `?id=${id}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+
+          if (response.ok) {
+            const responseData = await response.json();
+            if (responseData.success) {
+              // Si la solicitud es exitosa, recarga la lista de marcas
+              await cargarTabla();
+              // Cierra el modal de eliminación
+              $("#modalCrudEliminarComponente").modal('hide');
+
+            } else {
+              console.error('Error al eliminar componente:', responseData.message || response.statusText);
+              alert(responseData.message)
+            }
+          }
+        } catch (error) {
+          console.error('Error al eliminar componente:', error);
+        }
+      });
+
+      window.showEliminarModalComponente = function (id) {
+        componenteAEliminarId = id;
+        $("#modalCrudEliminarComponente").modal('show');
+        console.log('Mostrar modal de eliminación para componente con id: ', id);
+
+      }
     });
+
+
   </script>
 
   <!-- plugins:js -->

@@ -44,7 +44,7 @@ class AccionesBienes_Informaticos
             }
 
             // Ajusta el nombre de la columna a la correcta en tu base de datos
-            $consultaComponentes = $conexion->prepare("SELECT * FROM componentes WHERE id_bien_infor_per = :id");
+            $consultaComponentes = $conexion->prepare("SELECT * FROM componentes WHERE id_bien_infor_per = :id AND activo = 'si'" );
             $consultaComponentes->bindParam(':id', $id);
             $consultaComponentes->execute();
             $componentes = $consultaComponentes->fetchAll(PDO::FETCH_ASSOC);
@@ -75,7 +75,7 @@ class AccionesBienes_Informaticos
                         <button class="btn btn-warning btn-circle element-white editarComponente" data-id="' . $componente['id'] . '" data-toggle="modal" onclick="showEditarModalComponente('. $componente['id'].')">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <button class="btn btn-danger btn-circle eliminarComponente" data-id="' . $componente['id'] . '" data-toggle="modal" data-target="#modalCrudEliminarComponente">
+                        <button class="btn btn-danger btn-circle eliminarComponente" data-id="' . $componente['id'] . '" data-toggle="modal" onclick="showEliminarModalComponente('. $componente['id'].')" >
                             <i class="fas fa-trash"></i>
                         </button>
                     </center>

@@ -1,25 +1,21 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php';
 
-class Obtener
-{
-    public static function ObtenerComponente()
-    {
-
+class Obtener{
+    public static function ObtenerComponente(){
+        
     }
-
-    public static function ObtenerNombres()
-    {
-        $conectar = Conexion::getInstance()->getConexion();
-        $select = "SELECT id,nombre FROM componentes";
-        $resultado = $conectar->prepare($select);
+    
+    public static function ObtenerNombres(){
+        $conectar=Conexion::getInstance()->getConexion();
+        $select="SELECT id,nombre FROM componentes";
+        $resultado=$conectar->prepare($select);
         $resultado->execute();
         $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
-        echo (json_encode($data));
+        echo(json_encode($data));
     }
 
-    public static function ObtenerById($id)
-    {
+    public static function ObtenerById($id){
         try {
             $conectar = Conexion::getInstance()->getConexion();
             $select = "SELECT * FROM componentes WHERE id = :id";
@@ -34,10 +30,8 @@ class Obtener
     }
 }
 
-class Guardar
-{
-    public static function GuardarComponente()
-    {
+class Guardar{
+    public static function GuardarComponente(){
         try {
             $json = file_get_contents('php://input');
             $data = json_decode($json, true);
@@ -58,14 +52,12 @@ class Guardar
             }
         } catch (PDOException $e) {
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
-        }
+        } 
     }
 }
 
-class Actualizar
-{
-    public static function ActualizarComponente($id)
-    {
+class Actualizar{
+    public static function ActualizarComponente($id){
         try {
             $json = file_get_contents('php://input');
             $data = json_decode($json, true);
@@ -87,28 +79,27 @@ class Actualizar
             }
         } catch (PDOException $e) {
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
-        }
+        } 
     }
 }
 
-class Eliminar
-{
-
-    public static function BorrarComponente($id)
+class Eliminar{
+   
+        public static function BorrarComponente($id)
     {
         try {
             $conectar = Conexion::getInstance()->getConexion();
 
-            // Verificación si la marca está siendo utilizada en repotenciaciones
+            // Verificación si el componente está siendo utilizado en repotenciaciones
             $verif1 = $conectar->prepare("SELECT COUNT(*) FROM repotenciaciones WHERE id_componente = :id");
             $verif1->bindParam(':id', $id, PDO::PARAM_INT);
             $verif1->execute();
             $resultado1 = $verif1->fetchColumn();
 
+         
 
-
-            if ($resultado1 > 0) {
-                echo json_encode(['success' => false, 'message' => 'No se puede eliminar, la marca está siendo utilizzada en otra(s) tablas(s)']);
+            if ($resultado1 > 0 ) {
+                echo json_encode(['success' => false, 'message' => 'No se puede eliminar, el componente está siendo utilizado en otra(s) tablas(s)']);
             } else {
 
                 $borrarSQL = "UPDATE componentes SET activo = 'no' WHERE id = :id";
@@ -127,5 +118,5 @@ class Eliminar
         }
     }
 
-}
+    }
 
