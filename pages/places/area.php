@@ -235,7 +235,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.php">Bienes Informáticos</a></li>
-                
+
                 <li class="nav-item"> <a class="nav-link" href="../assets/repowering.php">Repotenciación</a></li>
                 <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.php">Bienes Mobiliarios</a></li>
               </ul>
@@ -530,7 +530,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     <label for="bloque" class="text-bold">Bloque Pertenece</label>
                     <select class="form-control" id="bloqueE" required>
                       <?php
-                      $bloques = AccionesAreas::listarBloquesEditar();
+                      $bloques = AccionesAreas::listarBloquesInsertar();
                       echo ($bloques['dato']);
                       ?>
                     </select>
@@ -547,8 +547,8 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
                     <label for="usuario" class="text-bold">Laboratorista Encargado</label>
                     <select class="form-control" id="usuarioE" required>
                       <?php
-                      $bloques = AccionesAreas::listarUsuariosEditar();
-                      echo ($bloques['dato']);
+                      $usuarios = AccionesAreas::listarUsuariosInsertar();
+                      echo ($usuarios['dato']);
                       ?>
                     </select>
                   </div>
@@ -677,23 +677,16 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         fila = $(this).closest("tr");
         nombre = fila.find('td:eq(0)').text();
         descripcion = fila.find('td:eq(1)').text();
-        id_bloque_per = fila.find('td:eq(2)').text();
-        piso = fila.find('td:eq(3)').text();
-        id_usu_encargado = fila.find('td:eq(4)').text();
+        id_bloque_per = fila.find('.id_bloque_per').val();
+        piso = fila.find('td:eq(4)').text();
+        id_usu_encargado = fila.find('.id_usu_encargado').val();
+        
         $("#nombreE").val(nombre);
         $("#descripcionE").val(descripcion);
-        $("#bloqueE option").each(function () {
-          if ($(this).text() === id_bloque_per) {
-            $(this).prop('selected', true);
-          }
-        });
+        $("#bloqueE").val(id_bloque_per);
+        $("#usuarioE").val(id_usu_encargado);
         $("#pisoE option").each(function () {
           if ($(this).text() === piso) {
-            $(this).prop('selected', true);
-          }
-        });
-        $("#usuarioE option").each(function () {
-          if ($(this).text() === id_usu_encargado) {
             $(this).prop('selected', true);
           }
         });
@@ -719,6 +712,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             id_bloque_per: id_bloque_per,
             id_usu_encargado: id_usu_encargado
           }), contentType: "application/json",
+          cache: false,
           error: function (error) {
             console.error("Error en la solicitud AJAX", error);
           },
