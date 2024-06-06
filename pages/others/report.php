@@ -726,29 +726,36 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
           alert('La fecha final no puede ser anterior a la fecha inicial.');
           document.getElementById('fechaFinalSW').value = '';
       }
-      // if (fecha_activacion === fecha_adqui) {
-      //     alert('La fecha final no puede ser la misma que la fecha inicial.');
-      //     document.getElementById('fecha_activacion').value = '';
-      // }
   });
   </script>
-    <script>
-      document.getElementById('fechaInicialI').addEventListener('change', function() {
-        var fecha_adqui = document.getElementById('fechaInicialI').value;
-        document.getElementById('fechaFinalI').min = fecha_adqui;
-    });
+  <script>
+    document.getElementById('fechaInicialI').addEventListener('change', function() {
+      var fecha_adqui = document.getElementById('fechaInicialI').value;
+      document.getElementById('fechaFinalI').min = fecha_adqui;
+  });
 
-    document.getElementById('fechaFinalI').addEventListener('change', function() {
-        var fecha_activacion = document.getElementById('fechaFinalI').value;
-        var fecha_adqui = document.getElementById('fechaInicialI').value;
-        if (fecha_activacion < fecha_adqui) {
-            alert('La fecha final no puede ser anterior a la fecha inicial.');
-            document.getElementById('fechaFinalI').value = '';
-        }
-        // if (fecha_activacion === fecha_adqui) {
-        //     alert('La fecha final no puede ser la misma que la fecha inicial.');
-        //     document.getElementById('fecha_activacion').value = '';
-        // }
-    });
-    </script>
+  document.getElementById('fechaFinalI').addEventListener('change', function() {
+      var fecha_activacion = document.getElementById('fechaFinalI').value;
+      var fecha_adqui = document.getElementById('fechaInicialI').value;
+      if (fecha_activacion < fecha_adqui) {
+          alert('La fecha final no puede ser anterior a la fecha inicial.');
+          document.getElementById('fechaFinalI').value = '';
+      }
+  });
+  </script>
+  <script>
+    document.getElementById('fechaInicialM').addEventListener('change', function() {
+      var fecha_adqui = document.getElementById('fechaInicialM').value;
+      document.getElementById('fechaFinalM').min = fecha_adqui;
+  });
+
+  document.getElementById('fechaFinalM').addEventListener('change', function() {
+      var fecha_activacion = document.getElementById('fechaFinalM').value;
+      var fecha_adqui = document.getElementById('fechaInicialM').value;
+      if (fecha_activacion < fecha_adqui) {
+          alert('La fecha final no puede ser anterior a la fecha inicial.');
+          document.getElementById('fechaFinalM').value = '';
+      }
+  });
+  </script>
 </html>
