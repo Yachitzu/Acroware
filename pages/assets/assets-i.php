@@ -1034,14 +1034,14 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             }
           });
         });
-
+        let currentId=null;
         // Listener para el botón "mas"
         $('#dataTable tbody').on('click', 'button.mas', function () {
           var btn = $(this);
           var tr = btn.closest('tr');
           var row = $('#dataTable').DataTable().row(tr);
           var id = btn.data('id');  // Aquí se obtiene el ID del atributo data-id del botón
-
+          currentId=id;
           if (row.child.isShown()) {
             row.child.hide();
             btn.find('i').removeClass('fa-minus').addClass('fa-plus');
@@ -1105,15 +1105,14 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         // Form submission handler for adding components
         $('#agregarComponenteForm').on('submit', async function (event) {
           event.preventDefault();
-          var btn = $('button.mas');
-          var id = btn.data('id');
+          
+          var id = currentId;
           const nombre = document.getElementById('nombreComponente').value;
           const descripcion = document.getElementById('descripcionComponente').value;
           const serie = document.getElementById('serieComponente').value;
           const codigo_adi_uta = document.getElementById('codigoAdicionalComponente').value;
           const repotenciado = document.getElementById('repotenciadoComponente').value;
-          const id_bien_infor_per = id;
-          /* alert(id); */
+          const id_bien_infor_per = id; 
           try {
             const response = await fetch('../../Acciones/RestComponentes.php', {
               method: 'POST',
