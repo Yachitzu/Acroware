@@ -57,7 +57,7 @@ class AccionesBienes_Informaticos
                     <th>Descripción</th>
                     <th>Serie</th>
                     <th>Código UTA</th>
-                    <th>Activo</th>
+                    <th>Repotenciado</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -69,7 +69,7 @@ class AccionesBienes_Informaticos
                 <td>' . htmlspecialchars($componente['descripcion']) . '</td>
                 <td>' . htmlspecialchars($componente['serie']) . '</td>
                 <td>' . htmlspecialchars($componente['codigo_adi_uta']) . '</td>
-                <td>' . htmlspecialchars($componente['activo']) . '</td>
+                <td>' . htmlspecialchars($componente['repotenciado']) . '</td>
                 <td>
                     <center>
                         <button class="btn btn-warning btn-circle element-white editarComponente" data-id="' . $componente['id'] . '" data-toggle="modal" onclick="showEditarModalComponente('. $componente['id'].')">

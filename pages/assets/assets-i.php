@@ -369,7 +369,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <h3 class="modal-title text-white" id="modal-add-component-label">Agregar Componente</h3>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
@@ -420,7 +420,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">>
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Componente ">
           </div>
@@ -436,7 +436,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       <div class="modal-content">
         <div class="modal-header bg-primary">
           <h3 class="modal-title text-white" id="modal-edit-component-label">Editar Componente</h3>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
@@ -487,7 +487,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
               aria-label="Close" value="Cancelar">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Componente ">
           </div>
@@ -504,7 +504,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         <div class="modal-header bg-primary">
           <h3 class="modal-title text-white" id="modal-delete-component-label">Eliminar Componente </h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
@@ -538,7 +538,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
       <div class="modal-content">
         <div class="modal-header">
           <h3 class="modal-title text-primary" id="modal-register-label">¿Listo para partir?</h3>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
@@ -770,7 +770,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         <div class="modal-header bg-primary">
           <h3 class="modal-title text-white" id="modal-register-label"> QR Bien Informático </h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
@@ -813,7 +813,7 @@ if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
         <div class="modal-header bg-primary">
           <h3 class="modal-title text-white" id="modal-register-label"> QR Bien Informático </h3>
           <p class="modal">Ingrese los datos del Usuario:</p>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
