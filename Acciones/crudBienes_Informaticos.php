@@ -1,5 +1,6 @@
 <?php
 include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php');
+require 'phpqrcode/qrlib.php';
 class AccionesBienes_Informaticos
 {
     public static function listarBienes_Informaticos()
@@ -44,7 +45,7 @@ class AccionesBienes_Informaticos
             }
 
             // Ajusta el nombre de la columna a la correcta en tu base de datos
-            $consultaComponentes = $conexion->prepare("SELECT * FROM componentes WHERE id_bien_infor_per = :id AND activo = 'si'" );
+            $consultaComponentes = $conexion->prepare("SELECT * FROM componentes WHERE id_bien_infor_per = :id AND activo = 'si'");
             $consultaComponentes->bindParam(':id', $id);
             $consultaComponentes->execute();
             $componentes = $consultaComponentes->fetchAll(PDO::FETCH_ASSOC);
@@ -72,10 +73,10 @@ class AccionesBienes_Informaticos
                 <td>' . htmlspecialchars($componente['repotenciado']) . '</td>
                 <td>
                     <center>
-                        <button class="btn btn-warning btn-circle element-white editarComponente" data-id="' . $componente['id'] . '" data-toggle="modal" onclick="showEditarModalComponente('. $componente['id'].')">
+                        <button class="btn btn-warning btn-circle element-white editarComponente" data-id="' . $componente['id'] . '" data-toggle="modal" onclick="showEditarModalComponente(' . $componente['id'] . ')">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <button class="btn btn-danger btn-circle eliminarComponente" data-id="' . $componente['id'] . '" data-toggle="modal" onclick="showEliminarModalComponente('. $componente['id'].')" >
+                        <button class="btn btn-danger btn-circle eliminarComponente" data-id="' . $componente['id'] . '" data-toggle="modal" onclick="showEliminarModalComponente(' . $componente['id'] . ')" >
                             <i class="fas fa-trash"></i>
                         </button>
                     </center>
@@ -202,6 +203,12 @@ class AccionesBienes_Informaticos
             $consulta->bindParam(':id_ubi_per', $id_ubi_per);
             $consulta->bindParam(':ip', $ip);
             $consulta->execute();
+            // Obtener el ID del bien informático insertado
+            $id_insertado = $conexion->lastInsertId();
+
+            // Generar y guardar el código QR
+            /* $qr_path =  */
+            self::generarYGuardarQR($id_insertado);
             return 0;
         } catch (PDOException $e) {
             error_log('Error en insertarBienes_Informaticos: ' . $e->getMessage());
@@ -245,5 +252,32 @@ class AccionesBienes_Informaticos
             return 2;
         }
     }
+
+    public static function generarYGuardarQR($id)
+    {
+        // Directorio donde se guardarán los códigos QR
+        $directorio_qr = '../qr/';
+        if (!file_exists($directorio_qr)) {
+            mkdir($directorio_qr);
+        }
+
+        $file_name = $directorio_qr . 'qr_' . $id . '.png';
+        $tamanio = 10;
+        $level = 'M';
+        $frameSize = 3;
+        $contenido = 'http://localhost/Acroware1/Acroware/pages/others/QR.php?id=' . $id;
+        QRcode::png($contenido, $file_name, $level, $tamanio, $frameSize);
+        try{
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = $conexion->prepare("UPDATE bienes_informaticos SET qr= :qr WHERE id= :id");
+            $consulta->bindParam(':qr', $file_name);
+            $consulta->bindParam(':id', $id);
+            $consulta->execute();
+        }catch(PDOException $e){
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+
 }
 ?>
