@@ -1,4 +1,3 @@
-
 <?php
 
 header('Content-Type: application/json');
@@ -116,9 +115,9 @@ if ($op == "POST" && $_POST["tipoArchivoSW"] == "pdf") {
    
    $pdf->Output('ReporteSW.pdf', 'I');//nombreDescarga, Visor(I->visualizar - D->descargar)
 }else if ($op == "POST" && $_POST["tipoArchivoSW"] == "excel") {
-   header('Content-Type:text/csv; charset=UTF-8');
-   header('Content-Disposition: attachment; filename="ReporteSW.csv"');
 
+   header('Content-Type: application/vnd.ms-excel; charset=UTF-8');
+   header('Content-Disposition: attachment; filename="ReporteSW.csv"');
    $salida = fopen('php://output', 'w');
    fputcsv($salida, array('Nombre', 'Proveedor', 'Activo', 'Tipo de licencia', 'Fecha de compra', 'Fecha de Activación'));
    include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php');
@@ -161,15 +160,16 @@ if ($op == "POST" && $_POST["tipoArchivoSW"] == "pdf") {
       $resultado->execute();
    }
    $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
-
-   foreach ($dato as $respuesta) {
-      fputcsv($salida, array(utf8_encode($respuesta['nombre_software']),
-      utf8_encode($respuesta['proveedor']),
-      utf8_encode($respuesta['activado']),
-      utf8_encode($respuesta['tipo_licencia']),
-      utf8_encode($respuesta['fecha_adqui']),
-      utf8_encode($respuesta['fecha_activacion'])));
-   }
+      foreach ($dato as $respuesta) {
+         fputcsv($salida, array(
+             $respuesta['nombre_software'],
+             $respuesta['proveedor'],
+             $respuesta['activado'],
+             $respuesta['tipo_licencia'],
+             $respuesta['fecha_adqui'],
+             $respuesta['fecha_activacion']
+         ));
+     }
 }else{
    echo "aquí no encuentra nada si no envía info";
 }

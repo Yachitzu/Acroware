@@ -238,7 +238,7 @@ foreach ($dato as $respuesta) {
    
    $pdf->Output('ReporteSW.pdf', 'I');//nombreDescarga, Visor(I->visualizar - D->descargar)
 }else if ($op == "POST" && $_POST["tipoArchivoBM"] == "excel") {
-    header('Content-Type:text/csv; charset=UTF-8');
+    header('Content-Type: application/vnd.ms-excel; charset=UTF-8');
     header('Content-Disposition: attachment; filename="ReporteBM.csv"');
  
     $salida = fopen('php://output', 'w');
@@ -429,23 +429,23 @@ foreach ($dato as $respuesta) {
 
     $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
     foreach ($dato as $respuesta) {
-        fputcsv($salida, array(utf8_encode($respuesta['codigo_uta']),
-        utf8_encode($respuesta['bld_o_bca']),
-        utf8_encode($respuesta['nombre']),
-        utf8_encode($respuesta['serie']),
-        utf8_encode($respuesta['nombre_marca']),
-        utf8_encode($respuesta['modelo']),
-        utf8_encode($respuesta['color']),
-        utf8_encode($respuesta['material']),
-        utf8_encode($respuesta['dimensiones']),
-        utf8_encode($respuesta['condicion']),
-        utf8_encode($respuesta['custodio_actual']),
-        utf8_encode($respuesta['fecha_ingreso']),
-        utf8_encode($respuesta['valor_contable']),
-        utf8_encode($respuesta['precio']),
-        utf8_encode($respuesta['nombre_area']),
-        utf8_encode($respuesta['nombre_ubicacion']),
-        utf8_encode($respuesta['activo'])));
+        fputcsv($salida, array($respuesta['codigo_uta'],
+        $respuesta['bld_o_bca'],
+        $respuesta['nombre'],
+        $respuesta['serie'],
+        $respuesta['nombre_marca'],
+        $respuesta['modelo'],
+        $respuesta['color'],
+        $respuesta['material'],
+        $respuesta['dimensiones'],
+        $respuesta['condicion'],
+        $respuesta['custodio_actual'],
+        $respuesta['fecha_ingreso'],
+        $respuesta['valor_contable'],
+        $respuesta['precio'],
+        $respuesta['nombre_area'],
+        $respuesta['nombre_ubicacion'],
+        $respuesta['activo']));
     }
 }else{
    echo "aquí no encuentra nada si no envía info";

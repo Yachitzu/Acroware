@@ -161,11 +161,11 @@ foreach ($dato as $respuesta) {
    
    $pdf->Output('ReporteSW.pdf', 'I');//nombreDescarga, Visor(I->visualizar - D->descargar)
 }else if ($op == "POST" && $_POST["tipoArchivoI"] == "excel") {
-    header('Content-Type:text/csv; charset=UTF-8');
+    header('Content-Type: application/vnd.ms-excel; charset=UTF-8');
     header('Content-Disposition: attachment; filename="ReporteBI.csv"');
  
     $salida = fopen('php://output', 'w');
-    fputcsv($salida, array('Codigo Uta', 'Nombre', 'Serie', 'Marca', 'Modelo', 'Area', 'Ubicacion', 'ip', 'Fecha de ingreso', 'Precio', 'Activo'));
+    fputcsv($salida, array('Codigo Uta', 'Nombre', 'Serie', 'Marca', 'Modelo', 'Area', 'Ubicacion', 'IP','Fecha de ingreso', 'Activo'));
     include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php');
  
     $conexion = Conexion::getInstance()->getConexion();
@@ -265,17 +265,16 @@ foreach ($dato as $respuesta) {
     $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($dato as $respuesta) {
-        fputcsv($salida, array(utf8_encode($respuesta['codigo_uta']),
-        utf8_encode($respuesta['nombre']),
-        utf8_encode($respuesta['serie']),
-        utf8_encode($respuesta['nombre_marca']),
-        utf8_encode($respuesta['modelo']),
-        utf8_encode($respuesta['nombre_area']),
-        utf8_encode($respuesta['nombre_ubicacion']),
-        //utf8_encode($respuesta['ip']),
-        utf8_encode($respuesta['fecha_ingreso']),
-        utf8_encode($respuesta['precio']),
-        utf8_encode($respuesta['activo'])));
+        fputcsv($salida, array($respuesta['codigo_uta'],
+        $respuesta['nombre'],
+        $respuesta['serie'],
+        $respuesta['nombre_marca'],
+        $respuesta['modelo'],
+        $respuesta['nombre_area'],
+        $respuesta['nombre_ubicacion'],
+        $respuesta['ip'],
+        $respuesta['fecha_ingreso'],
+        $respuesta['activo']));
     }
 }else{
    echo "aquí no encuentra nada si no envía info";
