@@ -1,5 +1,5 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php';
+include_once __DIR__. '/../patrones/Singleton/Conexion.php';
 
 class Obtener
 {
@@ -40,8 +40,10 @@ class Obtener
                 'recordsFiltered' => $filtroRegistros,
                 'data' => $data
             ]);
+            return 0;
         } catch (PDOException $e) {
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            return 2;
         }
     }
 
@@ -55,8 +57,10 @@ class Obtener
             $resultado->execute();
             $data = $resultado->fetch(PDO::FETCH_ASSOC);
             echo json_encode(['success' => true, 'data' => $data]);
+            return 0;
         } catch (PDOException $e) {
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            return 2;
         }
     }
 
@@ -174,10 +178,9 @@ class Obtener
 
 class Guardar
 {
-    public static function GuardarMarca()
+    public static function GuardarMarca($json)
     {
         try {
-            $json = file_get_contents('php://input');
             $data = json_decode($json, true);
             if ($data !== null) {
                 $conectar = Conexion::getInstance()->getConexion();
@@ -189,21 +192,23 @@ class Guardar
                 $resultado->bindParam(':area', $data["area"], PDO::PARAM_STR);
                 $resultado->execute();
                 echo json_encode(['success' => true]);
+                return 0;
             } else {
                 echo json_encode(['success' => false, 'message' => 'Invalid input']);
+                return 1;
             }
         } catch (PDOException $e) {
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            return 2;
         }
     }
 }
 
 class Actualizar
 {
-    public static function ActualizarMarca($id)
+    public static function ActualizarMarca($id,$json)
     {
         try {
-            $json = file_get_contents('php://input');
             $data = json_decode($json, true);
             if ($data !== null) {
                 $conectar = Conexion::getInstance()->getConexion();
@@ -216,11 +221,14 @@ class Actualizar
                 $resultado->bindParam(':id', $id, PDO::PARAM_INT);
                 $resultado->execute();
                 echo json_encode(['success' => true]);
+                return 0;
             } else {
                 echo json_encode(['success' => false, 'message' => 'Invalid input']);
+                return 1;
             }
         } catch (PDOException $e) {
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            return 2;
         }
     }
 }
@@ -246,6 +254,7 @@ class Eliminar
 
             if ($resultado1 > 0 || $resultado2 > 0) {
                 echo json_encode(['success' => false, 'message' => 'No se puede eliminar, la marca está siendo utilizzada en otra(s) tablas(s)']);
+                return 3;
             } else {
 
                 $borrarSQL = "UPDATE marcas SET activo = 'no' WHERE id = :id";
@@ -255,12 +264,15 @@ class Eliminar
                 $rowCount = $resultado->rowCount();
                 if ($rowCount > 0) {
                     echo json_encode(['success' => true, 'message' => "Se eliminaron: $rowCount registros"]);
+                    return 0;
                 } else {
                     echo json_encode(['success' => false, 'message' => 'No records deleted']);
+                    return 1;
                 }
             }
         } catch (PDOException $e) {
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            return 2;
         }
     }
 }

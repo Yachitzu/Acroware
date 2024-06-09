@@ -13,7 +13,7 @@ switch ($opc) {
         }
         break;
     case 'POST':
-        Guardar::GuardarMarca();
+        Guardar::GuardarMarca(file_get_contents('php://input'));
         break;
     case 'DELETE':
         $data = json_decode(file_get_contents('php://input'), true);
@@ -26,7 +26,7 @@ switch ($opc) {
     case 'PUT':
         $data = json_decode(file_get_contents('php://input'), true);
         if (isset($data['id']) && !empty($data['id'])) {
-            Actualizar::ActualizarMarca($data['id']);
+            Actualizar::ActualizarMarca($data['id'],file_get_contents('php://input'));
         } else {
             echo json_encode(['success' => false, 'message' => 'ID no proporcionado']);
         }
