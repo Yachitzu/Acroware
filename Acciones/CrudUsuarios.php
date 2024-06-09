@@ -1,6 +1,6 @@
 <?php
-include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php');
-include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Sesion.php');
+include_once (__DIR__. '/../patrones/Singleton/Conexion.php');
+include_once (__DIR__. '/../patrones/Singleton/Sesion.php');
 Class Obtener{
     public static function ObtenerUsuarios() {
         try {
@@ -62,8 +62,10 @@ Class Obtener{
                 'recordsFiltered' => $filtroRegistros,
                 'data' => $data
             ]);
+            return 0;
         } catch (PDOException $e) {
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            return 2;
         }
     }
     
@@ -76,18 +78,17 @@ Class Obtener{
             $resultado->execute();
             $data = $resultado->fetch(PDO::FETCH_ASSOC);
             echo json_encode(['success' => true, 'data' => $data]);
+            return 0;
         } catch (PDOException $e) {
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            return 2;
         }
     }
 }
 Class Guardar{
-    public static function GuardarUsuario()
+    public static function GuardarUsuario($data)
 {
     try {
-        $json = file_get_contents('php://input');
-        $data = json_decode($json, true);
-
         if ($data !== null) {
             $conectar = Conexion::getInstance()->getConexion();
 
@@ -100,6 +101,7 @@ Class Guardar{
 
             if ($buscarResultado->rowCount() > 0) {
                 echo json_encode(['success' => false, 'message' => 'El usuario ya existe']);
+                return 3;
             } else {
                 // Si no existe, se procede a insertar el usuario
                 $insertarSql = "INSERT INTO usuarios(nombre, apellido, cedula, email, rol, psswd) VALUES (:nombre, :apellido, :cedula, :email, :rol, :psswd)";
@@ -112,20 +114,21 @@ Class Guardar{
                 $resultado->bindParam(':psswd', $data["psswd"], PDO::PARAM_STR);
                 $resultado->execute();
                 echo json_encode(['success' => true]);
+                return 0;
             }
         } else {
             echo json_encode(['success' => false, 'message' => 'Invalid input']);
+            return 1;
         }
     } catch (PDOException $e) {
         echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        return 2;
     }
 }
 }
 class Actualizar{
-    public static function ActualizarUsuario($id){
+    public static function ActualizarUsuario($id,$data){
         try {
-            $json = file_get_contents('php://input');
-            $data = json_decode($json, true);
             if ($data !== null) {
                 $email=$data["email"];
                 $conectar = Conexion::getInstance()->getConexion();
@@ -137,6 +140,7 @@ class Actualizar{
     
                 if ($buscarResultado->rowCount() > 0) {
                     echo json_encode(['success' => false, 'message' => 'El usuario ya existe']);
+                    return 3;
                 } else {$updatesql = "UPDATE usuarios SET email = :email, rol = :rol WHERE id = :id";
                 $resultado = $conectar->prepare($updatesql);
                 $resultado->bindParam(':email', $data["email"], PDO::PARAM_STR);
@@ -149,12 +153,15 @@ class Actualizar{
                 }
                 
                 echo json_encode(['success' => true]);
+                return 0;
             }
             } else {
                 echo json_encode(['success' => false, 'message' => 'Invalid input']);
+                return 1;
             }
         } catch (PDOException $e) {
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            return 2;
         }
     }
     public static function ActualizarContrasena($data){
@@ -168,11 +175,14 @@ class Actualizar{
                 $resultado->execute();
                 //$conectar->commit();
                 echo json_encode(['success' => true]);
+                return 0;
             } else {
                 echo json_encode(['success' => false, 'message' => 'Invalid input']);
+                return 1;
             }
         } catch (PDOException $e) {
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            return 2;
         }
     }
     public static function ActualizarPerfil($data){
@@ -188,6 +198,7 @@ class Actualizar{
                 $buscarResultado->execute();
                 if ($buscarResultado->rowCount() > 0) {
                     echo json_encode(['success' => false, 'message' => 'El correo electrónico ya está en uso']);
+                    return 3;
                 } else {
                     // Consulta para buscar si ya existe un usuario con la misma cédula
                     $buscarCedulaSql = "SELECT * FROM usuarios WHERE cedula = :cedula AND id!= :id";
@@ -197,6 +208,7 @@ class Actualizar{
                     $buscarCedulaResultado->execute();
                     if ($buscarCedulaResultado->rowCount() > 0) {
                         echo json_encode(['success' => false, 'message' => 'La cédula ya está en uso']);
+                        return 4;
                     } else {
                         $nombre = htmlspecialchars($data["nombre"]);
                         $apellido = htmlspecialchars($data["apellido"]);
@@ -212,13 +224,16 @@ class Actualizar{
                         $_SESSION['correo'] = $email;
                         $_SESSION['cedula'] = $cedula;
                         echo json_encode('Actualizado');
+                        return 0;
                     }
                 }
             } else {
                 echo json_encode(['success' => false, 'message' => 'Invalid input']);
+                return 1;
             }
         } catch (PDOException $e) {
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            return 2;
         }
     }
 }  
@@ -237,6 +252,7 @@ class Eliminar{
 
             if ($resultado1 > 0 ) {
                 echo json_encode(['success' => false, 'message' => 'No se puede eliminar, el usuario está siendo utilizado en otra(s) tablas(s)']);
+                return 3;
             } else {
 
                 $borrarSQL = "UPDATE usuarios SET activo = 'no' WHERE id = :id";
@@ -246,12 +262,15 @@ class Eliminar{
                 $rowCount = $resultado->rowCount();
                 if ($rowCount > 0) {
                     echo json_encode(['success' => true, 'message' => "Se eliminaron: $rowCount registros"]);
+                    return 0;
                 } else {
                     echo json_encode(['success' => false, 'message' => 'No records deleted']);
+                    return 1;
                 }
             }
         } catch (PDOException $e) {
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            return 2;
         }
     }
 }

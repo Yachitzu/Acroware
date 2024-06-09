@@ -13,7 +13,7 @@ switch ($opc) {
         }
         break;
     case 'POST':
-        Guardar::GuardarUsuario();
+        Guardar::GuardarUsuario(json_decode(file_get_contents('php://input'), true));
         break;
     case 'DELETE':
         $data = json_decode(file_get_contents('php://input'), true);
@@ -33,7 +33,7 @@ switch ($opc) {
                     Actualizar::ActualizarContrasena($data);
                 }
             }else{
-                Actualizar::ActualizarUsuario($data['id']);
+                Actualizar::ActualizarUsuario($data['id'],$data);
             }
         } else {
             echo json_encode(['success' => false, 'message' => 'ID no proporcionado']);
