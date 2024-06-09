@@ -15,8 +15,7 @@ class BienesInformaticosTest extends TestCase
     public function testListarBienesInformaticos()
     {
         $resultado = $this->crudBienesInformaticos->listarBienes_Informaticos();
-        $this->assertIsString($resultado);
-        $this->assertJson($resultado);
+        $this->assertEquals(0,$resultado['codigo']);
     }
 
     public function testInsertarBienInformatico()

@@ -15,7 +15,7 @@ class BienesMobiliariosTest extends TestCase
     public function testListarBienesMobiliarios()
     {
         $resultado = $this->crudBienesMobiliarios->listarBienes_mobiliarios();
-        $this->assertIsArray($resultado);
+        $this->assertEquals(0,$resultado['codigo']);
     }
 
     public function testInsertarBienMobiliario()

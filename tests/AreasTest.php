@@ -14,7 +14,7 @@ class AreasTest extends TestCase{
     public function testListarAreas()
     {
         $resultado = $this->crudAreas->listarAreas();
-        $this->assertIsArray($resultado);
+        $this->assertEquals(0,$resultado['codigo']);
     }
 
     public function testInsertarArea0()
