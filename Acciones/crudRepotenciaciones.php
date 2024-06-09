@@ -1,5 +1,5 @@
 <?php
-include_once $_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php';
+include_once __DIR__. '/../patrones/Singleton/Conexion.php';
 
 class Obtener{
     public static function ObtenerRepotenciacion(){
@@ -38,8 +38,10 @@ class Obtener{
                 'recordsFiltered' => $filtroRegistros,
                 'data' => $data
             ]);
+            return 0;
         } catch (PDOException $e) {
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            return 2;
         }
     }
 
@@ -52,8 +54,10 @@ class Obtener{
             $resultado->execute();
             $data = $resultado->fetch(PDO::FETCH_ASSOC);
             echo json_encode(['success' => true, 'data' => $data]);
+            return 0;
         } catch (PDOException $e) {
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            return 2;
         }
     }
 }
@@ -72,11 +76,14 @@ class Guardar{
                 $resultado->bindParam(':detalle', $data["detalle"], PDO::PARAM_STR);
                 $resultado->execute();
                 echo json_encode(['success' => true]);
+                return 0;
             } else {
                 echo json_encode(['success' => false, 'message' => 'Invalid input']);
+                return 1;
             }
         } catch (PDOException $e) {
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            return 2;
         }
     }
 }
@@ -96,11 +103,14 @@ class Actualizar{
                 $resultado->bindParam(':id', $data['id'], PDO::PARAM_INT);
                 $resultado->execute();
                 echo json_encode(['success' => true]);
+                return 0;
             } else {
                 echo json_encode(['success' => false, 'message' => 'Invalid input']);
+                return 1;
             }
         } catch (PDOException $e) {
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            return 2;
         }
     }
 }
@@ -122,11 +132,14 @@ class Eliminar{
             $rowCount = $resultado->rowCount();
             if ($rowCount > 0) {
                 echo json_encode(['success' => true, 'message' => "Se eliminaron: $rowCount registros"]);
+                return 0;
             } else {
                 echo json_encode(['success' => false, 'message' => 'No records deleted']);
+                return 1;
             }
         } catch (PDOException $e) {
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            return 2;
         }
     }
 }
