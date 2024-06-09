@@ -1,1 +1,2 @@
 app_error.log
+vendor/bin/.phpunit.result.cache
