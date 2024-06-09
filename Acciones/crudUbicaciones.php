@@ -1,5 +1,5 @@
 <?php
-include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php');
+include_once (__DIR__. '/../patrones/Singleton/Conexion.php');
 class AccionesUbicaciones
 {
     public static function listarUbicaciones()
