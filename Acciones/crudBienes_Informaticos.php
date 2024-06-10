@@ -108,7 +108,7 @@ class AccionesBienes_Informaticos
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = "SELECT * from marcas where activo = 'si'";
+            $consulta = "SELECT * from marcas where activo = 'si' AND area='tecnologico'";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
             $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -278,6 +278,38 @@ class AccionesBienes_Informaticos
         }
     }
 
-
+    public static function listarQR($id){
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = $conexion->prepare("SELECT 
+                                                bi.*
+                                               
+                                            FROM 
+                                                bienes_informaticos bi
+                                            
+                                            WHERE bi.id = :id");
+            $consulta->bindParam(':id', $id, PDO::PARAM_INT);
+            $consulta->execute();
+            $dato = $consulta->fetch(PDO::FETCH_ASSOC);
+    
+            if ($dato) {
+                return json_encode([
+                    'codigo' => 0,
+                    'datos' => $dato
+                ]);
+            } else {
+                return json_encode([
+                    'codigo' => 1,
+                    'mensaje' => 'No se encontró ningún bien informático con el ID proporcionado.'
+                ]);
+            }
+        } catch (PDOException $e) {
+            error_log('Error al obtener bien informático: ' . $e->getMessage());
+            return json_encode([
+                'codigo' => 1,
+                'mensaje' => 'Error al obtener bien informático: ' . $e->getMessage()
+            ]);
+        }
+    }
 }
 ?>
