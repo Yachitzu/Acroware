@@ -31,7 +31,7 @@ class BloquesTest extends TestCase
 
     public function testActualizarBloque()
     {
-        $id = 1; // Asume que existe un bloque con este ID
+        $id = 1;
         $nombre = 'Bloque B';
         $descripcion = 'Bloque secundario';
         $id_facultad_per = 2;
@@ -43,7 +43,7 @@ class BloquesTest extends TestCase
 
     public function testEliminarBloque()
     {
-        $id = 1; // Asume que existe un bloque con este ID
+        $id = 1;
 
         $resultado = $this->crudBloques->eliminarBloque($id);
         $this->assertEquals(1, $resultado);

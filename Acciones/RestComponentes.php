@@ -15,7 +15,7 @@ switch ($opc) {
         }
         break;
     case 'POST':
-        Guardar::GuardarComponente();
+        Guardar::GuardarComponente(json_decode(file_get_contents('php://input'), true));
         break;
     case 'DELETE':
         $data = json_decode(file_get_contents('php://input'), true);
@@ -28,7 +28,7 @@ switch ($opc) {
     case 'PUT':
         $data = json_decode(file_get_contents('php://input'), true);
         if (isset($data['id']) && !empty($data['id'])) {
-            Actualizar::ActualizarComponente($data['id']);
+            Actualizar::ActualizarComponente($data['id'],$data);
         } else {
             echo json_encode(['success' => false, 'message' => 'ID no proporcionado']);
         }

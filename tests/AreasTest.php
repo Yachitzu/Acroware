@@ -43,7 +43,7 @@ class AreasTest extends TestCase{
 
     public function testActualizarArea()
     {
-        $id = 3; // Asume que existe un área con este ID
+        $id = 3;
         $nombre = 'Área Actualizada';
         $descripcion = 'Descripción actualizada';
         $piso = '2';
@@ -56,7 +56,7 @@ class AreasTest extends TestCase{
 
     public function testEliminarArea()
     {
-        $id = 5; // Asume que existe un área con este ID
+        $id = 5;
 
         $resultado = $this->crudAreas->eliminarArea($id);
         $this->assertEquals(0, $resultado);

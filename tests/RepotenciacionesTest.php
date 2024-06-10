@@ -14,7 +14,7 @@ class CrudRepotenciacionesTest extends TestCase
 
     public function testObtenerRepotenciacionPorId()
     {
-        $id = 1; // Asume que existe una repotenciación con este ID
+        $id = 1;
         $resultado = Obtener::ObtenerById($id);
         $this->assertEquals(0, $resultado);
     }

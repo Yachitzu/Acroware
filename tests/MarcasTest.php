@@ -14,7 +14,7 @@ class MarcasTest extends TestCase
 
     public function testObtenerMarcaPorId()
     {
-        $id = 1; // Asume que existe una marca con este ID
+        $id = 1;
         $resultado = Obtener::ObtenerById($id);
         $this->assertEquals(0, $resultado);
     }
@@ -34,7 +34,7 @@ class MarcasTest extends TestCase
 
     public function testActualizarMarca()
     {
-        $id = 4; // Asume que existe una marca con este ID
+        $id = 4;
         $data = [
             'nombre' => 'MSI',
             'descripcion' => 'Descripción actualizada',
@@ -48,7 +48,7 @@ class MarcasTest extends TestCase
 
     public function testEliminarMarca()
     {
-        $id = 9999; // Asume que existe una marca con este ID
+        $id = 9999;
 
         $resultado = Eliminar::BorrarMarca($id);
         $this->assertEquals(1, $resultado);

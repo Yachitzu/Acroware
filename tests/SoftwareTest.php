@@ -40,7 +40,7 @@ class SoftwareTest extends TestCase
 
     public function testActualizarSoftware()
     {
-        $id = 2; // Asume que existe un software con este ID
+        $id = 2;
         $nombre_software = 'Software Y';
         $proveedor = 'Empresa Y';
         $activado = 'no';
@@ -62,7 +62,7 @@ class SoftwareTest extends TestCase
 
     public function testEliminarSoftware()
     {
-        $id = 9999; // Asume que existe un software con este ID
+        $id = 9999;
 
         $resultado = $this->crudSoftware->eliminarSoftware($id);
         $this->assertEquals(0, $resultado);

@@ -44,7 +44,7 @@ class BienesInformaticosTest extends TestCase
 
     public function testActualizarBienInformatico()
     {
-        $id = 3; // Asume que existe un bien informático con este ID
+        $id = 3;
         $codigo_uta = 'BI002';
         $nombre = 'Laptop';
         $serie = 'DEF456';
@@ -70,7 +70,7 @@ class BienesInformaticosTest extends TestCase
 
     public function testEliminarBienInformatico()
     {
-        $id = 9999; // Asume que existe un bien informático con este ID
+        $id = 9999;
 
         $resultado = $this->crudBienesInformaticos->eliminarBienes_Informaticos($id);
         $this->assertEquals(0, $resultado);

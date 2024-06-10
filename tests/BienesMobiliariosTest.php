@@ -54,7 +54,7 @@ class BienesMobiliariosTest extends TestCase
 
     public function testActualizarBienMobiliario()
     {
-        $id = 2; // Asume que existe un bien mobiliario con este ID
+        $id = 2;
         $codigo_uta = 'BM002';
         $nombre = 'Mesa';
         $serie = 'DEF456';
@@ -90,7 +90,7 @@ class BienesMobiliariosTest extends TestCase
 
     public function testEliminarBienMobiliario()
     {
-        $id = 9999; // Asume que existe un bien mobiliario con este ID
+        $id = 9999;
 
         $resultado = $this->crudBienesMobiliarios->eliminarBienes_mobiliarios($id);
         $this->assertEquals(0, $resultado);

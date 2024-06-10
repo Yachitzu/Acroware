@@ -30,7 +30,7 @@ class FacultadesTest extends TestCase
 
     public function testActualizarFacultad()
     {
-        $id = 2; // Asume que existe una facultad con este ID
+        $id = 2;
         $nombre = 'Facultad de Ciencias';
         $descripcion = 'Facultad de Ciencias Naturales';
         $campus = 'Campus Norte';
@@ -41,7 +41,7 @@ class FacultadesTest extends TestCase
 
     public function testEliminarFacultad()
     {
-        $id = 2; // Asume que existe una facultad con este ID
+        $id = 2;
 
         $resultado = $this->crudFacultades->EliminarFacultad($id);
         $this->assertEquals(0, $resultado);
