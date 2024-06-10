@@ -1,5 +1,5 @@
 <?php
-include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php');
 class AccionesBienes_Informaticos
 {
     public static function listarBienes_Informaticos()
@@ -44,7 +44,7 @@ class AccionesBienes_Informaticos
             }
 
             // Ajusta el nombre de la columna a la correcta en tu base de datos
-            $consultaComponentes = $conexion->prepare("SELECT * FROM componentes WHERE id_bien_infor_per = :id AND activo = 'si'" );
+            $consultaComponentes = $conexion->prepare("SELECT * FROM componentes WHERE id_bien_infor_per = :id AND activo = 'si'");
             $consultaComponentes->bindParam(':id', $id);
             $consultaComponentes->execute();
             $componentes = $consultaComponentes->fetchAll(PDO::FETCH_ASSOC);
@@ -72,10 +72,10 @@ class AccionesBienes_Informaticos
                 <td>' . htmlspecialchars($componente['repotenciado']) . '</td>
                 <td>
                     <center>
-                        <button class="btn btn-warning btn-circle element-white editarComponente" data-id="' . $componente['id'] . '" data-toggle="modal" onclick="showEditarModalComponente('. $componente['id'].')">
+                        <button class="btn btn-warning btn-circle element-white editarComponente" data-id="' . $componente['id'] . '" data-toggle="modal" onclick="showEditarModalComponente(' . $componente['id'] . ')">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <button class="btn btn-danger btn-circle eliminarComponente" data-id="' . $componente['id'] . '" data-toggle="modal" onclick="showEliminarModalComponente('. $componente['id'].')" >
+                        <button class="btn btn-danger btn-circle eliminarComponente" data-id="' . $componente['id'] . '" data-toggle="modal" onclick="showEliminarModalComponente(' . $componente['id'] . ')" >
                             <i class="fas fa-trash"></i>
                         </button>
                     </center>
@@ -246,4 +246,3 @@ class AccionesBienes_Informaticos
         }
     }
 }
-?>
