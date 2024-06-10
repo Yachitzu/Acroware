@@ -240,38 +240,26 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                     </div>
                 </div>
                 <div class="container-fluid py-4">
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <div class="row">
-                                <h2 class="col-md-12 text-center">Información del Código QR</h2>
-                            </div>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <div class="row">
+                            <h2 class="col-md-12 text-center">Editar por medio del Código QR</h2>
                         </div>
-                        <div class="card-body bg-darkwhite">
-                            <div class="row">
-                                <!-- Lado izquierdo: Imagen del QR -->
-                                <div class="col-md-6 d-flex flex-column justify-content-center align-items-center">
-                                    <img src="../../resources/images/logos/OIP.jpg" alt="Código QR" class="img-fluid mb-3">
-                                    <button type="submit" 
-                                        class="btn btn-primary btn-user font-weight-semi-bold text-white editar" id="editar">
-                                        Editar Información
-                                    </button>
-                                </div>
-                                <!-- Lado derecho: Información del QR -->
-                                <div class="col-md-6">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item"><strong>Nombre:</strong> Nombre del QR</li>
-                                        <li class="list-group-item"><strong>Fecha de Creación:</strong> 01/06/2024</li>
-                                        <li class="list-group-item"><strong>Generado por:</strong> Usuario o Aplicación</li>
-                                        <li class="list-group-item"><strong>Serie:</strong> Cualquier otra información relevante.</li>
-                                        <li class="list-group-item"><strong>Marca:</strong> Cualquier otra información relevante.</li>
-                                        <li class="list-group-item"><strong>Modelo:</strong> Cualquier otra información relevante.</li>
-                                        <li class="list-group-item"><strong>Ubicación:</strong> Cualquier otra información relevante.</li>
-                                    </ul>
-                                </div>
+                    </div>
+                    <div class="card-body bg-darkwhite">
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-md-6 text-center"> 
+                                <img src="../../resources/images/logos/OIP.jpg" alt="Código QR" class="img-fluid mb-3">
+                                <br>
+                                <button type="submit" class="btn btn-primary btn-user font-weight-semi-bold text-white editar" id="editar">
+                                    Editar Información
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+
             </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.php -->
