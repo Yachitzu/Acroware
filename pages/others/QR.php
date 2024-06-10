@@ -299,7 +299,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             <i class="fas fa-times" class="element-white"></i>
           </button>
         </div>
-        <form class="forms-sample" id="editarMarcaForm">
+        <form class="forms-sample" id="formEditarBienes">
           <div class="modal-body">
             <div class="grid-margin-modal">
               <div class="card-body">
@@ -307,52 +307,64 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   bien seleccionado:</p>
                 <div class="form-row">
                   <div class="form-group col-md-12">
-                    <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
-                    <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Código UTA"
+                    <label for="codigoUTAE" class="text-bold">Codigo UTA</label>
+                    <input type="text" class="form-control" name="codigoUTAE" id="codigoUTAE" placeholder="Código UTA"
+                      required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6" hidden>
+                    <label for="idE" class="text-bold" hidden>ID</label>
+                    <input type="text" class="form-control" name="idE" id="idE" value="<?php echo isset($_GET['id']) ? $_GET['id'] : ''; ?>" hidden>
+
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="nombreE" class="text-bold">Nombre</label>
+                    <input type="text" class="form-control" name="nombreE" id="nombreE" placeholder="Nombre" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="serieE" class="text-bold">Serie</label>
+                    <input type="text" class="form-control" name="serieE" id="serieE" placeholder="Serie"
                       required>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="nombreC" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre" required>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="codigoUTAC" class="text-bold">Serie</label>
-                    <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Serie"
-                      required>
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="facultad" class="text-bold">Marca</label>
-                    <select class="form-control" id="facultad" required>
-                      <option value="">Seleccione una Marca</option>
-                      <option value="HP">HP</option>
-                      <option value="Dell">DELL</option>
+                    <label for="marcaE" class="text-bold">Marca</label>
+                    <select class="form-control" id="marcaE" required>
+                    <option value="">Seleccione una Marca</option>
+                    <?php
+                      include_once ("../../Acciones/crudBienes_Informaticos.php");
+                      $marcas = AccionesBienes_Informaticos::listarMarcasInsertar();
+                      echo ($marcas['dato']);
+                      ?>
                     </select>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="codigoUTAC" class="text-bold">Modelo</label>
-                    <input type="text" class="form-control" name="codigoUTAC" id="codigoUTAC" placeholder="Modelo"
+                    <label for="modeloE" class="text-bold">Modelo</label>
+                    <input type="text" class="form-control" name="modeloE" id="modeloE" placeholder="Modelo"
                       required>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="facultad" class="text-bold">Facultad</label>
-                    <select class="form-control" id="facultad" required>
-                      <option value="">Seleccione una Facultad</option>
-                      <option value="FISEI">Facultad de Ingenieria en Sistemas, Electronica e Industrial</option>
-                      <option value="FDA">Facultad de Diseño y Arquitectura</option>
+                    <label for="areaE" class="text-bold">Áreas</label>
+                    <select class="form-control" id="areaE" required>
+                    <option value="">Seleccione un Área</option>
+                    <?php
+                      $areasE = AccionesBienes_Informaticos::listarAreasInsertar();
+                      echo ($areasE['dato']);
+                      ?>
                     </select>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="ubicación" class="text-bold">Ubicación</label>
-                    <select class="form-control" id="ubicación" required>
-                      <option value="">Seleccione una Ubicación</option>
-                      <option value="Aula01">Aula 01</option>
-                      <option value="Aula02">Aula 02</option>
+                    <label for="ubicacionE" class="text-bold">Ubicación</label>
+                    <select class="form-control" id="ubicacionE" required>
+                    <option value="">Seleccione una Ubicación</option>
+                    <?php
+                      $ubicacionesE = AccionesBienes_Informaticos::listarUbicacionesInsertar();
+                      echo ($ubicacionesE['dato']);
+                      ?>
                     </select>
                   </div>
                 </div>
@@ -394,15 +406,94 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       </div>
     </div>
   </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 
+    <script>
+  $(document).ready(function (){
+    $(document).on('click', '.editar', function () {
+    let id = $("#idE").val();
 
+    if (id) {
+        fetch(`../../Acciones/RestBienes_Informaticos.php?op=GET&id=${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.codigo === 0) {
+                    let respuesta = data.datos; // Solo necesitas un registro, ya que esperas un solo bien informático
+                    let codigo_uta = respuesta.codigo_uta;
+                    let nombre = respuesta.nombre;
+                    let modelo = respuesta.modelo;
+                    let nombre_marca = respuesta.id_marca;
+                    let serie = respuesta.serie;
+                    let nombre_area = respuesta.id_area_per;
+                    let nombre_ubicacion = respuesta.id_ubi_per;
+
+                    $("#codigoUTAE").val(codigo_uta);
+                    $("#nombreE").val(nombre);
+                    $("#modeloE").val(modelo);
+                    $("#marcaE").val(nombre_marca);
+                    $("#areaE").val(nombre_area); // Corregido el error en esta línea
+                    $("#ubicacionE").val(nombre_ubicacion); // Corregido el error en esta línea
+                    $("#serieE").val(serie);
+                    $("#modalCrud").modal('show');
+                } else {
+                    console.error('Error al obtener el bien informático:', data.mensaje);
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+            });
+    } else {
+        console.error('No se proporcionó ningún ID.');
+    }
+});
+
+    $("#formEditarBienes").submit(function (e) {
+          e.preventDefault();
+          let codigo_uta = $("#codigoUTAE").val();
+          let nombre = $("#nombreE").val();
+          let modelo = $("#modeloE").val();
+          let id_marca = $("#marcaE").val();
+          let serie = $("#serieE").val();
+          let id_area_per = $("#areaE").val();
+          let id_ubi_per = $("#ubicacionE").val();
+          let id = $("#idE").val();;
+          $.ajax({
+            url: "../../Acciones/RestBienes_Informaticos.php",
+            type: "PUT",
+            data: JSON.stringify({
+              id: id,
+              codigo_uta: codigo_uta,
+              nombre: nombre,
+              modelo: modelo,
+              id_marca: id_marca,
+              serie: serie,
+              id_area_per: id_area_per,
+              id_ubi_per: id_ubi_per
+            }),
+            contentType: "application/json",
+            error: function (error) {
+              console.error("Error en la solicitud AJAX", error);
+            },
+            complete: function () {
+              $("#modalCrudEditarBienes").modal('hide');
+              }
+          });
+        });
+
+  })
+</script>
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
   <script src="../../resources/vendors/chart.js/Chart.min.js"></script>
-  <script src="../../resources/vendors/datatables.net/jquery.dataTables.js"></script>
-  <script src="../../resources/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+  <!-- <script src="../../resources/js/dataTables.select.min.js"></script>-->
 
   <!-- End plugin js for this page -->
   <!-- inject:js -->
@@ -413,14 +504,15 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
   <script src="../../resources/js/template.js"></script>
   <script src="../../resources/js/settings.js"></script>
   <script src="../../resources/js/todolist.js"></script>
+  <!-- <script src="../../resources/js/todolist.js"></script>-->
   <!-- endinject -->
   <!-- Custom js for this page-->
+  <!-- <script src="../../resources/js/dashboard.js"></script>-->
   <script src="../../resources/js/Chart.roundedBarCharts.js"></script>
   <!-- End custom js for this page-->
 
   <!-- Page level plugins -->
   <script src="../../resources/vendors/datatables/jquery.dataTables.min.js"></script>
-  <script src="../../resources/vendors/datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
   <script src="../../resources/js/datatables-demo.js"></script>
