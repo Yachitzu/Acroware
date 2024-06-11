@@ -265,7 +265,7 @@ class AccionesBienes_Informaticos
         $tamanio = 10;
         $level = 'M';
         $frameSize = 3;
-        $contenido = 'http://localhost/Acroware1/Acroware/pages/others/QR.php?id=' . $id;
+        $contenido = $_SERVER['DOCUMENT_ROOT'] . '/Acroware/pages/others/QR.php?id=' . $id;
         QRcode::png($contenido, $file_name, $level, $tamanio, $frameSize);
         try{
             $conexion = Conexion::getInstance()->getConexion();
