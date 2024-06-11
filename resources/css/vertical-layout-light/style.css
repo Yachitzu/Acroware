@@ -30975,6 +30975,12 @@
     padding: 5px;
 }
 
-center button i{
+.center button i{
   margin: 0 auto !important;
+}
+
+.image_qr{
+  width: 100px!important;
+  height: 100px!important;
+  border-radius: 2px!important;
 }

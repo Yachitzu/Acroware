@@ -1029,6 +1029,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                                             <div class="col-md-3"><strong>Serie:</strong> ${detalle.serie}</div>
                                             <div class="col-md-3"><strong>Ubicación:</strong> ${detalle.nombre_ubicacion}</div>
                                             <div class="col-md-3"><strong>Fecha Ingreso:</strong> ${detalle.fecha_ingreso}</div>
+                                            <div class="col-md-3"><img src="../${detalle.qr}" alt="QR" class="image_qr" /></div>
                                         </div>
                                         <button class="btn-crud btn-primary btn-icon-split btn-add-component " id="agregarComponente" data-toggle="modal" data-target="#modalCrudAgregarComponente"> 
                                             <span class="icon text-white-50">
