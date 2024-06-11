@@ -1,5 +1,6 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php');
+include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php');
+require 'phpqrcode/qrlib.php';
 class AccionesBienes_Informaticos
 {
     public static function listarBienes_Informaticos()
@@ -107,7 +108,7 @@ class AccionesBienes_Informaticos
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = "SELECT * from marcas where activo = 'si'";
+            $consulta = "SELECT * from marcas where activo = 'si' AND area='tecnologico'";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
             $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -202,6 +203,12 @@ class AccionesBienes_Informaticos
             $consulta->bindParam(':id_ubi_per', $id_ubi_per);
             $consulta->bindParam(':ip', $ip);
             $consulta->execute();
+            // Obtener el ID del bien informático insertado
+            $id_insertado = $conexion->lastInsertId();
+
+            // Generar y guardar el código QR
+            /* $qr_path =  */
+            self::generarYGuardarQR($id_insertado);
             return 0;
         } catch (PDOException $e) {
             error_log('Error en insertarBienes_Informaticos: ' . $e->getMessage());
@@ -245,4 +252,64 @@ class AccionesBienes_Informaticos
             return 2;
         }
     }
+
+    public static function generarYGuardarQR($id)
+    {
+        // Directorio donde se guardarán los códigos QR
+        $directorio_qr = '../qr/';
+        if (!file_exists($directorio_qr)) {
+            mkdir($directorio_qr);
+        }
+
+        $file_name = $directorio_qr . 'qr_' . $id . '.png';
+        $tamanio = 10;
+        $level = 'M';
+        $frameSize = 3;
+        $contenido =  'http://localhost/Acroware/pages/others/QR.php?id=' . $id;
+        QRcode::png($contenido, $file_name, $level, $tamanio, $frameSize);
+        try{
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = $conexion->prepare("UPDATE bienes_informaticos SET qr= :qr WHERE id= :id");
+            $consulta->bindParam(':qr', $file_name);
+            $consulta->bindParam(':id', $id);
+            $consulta->execute();
+        }catch(PDOException $e){
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public static function listarQR($id){
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = $conexion->prepare("SELECT 
+                                                bi.*
+                                               
+                                            FROM 
+                                                bienes_informaticos bi
+                                            
+                                            WHERE bi.id = :id");
+            $consulta->bindParam(':id', $id, PDO::PARAM_INT);
+            $consulta->execute();
+            $dato = $consulta->fetch(PDO::FETCH_ASSOC);
+    
+            if ($dato) {
+                return json_encode([
+                    'codigo' => 0,
+                    'datos' => $dato
+                ]);
+            } else {
+                return json_encode([
+                    'codigo' => 1,
+                    'mensaje' => 'No se encontró ningún bien informático con el ID proporcionado.'
+                ]);
+            }
+        } catch (PDOException $e) {
+            error_log('Error al obtener bien informático: ' . $e->getMessage());
+            return json_encode([
+                'codigo' => 1,
+                'mensaje' => 'Error al obtener bien informático: ' . $e->getMessage()
+            ]);
+        }
+    }
 }
+?>

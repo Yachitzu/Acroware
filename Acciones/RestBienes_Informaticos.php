@@ -4,7 +4,14 @@ $op = $_SERVER["REQUEST_METHOD"];
 switch ($op) {
     case 'GET':
         header('Content-Type: application/json');
-        $resultado = AccionesBienes_Informaticos::listarBienes_Informaticos();
+        if (isset($_GET['id'])) {
+            // Si se proporciona un ID en la URL, llamar a una función para manejar esa acción
+            $id = $_GET['id'];
+            $resultado = AccionesBienes_Informaticos::listarQR($id);
+        } else {
+            // Si no se proporciona un ID, realizar la acción predeterminada (listar todos los bienes informáticos)
+            $resultado = AccionesBienes_Informaticos::listarBienes_Informaticos();
+        }
         echo $resultado;
         break;
     case 'POST':
