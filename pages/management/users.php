@@ -369,12 +369,10 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="nombreC" class="text-bold">Nombre</label>
-                                    <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre" required>
                                     <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre"  oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="apellidoC" class="text-bold">Apellido</label>
-                                    <input type="text" class="form-control" name="apellidoC" id="apellidoC" placeholder="Apellido" required>
                                     <input type="text" class="form-control" name="apellidoC" id="apellidoC" placeholder="Apellido"  oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                                 </div>
                                 <div class="form-group col-md-12">
