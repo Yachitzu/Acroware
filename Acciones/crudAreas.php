@@ -62,19 +62,16 @@ class AccionesAreas
         try {
             $conexion = Conexion::getInstance()->getConexion();
             $consulta = "SELECT bloques.*, facultades.nombre AS nombre_facultad 
-            FROM bloques 
-            INNER JOIN facultades ON bloques.id_facultad_per = facultades.id
-            WHERE bloques.activo = 'si'";
+        FROM bloques 
+        INNER JOIN facultades ON bloques.id_facultad_per = facultades.id
+        WHERE bloques.activo = 'si'";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
             $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
-            $dato;
-            $tabla = '';
 
+            $tabla = '';
             foreach ($dato as $respuesta) {
-                $tabla .= '
-                    <option value="' . htmlspecialchars($respuesta['id']) . '">' . htmlspecialchars($respuesta['nombre']).'-'.htmlspecialchars($respuesta['nombre_facultad']).'</option>
-                ';
+                $tabla .= '<option value="' . htmlspecialchars($respuesta['id']) . '" data-max-piso="' . htmlspecialchars($respuesta['pisos']) . '">' . htmlspecialchars($respuesta['nombre']) . '-' . htmlspecialchars($respuesta['nombre_facultad']) . '</option>';
             }
             return [
                 'codigo' => 0,
@@ -89,7 +86,8 @@ class AccionesAreas
         }
     }
 
-   
+
+
 
     public static function listarUsuariosInsertar()
     {
@@ -104,7 +102,7 @@ class AccionesAreas
 
             foreach ($dato as $respuesta) {
                 $tabla .= '
-                    <option value="' . htmlspecialchars($respuesta['id']) . '">' . htmlspecialchars($respuesta['nombre']).'</option>
+                    <option value="' . htmlspecialchars($respuesta['id']) . '">' . htmlspecialchars($respuesta['nombre']) . '</option>
                 ';
             }
             return [
@@ -120,7 +118,7 @@ class AccionesAreas
         }
     }
 
-    
+
     public static function insertarAreas($nombre, $descripcion, $piso, $id_bloque_per, $id_usu_encargado)
     {
         try {
@@ -168,7 +166,7 @@ class AccionesAreas
                 $usuario->bindParam(':nombre_usuario', $id_usu_encargado);
                 $usuario->execute();
                 $dato_usuario = $usuario->fetch(PDO::FETCH_ASSOC); */
-                
+
                 $consulta = $conexion->prepare("UPDATE areas SET nombre= :nombre, descripcion= :descripcion, piso= :piso, id_bloque_per= :id_bloque_per, id_usu_encargado= :id_usu_encargado WHERE id=:id");
                 $consulta->bindParam(":id", $id);
                 $consulta->bindParam(":nombre", $nombre);
@@ -198,10 +196,10 @@ class AccionesAreas
                 return 1;
             } else {
                 $consulta = $conexion->prepare("UPDATE areas set activo= 'no' WHERE id=:id");
-            $consulta->bindParam(":id", $id);
-            $consulta->execute();
-            return 0;
-            }  
+                $consulta->bindParam(":id", $id);
+                $consulta->execute();
+                return 0;
+            }
         } catch (PDOException $e) {
             error_log('Error en eliminarArea: ' . $e->getMessage());
             return 2;

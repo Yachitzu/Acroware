@@ -383,9 +383,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                     <label for="piso" class="text-bold">Piso Pertenece</label>
                     <select class="form-control" id="pisoA" required>
                       <option value="">Seleccione un Piso</option>
-                      <option value="Planta Baja">Planta Baja</option>
-                      <option value="Primer Piso">Primer Piso</option>
-                      <option value="Segundo Piso">Segundo Piso</option>
+                      
                     </select>
                   </div>
                   <div class="form-group col-md-12">
@@ -488,9 +486,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   <div class="form-group col-md-6">
                     <label for="piso" class="text-bold">Piso Pertenece</label>
                     <select class="form-control" id="pisoE" required>
-                      <option value="Planta Baja">Planta Baja</option>
-                      <option value="Primer Piso">Primer Piso</option>
-                      <option value="Segundo Piso">Segundo Piso</option>
+                      
                     </select>
                   </div>
                   <div class="form-group col-md-12">
@@ -521,7 +517,71 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       </div>
     </div>
   </div>
+  <script>
+    document.getElementById('bloqueA').addEventListener('change', function () {
+        var selectedBlock = this.options[this.selectedIndex];
+        var maxPiso = parseInt(selectedBlock.getAttribute('data-max-piso'));
+        var pisoSelect = document.getElementById('pisoA');
 
+        // Limpiar las opciones actuales del select de pisos
+        while (pisoSelect.options.length > 0) {
+            pisoSelect.remove(0);
+        }
+
+        // Función para obtener el nombre del piso según el número
+        function getPisoName(piso) {
+            if (piso === 0) return 'Planta Baja';
+            if (piso === 1) return 'Primer Piso';
+            if (piso === 2) return 'Segundo Piso';
+            if (piso === 3) return 'Tercer Piso';
+            if (piso === 4) return 'Cuarto Piso';
+            if (piso === 5) return 'Quinto Piso';
+            if (piso === 6) return 'Sexto Piso';
+            return 'Piso ' + piso;
+        }
+
+        // Agregar nuevas opciones basadas en el max_piso
+        for (var i = 0; i <= maxPiso; i++) {
+            var newOption = document.createElement('option');
+            newOption.value = getPisoName(i);
+            newOption.text = getPisoName(i);
+            pisoSelect.add(newOption);
+        }
+    });
+</script>
+
+<!-- <script>
+    document.getElementById('bloqueE').addEventListener('change', function () {
+        var selectedBlock = this.options[this.selectedIndex];
+        var maxPiso = parseInt(selectedBlock.getAttribute('data-max-piso'));
+        var pisoSelect = document.getElementById('pisoE');
+
+        // Limpiar las opciones actuales del select de pisos
+        while (pisoSelect.options.length > 0) {
+            pisoSelect.remove(0);
+        }
+
+        // Función para obtener el nombre del piso según el número
+        function getPisoName(piso) {
+            if (piso === 0) return 'Planta Baja';
+            if (piso === 1) return 'Primer Piso';
+            if (piso === 2) return 'Segundo Piso';
+            if (piso === 3) return 'Tercer Piso';
+            if (piso === 4) return 'Cuarto Piso';
+            if (piso === 5) return 'Quinto Piso';
+            if (piso === 6) return 'Sexto Piso';
+            return 'Piso ' + piso;
+        }
+
+        // Agregar nuevas opciones basadas en el max_piso
+        for (var i = 0; i <= maxPiso; i++) {
+            var newOption = document.createElement('option');
+            newOption.value = getPisoName(i);
+            newOption.text = getPisoName(i);
+            pisoSelect.add(newOption);
+        }
+    });
+</script> -->
   <script>
     $(document).ready(function () {
       $("#formAgregar").submit(function (e) {
@@ -553,6 +613,14 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             $("#bloqueA").val("");
             $("#pisoA").val("");
             $("#usuarioA").val("");
+            var pisoSelect = document.getElementById('pisoA');
+                    while (pisoSelect.options.length > 0) {
+                        pisoSelect.remove(0);
+                    }
+                    var defaultOption = document.createElement('option');
+                    defaultOption.value = "";
+                    defaultOption.text = "Seleccione un Piso";
+                    pisoSelect.add(defaultOption);
             cargarTabla();
           }
         });
@@ -635,11 +703,40 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         $("#descripcionE").val(descripcion);
         $("#bloqueE").val(id_bloque_per);
         $("#usuarioE").val(id_usu_encargado);
-        $("#pisoE option").each(function () {
-          if ($(this).text() === piso) {
-            $(this).prop('selected', true);
-          }
-        });
+        // Limpiar y agregar opciones al select de pisos
+        var pisoSelect = document.getElementById('pisoE');
+        while (pisoSelect.options.length > 0) {
+            pisoSelect.remove(0);
+        }
+        var defaultOption = document.createElement('option');
+        defaultOption.value = "";
+        defaultOption.text = "Seleccione un Piso";
+        pisoSelect.add(defaultOption);
+
+        var selectedBlock = document.getElementById('bloqueE').options[document.getElementById('bloqueE').selectedIndex];
+        var maxPiso = parseInt(selectedBlock.getAttribute('data-max-piso'));
+
+        function getPisoName(piso) {
+            if (piso === 0) return 'Planta Baja';
+            if (piso === 1) return 'Primer Piso';
+            if (piso === 2) return 'Segundo Piso';
+            if (piso === 3) return 'Tercer Piso';
+            if (piso === 4) return 'Cuarto Piso';
+            if (piso === 5) return 'Quinto Piso';
+            if (piso === 6) return 'Sexto Piso';
+            return 'Piso ' + piso;
+        }
+
+        for (var i = 0; i <= maxPiso; i++) {
+            var newOption = document.createElement('option');
+            newOption.value = getPisoName(i);
+            newOption.text = getPisoName(i);
+            if (newOption.text === piso) {
+                newOption.selected = true;
+            }
+            pisoSelect.add(newOption);
+        }
+
         $("#modalCrudEditar").modal('show');
       });
 
