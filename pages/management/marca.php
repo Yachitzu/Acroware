@@ -742,7 +742,15 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
           } else {
             console.error('Error al eliminar marca:', responseData.message || response.statusText);
-            alert(responseData.message)
+            eliminarModal.hide();
+            Swal.fire({
+              
+              icon: "info",
+              text: responseData.message,
+              confirmButtonText: "Cerrar",
+              confirmButtonColor: "#bd3503",
+              iconColor: "#bd3503"
+            });
           }
         }
       } catch (error) {
