@@ -262,7 +262,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
                         <th>Nombre</th>
                         <th>País Origen</th>
-                        <th>Área</th>
+                        <th>Categoría</th>
                         <th>Descripción</th>
                         <th>Acciones</th>
 
@@ -275,7 +275,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
                         <th>Nombre</th>
                         <th>País Origen</th>
-                        <th>Área</th>
+                        <th>Categoría</th>
                         <th>Descripción</th>
                         <th>Acciones</th>
                       </tr>
@@ -357,9 +357,9 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                     <input type="text" class="form-control" name="nombreC" id="nombreC" placeholder="Nombre" required>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="areaC" class="text-bold">Área</label>
+                    <label for="areaC" class="text-bold">Categoría</label>
                     <select class="form-control" name="areaC" id="areaC" required>
-                      <option value="">Seleccione un Área</option>
+                      <option value="">Seleccione una Categoría</option>
                       <option value="tecnologico">Tecnológico</option>
                       <option value="mobiliario">Mobiliario</option>
                     </select>
@@ -443,9 +443,9 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                     <input type="text" class="form-control" id="nombreE" placeholder="Nombre" required>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="area" class="text-bold">Área</label>
+                    <label for="area" class="text-bold">Categoría</label>
                     <select class="form-control" id="areaE" required>
-                      <option value="">Seleccione un Área</option>
+                      <option value="">Seleccione una Categoría</option>
                       <option value="tecnologico">Tecnológico</option>
                       <option value="mobiliario">Mobiliario</option>
                     </select>
@@ -608,7 +608,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         });
         const responseData = await response.json();
         const data = responseData.data;
-        console.log('Datos recibidos del servidor:', data)
+        //console.log('Datos recibidos del servidor:', data)
 
         $('#dataTable').DataTable().clear().draw();
 
