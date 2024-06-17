@@ -382,6 +382,8 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                     <input type="text" class="form-control" name="modeloA" id="modeloA" placeholder="Modelo" required>
                   </div>
                 </div>
+
+
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="facultad" class="text-bold">Marca</label>
@@ -394,25 +396,34 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                       ?>
                     </select>
                   </div>
+
+
                   <div class="form-group col-md-6">
                     <label for="nombreC" class="text-bold">Color</label>
                     <input type="text" class="form-control" name="colorA" id="colorA" placeholder="Color"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                   </div>
                 </div>
+
+
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="nombreC" class="text-bold">Material</label>
                     <input type="text" class="form-control" name="materialA" id="materialA" placeholder="Material"
                       oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                   </div>
+
+
                   <div class="form-group col-md-6">
                     <label for="codigoUTAC" class="text-bold">Dimensiones</label>
                     <input type="text" class="form-control" name="dimensionesA" id="dimensionesA"
                       placeholder="Dimensiones" required>
                   </div>
                 </div>
+
+
                 <div class="form-row">
+
                   <div class="form-group col-md-6">
                     <label for="ubicación" class="text-bold">Condición</label>
                     <select class="form-control" id="condicionA" required>
@@ -421,11 +432,24 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                       <option value="Mal Estado">Mal Estado</option>
                     </select>
                   </div>
+
+                  
+                  
                   <div class="form-group col-md-6">
-                    <label for="nombreC" class="text-bold">Custodio</label>
-                    <input type="text" class="form-control" name="custodioA" id="custodioA" placeholder="Custodio"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                    <label for="facultad" class="text-bold">Custodio</label>
+                    <select class="form-control" id="custodioA" required>
+                      <option value="">Seleccione una Marca</option>
+                      <?php
+                      include_once ("../../Acciones/crudBienes_Mobiliarios.php");
+                      $usuarios = AccionesBienes_mobiliarios::listarUsuariosInsertar();
+                      echo ($usuarios['dato']);
+                      ?>
+                    </select>
                   </div>
+
+
+
+
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
@@ -534,6 +558,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                       required>
                   </div>
                 </div>
+
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="nombreC" class="text-bold">Nombre</label>
@@ -544,6 +569,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                     <input type="text" class="form-control" name="modeloE" id="modeloE" placeholder="Modelo" required>
                   </div>
                 </div>
+
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="facultad" class="text-bold">Marca</label>
@@ -555,6 +581,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                       ?>
                     </select>
                   </div>
+
                   <div class="form-group col-md-6">
                     <label for="nombreC" class="text-bold">Color</label>
                     <input type="text" class="form-control" name="colorE" id="colorE" placeholder="Color"
@@ -581,11 +608,20 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                       <option value="Mal Estado">Mal Estado</option>
                     </select>
                   </div>
+
+                  
                   <div class="form-group col-md-6">
-                    <label for="nombreC" class="text-bold">Custodio</label>
-                    <input type="text" class="form-control" name="custodioE" id="custodioE" placeholder="Custodio"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                    <label for="facultad" class="text-bold">Custodio</label>
+                    <select class="form-control" id="custodioE" required>
+                      <?php
+                      include_once ("../../Acciones/crudBienes_Mobiliarios.php");
+                      $custodio = AccionesBienes_mobiliarios::listarUsuariosInsertar();
+                      echo ($custodio['dato']);
+                      ?>
+                    </select>
                   </div>
+
+
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
@@ -779,6 +815,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         id_marca = fila.find('.id_marca').val();
         id_area_per = fila.find('.id_area_per').val();
         id_ubi_per = fila.find('.id_ubi_per').val();
+        custodio_actual = fila.find('.custodio_actual').val();
 
         $("#codigoUTAE").val(codigo_uta);
         $("#nombreE").val(nombre);
@@ -791,7 +828,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         $("#materialE").val(material);
         $("#dimensionesE").val(dimensiones);
         $("#condicionE").val(condicion);
-        $("#custodioE").val(custodio);
+        $("#custodioE").val(custodio_actual);
         $("#valorE").val(valor);
         $("#modalCrudEditar").modal('show');
       });

@@ -6,51 +6,60 @@ class AccionesBienes_mobiliarios
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = $conexion->prepare("SELECT bienes_mobiliarios.*, marcas.nombre AS nombre_marca, areas.nombre AS nombre_area,
-            ubicaciones.nombre AS nombre_ubicacion
-            From bienes_mobiliarios
-            LEFT JOIN marcas ON bienes_mobiliarios.id_marca = marcas.id
-            LEFT JOIN areas ON bienes_mobiliarios.id_area_per = areas.id
-            LEFT JOIN ubicaciones ON bienes_mobiliarios.id_ubi_per = ubicaciones.id
-            where bienes_mobiliarios.activo='si'");
+            $consulta = $conexion->prepare(
+                "SELECT bienes_mobiliarios.*, 
+                        marcas.nombre AS nombre_marca, 
+                        areas.nombre AS nombre_area,
+                        ubicaciones.nombre AS nombre_ubicacion,
+                        usuarios.nombre AS nombre_custodio, 
+                        usuarios.apellido AS apellido_custodio
+                FROM bienes_mobiliarios
+                LEFT JOIN marcas ON bienes_mobiliarios.id_marca = marcas.id
+                LEFT JOIN areas ON bienes_mobiliarios.id_area_per = areas.id
+                LEFT JOIN ubicaciones ON bienes_mobiliarios.id_ubi_per = ubicaciones.id
+                LEFT JOIN usuarios ON bienes_mobiliarios.custodio_actual = usuarios.id
+                WHERE bienes_mobiliarios.activo = 'si'"
+            );
             $consulta->execute();
             $dato = $consulta->fetchAll(PDO::FETCH_ASSOC);
-            $dato;
             $tabla = '';
-
+    
             foreach ($dato as $respuesta) {
+                $nombreCompletoCustodio = htmlspecialchars($respuesta['nombre_custodio']) . ' ' . htmlspecialchars($respuesta['apellido_custodio']);
                 $tabla .= '
                     <tr>
-                        <td ">' . htmlspecialchars($respuesta['codigo_uta']) . '</td>
-                        <td ">' . htmlspecialchars($respuesta['nombre']) . '</td>
-                        <td ">' . htmlspecialchars($respuesta['serie']) . '</td>
-                        <td ">' . htmlspecialchars($respuesta['nombre_marca']) . '</td>
-                        <td ">' . htmlspecialchars($respuesta['modelo']) . '</td>
-                        <td ">' . htmlspecialchars($respuesta['color']) . '</td>
-                        <td ">' . htmlspecialchars($respuesta['material']) . '</td>
-                        <td ">' . htmlspecialchars($respuesta['dimensiones']) . '</td>
-                        <td ">' . htmlspecialchars($respuesta['condicion']) . '</td>
-                        <td ">' . htmlspecialchars($respuesta['custodio_actual']) . '</td>
-                        <td ">' . htmlspecialchars($respuesta['fecha_ingreso']) . '</td>
-                        <td ">' . htmlspecialchars($respuesta['valor_contable']) . '</td>
-                        <td ">' . htmlspecialchars($respuesta['nombre_area']) . '</td>
-                        <td ">' . htmlspecialchars($respuesta['nombre_ubicacion']) . '</td>
+                        <td>' . htmlspecialchars($respuesta['codigo_uta']) . '</td>
+                        <td>' . htmlspecialchars($respuesta['nombre']) . '</td>
+                        <td>' . htmlspecialchars($respuesta['serie']) . '</td>
+                        <td>' . htmlspecialchars($respuesta['nombre_marca']) . '</td>
+                        <td>' . htmlspecialchars($respuesta['modelo']) . '</td>
+                        <td>' . htmlspecialchars($respuesta['color']) . '</td>
+                        <td>' . htmlspecialchars($respuesta['material']) . '</td>
+                        <td>' . htmlspecialchars($respuesta['dimensiones']) . '</td>
+                        <td>' . htmlspecialchars($respuesta['condicion']) . '</td>
+                        <td>' . $nombreCompletoCustodio . '</td>
+                        <td>' . htmlspecialchars($respuesta['fecha_ingreso']) . '</td>
+                        <td>' . htmlspecialchars($respuesta['valor_contable']) . '</td>
+                        <td>' . htmlspecialchars($respuesta['nombre_area']) . '</td>
+                        <td>' . htmlspecialchars($respuesta['nombre_ubicacion']) . '</td>
                         <td class="mdl-data-table__cell">
                             <center>
-                            <button class="btn btn-warning btn-circle element-white editar" data-id="' . $respuesta['id'] . '" id="editar">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn btn-danger btn-circle eliminar" data-id="' . $respuesta['id'] . '" id="eliminar">
-                            <i class="fas fa-trash"></i>
-                        </button>
+                                <button class="btn btn-warning btn-circle element-white editar" data-id="' . htmlspecialchars($respuesta['id']) . '" id="editar">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger btn-circle eliminar" data-id="' . htmlspecialchars($respuesta['id']) . '" id="eliminar">
+                                    <i class="fas fa-trash"></i>
+                                </button>
                             </center>
                         </td>
                         <input type="hidden" class="id_marca" value="' . htmlspecialchars($respuesta['id_marca']) . '">
                         <input type="hidden" class="id_area_per" value="' . htmlspecialchars($respuesta['id_area_per']) . '">
                         <input type="hidden" class="id_ubi_per" value="' . htmlspecialchars($respuesta['id_ubi_per']) . '">
+                        <input type="hidden" class="custodio_actual" value="' . htmlspecialchars($respuesta['custodio_actual']) . '">
                     </tr>
                 ';
             }
+    
             return [
                 'codigo' => 0,
                 'dato' => $tabla,
@@ -63,6 +72,7 @@ class AccionesBienes_mobiliarios
             ];
         }
     }
+    
 
     public static function listarMarcasInsertar()
     {
@@ -91,6 +101,36 @@ class AccionesBienes_mobiliarios
             ];
         }
     }
+
+    public static function listarUsuariosInsertar()
+{
+    try {
+        $conexion = Conexion::getInstance()->getConexion();
+        $consulta = "SELECT id, nombre, apellido FROM usuarios WHERE activo = 'si'";
+        $resultado = $conexion->prepare($consulta);
+        $resultado->execute();
+        $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
+        $tabla = '';
+
+        foreach ($dato as $respuesta) {
+            $nombreCompleto = htmlspecialchars($respuesta['nombre']) . ' ' . htmlspecialchars($respuesta['apellido']);
+            $tabla .= '
+            <option value="' . htmlspecialchars($respuesta['id']) . '">' . $nombreCompleto . '</option>';
+        }
+
+        return [
+            'codigo' => 0,
+            'dato' => $tabla,
+        ];
+    } catch (PDOException $e) {
+        error_log('Error al listar usuarios: ' . $e->getMessage());
+        return [
+            'codigo' => 1,
+            'mensaje' => 'Error al listar usuarios: ' . $e->getMessage()
+        ];
+    }
+}
+
 
     public static function listarAreasInsertar()
     {
