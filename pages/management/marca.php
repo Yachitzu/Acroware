@@ -34,8 +34,9 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
   <!-- inject:css -->
   <link rel="stylesheet" href="../../resources/css/vertical-layout-light/style.css">
   <!-- endinject -->
-  <link rel="shortcut icon"
-    href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" />
+  <link rel="shortcut icon" href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" />
+  <!-- Sweet Alert -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 
@@ -44,10 +45,8 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     <!-- partial:partials/_navbar.php -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="../../index.php"><img
-            src="../../resources/images/logos/Acroware.png" class="mr-2" alt="logo" /></a>
-        <a class="navbar-brand brand-logo-mini" href="../../index.php"><img
-            src="../../resources/images/logos/acroware-mini.png" alt="logo" /></a>
+        <a class="navbar-brand brand-logo mr-5" href="../../index.php"><img src="../../resources/images/logos/Acroware.png" class="mr-2" alt="logo" /></a>
+        <a class="navbar-brand brand-logo-mini" href="../../index.php"><img src="../../resources/images/logos/acroware-mini.png" alt="logo" /></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -61,7 +60,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
-          
+
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
               <img src="../../resources/images/faces/perfil1.png" alt="profile" />
@@ -79,12 +78,11 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           </li>
           <li class="nav-item nav-settings d-none d-lg-flex">
             <a class="nav-link" href="#">
-              <i class="fa fa-tasks"></i> 
+              <i class="fa fa-tasks"></i>
             </a>
           </li>
         </ul>
-        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
-          data-toggle="offcanvas">
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
           <span class="icon-menu"></span>
         </button>
       </div>
@@ -95,45 +93,43 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
       <div id="right-sidebar" class="settings-panel">
         <i class="settings-close ti-close"></i>
-          <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
-              <li class="nav-item">
-                  <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab"
-                    aria-controls="todo-section" aria-expanded="true">Recordatorio</a>
-              </li>
-          </ul>
-          <div class="tab-content" id="setting-content">
-              <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel"
-                aria-labelledby="todo-section">
-                  <div class="add-items d-flex px-3 mb-0">
-                      <form class="form w-100">
-                          <div class="form-group d-flex">
-                              <input type="text" class="form-control todo-list-input" placeholder="Agregar actividad">
-                              <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task">Agregar</button>
-                              <input type="hidden" class="todo-list-input_id" name="usuario_id" value="<?php echo $usuario_id; ?>">
-                          </div>
-                      </form>
-                  </div>
-                  <div class="list-wrapper px-3">
-                      <ul class="d-flex flex-column-reverse todo-list">
-                          <?php if (is_array($recordatorios) && count($recordatorios) > 0): ?>
-                              <?php foreach ($recordatorios as $recordatorio): ?>
-                                  <li data-id="<?php echo $recordatorio['id']; ?>">
-                                      <div class="form-check">
-                                          <label class="form-check-label">
-                                              <input class="checkbox" type="checkbox" <?php echo $recordatorio['estado'] == 'finalizado' ? 'checked' : ''; ?>>
-                                              <?php echo htmlspecialchars($recordatorio['actividad']); ?>
-                                          </label>
-                                      </div>
-                                      <i class="remove ti-close"></i>
-                                  </li>
-                              <?php endforeach; ?>
-                          <?php else: ?>
-                              <li>No se encontraron recordatorios pendientes.</li>
-                          <?php endif; ?>
-                      </ul>
-                  </div>
-              </div>
+        <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">Recordatorio</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="setting-content">
+          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
+            <div class="add-items d-flex px-3 mb-0">
+              <form class="form w-100">
+                <div class="form-group d-flex">
+                  <input type="text" class="form-control todo-list-input" placeholder="Agregar actividad">
+                  <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task">Agregar</button>
+                  <input type="hidden" class="todo-list-input_id" name="usuario_id" value="<?php echo $usuario_id; ?>">
+                </div>
+              </form>
+            </div>
+            <div class="list-wrapper px-3">
+              <ul class="d-flex flex-column-reverse todo-list">
+                <?php if (is_array($recordatorios) && count($recordatorios) > 0) : ?>
+                  <?php foreach ($recordatorios as $recordatorio) : ?>
+                    <li data-id="<?php echo $recordatorio['id']; ?>">
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input class="checkbox" type="checkbox" <?php echo $recordatorio['estado'] == 'finalizado' ? 'checked' : ''; ?>>
+                          <?php echo htmlspecialchars($recordatorio['actividad']); ?>
+                        </label>
+                      </div>
+                      <i class="remove ti-close"></i>
+                    </li>
+                  <?php endforeach; ?>
+                <?php else : ?>
+                  <li>No se encontraron recordatorios pendientes.</li>
+                <?php endif; ?>
+              </ul>
+            </div>
           </div>
+        </div>
       </div>
       <!-- partial -->
       <!-- partial:partials/_sidebar.php -->
@@ -260,8 +256,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               </div>
               <div class="card-body bg-darkwhite">
                 <div class="table-responsive">
-                  <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%"
-                    cellspacing="0">
+                  <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                       <tr>
 
@@ -316,8 +311,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
 
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -333,8 +327,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           </div>
         </div>
         <div class="modal-footer">
-          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
-            aria-label="Close" value="Cancelar" id="cancelButton">
+          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
           <a class="btn-crud btn-primary text-bold" href="../../cerrar.php">Cerrar Sesión</a>
         </div>
       </div>
@@ -342,8 +335,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
   </div>
 
   <!-- Create Modal-->
-  <div class="modal fade modal-crud" id="modalCrudAgregar" tabindex="-1" role="dialog"
-    aria-labelledby="modal-register-label" aria-hidden="true">
+  <div class="modal fade modal-crud" id="modalCrudAgregar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
@@ -377,21 +369,18 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="paisC" class="text-bold">País</label>
-                    <input type="text" class="form-control" name="paisC" id="paisC" placeholder="País"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                    <input type="text" class="form-control" name="paisC" id="paisC" placeholder="País" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                   </div>
                   <div class="form-group col-md-12">
                     <label for="descripcionC" class="text-bold">Descripción</label>
-                    <textarea class="form-control" name="descripcionC" id="descripcionC"
-                      placeholder="Descripción"></textarea>
+                    <textarea class="form-control" name="descripcionC" id="descripcionC" placeholder="Descripción"></textarea>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-dismiss="modal"
-              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Marca ">
           </div>
         </form>
@@ -400,8 +389,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
   </div>
 
   <!-- Delete Modal-->
-  <div class="modal fade" id="modalCrudEliminar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
-    aria-hidden="true">
+  <div class="modal fade" id="modalCrudEliminar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
@@ -425,8 +413,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
-              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Marca ">
           </div>
         </form>
@@ -434,8 +421,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     </div>
   </div>
   <!-- Edit Modal-->
-  <div class="modal fade" id="modalCrudEditar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
-    aria-hidden="true">
+  <div class="modal fade" id="modalCrudEditar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
@@ -469,8 +455,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="pais" class="text-bold">País</label>
-                    <input type="text" class="form-control" id="paisE" placeholder="País"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                    <input type="text" class="form-control" id="paisE" placeholder="País" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                   </div>
                   <div class="form-group col-md-12">
                     <label for="descripcion" class="text-bold">Descripción</label>
@@ -481,8 +466,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
-              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Marca ">
           </div>
         </form>
@@ -524,7 +508,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', function() {
     const apiBaseUrl = '../../Acciones/RestMarcas.php';
 
     const marcasTableBody = document.getElementById('marcasTableBody');
@@ -541,7 +525,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       "ajax": {
         "url": apiBaseUrl,
         "type": "GET",
-        "data": function (d) {
+        "data": function(d) {
           d.start = d.start || 0; // Indice de inicio para la paginación
           d.length = d.length || 10; // Número de registros por página
           d.draw = d.draw || 1; // Número de la solicitud de dibujo
@@ -550,25 +534,32 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           d.order = d.order || [0, 'asc']; // Orden de las columnas
           return d;
         },
-        "dataSrc": function (json) {
+        "dataSrc": function(json) {
           // Devuelve los datos de la respuesta JSON
           return json.data;
         },
-        "error": function (xhr, error, thrown) {
+        "error": function(xhr, error, thrown) {
           console.log('Error:', error);
         }
       },
-      "columns": [
-        { "data": "nombre" },
-        { "data": "pais" },
-        { "data": "area" },
-        { "data": "descripcion" },
+      "columns": [{
+          "data": "nombre"
+        },
+        {
+          "data": "pais"
+        },
+        {
+          "data": "area"
+        },
+        {
+          "data": "descripcion"
+        },
         {
           "data": null,
           "defaultContent": "",
           "orderable": false,
           "searchable": false,
-          "render": function (data, type, row) {
+          "render": function(data, type, row) {
             return `
                         <center>          
                             <button class="btn btn-warning btn-circle element-white editar" id="editar" onclick="showEditarModal(${row.id})">
@@ -588,7 +579,9 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       "paging": true, // Habilita la paginación
       "info": true, // Habilita la información de la tabla
       "ordering": true, // Habilita la ordenación
-      "order": [[0, 'asc']], // Columna inicial para ordenar
+      "order": [
+        [0, 'asc']
+      ], // Columna inicial para ordenar
       "language": {
         // Personaliza los textos, por ejemplo:
         "lengthMenu": "Mostrar _MENU_ registros por página",
@@ -637,7 +630,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       }
     }
 
-    agregarMarcaForm.addEventListener('submit', async function (event) {
+    agregarMarcaForm.addEventListener('submit', async function(event) {
       event.preventDefault();
 
       const nombre = document.getElementById('nombreC').value;
@@ -651,7 +644,12 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ nombre, descripcion, pais, area })
+          body: JSON.stringify({
+            nombre,
+            descripcion,
+            pais,
+            area
+          })
         });
 
         if (response.ok) {
@@ -671,7 +669,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
 
 
-    document.getElementById('editarMarcaForm').addEventListener('submit', async function (event) {
+    document.getElementById('editarMarcaForm').addEventListener('submit', async function(event) {
       event.preventDefault();
       // Obtener los valores actualizados del formulario
       const id = marcaAEditarId;
@@ -687,7 +685,13 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ id, nombre, descripcion, pais, area })
+          body: JSON.stringify({
+            id,
+            nombre,
+            descripcion,
+            pais,
+            area
+          })
         });
 
         if (response.ok) {
@@ -711,7 +715,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
     const eliminarMarcaForm = document.getElementById('eliminarMarcaForm');
 
-    eliminarMarcaForm.addEventListener('submit', async function (event) {
+    eliminarMarcaForm.addEventListener('submit', async function(event) {
       event.preventDefault();
       try {
         const id = marcaAEliminarId;
@@ -738,7 +742,15 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
           } else {
             console.error('Error al eliminar marca:', responseData.message || response.statusText);
-            alert(responseData.message)
+            eliminarModal.hide();
+            Swal.fire({
+              
+              icon: "info",
+              text: responseData.message,
+              confirmButtonText: "Cerrar",
+              confirmButtonColor: "#bd3503",
+              iconColor: "#bd3503"
+            });
           }
         }
       } catch (error) {
@@ -746,7 +758,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       }
     });
 
-    window.showEditarModal = async function (id) {
+    window.showEditarModal = async function(id) {
       try {
         const response = await fetch(apiBaseUrl + `?id=${id}`);
         if (!response.ok) {
@@ -782,7 +794,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     };
 
 
-    window.showEliminarModal = function (id) {
+    window.showEliminarModal = function(id) {
       marcaAEliminarId = id;
       eliminarModal.show()
       console.log('Mostrar modal de eliminación para el ID:', id);

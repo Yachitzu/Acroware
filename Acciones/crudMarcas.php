@@ -245,7 +245,7 @@ class Eliminar
             $resultado2 = $verif2->fetchColumn();
 
             if ($resultado1 > 0 || $resultado2 > 0) {
-                echo json_encode(['success' => false, 'message' => 'No se puede eliminar, la marca está siendo utilizzada en otra(s) tablas(s)']);
+                echo json_encode(['success' => false, 'message' => 'No se puede eliminar, la marca está siendo utilizada en otra(s) tablas(s)']);
             } else {
 
                 $borrarSQL = "UPDATE marcas SET activo = 'no' WHERE id = :id";
