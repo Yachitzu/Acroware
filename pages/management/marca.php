@@ -608,7 +608,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         });
         const responseData = await response.json();
         const data = responseData.data;
-        console.log('Datos recibidos del servidor:', data)
+        //console.log('Datos recibidos del servidor:', data)
 
         $('#dataTable').DataTable().clear().draw();
 
