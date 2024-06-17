@@ -262,7 +262,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
                         <th>Nombre</th>
                         <th>País Origen</th>
-                        <th>Área</th>
+                        <th>Categoría</th>
                         <th>Descripción</th>
                         <th>Acciones</th>
 
@@ -275,7 +275,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
                         <th>Nombre</th>
                         <th>País Origen</th>
-                        <th>Área</th>
+                        <th>Categoría</th>
                         <th>Descripción</th>
                         <th>Acciones</th>
                       </tr>
