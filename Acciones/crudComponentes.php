@@ -31,29 +31,49 @@ class Obtener{
 }
 
 class Guardar{
-    public static function GuardarComponente(){
+    public static function GuardarComponente() {
         try {
             $json = file_get_contents('php://input');
             $data = json_decode($json, true);
             if ($data !== null) {
                 $conectar = Conexion::getInstance()->getConexion();
-                $insertarSql = "INSERT INTO componentes(nombre, descripcion, serie, codigo_adi_uta, id_bien_infor_per, repotenciado) VALUES (:nombre, :descripcion, :serie, :codigo_adi_uta, :id_bien_infor_per, :repotenciado)";
+    
+                // Insertar en la tabla componentes
+                $insertarSql = "INSERT INTO componentes(nombre, descripcion, serie, especificaciones, id_bien_infor_per, repotenciado) VALUES (:nombre, :descripcion, :serie, :especificaciones, :id_bien_infor_per, :repotenciado)";
                 $resultado = $conectar->prepare($insertarSql);
                 $resultado->bindParam(':nombre', $data["nombre"], PDO::PARAM_STR);
                 $resultado->bindParam(':descripcion', $data["descripcion"], PDO::PARAM_STR);
                 $resultado->bindParam(':serie', $data["serie"], PDO::PARAM_STR);
-                $resultado->bindParam(':codigo_adi_uta', $data["codigo_adi_uta"], PDO::PARAM_STR);
+                $resultado->bindParam(':especificaciones', $data["especificaciones"], PDO::PARAM_STR);
                 $resultado->bindParam(':id_bien_infor_per', $data["id_bien_infor_per"], PDO::PARAM_STR);
                 $resultado->bindParam(':repotenciado', $data["repotenciado"], PDO::PARAM_STR);
+                
                 $resultado->execute();
+    
+                // Obtener el id del componente recién insertado
+                $idComponente = $conectar->lastInsertId();
+    
+                // Verificar si los campos codigo_adi y descripcion_repo están presentes y no están vacíos
+                if (!empty($data["codigo_adi_uta"]) && !empty($data["motivo_repotenciacion"])) {
+                    // Insertar en la tabla repotenciaciones
+                    $insertarRepotenciacionesSql = "INSERT INTO repotenciaciones(id_componente, codigo_adi_uta, motivo_repotenciacion, fecha_repotenciacion) VALUES (:id_componente, :codigo_adi_uta, :motivo_repotenciacion, NOW())";
+                    $resultadoRepotenciaciones = $conectar->prepare($insertarRepotenciacionesSql);
+                    $resultadoRepotenciaciones->bindParam(':id_componente', $idComponente, PDO::PARAM_INT);
+                    $resultadoRepotenciaciones->bindParam(':codigo_adi_uta', $data["codigo_adi_uta"], PDO::PARAM_STR);
+                    $resultadoRepotenciaciones->bindParam(':motivo_repotenciacion', $data["motivo_repotenciacion"], PDO::PARAM_STR);
+                    
+                    $resultadoRepotenciaciones->execute();
+                }
+    
                 echo json_encode(['success' => true]);
             } else {
                 echo json_encode(['success' => false, 'message' => 'Invalid input']);
             }
         } catch (PDOException $e) {
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
-        } 
+        }
     }
+    
 }
 
 class Actualizar{

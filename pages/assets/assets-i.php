@@ -328,7 +328,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="descripcionComponente" class="text-bold">Descripción</label>
-                    <input type="text" class="form-control" name="descripcionComponente" id="descripcionComponente" placeholder="Descripción" required>
+                    <input type="text" class="form-control" name="descripcionComponente" id="descripcionComponente" placeholder="Descripción">
                   </div>
                 </div>
                 <div class="form-row">
@@ -337,8 +337,8 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                     <input type="text" class="form-control" name="serieComponente" id="serieComponente" placeholder="Serie" required>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="codigoAdicionalComponente" class="text-bold">Código Adicional UTA</label>
-                    <input type="text" class="form-control" name="codigoAdicionalComponente" id="codigoAdicionalComponente" placeholder="Código Adicional UTA" required>
+                    <label for="especificacionComponente" class="text-bold">Especificaciones</label>
+                    <input type="text" class="form-control" name="especificacionComponente" id="especificacionComponente" placeholder="Especificaciones" required>
                   </div>
                 </div>
                 <div class="form-row">
@@ -350,7 +350,16 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                       <option value="no">No</option>
                     </select>
                   </div>
-
+                </div>
+                <div class="form-row hidden" id="repotenciacionFields">
+                  <div class="form-group col-md-12" id="codigoAdicionalField">
+                    <label for="codigoAdicionalUTA" class="text-bold">Código Adicional UTA</label>
+                    <input type="text" class="form-control" name="codigoAdicionalUTA" id="codigoAdicionalUTA" placeholder="Código Adicional UTA">
+                  </div>
+                  <div class="form-group col-md-12" id="motivoRepotenciacionField">
+                    <label for="motivoRepotenciacion" class="text-bold">Motivo de la Repotenciación</label>
+                    <input type="text" class="form-control" name="motivoRepotenciacion" id="motivoRepotenciacion" placeholder="Motivo de la Repotenciación">
+                  </div>
                 </div>
               </div>
             </div>
@@ -364,7 +373,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     </div>
   </div>
 
-  <!-- Create Modal for Adding Components -->
+  <!-- Create Modal for Edit Components -->
   <div class="modal fade modal-crud" id="modalCrudEditarComponente" tabindex="-1" role="dialog" aria-labelledby="modal-edit-component-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -389,7 +398,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="descripcionComponenteE" class="text-bold">Descripción</label>
-                    <input type="text" class="form-control" name="descripcionComponenteE" id="descripcionComponenteE" placeholder="Descripción" required>
+                    <input type="text" class="form-control" name="descripcionComponenteE" id="descripcionComponenteE" placeholder="Descripción">
                   </div>
                 </div>
                 <div class="form-row">
@@ -398,8 +407,8 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                     <input type="text" class="form-control" name="serieComponenteE" id="serieComponenteE" placeholder="Serie" required>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="codigoAdicionalComponenteE" class="text-bold">Código Adicional UTA</label>
-                    <input type="text" class="form-control" name="codigoAdicionalComponenteE" id="codigoAdicionalComponenteE" placeholder="Código Adicional UTA" required>
+                    <label for="especificacionComponenteE" class="text-bold">Especificaciones</label>
+                    <input type="text" class="form-control" name="especificacionComponenteE" id="especificacionComponenteE" placeholder="Especificaciones" required>
                   </div>
                 </div>
                 <div class="form-row">
@@ -411,7 +420,16 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                       <option value="no">No</option>
                     </select>
                   </div>
-
+                </div>
+                <div class="form-row hidden" id="repotenciacionFieldsE">
+                  <div class="form-group col-md-12">
+                    <label for="codigoAdicionalUTAE" class="text-bold">Código Adicional UTA</label>
+                    <input type="text" class="form-control" name="codigoAdicionalUTAE" id="codigoAdicionalUTAE" placeholder="Código Adicional UTA">
+                  </div>
+                  <div class="form-group col-md-12">
+                    <label for="motivoRepotenciacionE" class="text-bold">Motivo de la Repotenciación</label>
+                    <input type="text" class="form-control" name="motivoRepotenciacionE" id="motivoRepotenciacionE" placeholder="Motivo de la Repotenciación">
+                  </div>
                 </div>
               </div>
             </div>
@@ -768,6 +786,45 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 
   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      //---------------------- Agregar --------------------------------------------
+      var repotenciadoComponente = document.getElementById('repotenciadoComponente');
+      var extraFields = document.getElementById('repotenciacionFields');
+
+
+
+      // Ocultar los campos adicionales por defecto
+      extraFields.style.display = 'none';
+
+      repotenciadoComponente.addEventListener('change', function() {
+        var selectedOption = this.value;
+
+        if (selectedOption === 'si') {
+          extraFields.style.display = 'block';
+        } else {
+          extraFields.style.display = 'none';
+        }
+      });
+
+      //---------------------- Editar --------------------------------------------
+      var repotenciadoComponenteE = document.getElementById('repotenciadoComponenteE');
+      var extraFieldsE = document.getElementById('repotenciacionFieldsE');
+
+
+
+      // Ocultar los campos adicionales por defecto
+      extraFieldsE.style.display = 'none';
+
+      repotenciadoComponenteE.addEventListener('change', function() {
+        var selectedOption = this.value;
+
+        if (selectedOption === 'si') {
+          extraFieldsE.style.display = 'block';
+        } else {
+          extraFieldsE.style.display = 'none';
+        }
+      });
+    });
     $(document).ready(function() {
       // Inicializa la tabla pero no la guardes en una variable
       // porque se reconstruirá después de cada carga de datos.
@@ -1075,7 +1132,8 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         let isSubmitting = false;
         // Form submission handler for adding components
         $('#agregarComponenteForm').on('submit', async function(event) {
-          //event.preventDefault();
+          event.preventDefault();
+
 
           var id = currentId;
 
@@ -1087,14 +1145,25 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           isSubmitting = true;
 
 
+          const submitButton = document.querySelector('#agregarComponenteForm input[type="submit"]');
+          if (!submitButton) {
+            console.error('Botón de envío no encontrado');
+            isSubmitting = false;
+            return;
+          }
+          submitButton.disabled = true;
+
+
 
           console.log(id);
           const nombre = document.getElementById('nombreComponente').value;
           const descripcion = document.getElementById('descripcionComponente').value;
           const serie = document.getElementById('serieComponente').value;
-          const codigo_adi_uta = document.getElementById('codigoAdicionalComponente').value;
+          const especificaciones = document.getElementById('especificacionComponente').value;
           const repotenciado = document.getElementById('repotenciadoComponente').value;
           const id_bien_infor_per = id;
+          const codigo_adi_uta = document.getElementById('codigoAdicionalUTA').value;
+          const motivo_repotenciacion = document.getElementById('motivoRepotenciacion').value;
           try {
             const response = await fetch('../../Acciones/RestComponentes.php', {
               method: 'POST',
@@ -1105,9 +1174,11 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 nombre,
                 descripcion,
                 serie,
-                codigo_adi_uta,
+                especificaciones,
                 repotenciado,
-                id_bien_infor_per
+                id_bien_infor_per,
+                codigo_adi_uta,
+                motivo_repotenciacion
               })
             });
 
@@ -1115,17 +1186,23 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               await cargarTabla();
               agregarComponenteForm.reset();
 
+
               $('#modalCrudAgregarComponente').modal('hide');
               $('body').removeClass('modal-open');
               $('.modal-backdrop').remove();
+              location.reload();
             } else {
               console.error('Error al agregar componente: ', response.statusText);
+              alert(response.status);
             }
           } catch (error) {
             console.error('Error al cargar componente: ', error)
+            alert(error);
           } finally {
             // Rehabilitar el botón de envío
             isSubmitting = false;
+            submitButton.disabled = false;
+
 
           }
 
@@ -1144,7 +1221,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           const nombre = document.getElementById('nombreComponenteE').value;
           const descripcion = document.getElementById('descripcionComponenteE').value;
           const serie = document.getElementById('serieComponenteE').value;
-          const codigo_adi_uta = document.getElementById('codigoAdicionalComponenteE').value;
+          const especificaciones = document.getElementById('especificacionesE').value;
           const repotenciado = document.getElementById('repotenciadoComponenteE').value;
           const id_bien_infor_per = idBien;
           try {

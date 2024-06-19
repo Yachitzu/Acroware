@@ -1,5 +1,5 @@
 <?php
-include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php');
 require 'phpqrcode/qrlib.php';
 class AccionesBienes_Informaticos
 {
@@ -57,8 +57,9 @@ class AccionesBienes_Informaticos
                     <th>Nombre</th>
                     <th>Descripción</th>
                     <th>Serie</th>
-                    <th>Código UTA</th>
+                    <th>Especificaciones</th>
                     <th>Repotenciado</th>
+                    <th>Activo</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -69,8 +70,9 @@ class AccionesBienes_Informaticos
                 <td>' . htmlspecialchars($componente['nombre']) . '</td>
                 <td>' . htmlspecialchars($componente['descripcion']) . '</td>
                 <td>' . htmlspecialchars($componente['serie']) . '</td>
-                <td>' . htmlspecialchars($componente['codigo_adi_uta']) . '</td>
+                <td>' . htmlspecialchars($componente['especificaciones']) . '</td>
                 <td>' . htmlspecialchars($componente['repotenciado']) . '</td>
+                <td>' . htmlspecialchars($componente['activo']) . '</td>
                 <td>
                     <center>
                         <button class="btn btn-warning btn-circle element-white editarComponente" data-id="' . $componente['id'] . '" data-toggle="modal" onclick="showEditarModalComponente(' . $componente['id'] . ')">
@@ -267,18 +269,19 @@ class AccionesBienes_Informaticos
         $frameSize = 3;
         $contenido =  'http://localhost/Acroware/pages/others/QR.php?id=' . $id;
         QRcode::png($contenido, $file_name, $level, $tamanio, $frameSize);
-        try{
+        try {
             $conexion = Conexion::getInstance()->getConexion();
             $consulta = $conexion->prepare("UPDATE bienes_informaticos SET qr= :qr WHERE id= :id");
             $consulta->bindParam(':qr', $file_name);
             $consulta->bindParam(':id', $id);
             $consulta->execute();
-        }catch(PDOException $e){
+        } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
     }
 
-    public static function listarQR($id){
+    public static function listarQR($id)
+    {
         try {
             $conexion = Conexion::getInstance()->getConexion();
             $consulta = $conexion->prepare("SELECT 
@@ -291,7 +294,7 @@ class AccionesBienes_Informaticos
             $consulta->bindParam(':id', $id, PDO::PARAM_INT);
             $consulta->execute();
             $dato = $consulta->fetch(PDO::FETCH_ASSOC);
-    
+
             if ($dato) {
                 return json_encode([
                     'codigo' => 0,
@@ -312,4 +315,3 @@ class AccionesBienes_Informaticos
         }
     }
 }
-?>
