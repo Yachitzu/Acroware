@@ -37,6 +37,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -636,10 +637,21 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           type: "DELETE",
           data: JSON.stringify({
             id: id
-          }),
+          }), 
           contentType: "application/json",
-          error: function (error) {
-            console.error("Error en la solicitud AJAX", error);
+          error: function (jqXHR) {
+            var response = jqXHR.responseJSON;
+            var message = "Este bloque esta siendo usado en Áreas.";
+            if (response && response.message) {
+                message = response.message;
+            }
+            Swal.fire({
+                icon: "info",
+                text: message,
+                confirmButtonText: "Cerrar",
+                confirmButtonColor: "#bd3503", 
+                iconColor: "#bd3503"
+            });
           },
           complete: function () {
             $("#modalCrudEliminar").modal('hide');

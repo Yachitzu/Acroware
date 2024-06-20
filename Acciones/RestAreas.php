@@ -46,9 +46,20 @@ switch ($op) {
         $data = json_decode($json_input, true);
         $id = isset($data['id']) ? filter_var($data['id'], FILTER_SANITIZE_STRING) : null;
         $resultado = AccionesAreas::eliminarArea($id);
-        if ($resultado === 0) {
-            http_response_code(200);
-            echo json_encode(["message" => "Área eliminada con éxito."]);
+        switch ($resultado) {
+            case 0:
+                http_response_code(200);
+                echo json_encode(["message" => "Área eliminada con éxito."]);
+                break;
+            case 1:
+                http_response_code(400);
+                echo json_encode(["message" => "No se puede eliminar, la área está referenciada en ubicaciones."]);
+                break;
+            case 2:
+            default:
+                http_response_code(500);
+                echo json_encode(["message" => "Error al eliminar el área."]);
+                break;
         }
         break;
 }

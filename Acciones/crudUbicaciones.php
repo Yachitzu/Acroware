@@ -169,10 +169,27 @@ class AccionesUbicaciones
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = $conexion->prepare("UPDATE ubicaciones set activo= 'no' where id= :id");
-            $consulta->bindParam(':id', $id);
-            $consulta->execute();
-            return 0;
+
+            // Verificar en bienes_informaticos
+            $verificacion_informaticos = $conexion->prepare("SELECT COUNT(*) AS referencias FROM bienes_informaticos WHERE id_ubi_per = :id AND activo='si'");
+            $verificacion_informaticos->bindParam(':id', $id);
+            $verificacion_informaticos->execute();
+            $resultado_informaticos = $verificacion_informaticos->fetch(PDO::FETCH_ASSOC);
+
+            // Verificar en bienes_mobiliarios
+            $verificacion_mobiliarios = $conexion->prepare("SELECT COUNT(*) AS referencias FROM bienes_mobiliarios WHERE id_ubi_per = :id AND activo='si'");
+            $verificacion_mobiliarios->bindParam(':id', $id);
+            $verificacion_mobiliarios->execute();
+            $resultado_mobiliarios = $verificacion_mobiliarios->fetch(PDO::FETCH_ASSOC);
+
+            if ($resultado_informaticos['referencias'] > 0 || $resultado_mobiliarios['referencias'] > 0) {
+                return 1;
+            } else {
+                $consulta = $conexion->prepare("UPDATE ubicaciones set activo= 'no' where id= :id");
+                $consulta->bindParam(':id', $id);
+                $consulta->execute();
+                return 0;
+            }
         } catch (PDOException $e) {
             error_log('Error en eliminarUbicaciones: ' . $e->getMessage());
             return 2;
