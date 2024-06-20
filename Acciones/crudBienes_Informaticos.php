@@ -45,7 +45,7 @@ class AccionesBienes_Informaticos
             }
 
             // Ajusta el nombre de la columna a la correcta en tu base de datos
-            $consultaComponentes = $conexion->prepare("SELECT * FROM componentes WHERE id_bien_infor_per = :id AND activo = 'si'");
+            $consultaComponentes = $conexion->prepare("SELECT * FROM componentes WHERE id_bien_infor_per = :id");
             $consultaComponentes->bindParam(':id', $id);
             $consultaComponentes->execute();
             $componentes = $consultaComponentes->fetchAll(PDO::FETCH_ASSOC);
