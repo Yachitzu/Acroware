@@ -786,52 +786,49 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      //---------------------- Agregar --------------------------------------------
-      var repotenciadoComponente = document.getElementById('repotenciadoComponente');
-      var extraFields = document.getElementById('repotenciacionFields');
-
-
-
-      // Ocultar los campos adicionales por defecto
-      extraFields.style.display = 'none';
-
-      repotenciadoComponente.addEventListener('change', function() {
-        var selectedOption = this.value;
-
-        if (selectedOption === 'si') {
-          extraFields.style.display = 'block';
-        } else {
-          extraFields.style.display = 'none';
-        }
-      });
-
-      //---------------------- Editar --------------------------------------------
-      var repotenciadoComponenteE = document.getElementById('repotenciadoComponenteE');
-      var extraFieldsE = document.getElementById('repotenciacionFieldsE');
-
-
-
-      // Ocultar los campos adicionales por defecto
-      extraFieldsE.style.display = 'none';
-
-      repotenciadoComponenteE.addEventListener('change', function() {
-        var selectedOption = this.value;
-
-        if (selectedOption === 'si') {
-          extraFieldsE.style.display = 'block';
-        } else {
-          extraFieldsE.style.display = 'none';
-        }
-      });
-    });
     $(document).ready(function() {
+
+      function manejarCampoAdicionales() {
+        function configurarCamposAdicionales(repotenciadoSelector, extraFieldsSelector) {
+          var repotenciadoComponente = document.getElementById(repotenciadoSelector);
+          var extraFields = document.getElementById(extraFieldsSelector);
+
+          if (!repotenciadoComponente || !extraFields) {
+            console.error('Elementos no encontrados:', repotenciadoSelector, extraFieldsSelector);
+            return;
+          }
+
+          // Mostrar u ocultar campos adicionales según la opción seleccionada
+          function actualizarCamposAdicionales() {
+            if (repotenciadoComponente.value === 'si') {
+              extraFields.style.display = 'block';
+            } else {
+              extraFields.style.display = 'none';
+            }
+          }
+
+          // Comprobar el valor actual del select al cargar
+          actualizarCamposAdicionales();
+
+          // Añadir el listener para cambios en el select
+          repotenciadoComponente.addEventListener('change', function() {
+            actualizarCamposAdicionales();
+          });
+        }
+
+        // Configurar campos adicionales para agregar
+        configurarCamposAdicionales('repotenciadoComponente', 'repotenciacionFields');
+
+        // Configurar campos adicionales para editar
+        configurarCamposAdicionales('repotenciadoComponenteE', 'repotenciacionFieldsE');
+      }
       // Inicializa la tabla pero no la guardes en una variable
       // porque se reconstruirá después de cada carga de datos.
       $('#dataTable').DataTable();
 
       // Cargar la tabla cuando se cargue el DOM
       cargarTabla();
+      manejarCampoAdicionales();
 
       $("#AgregarBienes").click(function() {
         $("#modalCrudAgregarBienes").modal('show');
@@ -1221,9 +1218,12 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           const nombre = document.getElementById('nombreComponenteE').value;
           const descripcion = document.getElementById('descripcionComponenteE').value;
           const serie = document.getElementById('serieComponenteE').value;
-          const especificaciones = document.getElementById('especificacionesE').value;
+          const especificaciones = document.getElementById('especificacionComponenteE').value;
           const repotenciado = document.getElementById('repotenciadoComponenteE').value;
           const id_bien_infor_per = idBien;
+          const codigo_adi_uta = document.getElementById('codigoAdicionalUTAE').value;
+          const motivo_repotenciacion = document.getElementById('motivoRepotenciacionE').value;
+
           try {
             // Enviar la solicitud de edición al servidor
             const response = await fetch('../../Acciones/RestComponentes.php' + `?id=${id}`, {
@@ -1236,9 +1236,11 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 nombre,
                 descripcion,
                 serie,
-                codigo_adi_uta,
+                especificaciones,
                 repotenciado,
-                id_bien_infor_per
+                id_bien_infor_per,
+                codigo_adi_uta,
+                motivo_repotenciacion
               })
             });
 
@@ -1262,6 +1264,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
 
         window.showEditarModalComponente = async function(id) {
+
           try {
             const response = await fetch('../../Acciones/RestComponentes.php' + `?id=${id}`);
             if (!response.ok) {
@@ -1275,7 +1278,10 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             document.getElementById('nombreComponenteE').value = componente.nombre;
             document.getElementById('descripcionComponenteE').value = componente.descripcion;
             document.getElementById('serieComponenteE').value = componente.serie;
-            document.getElementById('codigoAdicionalComponenteE').value = componente.codigo_adi_uta;
+            document.getElementById('especificacionComponenteE').value = componente.especificaciones;
+            document.getElementById('codigoAdicionalUTAE').value = componente.codigo_adi_uta;
+            document.getElementById('motivoRepotenciacionE').value = componente.motivo_repotenciacion;
+
             const selectedRepotenciado = componente.repotenciado;
             const repotenciadoEInput = document.getElementById('repotenciadoComponenteE');
 
@@ -1290,6 +1296,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               }
             }
             componenteAEditarId = id;
+            manejarCampoAdicionales();
 
             // Mostrar el modal de edición
             $("#modalCrudEditarComponente").modal('show');
