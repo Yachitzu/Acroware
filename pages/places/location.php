@@ -532,7 +532,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             tbody.appendChild(tr);
           }
 
-          $('#dataTable').DataTable({
+          const dataTable = $('#dataTable').DataTable({
             language: {
               "decimal": "",
               "emptyTable": "No hay información",
@@ -552,6 +552,15 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 "next": "Siguiente",
                 "previous": "Anterior"
               }
+            },
+            initComplete: function() {
+                // Insertar el campo de búsqueda por bloque en el contenedor de DataTables
+                $('#dataTable_filter').append('<label style="margin-left: 10px;">Buscar por Áreas:<input type="text" id="searchArea" class="form-control input-sm" placeholder="Buscar por Areas" style="display: inline-block; width: auto; margin-left: 5px;"></label>');
+                
+                // Agregar evento de búsqueda al campo de búsqueda por bloque
+                $('#searchArea').on('keyup', function() {
+                    dataTable.column(2).search(this.value).draw(); // 2 es el índice de la columna de bloques
+                });
             }
           });
           addEventListeners();

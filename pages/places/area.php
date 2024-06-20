@@ -653,7 +653,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             tbody.appendChild(tr);
           }
 
-          $('#dataTable').DataTable({
+          const dataTable = $('#dataTable').DataTable({
             language: {
               "decimal": "",
               "emptyTable": "No hay información",
@@ -673,7 +673,16 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 "next": "Siguiente",
                 "previous": "Anterior"
               }
-            }
+            },
+            initComplete: function() {
+              // Insertar el campo de búsqueda por bloque antes del campo de búsqueda general
+                $('#dataTable_filter').append('<label style="margin-left: 10px;">Buscar por Bloques:<input type="text" id="searchBloques" class="form-control input-sm" placeholder="Buscar por Bloques" style="display: inline-block; width: auto; margin-left: 5px;"></label>');
+                
+                // Agregar evento de búsqueda al campo de búsqueda por bloque
+                $('#searchBloques').on('keyup', function() {
+                  dataTable.column(3).search(this.value).draw(); // 2 es el índice de la columna de facultades/bloques
+                });
+             }
           });
           addEventListeners();
         })
