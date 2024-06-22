@@ -272,7 +272,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                         <th>Facultad Pertenece</th>
                         <th>Bloque Pertenece</th>
                         <th>Piso</th>
-                        <th>Laboratorista Encargado</th>
                         <th>Acciones</th>
                       </tr>
                     </thead>
@@ -287,7 +286,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                         <th>Facultad Pertenece</th>
                         <th>Bloque Pertenece</th>
                         <th>Piso</th>
-                        <th>Laboratorista Encargado</th>
                         <th>Acciones</th>
                       </tr>
                     </tfoot>
@@ -344,7 +342,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
   </div>
 
   <!-- Create Modal-->
-  <div class="modal fade modal-crud" id="modalCrudAgregar" tabindex="-1" role="dialog"
+ <div class="modal fade modal-crud" id="modalCrudAgregar" tabindex="-1" role="dialog"
     aria-labelledby="modal-register-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -385,16 +383,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                     <select class="form-control" id="pisoA" required>
                       <option value="">Seleccione un Piso</option>
                       
-                    </select>
-                  </div>
-                  <div class="form-group col-md-12">
-                    <label for="usuario" class="text-bold">Laboratorista Encargado</label>
-                    <select class="form-control" id="usuarioA" required>
-                      <option value="">Seleccione un Laboratorista</option>
-                      <?php
-                      $bloques = AccionesAreas::listarUsuariosInsertar();
-                      echo ($bloques['dato']);
-                      ?>
                     </select>
                   </div>
                 </div>
@@ -490,15 +478,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                       
                     </select>
                   </div>
-                  <div class="form-group col-md-12">
-                    <label for="usuario" class="text-bold">Laboratorista Encargado</label>
-                    <select class="form-control" id="usuarioE" required>
-                      <?php
-                      $usuarios = AccionesAreas::listarUsuariosInsertar();
-                      echo ($usuarios['dato']);
-                      ?>
-                    </select>
-                  </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-12">
@@ -551,38 +530,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     });
 </script>
 
-<!-- <script>
-    document.getElementById('bloqueE').addEventListener('change', function () {
-        var selectedBlock = this.options[this.selectedIndex];
-        var maxPiso = parseInt(selectedBlock.getAttribute('data-max-piso'));
-        var pisoSelect = document.getElementById('pisoE');
-
-        // Limpiar las opciones actuales del select de pisos
-        while (pisoSelect.options.length > 0) {
-            pisoSelect.remove(0);
-        }
-
-        // Función para obtener el nombre del piso según el número
-        function getPisoName(piso) {
-            if (piso === 0) return 'Planta Baja';
-            if (piso === 1) return 'Primer Piso';
-            if (piso === 2) return 'Segundo Piso';
-            if (piso === 3) return 'Tercer Piso';
-            if (piso === 4) return 'Cuarto Piso';
-            if (piso === 5) return 'Quinto Piso';
-            if (piso === 6) return 'Sexto Piso';
-            return 'Piso ' + piso;
-        }
-
-        // Agregar nuevas opciones basadas en el max_piso
-        for (var i = 0; i <= maxPiso; i++) {
-            var newOption = document.createElement('option');
-            newOption.value = getPisoName(i);
-            newOption.text = getPisoName(i);
-            pisoSelect.add(newOption);
-        }
-    });
-</script> -->
   <script>
     $(document).ready(function () {
       $("#formAgregar").submit(function (e) {
@@ -591,7 +538,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         descripcion = $("#descripcionA").val();
         id_bloque_per = $("#bloqueA").val();
         piso = $("#pisoA").val();
-        id_usu_encargado = $("#usuarioA").val();
         $.ajax({
           url: "../../Acciones/RestAreas.php",
           type: "POST",
@@ -600,7 +546,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             descripcion: descripcion,
             id_bloque_per: id_bloque_per,
             piso: piso,
-            id_usu_encargado: id_usu_encargado
           }),
           contentType: "application/json",
           cache: false,
@@ -613,7 +558,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             $("#descripcionA").val("");
             $("#bloqueA").val("");
             $("#pisoA").val("");
-            $("#usuarioA").val("");
             var pisoSelect = document.getElementById('pisoA');
                     while (pisoSelect.options.length > 0) {
                         pisoSelect.remove(0);
@@ -648,7 +592,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             const tr = document.createElement('tr');
             const td = document.createElement('td');
             td.textContent = 'No se encontraron áreas.';
-            td.setAttribute('colspan', '7');
+            td.setAttribute('colspan', '6');
             tr.appendChild(td);
             tbody.appendChild(tr);
           }
@@ -692,7 +636,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           const tr = document.createElement('tr');
           const td = document.createElement('td');
           td.textContent = 'Error al cargar los datos.';
-          td.setAttribute('colspan', '7');
+          td.setAttribute('colspan', '6');
           tr.appendChild(td);
           tbody.appendChild(tr);
         });
@@ -707,12 +651,10 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         descripcion = fila.find('td:eq(1)').text();
         id_bloque_per = fila.find('.id_bloque_per').val();
         piso = fila.find('td:eq(4)').text();
-        id_usu_encargado = fila.find('.id_usu_encargado').val();
         
         $("#nombreE").val(nombre);
         $("#descripcionE").val(descripcion);
         $("#bloqueE").val(id_bloque_per);
-        $("#usuarioE").val(id_usu_encargado);
         // Limpiar y agregar opciones al select de pisos
         var pisoSelect = document.getElementById('pisoE');
         while (pisoSelect.options.length > 0) {
@@ -757,7 +699,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         descripcion = $("#descripcionE").val();
         id_bloque_per = $("#bloqueE").val();
         piso = $("#pisoE").val();
-        id_usu_encargado = $("#usuarioE").val();
         $.ajax({
           url: "../../Acciones/RestAreas.php",
           type: "PUT",
@@ -767,7 +708,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             descripcion: descripcion,
             piso: piso,
             id_bloque_per: id_bloque_per,
-            id_usu_encargado: id_usu_encargado
           }), contentType: "application/json",
           cache: false,
           error: function (error) {

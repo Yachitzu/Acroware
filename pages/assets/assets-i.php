@@ -587,6 +587,16 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                     </select>
                   </div>
                 </div>
+                <div class="form-group col-md-12">
+                  <label for="usuario" class="text-bold">Laboratorista Encargado</label>
+                  <select class="form-control" id="usuarioA" required>
+                    <option value="">Seleccione un Laboratorista</option>
+                    <?php
+                    $usuarios = AccionesBienes_Informaticos::listarUsuariosInsertar();
+                    echo ($usuarios['dato']);
+                    ?>
+                  </select>
+                </div>
               </div>
             </div>
           </div>
@@ -599,7 +609,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       </div>
     </div>
   </div>
-
   <!-- Delete Modal-->
   <div class="modal fade" id="modalCrudEliminarBienes" tabindex="-1" role="dialog"
     aria-labelledby="modal-register-label" aria-hidden="true">
@@ -635,6 +644,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     </div>
   </div>
 
+  <!-- Edit Modal-->
   <!-- Edit Modal-->
   <div class="modal fade" id="modalCrudEditarBienes" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
     aria-hidden="true">
@@ -701,6 +711,15 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                       <?php
                       $ubicacionesE = AccionesBienes_Informaticos::listarUbicacionesInsertar();
                       echo ($ubicacionesE['dato']);
+                      ?>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <label for="usuario" class="text-bold">Laboratorista Encargado</label>
+                    <select class="form-control" id="usuarioE" required>
+                      <?php
+                      $usuarios = AccionesBienes_Informaticos::listarUsuariosInsertar();
+                      echo ($usuarios['dato']);
                       ?>
                     </select>
                   </div>
@@ -833,7 +852,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         let modelo = $("#modeloA").val();
         let id_area_per = $("#areaA").val();
         let id_ubi_per = $("#ubicacionA").val();
-
+        let custodio = $("#usuarioA").val();
         $.ajax({
           url: "../../Acciones/RestBienes_Informaticos.php",
           type: "POST",
@@ -844,7 +863,8 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             id_marca: id_marca,
             modelo: modelo,
             id_area_per: id_area_per,
-            id_ubi_per: id_ubi_per
+            id_ubi_per: id_ubi_per,
+            custodio: custodio
           }),
           contentType: "application/json",
           cache: false,
@@ -860,6 +880,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             $("#modeloA").val("");
             $("#areaA").val("");
             $("#ubicacionA").val("");
+            $("#usuarioA").val("");
             cargarTabla();
           }
         });
@@ -910,6 +931,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   <input type="hidden" class="id_area_per" value="${respuesta.id_area_per}">
                   <input type="hidden" class="id_bien" value="${respuesta.id}">
                   <input type="hidden" class="id_ubi_per" value="${respuesta.id_ubi_per}">
+                  <input type="hidden" class="custodio" value="${respuesta.custodio}">
               `;
                 tr.dataset.area = respuesta.nombre_area;
                 tr.dataset.bloque = respuesta.nombre_bloque;
@@ -1012,6 +1034,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           let serie = fila.find('.serie').val();
           let id_area_per = fila.find('.id_area_per').val();
           let id_ubi_per = fila.find('.id_ubi_per').val();
+          let custodio = fila.find('.custodio').val();
 
           $("#codigoUTAE").val(codigo_uta);
           $("#nombreE").val(nombre);
@@ -1020,6 +1043,8 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           $("#areaE").val(id_area_per);
           $("#ubicacionE").val(id_ubi_per);
           $("#serieE").val(serie);
+          $("#usuarioE").val(custodio)
+
           $("#modalCrudEditarBienes").modal('show');
         });
 
@@ -1032,7 +1057,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           let serie = $("#serieE").val();
           let id_area_per = $("#areaE").val();
           let id_ubi_per = $("#ubicacionE").val();
-
+          let custodio = $("#usuarioE").val();
           $.ajax({
             url: "../../Acciones/RestBienes_Informaticos.php",
             type: "PUT",
@@ -1044,7 +1069,8 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               id_marca: id_marca,
               serie: serie,
               id_area_per: id_area_per,
-              id_ubi_per: id_ubi_per
+              id_ubi_per: id_ubi_per,
+              custodio: custodio
             }),
             contentType: "application/json",
             error: function (error) {
@@ -1112,6 +1138,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                                         <div class="row info-assets">
                                             <div class="col-md-3"><strong>Serie:</strong> ${detalle.serie}</div>
                                             <div class="col-md-3"><strong>Ubicación:</strong> ${detalle.nombre_ubicacion}</div>
+                                            <div class="col-md-3"><strong>Custodio:</strong> ${detalle.nombre_usuario} ${detalle.apellido_usuario}</div>
                                             <div class="col-md-3"><strong>Fecha Ingreso:</strong> ${detalle.fecha_ingreso}</div>
                                             <div class="col-md-3"><img src="../${detalle.qr}" alt="QR" class="image_qr" /></div>
                                         </div>
@@ -1179,6 +1206,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           const codigo_adi_uta = document.getElementById('codigoAdicionalComponente').value;
           const repotenciado = document.getElementById('repotenciadoComponente').value;
           const id_bien_infor_per = id;
+          alert( id_bien_infor_per);
           try {
             const response = await fetch('../../Acciones/RestComponentes.php', {
               method: 'POST',
