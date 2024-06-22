@@ -35,6 +35,8 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
   <link rel="stylesheet" href="../../resources/css/vertical-layout-light/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" />
+  <!-- Sweet Alert -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
@@ -1307,7 +1309,9 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       }
 
       const eliminarComponenteForm = document.getElementById('eliminarComponenteForm');
+
       eliminarComponenteForm.addEventListener('submit', async function(event) {
+        event.preventDefault();
         try {
           const id = componenteAEliminarId;
 
@@ -1332,12 +1336,26 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               $("#modalCrudEliminarComponente").modal('hide');
 
             } else {
-              console.error('Error al eliminar componente:', responseData.message || response.statusText);
-              alert(responseData.message)
+              $("#modalCrudEliminarComponente").modal('hide');
+              //alert(responseData.message);
+              //console.error('Error al eliminar componente:', responseData.message || response.statusText);
+              Swal.fire({
+                icon: "info",
+                text: responseData.message,
+                confirmButtonText: "Aceptar",
+                confirmButtonColor: "#bd3503",
+                iconColor: "#bd3503"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  location.reload();
+                }
+              });
             }
           }
         } catch (error) {
+
           console.error('Error al eliminar componente:', error);
+
         }
       });
 
@@ -1378,6 +1396,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
   <!-- Page level custom scripts -->
   <script src="../../resources/js/datatables-demo.js"></script>
+
 </body>
 
 </html>

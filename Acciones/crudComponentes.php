@@ -163,7 +163,7 @@ class Eliminar
                 if ($rowCount > 0) {
                     echo json_encode(['success' => true, 'message' => "Se eliminaron: $rowCount registros"]);
                 } else {
-                    echo json_encode(['success' => false, 'message' => 'No records deleted']);
+                    echo json_encode(['success' => false, 'message' => 'El componente seleccionado ya fue dado de baja']);
                 }
             }
         } catch (PDOException $e) {
