@@ -8,10 +8,9 @@ class AccionesBienes_Informaticos
         try {
             $conexion = Conexion::getInstance()->getConexion();
             $consulta = $conexion->prepare("SELECT bienes_informaticos.*, marcas.nombre AS nombre_marca, 
-            areas.nombre AS nombre_area, bloques.nombre AS nombre_bloque 
+            bloques.nombre AS nombre_bloque 
             FROM bienes_informaticos
             LEFT JOIN marcas ON bienes_informaticos.id_marca = marcas.id
-            LEFT JOIN areas ON bienes_informaticos.id_area_per = areas.id
             LEFT JOIN bloques ON bienes_informaticos.id_blo_per = bloques.id
             WHERE bienes_informaticos.activo='si'");
             $consulta->execute();
@@ -34,8 +33,10 @@ class AccionesBienes_Informaticos
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = $conexion->prepare("SELECT bienes_informaticos.*,ubicaciones.nombre AS nombre_ubicacion from bienes_informaticos
-            LEFT JOIN ubicaciones ON bienes_informaticos.id_ubi_per = ubicaciones.id where bienes_informaticos.id = :id AND bienes_informaticos.activo='si'");
+            $consulta = $conexion->prepare("SELECT bienes_informaticos.*,ubicaciones.nombre AS nombre_ubicacion, usuarios.nombre AS nombre_usuario, usuarios.apellido AS apellido_usuario from bienes_informaticos
+            LEFT JOIN ubicaciones ON bienes_informaticos.id_ubi_per = ubicaciones.id
+            LEFT JOIN usuarios ON bienes_informaticos.custodio = usuarios.id
+            where bienes_informaticos.id = :id AND bienes_informaticos.activo='si'");
             $consulta->bindParam(':id', $id);
             $consulta->execute();
             $dato = $consulta->fetch(PDO::FETCH_ASSOC);
@@ -217,9 +218,36 @@ class AccionesBienes_Informaticos
         }
     }
 
+    public static function listarUsuariosInsertar()
+    {
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = "SELECT * FROM usuarios WHERE activo = 'si'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+            $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            $dato;
+            $tabla = '';
 
+            foreach ($dato as $respuesta) {
+                $tabla .= '
+                    <option value="' . htmlspecialchars($respuesta['id']) . '">' . htmlspecialchars($respuesta['nombre']) .' '. htmlspecialchars($respuesta['apellido']) . '</option>
+                ';
+            }
+            return [
+                'codigo' => 0,
+                'dato' => $tabla,
+            ];
+        } catch (PDOException $e) {
+            error_log('Error al listar Facultades: ' . $e->getMessage());
+            return [
+                'codigo' => 1,
+                'mensaje' => 'Error al listar facultades: ' . $e->getMessage()
+            ];
+        }
+    }
 
-    public static function insertarBienes_Informaticos($codigo_uta, $nombre, $serie, $id_marca, $modelo, $id_area_per, $id_ubi_per, $ip)
+    public static function insertarBienes_Informaticos($codigo_uta, $nombre, $serie, $id_marca, $modelo, $id_area_per, $id_ubi_per, $ip, $custodio)
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
@@ -237,8 +265,8 @@ class AccionesBienes_Informaticos
             $bloque_id = $area['id_bloque_per'];
             // Insertar el bien informático
             $consulta = $conexion->prepare("
-            INSERT INTO bienes_informaticos (codigo_uta, nombre, serie, id_marca, modelo, id_area_per, id_ubi_per, ip, id_blo_per)
-            VALUES (:codigo_uta, :nombre, :serie, :id_marca, :modelo, :id_area_per, :id_ubi_per, :ip, :bloqueID)
+            INSERT INTO bienes_informaticos (codigo_uta, nombre, serie, id_marca, modelo, id_area_per, id_ubi_per, ip, custodio, id_blo_per)
+            VALUES (:codigo_uta, :nombre, :serie, :id_marca, :modelo, :id_area_per, :id_ubi_per, :ip, :custodio, :bloqueID)
         ");
             $consulta->bindParam(':codigo_uta', $codigo_uta);
             $consulta->bindParam(':nombre', $nombre);
@@ -248,6 +276,7 @@ class AccionesBienes_Informaticos
             $consulta->bindParam(':id_area_per', $id_area_per);
             $consulta->bindParam(':id_ubi_per', $id_ubi_per);
             $consulta->bindParam(':ip', $ip);
+            $consulta->bindParam(':custodio', $custodio);
             $consulta->bindParam(':bloqueID', $bloque_id);
             $consulta->execute();
 
@@ -264,7 +293,7 @@ class AccionesBienes_Informaticos
     }
 
 
-    public static function actualizarBienes_Informaticos($id, $codigo_uta, $nombre, $serie, $id_marca, $modelo, $id_area_per, $id_ubi_per, $ip)
+    public static function actualizarBienes_Informaticos($id, $codigo_uta, $nombre, $serie, $id_marca, $modelo, $id_area_per, $id_ubi_per, $ip, $custodio)
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
@@ -280,7 +309,7 @@ class AccionesBienes_Informaticos
 
             $bloque_id = $area['id_bloque_per'];
             $consulta = $conexion->prepare("UPDATE bienes_informaticos SET codigo_uta= :codigo_uta, nombre= :nombre, serie= :serie, id_marca= :id_marca,
-        modelo= :modelo, id_area_per= :id_area_per, id_ubi_per= :id_ubi_per, ip= :ip, id_blo_per= :bloqueID WHERE id= :id");
+        modelo= :modelo, id_area_per= :id_area_per, id_ubi_per= :id_ubi_per, ip= :ip, custodio= :custodio, id_blo_per= :bloqueID WHERE id= :id");
             $consulta->bindParam(':id', $id);
             $consulta->bindParam(':codigo_uta', $codigo_uta);
             $consulta->bindParam(':nombre', $nombre);
@@ -290,6 +319,7 @@ class AccionesBienes_Informaticos
             $consulta->bindParam(':id_area_per', $id_area_per);
             $consulta->bindParam(':id_ubi_per', $id_ubi_per);
             $consulta->bindParam(':ip', $ip);
+            $consulta->bindParam(':custodio', $custodio);
             $consulta->bindParam(':bloqueID', $bloque_id);
             $consulta->execute();
             return 0;
