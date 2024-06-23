@@ -580,10 +580,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                     <label for="ubicación" class="text-bold">Ubicación</label>
                     <select class="form-control" id="ubicacionA" required>
                       <option value="">Seleccione una Ubicación</option>
-                      <?php
-                      $ubicaciones = AccionesBienes_Informaticos::listarUbicacionesInsertar();
-                      echo ($ubicaciones['dato']);
-                      ?>
+
                     </select>
                   </div>
                 </div>
@@ -708,10 +705,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   <div class="form-group col-md-6">
                     <label for="ubicación" class="text-bold">Ubicación</label>
                     <select class="form-control" id="ubicacionE" required>
-                      <?php
-                      $ubicacionesE = AccionesBienes_Informaticos::listarUbicacionesInsertar();
-                      echo ($ubicacionesE['dato']);
-                      ?>
+
                     </select>
                   </div>
                   <div class="form-group col-md-12">
@@ -829,6 +823,85 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script type="text/javascript" charset="utf8"
     src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('#areaA').change(function () {
+        var areaId = $(this).val();
+        if (areaId) {
+          $.ajax({
+            url: "../../Acciones/CargarUbicaciones.php",
+            type: "GET",
+            data: { area_id: areaId },
+            success: function (response) {
+              try {
+                var ubicaciones = typeof response === 'string' ? JSON.parse(response) : response;
+                console.log("Respuesta parseada: ", ubicaciones);
+
+                if (ubicaciones.codigo === 0) {
+                  $('#ubicacionA').empty();
+                  $('#ubicacionA').append('<option value="">Seleccione una Ubicación</option>');
+                  ubicaciones.dato.forEach(function (ubicacion) {
+                    $('#ubicacionA').append('<option value="' + ubicacion.id + '">' + ubicacion.nombre + '</option>');
+                  });
+                } else {
+                  console.error("Error en la respuesta del servidor:", ubicaciones.mensaje);
+                  alert('Error al cargar las ubicaciones: ' + ubicaciones.mensaje);
+                }
+              } catch (error) {
+                console.error("Error al parsear la respuesta JSON:", error);
+                alert('Error al procesar la respuesta del servidor');
+              }
+            },
+            error: function (error) {
+              console.error("Error en la solicitud AJAX:", error);
+              alert('Error al cargar las ubicaciones');
+            }
+          });
+        } else {
+          $('#ubicacionA').empty();
+          $('#ubicacionA').append('<option value="">Seleccione una Ubicación</option>');
+        }
+      });
+
+      $('#areaE').change(function () {
+        var areaId = $(this).val();
+        if (areaId) {
+          $.ajax({
+            url: "../../Acciones/CargarUbicaciones.php",
+            type: "GET",
+            data: { area_id: areaId },
+            success: function (response) {
+              try {
+                var ubicaciones = typeof response === 'string' ? JSON.parse(response) : response;
+                console.log("Respuesta parseada: ", ubicaciones);
+
+                if (ubicaciones.codigo === 0) {
+                  $('#ubicacionE').empty();
+                  $('#ubicacionE').append('<option value="">Seleccione una Ubicación</option>');
+                  ubicaciones.dato.forEach(function (ubicacion) {
+                    $('#ubicacionE').append('<option value="' + ubicacion.id + '">' + ubicacion.nombre + '</option>');
+                  });
+                } else {
+                  console.error("Error en la respuesta del servidor:", ubicaciones.mensaje);
+                  alert('Error al cargar las ubicaciones: ' + ubicaciones.mensaje);
+                }
+              } catch (error) {
+                console.error("Error al parsear la respuesta JSON:", error);
+                alert('Error al procesar la respuesta del servidor');
+              }
+            },
+            error: function (error) {
+              console.error("Error en la solicitud AJAX:", error);
+              alert('Error al cargar las ubicaciones');
+            }
+          });
+        } else {
+          $('#ubicacionE').empty();
+          $('#ubicacionE').append('<option value="">Seleccione una Ubicación</option>');
+        }
+      });
+    });
+  </script>
 
   <script>
     $(document).ready(function () {
@@ -1041,10 +1114,35 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           $("#modeloE").val(modelo);
           $("#marcaE").val(id_marca);
           $("#areaE").val(id_area_per);
-          $("#ubicacionE").val(id_ubi_per);
           $("#serieE").val(serie);
           $("#usuarioE").val(custodio)
-
+          $("#ubicacionE").val(id_ubi_per);
+          if (id_area_per) {
+            $.ajax({
+              url: "../../Acciones/CargarUbicaciones.php",
+              type: "GET",
+              data: { area_id: id_area_per },
+              success: function (response) {
+                var ubicaciones = typeof response === 'string' ? JSON.parse(response) : response;
+                if (ubicaciones.codigo === 0) {
+                  $('#ubicacionE').empty();
+                  $('#ubicacionE').append('<option value="">Seleccione una Ubicación</option>');
+                  ubicaciones.dato.forEach(function (ubicacion) {
+                    $('#ubicacionE').append('<option value="' + ubicacion.id + '">' + ubicacion.nombre + '</option>');
+                  });
+                  $("#ubicacionE").val(id_ubi_per);
+                } else {
+                  alert('Error al cargar las ubicaciones: ' + ubicaciones.mensaje);
+                }
+              },
+              error: function () {
+                alert('Error al cargar las ubicaciones');
+              }
+            });
+          } else {
+            $('#ubicacionE').empty();
+            $('#ubicacionE').append('<option value="">Seleccione una Ubicación</option>');
+          }
           $("#modalCrudEditarBienes").modal('show');
         });
 
@@ -1206,7 +1304,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           const codigo_adi_uta = document.getElementById('codigoAdicionalComponente').value;
           const repotenciado = document.getElementById('repotenciadoComponente').value;
           const id_bien_infor_per = id;
-          alert( id_bien_infor_per);
+          alert(id_bien_infor_per);
           try {
             const response = await fetch('../../Acciones/RestComponentes.php', {
               method: 'POST',

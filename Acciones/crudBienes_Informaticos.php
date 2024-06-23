@@ -8,10 +8,11 @@ class AccionesBienes_Informaticos
         try {
             $conexion = Conexion::getInstance()->getConexion();
             $consulta = $conexion->prepare("SELECT bienes_informaticos.*, marcas.nombre AS nombre_marca, 
-            bloques.nombre AS nombre_bloque 
+            bloques.nombre AS nombre_bloque, areas.nombre As nombre_area 
             FROM bienes_informaticos
             LEFT JOIN marcas ON bienes_informaticos.id_marca = marcas.id
             LEFT JOIN bloques ON bienes_informaticos.id_blo_per = bloques.id
+            LEFT JOIN areas ON bienes_informaticos.id_area_per = areas.id
             WHERE bienes_informaticos.activo='si'");
             $consulta->execute();
             $dato = $consulta->fetchAll(PDO::FETCH_ASSOC);
@@ -190,24 +191,18 @@ class AccionesBienes_Informaticos
             ];
         }
     }
-    public static function listarUbicacionesInsertar()
+    public static function listarUbicacionesInsertar($area_id)
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = "SELECT * from ubicaciones where activo = 'si'";
+            $consulta = "SELECT * from ubicaciones where id_area_per = :area_id AND activo = 'si'";
             $resultado = $conexion->prepare($consulta);
+            $resultado->bindParam(':area_id', $area_id);
             $resultado->execute();
-            $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
-            $dato;
-            $tabla = '';
-
-            foreach ($dato as $respuesta) {
-                $tabla .= '
-                <option value="' . htmlspecialchars($respuesta['id']) . '">' . htmlspecialchars($respuesta['nombre']) . '</option>                ';
-            }
+            $ubicaciones = $resultado->fetchAll(PDO::FETCH_ASSOC);
             return [
                 'codigo' => 0,
-                'dato' => $tabla,
+                'dato' => $ubicaciones,
             ];
         } catch (PDOException $e) {
             error_log('Error al listar marcas: ' . $e->getMessage());
@@ -231,7 +226,7 @@ class AccionesBienes_Informaticos
 
             foreach ($dato as $respuesta) {
                 $tabla .= '
-                    <option value="' . htmlspecialchars($respuesta['id']) . '">' . htmlspecialchars($respuesta['nombre']) .' '. htmlspecialchars($respuesta['apellido']) . '</option>
+                    <option value="' . htmlspecialchars($respuesta['id']) . '">' . htmlspecialchars($respuesta['nombre']) . ' ' . htmlspecialchars($respuesta['apellido']) . '</option>
                 ';
             }
             return [
