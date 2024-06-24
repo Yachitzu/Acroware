@@ -25,7 +25,8 @@ switch ($op) {
         $id_area_per = filter_var($data['id_area_per'], FILTER_SANITIZE_STRING);
         $id_ubi_per = filter_var($data['id_ubi_per'], FILTER_SANITIZE_STRING);
         $ip = filter_var($data['ip'], FILTER_SANITIZE_STRING);
-        $resultado = AccionesBienes_Informaticos::insertarBienes_Informaticos($codigo_uta, $nombre, $serie, $id_marca, $modelo, $id_area_per, $id_ubi_per, $ip);
+        $custodio = filter_var($data['custodio'], FILTER_SANITIZE_STRING);
+        $resultado = AccionesBienes_Informaticos::insertarBienes_Informaticos($codigo_uta, $nombre, $serie, $id_marca, $modelo, $id_area_per, $id_ubi_per, $ip,$custodio);
         if ($resultado === 0) {
             http_response_code(200);
             echo json_encode(["message" => "El bien informatico ha sido insertado con éxito."]);
@@ -46,7 +47,8 @@ switch ($op) {
         $id_area_per = filter_var($data['id_area_per'], FILTER_SANITIZE_STRING);
         $id_ubi_per = filter_var($data['id_ubi_per'], FILTER_SANITIZE_STRING);
         $ip = filter_var($data['ip'], FILTER_SANITIZE_STRING);
-        $resultado = AccionesBienes_Informaticos::actualizarBienes_Informaticos($id, $codigo_uta, $nombre, $serie, $id_marca, $modelo, $id_area_per, $id_ubi_per, $ip);
+        $custodio = filter_var($data['custodio'], FILTER_SANITIZE_STRING);
+        $resultado = AccionesBienes_Informaticos::actualizarBienes_Informaticos($id, $codigo_uta, $nombre, $serie, $id_marca, $modelo, $id_area_per, $id_ubi_per, $ip, $custodio);
         if ($resultado === 0) {
             http_response_code(200);
             echo json_encode(["message" => "El bien informatico ha sido actualizado con éxito."]);

@@ -42,9 +42,20 @@ switch ($op) {
         $data = json_decode($json_input, true);
         $id = filter_var($data['id'], FILTER_SANITIZE_STRING);
         $resultado = AccionesUbicaciones::eliminarUbicacion($id);
-        if ($resultado === 0) {
-            http_response_code(200);
-            echo json_encode(["message" => "Ubicación eliminada."]);
+        switch ($resultado) {
+            case 0:
+                http_response_code(200);
+                echo json_encode(["message" => "Ubicación eliminada con éxito."]);
+                break;
+            case 1:
+                http_response_code(400);
+                echo json_encode(["message" => "No se puede eliminar, la ubicación está referenciada en el inventario."]);
+                break;
+            case 2:
+            default:
+                http_response_code(500);
+                echo json_encode(["message" => "Error al eliminar la ubicación."]);
+                break;
         }
         break;
 }

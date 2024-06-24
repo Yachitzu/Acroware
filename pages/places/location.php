@@ -37,6 +37,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -531,7 +532,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             tbody.appendChild(tr);
           }
 
-          $('#dataTable').DataTable({
+          const dataTable = $('#dataTable').DataTable({
             language: {
               "decimal": "",
               "emptyTable": "No hay información",
@@ -551,6 +552,15 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 "next": "Siguiente",
                 "previous": "Anterior"
               }
+            },
+            initComplete: function() {
+                // Insertar el campo de búsqueda por bloque en el contenedor de DataTables
+                $('#dataTable_filter').append('<label style="margin-left: 10px;">Buscar por Áreas:<input type="text" id="searchArea" class="form-control input-sm" placeholder="Buscar por Areas" style="display: inline-block; width: auto; margin-left: 5px;"></label>');
+                
+                // Agregar evento de búsqueda al campo de búsqueda por bloque
+                $('#searchArea').on('keyup', function() {
+                    dataTable.column(2).search(this.value).draw(); // 2 es el índice de la columna de bloques
+                });
             }
           });
           addEventListeners();
@@ -620,8 +630,19 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           data: JSON.stringify({
             id: id
           }), contentType: "application/json",
-          error: function (error) {
-            console.error("Error en la solicitud AJAX", error);
+          error: function (jqXHR) {
+            var response = jqXHR.responseJSON;
+            var message = "Esta ubicación esta siendo usada en el inventario.";
+            if (response && response.message) {
+                message = response.message;
+            }
+            Swal.fire({
+                icon: "info",
+                text: message,
+                confirmButtonText: "Cerrar",
+                confirmButtonColor: "#bd3503", 
+                iconColor: "#bd3503"
+            });
           },
           complete: function () {
             $("#modalCrudEliminar").modal('hide');

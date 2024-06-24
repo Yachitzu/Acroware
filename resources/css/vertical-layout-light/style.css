@@ -30984,3 +30984,17 @@
   height: 100px!important;
   border-radius: 2px!important;
 }
+
+.dataTables_filter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; 
+}
+
+.searchBloqueWrapper {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+

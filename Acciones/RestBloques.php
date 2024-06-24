@@ -44,9 +44,20 @@ switch ($op) {
         $data = json_decode($json_input, true);
         $id = filter_var($data['id'], FILTER_SANITIZE_STRING);
         $resultado = AccionesBloques::eliminarBloque($id);
-        if ($resultado === 0) {
-            http_response_code(200);
-            echo json_encode(["message" => "Bloque eliminado con éxito."]);
+        switch ($resultado) {
+            case 0:
+                http_response_code(200);
+                echo json_encode(["message" => "Bloque eliminada con éxito."]);
+                break;
+            case 1:
+                http_response_code(400);
+                echo json_encode(["message" => "No se puede eliminar, el bloque está referenciado en áreas."]);
+                break;
+            case 2:
+            default:
+                http_response_code(500);
+                echo json_encode(["message" => "Error al eliminar el bloque."]);
+                break;
         }
         break;
 }
