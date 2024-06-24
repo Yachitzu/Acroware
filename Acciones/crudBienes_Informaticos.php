@@ -242,6 +242,81 @@ class AccionesBienes_Informaticos
         }
     }
 
+    public static function listarUsuariosOrigen()
+    {
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = "SELECT DISTINCT usuarios.id as custodio, usuarios.nombre as nombre_usuario, usuarios.apellido as apellido_usuario 
+                     FROM bienes_informaticos 
+                     LEFT JOIN usuarios ON bienes_informaticos.custodio = usuarios.id 
+                     WHERE bienes_informaticos.activo = 'si' AND usuarios.id IS NOT NULL";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+            $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            $dato;
+            $tabla = '';
+
+            foreach ($dato as $respuesta) {
+                $tabla .= '
+                    <option value="' . htmlspecialchars($respuesta['custodio']) . '">' . htmlspecialchars($respuesta['nombre_usuario']) . ' ' . htmlspecialchars($respuesta['apellido_usuario']) . '</option>
+                ';
+            }
+            return [
+                'codigo' => 0,
+                'dato' => $tabla,
+            ];
+        } catch (PDOException $e) {
+            error_log('Error al listar Usuarios: ' . $e->getMessage());
+            return [
+                'codigo' => 1,
+                'mensaje' => 'Error al listar usuarios: ' . $e->getMessage()
+            ];
+        }
+    }
+
+    public static function listarUsuariosDestino($usuario_id)
+    {
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = "SELECT * FROM usuarios WHERE  id!= :usuario_id AND activo = 'si'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->bindParam(':usuario_id', $usuario_id);
+            $resultado->execute();
+            $usuariosDestino = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            return [
+                'codigo' => 0,
+                'dato' => $usuariosDestino,
+            ];
+        } catch (PDOException $e) {
+            error_log('Error al listar Usuarios: ' . $e->getMessage());
+            return [
+                'codigo' => 1,
+                'mensaje' => 'Error al listar usuarios: ' . $e->getMessage()
+            ];
+        }
+    }
+
+    public static function listarBienesPorCustodio($custodio_id)
+    {
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = "SELECT * FROM bienes_informaticos WHERE custodio = :custodio_id AND activo = 'si'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->bindParam(':custodio_id', $custodio_id);
+            $resultado->execute();
+            $bienes = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            return [
+                'codigo' => 0,
+                'dato' => $bienes,
+            ];
+        } catch (PDOException $e) {
+            error_log('Error al listar bienes informáticos: ' . $e->getMessage());
+            return [
+                'codigo' => 1,
+                'mensaje' => 'Error al listar bienes informáticos: ' . $e->getMessage()
+            ];
+        }
+    }
     public static function insertarBienes_Informaticos($codigo_uta, $nombre, $serie, $id_marca, $modelo, $id_area_per, $id_ubi_per, $ip, $custodio)
     {
         try {
@@ -397,5 +472,36 @@ class AccionesBienes_Informaticos
             ]);
         }
     }
+
+    public static function actualizarCustodioBienes($bienes, $custodioDestino)
+    {
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $conexion->beginTransaction();
+
+            $consulta = "UPDATE bienes_informaticos SET custodio = :custodioDestino WHERE id = :id";
+            $stmt = $conexion->prepare($consulta);
+
+            foreach ($bienes as $id) {
+                $stmt->bindParam(':custodioDestino', $custodioDestino, PDO::PARAM_INT);
+                $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+                $stmt->execute();
+            }
+
+            $conexion->commit();
+            return [
+                'codigo' => 0,
+                'mensaje' => 'Custodio actualizado con éxito'
+            ];
+        } catch (PDOException $e) {
+            $conexion->rollBack();
+            error_log('Error al actualizar custodio de bienes: ' . $e->getMessage());
+            return [
+                'codigo' => 1,
+                'mensaje' => 'Error al actualizar custodio de bienes: ' . $e->getMessage()
+            ];
+        }
+    }
+
 }
 ?>

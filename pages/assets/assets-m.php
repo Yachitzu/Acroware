@@ -36,7 +36,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
   <!-- endinject -->
   <link rel="shortcut icon"
     href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" />
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 
@@ -260,6 +259,12 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   </span>
                   <span class="text text-white">Agregar Bien</span>
                 </button>
+                <button class="btn-crud btn-secondary btn-icon-split" id="CambiarCustodio">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-plus-circle"></i>
+                  </span>
+                  <span class="text text-white">Cambiar custodio</span>
+                </button>
               </div>
               <div class="card-body bg-darkwhite">
                 <div class="table-responsive">
@@ -278,7 +283,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                         <th>Condición</th>
                         <th>Custodio</th>
                         <th>Fecha Ingreso</th>
-                        <th>Valor Contable</th>
                         <th>Áreas</th>
                         <th>Ubicación</th>
                         <th>Acciones</th>
@@ -366,20 +370,24 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 <p class="card-description">Por favor, complete los siguientes campos para agregar un nuevo bien al
                   sistema:</p>
                 <div class="form-row">
-                  <div class="form-group col-md-12">
+                  <div class="form-group col-md-6">
                     <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
                     <input type="text" class="form-control" name="codigoUTAA" id="codigoUTAA" placeholder="Código UTA"
                       required>
                   </div>
-                </div>
-                <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="nombreC" class="text-bold">Nombre</label>
                     <input type="text" class="form-control" name="nombreA" id="nombreA" placeholder="Nombre" required>
                   </div>
+                </div>
+                <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="codigoUTAC" class="text-bold">Modelo</label>
                     <input type="text" class="form-control" name="modeloA" id="modeloA" placeholder="Modelo" >
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="nombreC" class="text-bold">Serie</label>
+                    <input type="text" class="form-control" name="serieA" id="serieA" placeholder="Serie">
                   </div>
                 </div>
 
@@ -453,17 +461,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="nombreC" class="text-bold">Serie</label>
-                    <input type="text" class="form-control" name="serieA" id="serieA" placeholder="Serie">
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="codigoUTAC" class="text-bold">Valor</label>
-                    <input type="number" class="form-control" name="valorA" id="valorA" placeholder="Valor" min="0"
-                      oninput="if(this.value < 1) this.value = 1;">
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
                     <label for="facultad" class="text-bold">Areas</label>
                     <select class="form-control" id="areaA" required>
                       <option value="">Seleccione una área</option>
@@ -484,7 +481,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-bs-dismiss="modal"
+            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Bien ">
           </div>
@@ -520,7 +517,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Bien ">
           </div>
@@ -548,21 +545,26 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 <p class="card-description">Por favor, complete los siguientes campos para editar la información del
                   bien seleccionado:</p>
                 <div class="form-row">
-                  <div class="form-group col-md-12">
+                  <div class="form-group col-md-6">
                     <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
                     <input type="text" class="form-control" name="codigoUTAE" id="codigoUTAE" placeholder="Código UTA"
                       required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="nombreC" class="text-bold">Nombre</label>
+                    <input type="text" class="form-control" name="nombreE" id="nombreE" placeholder="Nombre" required>
                   </div>
                 </div>
 
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="nombreC" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" name="nombreE" id="nombreE" placeholder="Nombre" required>
-                  </div>
-                  <div class="form-group col-md-6">
                     <label for="codigoUTAC" class="text-bold">Modelo</label>
                     <input type="text" class="form-control" name="modeloE" id="modeloE" placeholder="Modelo" >
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="nombreC" class="text-bold">Serie</label>
+                    <input type="text" class="form-control" name="serieE" id="serieE" placeholder="Serie"
+                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" >
                   </div>
                 </div>
 
@@ -622,18 +624,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="nombreC" class="text-bold">Serie</label>
-                    <input type="text" class="form-control" name="serieE" id="serieE" placeholder="Serie"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" >
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="codigoUTAC" class="text-bold">Valor</label>
-                    <input type="number" class="form-control" name="valorE" id="valorE" placeholder="Valor" min="0"
-                      oninput="if(this.value < 1) this.value = 1;" >
-                  </div>
-                </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
                     <label for="facultad" class="text-bold">Areas</label>
                     <select class="form-control" id="areaE" required>
                       <?php
@@ -653,9 +643,63 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Bien">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade modal-crud" id="modalCambiarCustodio" tabindex="-1" role="dialog"
+    aria-labelledby="modal-register-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h3 class="modal-title text-white" id="modal-register-label">Cambiar Custodio</h3>
+          <p class="modal">Ingrese los datos del Usuario:</p>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
+        </div>
+        <form class="forms-sample" id="formCambiarCustodio">
+          <div class="modal-body">
+            <div class="grid-margin-modal">
+              <div class="card-body">
+                <p class="card-description">Por favor, complete los siguientes campos para realizar el cambio de
+                  custodio agregar</p>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="custodioOrigen" class="text-bold">Custodio de origen</label>
+                    <select class="form-control" id="custodioOrigen" required>
+                      <option value="">Custodio actual</option>
+                      <?php
+                      $usuarios = AccionesBienes_mobiliarios::listarUsuariosOrigen();
+                      echo ($usuarios['dato']);
+                      ?>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="custodioDestino" class="text-bold">Custodio de destino</label>
+                    <select class="form-control" id="custodioDestino" required>
+                      <option value="">Custodio destino</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group text-center">
+                  <label for="bienesInformaticos" class="text-bold">Bienes Mobiliarios</label>
+                  <div id="bienesInformaticos">
+                    <!-- Aquí se cargarán los bienes informáticos -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-dismiss="modal"
+              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="submit" class="btn-crud btn-primary text-bold agregarBien" value="Aceptar">
           </div>
         </form>
       </div>
@@ -684,16 +728,13 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   });
                 } else {
                   console.error("Error en la respuesta del servidor:", ubicaciones.mensaje);
-                  alert('Error al cargar las ubicaciones: ' + ubicaciones.mensaje);
                 }
               } catch (error) {
                 console.error("Error al parsear la respuesta JSON:", error);
-                alert('Error al procesar la respuesta del servidor');
               }
             },
             error: function (error) {
               console.error("Error en la solicitud AJAX:", error);
-              alert('Error al cargar las ubicaciones');
             }
           });
         } else {
@@ -722,16 +763,13 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   });
                 } else {
                   console.error("Error en la respuesta del servidor:", ubicaciones.mensaje);
-                  alert('Error al cargar las ubicaciones: ' + ubicaciones.mensaje);
                 }
               } catch (error) {
                 console.error("Error al parsear la respuesta JSON:", error);
-                alert('Error al procesar la respuesta del servidor');
               }
             },
             error: function (error) {
               console.error("Error en la solicitud AJAX:", error);
-              alert('Error al cargar las ubicaciones');
             }
           });
         } else {
@@ -742,9 +780,138 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     });
   </script>
 
+<!-- Custodio -->
+<script>
+    $(document).ready(function () {
+      $('#custodioOrigen').change(function () {
+        var usuario_id = $(this).val();
+        var op = 2;
+        if (usuario_id) {
+          $.ajax({
+            url: "../../Acciones/AccionesExtrasBm.php",
+            type: "GET",
+            data: {
+              usuario_id: usuario_id,
+              op: op
+            },
+            success: function (response) {
+              try {
+                var usuariosDestino = typeof response === 'string' ? JSON.parse(response) : response;
+                console.log("Respuesta parseada: ", usuariosDestino);
+
+                if (usuariosDestino.codigo === 0) {
+                  $('#custodioDestino').empty();
+                  $('#custodioDestino').append('<option value="">Custodio destino</option>');
+                  usuariosDestino.dato.forEach(function (usuariodestino) {
+                    $('#custodioDestino').append('<option value="' + usuariodestino.id + '">' + usuariodestino.nombre + ' ' + usuariodestino.apellido + '</option>');
+                  });
+                } else {
+                  console.error("Error en la respuesta del servidor:", usuariosDestino.mensaje);
+
+                }
+              } catch (error) {
+                console.error("Error al parsear la respuesta JSON:", error);
+
+              }
+            },
+            error: function (error) {
+              console.error("Error en la solicitud AJAX:", error);
+
+            }
+          });
+        } else {
+          $('#custodioDestino').empty();
+          $('#custodioDestino').append('<option value="">Custodio Destino</option>');
+        }
+      });
+
+      $('#custodioOrigen').change(function () {
+        var custodioId = $(this).val();
+        var op = 3;
+        if (custodioId) {
+          $.ajax({
+            url: "../../Acciones/AccionesExtrasBm.php",
+            type: "GET",
+            data: {
+              custodio_id: custodioId,
+              op: op
+            },
+            success: function (response) {
+              try {
+                var bienes = typeof response === 'string' ? JSON.parse(response) : response;
+                if (bienes.codigo === 0) {
+                  $('#bienesInformaticos').empty();
+                  bienes.dato.forEach(function (bien) {
+                    $('#bienesInformaticos').append('<div><input type="checkbox" name="bienes" value="' + bien.id + '"> Nombre: ' + bien.nombre + ' Modelo: ' + bien.modelo + '</div>');
+                  });
+                } else {
+                  console.error("Error en la respuesta del servidor:", bienes.mensaje);
+                }
+              } catch (error) {
+                console.error("Error al parsear la respuesta JSON:", error);
+              }
+            },
+            error: function (error) {
+              console.error("Error en la solicitud AJAX:", error);
+            }
+          });
+        } else {
+          $('#bienesInformaticos').empty();
+        }
+      });
+
+      // Otras funciones y cambios de eventos
+
+  $("#formCambiarCustodio").submit(function (e) {
+    /* e.preventDefault(); */
+
+    var seleccionados = [];
+    $('#bienesInformaticos input[type="checkbox"]:checked').each(function () {
+      seleccionados.push($(this).val());
+    });
+
+    var custodioDestino = $('#custodioDestino').val();
+
+    if (seleccionados.length > 0 && custodioDestino) {
+      $.ajax({
+          url: "../../Acciones/AccionesExtrasBm.php",
+          type: "PUT",
+          data: JSON.stringify({
+          bienes: seleccionados,
+          custodioDestino: custodioDestino
+          }),
+            contentType: "application/json",
+            success: function (response) {
+            try {
+              var result = typeof response === 'string' ? JSON.parse(response) : response;
+              if (result.codigo === 0) {
+                  $("#modalCambiarCustodio").modal('hide');
+                  cargarTabla();  // Asume que cargarTabla() recarga la tabla principal de bienes
+                } else {
+                }
+              } catch (error) {
+                console.error("Error al parsear la respuesta JSON:", error);
+              }
+            },
+            error: function (error) {
+              console.error("Error en la solicitud AJAX", error);
+            }
+          });
+        } else {
+        }
+      });
+    });
+
+  </script>
+  
  <!-- SCRIPT  DE FUNCIONES --> 
  <script>
   $(document).ready(function () {
+
+    $("#CambiarCustodio").click(function () {
+        $("#modalCambiarCustodio").modal('show');
+      });
+
       $("#formAgregar").submit(function (e) {
         /* e.preventDefault(); */
         codigo_uta = $("#codigoUTAA").val();
@@ -757,7 +924,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         dimensiones = $("#dimensionesA").val();
         condicion = $("#condicionA").val();
         custodio = $("#custodioA").val();
-        valor = $("#valorA").val();
         id_area_per = $("#areaA").val();
         id_ubi_per = $("#ubicacionA").val();
         $.ajax({
@@ -774,7 +940,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             dimensiones: dimensiones,
             condicion: condicion,
             custodio: custodio,
-            valor: valor,
             id_area_per: id_area_per,
             id_ubi_per: id_ubi_per
           }),
@@ -795,7 +960,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             $("#dimensionesA").val("");
             $("#condicionA").val("");
             $("#custodioA").val("");
-            $("#valorA").val("");
             $("#areaA").val("");
             $("#ubicacionA").val("");
             cargarTabla();
@@ -834,7 +998,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   <td>${respuesta.condicion}</td>
                   <td>${respuesta.nombre_custodio} ${respuesta.apellido_custodio}</td>
                   <td>${respuesta.fecha_ingreso}</td>
-                  <td>${respuesta.valor_contable}</td>
                   <td>${respuesta.nombre_area}</td>
                   <td>${respuesta.nombre_ubicacion}</td>
                   <td class="mdl-data-table__cell">
@@ -861,7 +1024,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               const tr = document.createElement('tr');
               const td = document.createElement('td');
               td.textContent = 'No se encontraron facultades.';
-              td.setAttribute('colspan', '16');
+              td.setAttribute('colspan', '15');
               tr.appendChild(td);
               tbody.appendChild(tr);
             }
@@ -942,7 +1105,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             const tr = document.createElement('tr');
             const td = document.createElement('td');
             td.textContent = 'Error al cargar los datos.';
-            td.setAttribute('colspan', '16');
+            td.setAttribute('colspan', '15');
             tr.appendChild(td);
             tbody.appendChild(tr);
           });
@@ -962,7 +1125,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         dimensiones = fila.find('td:eq(7)').text();
         condicion = fila.find('td:eq(8)').text();
         custodio = fila.find('td:eq(9)').text();
-        valor = fila.find('td:eq(11)').text();
         id_marca = fila.find('.id_marca').val();
         id_area_per = fila.find('.id_area_per').val();
         id_ubi_per = fila.find('.id_ubi_per').val();
@@ -980,7 +1142,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         $("#dimensionesE").val(dimensiones);
         $("#condicionE").val(condicion);
         $("#custodioE").val(custodio_actual);
-        $("#valorE").val(valor);
         $("#ubicacionE").val(id_ubi_per);
           if (id_area_per) {
             $.ajax({
@@ -997,11 +1158,9 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   });
                   $("#ubicacionE").val(id_ubi_per);
                 } else {
-                  alert('Error al cargar las ubicaciones: ' + ubicaciones.mensaje);
                 }
               },
               error: function () {
-                alert('Error al cargar las ubicaciones');
               }
             });
           } else {
@@ -1024,7 +1183,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         dimensiones = $("#dimensionesE").val();
         condicion = $("#condicionE").val();
         custodio = $("#custodioE").val();
-        valor = $("#valorE").val();
         id_area_per = $("#areaE").val();
         id_ubi_per = $("#ubicacionE").val();
 
@@ -1043,7 +1201,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             dimensiones: dimensiones,
             condicion: condicion,
             custodio: custodio,
-            valor: valor,
             id_area_per: id_area_per,
             id_ubi_per: id_ubi_per
           }),

@@ -1,5 +1,5 @@
 <?php
-include_once ("crudBienes_Informaticos.php");
+include_once ("crudBienes_Mobiliarios.php");
 header('Content-Type: application/json');
 $op = $_SERVER["REQUEST_METHOD"];
 switch ($op) {
@@ -9,14 +9,14 @@ switch ($op) {
             case 2:
                 if (isset($_GET['usuario_id'])) {
                     $usuario_id = filter_var($_GET['usuario_id'], FILTER_SANITIZE_STRING);
-                    $usuarioDestino = AccionesBienes_Informaticos::listarUsuariosDestino($usuario_id);
+                    $usuarioDestino = AccionesBienes_mobiliarios::listarUsuariosDestino($usuario_id);
                     echo json_encode($usuarioDestino);
                 }
                 break;
             case 3:
                 if (isset($_GET['custodio_id'])) {
                     $custodio_id = filter_var($_GET['custodio_id'], FILTER_SANITIZE_NUMBER_INT);
-                    $bienes = AccionesBienes_Informaticos::listarBienesPorCustodio($custodio_id);
+                    $bienes = AccionesBienes_mobiliarios::listarBienesPorCustodio($custodio_id);
                     echo json_encode($bienes);
                 }
                 break;
@@ -34,7 +34,7 @@ switch ($op) {
         if (isset($data['bienes']) && isset($data['custodioDestino'])) {
             $bienes = $data['bienes'];
             $custodioDestino = $data['custodioDestino'];
-            $resultado = AccionesBienes_Informaticos::actualizarCustodioBienes($bienes, $custodioDestino);
+            $resultado = AccionesBienes_mobiliarios::actualizarCustodioBienes($bienes, $custodioDestino);
             echo json_encode($resultado);
         }
         break;
