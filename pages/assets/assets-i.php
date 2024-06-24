@@ -34,8 +34,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
   <!-- inject:css -->
   <link rel="stylesheet" href="../../resources/css/vertical-layout-light/style.css">
   <!-- endinject -->
-  <link rel="shortcut icon"
-    href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" />
+  <link rel="shortcut icon" href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" />
   <!-- Sweet Alert -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -50,10 +49,8 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     <!-- partial:partials/_navbar.php -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="navbar-brand brand-logo mr-5" href="../../index.php"><img
-            src="../../resources/images/logos/Acroware.png" class="mr-2" alt="logo" /></a>
-        <a class="navbar-brand brand-logo-mini" href="../../index.php"><img
-            src="../../resources/images/logos/acroware-mini.png" alt="logo" /></a>
+        <a class="navbar-brand brand-logo mr-5" href="../../index.php"><img src="../../resources/images/logos/Acroware.png" class="mr-2" alt="logo" /></a>
+        <a class="navbar-brand brand-logo-mini" href="../../index.php"><img src="../../resources/images/logos/acroware-mini.png" alt="logo" /></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -89,8 +86,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </a>
           </li>
         </ul>
-        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
-          data-toggle="offcanvas">
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
           <span class="icon-menu"></span>
         </button>
       </div>
@@ -103,13 +99,11 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         <i class="settings-close ti-close"></i>
         <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab"
-              aria-controls="todo-section" aria-expanded="true">Recordatorio</a>
+            <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">Recordatorio</a>
           </li>
         </ul>
         <div class="tab-content" id="setting-content">
-          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel"
-            aria-labelledby="todo-section">
+          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
             <div class="add-items d-flex px-3 mb-0">
               <form class="form w-100">
                 <div class="form-group d-flex">
@@ -121,8 +115,8 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </div>
             <div class="list-wrapper px-3">
               <ul class="d-flex flex-column-reverse todo-list">
-                <?php if (is_array($recordatorios) && count($recordatorios) > 0): ?>
-                  <?php foreach ($recordatorios as $recordatorio): ?>
+                <?php if (is_array($recordatorios) && count($recordatorios) > 0) : ?>
+                  <?php foreach ($recordatorios as $recordatorio) : ?>
                     <li data-id="<?php echo $recordatorio['id']; ?>">
                       <div class="form-check">
                         <label class="form-check-label">
@@ -133,7 +127,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                       <i class="remove ti-close"></i>
                     </li>
                   <?php endforeach; ?>
-                <?php else: ?>
+                <?php else : ?>
                   <li>No se encontraron recordatorios pendientes.</li>
                 <?php endif; ?>
               </ul>
@@ -265,8 +259,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               </div>
               <div class="card-body bg-darkwhite">
                 <div class="table-responsive">
-                  <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%"
-                    cellspacing="0">
+                  <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                       <tr>
                         <th>Ver Más</th>
@@ -298,8 +291,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
 
           <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-          <script type="text/javascript" charset="utf8"
-            src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+          <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 
           <!-- /.container-fluid -->
 
@@ -321,8 +313,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
   <!-- container-scroller -->
 
   <!-- Create Modal for Adding Components -->
-  <div class="modal fade modal-crud" id="modalCrudAgregarComponente" tabindex="-1" role="dialog"
-    aria-labelledby="modal-add-register-label" aria-hidden="true">
+  <div class="modal fade modal-crud" id="modalCrudAgregarComponente" tabindex="-1" role="dialog" aria-labelledby="modal-add-register-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
@@ -340,8 +331,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="nombreComponente" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" name="nombreComponente" id="nombreComponente"
-                      placeholder="Nombre" required>
+                    <input type="text" class="form-control" name="nombreComponente" id="nombreComponente" placeholder="Nombre" required>
                   </div>
                 </div>
                 <div class="form-row">
@@ -353,8 +343,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="serieComponente" class="text-bold">Serie</label>
-                    <input type="text" class="form-control" name="serieComponente" id="serieComponente"
-                      placeholder="Serie" required>
+                    <input type="text" class="form-control" name="serieComponente" id="serieComponente" placeholder="Serie" required>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="especificacionComponente" class="text-bold">Especificaciones</label>
@@ -385,8 +374,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
-              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Agregar Componente ">
           </div>
         </form>
@@ -413,8 +401,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="nombreComponenteE" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" name="nombreComponenteE" id="nombreComponenteE"
-                      placeholder="Nombre" required>
+                    <input type="text" class="form-control" name="nombreComponenteE" id="nombreComponenteE" placeholder="Nombre" required>
                   </div>
                 </div>
                 <div class="form-row">
@@ -426,8 +413,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="serieComponenteE" class="text-bold">Serie</label>
-                    <input type="text" class="form-control" name="serieComponenteE" id="serieComponenteE"
-                      placeholder="Serie" required>
+                    <input type="text" class="form-control" name="serieComponenteE" id="serieComponenteE" placeholder="Serie" required>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="especificacionComponenteE" class="text-bold">Especificaciones</label>
@@ -458,8 +444,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
-              aria-label="Close" value="Cancelar">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal" aria-label="Close" value="Cancelar">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Editar Componente ">
           </div>
         </form>
@@ -468,8 +453,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
   </div>
 
   <!-- Delete Modal-->
-  <div class="modal fade modal-crud" id="modalCrudEliminarComponente" tabindex="-1" role="dialog"
-    aria-labelledby="modal-delete-component-label" aria-hidden="true">
+  <div class="modal fade modal-crud" id="modalCrudEliminarComponente" tabindex="-1" role="dialog" aria-labelledby="modal-delete-component-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
@@ -493,8 +477,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
-              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Componente ">
           </div>
         </form>
@@ -503,8 +486,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
   </div>
 
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -520,8 +502,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           </div>
         </div>
         <div class="modal-footer">
-          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
-            aria-label="Close" value="Cancelar" id="cancelButton">
+          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
           <a class="btn-crud btn-primary text-bold" href="../../cerrar.php">Cerrar Sesión</a>
         </div>
       </div>
@@ -529,8 +510,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
   </div>
   <!-- BIENES INFORMÁTICOS -->
   <!-- Create Modal-->
-  <div class="modal fade modal-crud" id="modalCrudAgregarBienes" tabindex="-1" role="dialog"
-    aria-labelledby="modal-register-label" aria-hidden="true">
+  <div class="modal fade modal-crud" id="modalCrudAgregarBienes" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
@@ -549,8 +529,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
-                    <input type="text" class="form-control" name="codigoUTAA" id="codigoUTAA" placeholder="Código UTA"
-                      required>
+                    <input type="text" class="form-control" name="codigoUTAA" id="codigoUTAA" placeholder="Código UTA" required>
                   </div>
                 </div>
                 <div class="form-row">
@@ -569,7 +548,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                     <select class="form-control" id="marcaA" required>
                       <option value="">Seleccione una Marca</option>
                       <?php
-                      include_once ("../../Acciones/crudBienes_Informaticos.php");
+                      include_once("../../Acciones/crudBienes_Informaticos.php");
                       $marcas = AccionesBienes_Informaticos::listarMarcasInsertar();
                       echo ($marcas['dato']);
                       ?>
@@ -613,8 +592,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-dismiss="modal"
-              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold agregarBien" value=" Agregar Bien ">
           </div>
         </form>
@@ -622,8 +600,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     </div>
   </div>
   <!-- Delete Modal-->
-  <div class="modal fade" id="modalCrudEliminarBienes" tabindex="-1" role="dialog"
-    aria-labelledby="modal-register-label" aria-hidden="true">
+  <div class="modal fade" id="modalCrudEliminarBienes" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
@@ -647,8 +624,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
-              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold" value=" Eliminar Bien ">
           </div>
         </form>
@@ -658,8 +634,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
   <!-- Edit Modal-->
   <!-- Edit Modal-->
-  <div class="modal fade" id="modalCrudEditarBienes" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
-    aria-hidden="true">
+  <div class="modal fade" id="modalCrudEditarBienes" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
@@ -678,8 +653,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
-                    <input type="text" class="form-control" name="codigoUTAE" id="codigoUTAE" placeholder="Código UTA"
-                      required>
+                    <input type="text" class="form-control" name="codigoUTAE" id="codigoUTAE" placeholder="Código UTA" required>
                   </div>
                 </div>
                 <div class="form-row">
@@ -737,8 +711,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
-              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold editarBien" value=" Editar Bien">
           </div>
         </form>
@@ -747,8 +720,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
   </div>
   <!-- CODIGO QR -->
 
-  <div class="modal fade" id="modalQR" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
-    aria-hidden="true">
+  <div class="modal fade" id="modalQR" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
@@ -780,8 +752,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         </div>
 
         <div class="modal-footer">
-          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
-            aria-label="Close" value="Cerrar Modal" id="cancelButton">
+          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal" aria-label="Close" value="Cerrar Modal" id="cancelButton">
           <button class="btn-crud btn-primary text-bold">
             <i class="fas fa-download"></i> Descargar QR
           </button>
@@ -790,8 +761,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     </div>
   </div>
 
-  <div class="modal fade" id="modalQREditar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label"
-    aria-hidden="true">
+  <div class="modal fade" id="modalQREditar" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
@@ -823,8 +793,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         </div>
 
         <div class="modal-footer">
-          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
-            aria-label="Close" value="Cerrar Modal" id="cancelButton">
+          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal" aria-label="Close" value="Cerrar Modal" id="cancelButton">
           <button class="btn-crud btn-primary text-bold">
             <i class="fas fa-download"></i> Descargar QR
           </button>
@@ -836,18 +805,19 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script type="text/javascript" charset="utf8"
-    src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
   <script>
-    $(document).ready(function () {
-      $('#areaA').change(function () {
+    $(document).ready(function() {
+      $('#areaA').change(function() {
         var areaId = $(this).val();
         if (areaId) {
           $.ajax({
             url: "../../Acciones/CargarUbicaciones.php",
             type: "GET",
-            data: { area_id: areaId },
-            success: function (response) {
+            data: {
+              area_id: areaId
+            },
+            success: function(response) {
               try {
                 var ubicaciones = typeof response === 'string' ? JSON.parse(response) : response;
                 console.log("Respuesta parseada: ", ubicaciones);
@@ -855,7 +825,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 if (ubicaciones.codigo === 0) {
                   $('#ubicacionA').empty();
                   $('#ubicacionA').append('<option value="">Seleccione una Ubicación</option>');
-                  ubicaciones.dato.forEach(function (ubicacion) {
+                  ubicaciones.dato.forEach(function(ubicacion) {
                     $('#ubicacionA').append('<option value="' + ubicacion.id + '">' + ubicacion.nombre + '</option>');
                   });
                 } else {
@@ -867,7 +837,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 alert('Error al procesar la respuesta del servidor');
               }
             },
-            error: function (error) {
+            error: function(error) {
               console.error("Error en la solicitud AJAX:", error);
               alert('Error al cargar las ubicaciones');
             }
@@ -878,14 +848,16 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         }
       });
 
-      $('#areaE').change(function () {
+      $('#areaE').change(function() {
         var areaId = $(this).val();
         if (areaId) {
           $.ajax({
             url: "../../Acciones/CargarUbicaciones.php",
             type: "GET",
-            data: { area_id: areaId },
-            success: function (response) {
+            data: {
+              area_id: areaId
+            },
+            success: function(response) {
               try {
                 var ubicaciones = typeof response === 'string' ? JSON.parse(response) : response;
                 console.log("Respuesta parseada: ", ubicaciones);
@@ -893,7 +865,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 if (ubicaciones.codigo === 0) {
                   $('#ubicacionE').empty();
                   $('#ubicacionE').append('<option value="">Seleccione una Ubicación</option>');
-                  ubicaciones.dato.forEach(function (ubicacion) {
+                  ubicaciones.dato.forEach(function(ubicacion) {
                     $('#ubicacionE').append('<option value="' + ubicacion.id + '">' + ubicacion.nombre + '</option>');
                   });
                 } else {
@@ -905,7 +877,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 alert('Error al procesar la respuesta del servidor');
               }
             },
-            error: function (error) {
+            error: function(error) {
               console.error("Error en la solicitud AJAX:", error);
               alert('Error al cargar las ubicaciones');
             }
@@ -963,11 +935,11 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       cargarTabla();
       manejarCampoAdicionales();
 
-      $("#AgregarBienes").click(function () {
+      $("#AgregarBienes").click(function() {
         $("#modalCrudAgregarBienes").modal('show');
       });
 
-      $("#formAgregarBienes").submit(function (e) {
+      $("#formAgregarBienes").submit(function(e) {
         //e.preventDefault();
         let codigo_uta = $("#codigoUTAA").val();
         let nombre = $("#nombreA").val();
@@ -992,10 +964,10 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           }),
           contentType: "application/json",
           cache: false,
-          error: function (error) {
+          error: function(error) {
             console.error("Error en la solicitud AJAX", error);
           },
-          complete: function () {
+          complete: function() {
             $("#modalCrudAgregarBienes").modal('hide');
             $("#codigoUTAA").val("");
             $("#nombreA").val("");
@@ -1012,11 +984,11 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
       function cargarTabla() {
         fetch('../../Acciones/RestBienes_Informaticos.php?op=GET', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
           .then(response => response.json())
           .then(data => {
             const tbody = document.querySelector('#dataTable tbody');
@@ -1091,11 +1063,11 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   "previous": "Anterior"
                 }
               },
-              initComplete: function () {
+              initComplete: function() {
                 // Insertar el campo de búsqueda por bloque antes del campo de búsqueda general
                 $('#dataTable_filter').append('<label style="margin-left: 10px;">Buscar por marcas:<input type="text" id="searchMarcas" class="form-control input-sm" placeholder="Buscar por marcas" style="display: inline-block; width: auto; height: 30px; padding: 2px 5px; margin-left: 5px;"></label>');
                 // Agregar evento de búsqueda al campo de búsqueda por bloque
-                $('#searchMarcas').on('keyup', function () {
+                $('#searchMarcas').on('keyup', function() {
                   dataTable.column(4).search(this.value).draw(); // 2 es el índice de la columna de facultades/bloques
                 });
 
@@ -1103,18 +1075,18 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 $('#dataTable_filter').append('<label style="margin-left: 10px;">Buscar por Bloques:<input type="text" id="searchBloques" class="form-control input-sm" placeholder="Buscar por Bloques" style="display: inline-block; width: auto; height: 30px; padding: 2px 5px; margin-left: 5px;"></label>');
 
                 // Agregar evento de búsqueda al campo de búsqueda por Área
-                $('#searchArea').on('keyup', function () {
+                $('#searchArea').on('keyup', function() {
                   dataTable.draw();
                 });
 
                 // Agregar evento de búsqueda al campo de búsqueda por Bloques
-                $('#searchBloques').on('keyup', function () {
+                $('#searchBloques').on('keyup', function() {
                   dataTable.draw();
                 });
               }
             });
             $.fn.dataTable.ext.search.push(
-              function (settings, data, dataIndex) {
+              function(settings, data, dataIndex) {
                 const areaValue = $('#searchArea').val().toLowerCase();
                 const bloqueValue = $('#searchBloques').val().toLowerCase();
                 const row = dataTable.row(dataIndex).node();
@@ -1148,7 +1120,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
       function addEventListeners() {
         let id = "";
-        $(document).on('click', '.editar', function () {
+        $(document).on('click', '.editar', function() {
           id = $(this).data("id");
           let fila = $(this).closest("tr");
           let codigo_uta = fila.find('td:eq(1)').text();
@@ -1172,13 +1144,15 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             $.ajax({
               url: "../../Acciones/CargarUbicaciones.php",
               type: "GET",
-              data: { area_id: id_area_per },
-              success: function (response) {
+              data: {
+                area_id: id_area_per
+              },
+              success: function(response) {
                 var ubicaciones = typeof response === 'string' ? JSON.parse(response) : response;
                 if (ubicaciones.codigo === 0) {
                   $('#ubicacionE').empty();
                   $('#ubicacionE').append('<option value="">Seleccione una Ubicación</option>');
-                  ubicaciones.dato.forEach(function (ubicacion) {
+                  ubicaciones.dato.forEach(function(ubicacion) {
                     $('#ubicacionE').append('<option value="' + ubicacion.id + '">' + ubicacion.nombre + '</option>');
                   });
                   $("#ubicacionE").val(id_ubi_per);
@@ -1186,7 +1160,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   alert('Error al cargar las ubicaciones: ' + ubicaciones.mensaje);
                 }
               },
-              error: function () {
+              error: function() {
                 alert('Error al cargar las ubicaciones');
               }
             });
@@ -1197,7 +1171,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           $("#modalCrudEditarBienes").modal('show');
         });
 
-        $("#formEditarBienes").submit(function (e) {
+        $("#formEditarBienes").submit(function(e) {
           /* e.preventDefault(); */
           let codigo_uta = $("#codigoUTAE").val();
           let nombre = $("#nombreE").val();
@@ -1222,22 +1196,22 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               custodio: custodio
             }),
             contentType: "application/json",
-            error: function (error) {
+            error: function(error) {
               console.error("Error en la solicitud AJAX", error);
             },
-            complete: function () {
+            complete: function() {
               $("#modalCrudEditarBienes").modal('hide');
               cargarTabla();
             }
           });
         });
 
-        $(document).on('click', '.eliminar', function () {
+        $(document).on('click', '.eliminar', function() {
           id = $(this).data("id");
           $("#modalCrudEliminarBienes").modal('show');
         });
 
-        $("#formEliminarBienes").submit(function (e) {
+        $("#formEliminarBienes").submit(function(e) {
           //e.preventDefault();
 
           $.ajax({
@@ -1247,10 +1221,10 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               id: id
             }),
             contentType: "application/json",
-            error: function (error) {
+            error: function(error) {
               console.error("Error en la solicitud AJAX", error);
             },
-            complete: function () {
+            complete: function() {
               $("#modalCrudEliminarBienes").modal('hide');
               cargarTabla();
             }
@@ -1259,7 +1233,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
         let currentId = null;
         // Listener para el botón "mas"
-        $('#dataTable tbody').on('click', 'button.mas', function () {
+        $('#dataTable tbody').on('click', 'button.mas', function() {
           var btn = $(this);
           var tr = btn.closest('tr');
           var row = $('#dataTable').DataTable().row(tr);
@@ -1276,7 +1250,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               data: {
                 id: id
               },
-              success: function (response) {
+              success: function(response) {
                 try {
                   response = JSON.parse(response);
                   if (response.codigo === 0) {
@@ -1310,7 +1284,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   console.error('Respuesta recibida:', response);
                 }
               },
-              error: function (xhr, status, error) {
+              error: function(xhr, status, error) {
                 console.error('Error en la solicitud AJAX:', error);
               }
             });
@@ -1325,7 +1299,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         let componenteAEliminarId = null;
         let componenteAEditarId = null;
         // Event listener for adding components
-        $('#dataTable tbody').on('click', '.btn-add-component', function () {
+        $('#dataTable tbody').on('click', '.btn-add-component', function() {
 
           $('#modalCrudAgregarComponente').modal('show');
         });
@@ -1415,7 +1389,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
 
 
-        document.getElementById('editarComponenteForm').addEventListener('submit', async function (event) {
+        document.getElementById('editarComponenteForm').addEventListener('submit', async function(event) {
           //event.preventDefault();
           var btn = $('button.mas');
           var idBien = btn.data('id');
@@ -1485,8 +1459,8 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             document.getElementById('descripcionComponenteE').value = componente.descripcion;
             document.getElementById('serieComponenteE').value = componente.serie;
             document.getElementById('especificacionComponenteE').value = componente.especificaciones;
-            document.getElementById('codigoAdicionalUTAE').value = componente.codigo_adi_uta;
-            document.getElementById('motivoRepotenciacionE').value = componente.motivo_repotenciacion;
+            document.getElementById('codigoAdicionalUTAE').value = componente.codigo_adi_uta !== undefined ? componente.codigo_adi_uta : '';
+            document.getElementById('motivoRepotenciacionE').value = componente.motivo_repotenciacion !== undefined ? componente.motivo_repotenciacion : '';
 
             const selectedRepotenciado = componente.repotenciado;
             const repotenciadoEInput = document.getElementById('repotenciadoComponenteE');
@@ -1563,7 +1537,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         }
       });
 
-      window.showEliminarModalComponente = function (id) {
+      window.showEliminarModalComponente = function(id) {
         componenteAEliminarId = id;
         $("#modalCrudEliminarComponente").modal('show');
         console.log('Mostrar modal de eliminación para componente con id: ', id);
