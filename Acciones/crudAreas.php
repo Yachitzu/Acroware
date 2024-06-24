@@ -83,7 +83,7 @@ class AccionesAreas
         }
     }
 
-    public static function insertarAreas($nombre, $descripcion, $piso, $id_bloque_per, $id_usu_encargado)
+    public static function insertarAreas($nombre, $descripcion, $piso, $id_bloque_per)
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
@@ -94,12 +94,11 @@ class AccionesAreas
                 echo ("El área ya existe.");
                 return 1;
             } else {
-                $consulta = $conexion->prepare("INSERT INTO areas(nombre,descripcion,piso,id_bloque_per,id_usu_encargado) values (:nombre,:descripcion,:piso,:id_bloque_per,:id_usu_encargado)");
+                $consulta = $conexion->prepare("INSERT INTO areas(nombre,descripcion,piso,id_bloque_per) values (:nombre,:descripcion,:piso,:id_bloque_per)");
                 $consulta->bindParam(":nombre", $nombre);
                 $consulta->bindParam(':descripcion', $descripcion);
                 $consulta->bindParam(':piso', $piso);
                 $consulta->bindParam(':id_bloque_per', $id_bloque_per);
-                $consulta->bindParam(':id_usu_encargado', $id_usu_encargado);
                 $consulta->execute();
                 return 0;
             }
@@ -109,7 +108,7 @@ class AccionesAreas
         }
     }
 
-    public static function actualizarArea($id, $nombre, $descripcion, $piso, $id_bloque_per, $id_usu_encargado)
+    public static function actualizarArea($id, $nombre, $descripcion, $piso, $id_bloque_per)
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
@@ -131,13 +130,12 @@ class AccionesAreas
                 $usuario->execute();
                 $dato_usuario = $usuario->fetch(PDO::FETCH_ASSOC); */
 
-                $consulta = $conexion->prepare("UPDATE areas SET nombre= :nombre, descripcion= :descripcion, piso= :piso, id_bloque_per= :id_bloque_per, id_usu_encargado= :id_usu_encargado WHERE id=:id");
+                $consulta = $conexion->prepare("UPDATE areas SET nombre= :nombre, descripcion= :descripcion, piso= :piso, id_bloque_per= :id_bloque_per WHERE id=:id");
                 $consulta->bindParam(":id", $id);
                 $consulta->bindParam(":nombre", $nombre);
                 $consulta->bindParam(':descripcion', $descripcion);
                 $consulta->bindParam(':piso', $piso);
                 $consulta->bindParam(':id_bloque_per', $id_bloque_per);
-                $consulta->bindParam(':id_usu_encargado', $id_usu_encargado);
                 $consulta->execute();
                 return 0;
             }

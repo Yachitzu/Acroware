@@ -646,27 +646,44 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       id = "";
       $(".editar").click(function () {
         id = $(this).data("id");
-        fila = $(this).closest("tr");
-        nombre = fila.find('td:eq(0)').text();
-        descripcion = fila.find('td:eq(1)').text();
-        id_bloque_per = fila.find('.id_bloque_per').val();
-        piso = fila.find('td:eq(4)').text();
+        const fila = $(this).closest("tr");
+        const nombre = fila.find('td:eq(0)').text();
+        const descripcion = fila.find('td:eq(1)').text();
+        const id_bloque_per = fila.find('.id_bloque_per').val();
+        const piso = fila.find('td:eq(4)').text();
         
         $("#nombreE").val(nombre);
         $("#descripcionE").val(descripcion);
         $("#bloqueE").val(id_bloque_per);
+
+        // Obtener el bloque seleccionado
+        const selectedBlock = document.getElementById('bloqueE').querySelector(`option[value="${id_bloque_per}"]`);
+        const maxPiso = parseInt(selectedBlock.getAttribute('data-max-piso'));
+
+        // Llamar a la función para actualizar los pisos
+        updatePisoSelect(maxPiso, piso);
+
+        $("#modalCrudEditar").modal('show');
+    });
+
+    document.getElementById('bloqueE').addEventListener('change', function () {
+        const selectedBlock = this.options[this.selectedIndex];
+        const maxPiso = parseInt(selectedBlock.getAttribute('data-max-piso'));
+        updatePisoSelect(maxPiso, "");
+    });
+
+    function updatePisoSelect(maxPiso, selectedPiso) {
+        const pisoSelect = document.getElementById('pisoE');
+        
         // Limpiar y agregar opciones al select de pisos
-        var pisoSelect = document.getElementById('pisoE');
         while (pisoSelect.options.length > 0) {
             pisoSelect.remove(0);
         }
-        var defaultOption = document.createElement('option');
+
+        const defaultOption = document.createElement('option');
         defaultOption.value = "";
         defaultOption.text = "Seleccione un Piso";
         pisoSelect.add(defaultOption);
-
-        var selectedBlock = document.getElementById('bloqueE').options[document.getElementById('bloqueE').selectedIndex];
-        var maxPiso = parseInt(selectedBlock.getAttribute('data-max-piso'));
 
         function getPisoName(piso) {
             if (piso === 0) return 'Planta Baja';
@@ -679,18 +696,16 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             return 'Piso ' + piso;
         }
 
-        for (var i = 0; i <= maxPiso; i++) {
-            var newOption = document.createElement('option');
+        for (let i = 0; i <= maxPiso; i++) {
+            const newOption = document.createElement('option');
             newOption.value = getPisoName(i);
             newOption.text = getPisoName(i);
-            if (newOption.text === piso) {
+            if (newOption.text === selectedPiso) {
                 newOption.selected = true;
             }
             pisoSelect.add(newOption);
         }
-
-        $("#modalCrudEditar").modal('show');
-      });
+    }
 
       $("#formEditar").submit(function (e) {
         e.preventDefault();

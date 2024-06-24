@@ -379,7 +379,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   </div>
                   <div class="form-group col-md-6">
                     <label for="codigoUTAC" class="text-bold">Modelo</label>
-                    <input type="text" class="form-control" name="modeloA" id="modeloA" placeholder="Modelo" required>
+                    <input type="text" class="form-control" name="modeloA" id="modeloA" placeholder="Modelo" >
                   </div>
                 </div>
 
@@ -401,7 +401,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   <div class="form-group col-md-6">
                     <label for="nombreC" class="text-bold">Color</label>
                     <input type="text" class="form-control" name="colorA" id="colorA" placeholder="Color"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" >
                   </div>
                 </div>
 
@@ -410,14 +410,14 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   <div class="form-group col-md-6">
                     <label for="nombreC" class="text-bold">Material</label>
                     <input type="text" class="form-control" name="materialA" id="materialA" placeholder="Material"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" >
                   </div>
 
 
                   <div class="form-group col-md-6">
                     <label for="codigoUTAC" class="text-bold">Dimensiones</label>
                     <input type="text" class="form-control" name="dimensionesA" id="dimensionesA"
-                      placeholder="Dimensiones" required>
+                      placeholder="Dimensiones" >
                   </div>
                 </div>
 
@@ -426,7 +426,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
                   <div class="form-group col-md-6">
                     <label for="ubicación" class="text-bold">Condición</label>
-                    <select class="form-control" id="condicionA" required>
+                    <select class="form-control" id="condicionA" >
                       <option value="">Seleccione una condición</option>
                       <option value="Buen estado">Buen estado</option>
                       <option value="Mal Estado">Mal Estado</option>
@@ -438,7 +438,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   <div class="form-group col-md-6">
                     <label for="facultad" class="text-bold">Custodio</label>
                     <select class="form-control" id="custodioA" required>
-                      <option value="">Seleccione una Marca</option>
+                      <option value="">Seleccione un custodio</option>
                       <?php
                       include_once ("../../Acciones/crudBienes_Mobiliarios.php");
                       $usuarios = AccionesBienes_mobiliarios::listarUsuariosInsertar();
@@ -454,12 +454,12 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="nombreC" class="text-bold">Serie</label>
-                    <input type="text" class="form-control" name="serieA" id="serieA" placeholder="Serie" required>
+                    <input type="text" class="form-control" name="serieA" id="serieA" placeholder="Serie">
                   </div>
                   <div class="form-group col-md-6">
                     <label for="codigoUTAC" class="text-bold">Valor</label>
                     <input type="number" class="form-control" name="valorA" id="valorA" placeholder="Valor" min="0"
-                      oninput="if(this.value < 1) this.value = 1;" required>
+                      oninput="if(this.value < 1) this.value = 1;">
                   </div>
                 </div>
                 <div class="form-row">
@@ -477,10 +477,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                     <label for="ubicación" class="text-bold">Ubicación</label>
                     <select class="form-control" id="ubicacionA" required>
                       <option value="">Seleccione una Ubicación</option>
-                      <?php
-                      $ubicaciones = AccionesBienes_mobiliarios::listarUbicacionesInsertar();
-                      echo ($ubicaciones['dato']);
-                      ?>
                     </select>
                   </div>
                 </div>
@@ -566,7 +562,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   </div>
                   <div class="form-group col-md-6">
                     <label for="codigoUTAC" class="text-bold">Modelo</label>
-                    <input type="text" class="form-control" name="modeloE" id="modeloE" placeholder="Modelo" required>
+                    <input type="text" class="form-control" name="modeloE" id="modeloE" placeholder="Modelo" >
                   </div>
                 </div>
 
@@ -585,25 +581,26 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   <div class="form-group col-md-6">
                     <label for="nombreC" class="text-bold">Color</label>
                     <input type="text" class="form-control" name="colorE" id="colorE" placeholder="Color"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" >
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="nombreC" class="text-bold">Material</label>
                     <input type="text" class="form-control" name="materialE" id="materialE" placeholder="Material"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" >
                   </div>
                   <div class="form-group col-md-6">
                     <label for="codigoUTAC" class="text-bold">Dimensiones</label>
                     <input type="text" class="form-control" name="dimensionesE" id="dimensionesE"
-                      placeholder="Dimensiones" required>
+                      placeholder="Dimensiones" >
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="ubicación" class="text-bold">Condición</label>
-                    <select class="form-control" id="condicionE" required>
+                    <select class="form-control" id="condicionE" >
+                      <option value="">Seleccione una condición</option>
                       <option value="Buen estado">Buen estado</option>
                       <option value="Mal Estado">Mal Estado</option>
                     </select>
@@ -627,12 +624,12 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   <div class="form-group col-md-6">
                     <label for="nombreC" class="text-bold">Serie</label>
                     <input type="text" class="form-control" name="serieE" id="serieE" placeholder="Serie"
-                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                      oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" >
                   </div>
                   <div class="form-group col-md-6">
                     <label for="codigoUTAC" class="text-bold">Valor</label>
                     <input type="number" class="form-control" name="valorE" id="valorE" placeholder="Valor" min="0"
-                      oninput="if(this.value < 1) this.value = 1;" required>
+                      oninput="if(this.value < 1) this.value = 1;" >
                   </div>
                 </div>
                 <div class="form-row">
@@ -648,10 +645,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   <div class="form-group col-md-6">
                     <label for="ubicación" class="text-bold">Ubicación</label>
                     <select class="form-control" id="ubicacionE" required>
-                      <?php
-                      $ubicaciones = AccionesBienes_mobiliarios::listarUbicacionesInsertar();
-                      echo ($ubicaciones['dato']);
-                      ?>
+                      
                     </select>
                   </div>
                 </div>
@@ -668,11 +662,91 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     </div>
   </div>
 
+  <script>
+    $(document).ready(function () {
+      $('#areaA').change(function () {
+        var areaId = $(this).val();
+        if (areaId) {
+          $.ajax({
+            url: "../../Acciones/CargarUbicaciones.php",
+            type: "GET",
+            data: { area_id: areaId },
+            success: function (response) {
+              try {
+                var ubicaciones = typeof response === 'string' ? JSON.parse(response) : response;
+                console.log("Respuesta parseada: ", ubicaciones);
+
+                if (ubicaciones.codigo === 0) {
+                  $('#ubicacionA').empty();
+                  $('#ubicacionA').append('<option value="">Seleccione una Ubicación</option>');
+                  ubicaciones.dato.forEach(function (ubicacion) {
+                    $('#ubicacionA').append('<option value="' + ubicacion.id + '">' + ubicacion.nombre + '</option>');
+                  });
+                } else {
+                  console.error("Error en la respuesta del servidor:", ubicaciones.mensaje);
+                  alert('Error al cargar las ubicaciones: ' + ubicaciones.mensaje);
+                }
+              } catch (error) {
+                console.error("Error al parsear la respuesta JSON:", error);
+                alert('Error al procesar la respuesta del servidor');
+              }
+            },
+            error: function (error) {
+              console.error("Error en la solicitud AJAX:", error);
+              alert('Error al cargar las ubicaciones');
+            }
+          });
+        } else {
+          $('#ubicacionA').empty();
+          $('#ubicacionA').append('<option value="">Seleccione una Ubicación</option>');
+        }
+      });
+
+      $('#areaE').change(function () {
+        var areaId = $(this).val();
+        if (areaId) {
+          $.ajax({
+            url: "../../Acciones/CargarUbicaciones.php",
+            type: "GET",
+            data: { area_id: areaId },
+            success: function (response) {
+              try {
+                var ubicaciones = typeof response === 'string' ? JSON.parse(response) : response;
+                console.log("Respuesta parseada: ", ubicaciones);
+
+                if (ubicaciones.codigo === 0) {
+                  $('#ubicacionE').empty();
+                  $('#ubicacionE').append('<option value="">Seleccione una Ubicación</option>');
+                  ubicaciones.dato.forEach(function (ubicacion) {
+                    $('#ubicacionE').append('<option value="' + ubicacion.id + '">' + ubicacion.nombre + '</option>');
+                  });
+                } else {
+                  console.error("Error en la respuesta del servidor:", ubicaciones.mensaje);
+                  alert('Error al cargar las ubicaciones: ' + ubicaciones.mensaje);
+                }
+              } catch (error) {
+                console.error("Error al parsear la respuesta JSON:", error);
+                alert('Error al procesar la respuesta del servidor');
+              }
+            },
+            error: function (error) {
+              console.error("Error en la solicitud AJAX:", error);
+              alert('Error al cargar las ubicaciones');
+            }
+          });
+        } else {
+          $('#ubicacionE').empty();
+          $('#ubicacionE').append('<option value="">Seleccione una Ubicación</option>');
+        }
+      });
+    });
+  </script>
+
  <!-- SCRIPT  DE FUNCIONES --> 
  <script>
   $(document).ready(function () {
       $("#formAgregar").submit(function (e) {
-        e.preventDefault();
+        /* e.preventDefault(); */
         codigo_uta = $("#codigoUTAA").val();
         nombre = $("#nombreA").val();
         serie = $("#serieA").val();
@@ -731,71 +805,148 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     });
 
     function cargarTabla() {
-      fetch('../../Acciones/RestBienes_Mobiliarios.php', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-        .then(response => response.json())
-        .then(data => {
-          const tbody = document.querySelector('#dataTable tbody');
-          if ($.fn.DataTable.isDataTable('#dataTable')) {
-            $('#dataTable').DataTable().destroy();
+        fetch('../../Acciones/RestBienes_Mobiliarios.php', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
           }
-          tbody.innerHTML = '';
+        })
+          .then(response => response.json())
+          .then(data => {
+            const tbody = document.querySelector('#dataTable tbody');
+            if ($.fn.DataTable.isDataTable('#dataTable')) {
+              $('#dataTable').DataTable().destroy();
+            }
+            tbody.innerHTML = '';
 
-          if (data.codigo === 0) {
-            tbody.innerHTML = data.dato;
-          } else {
+            if (data.codigo === 0) {
+              data.datos.forEach(respuesta => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                  <td>${respuesta.codigo_uta}</td>
+                  <td>${respuesta.nombre}</td>
+                  <td>${respuesta.serie}</td>
+                  <td>${respuesta.nombre_marca}</td>
+                  <td>${respuesta.modelo}</td>
+                  <td>${respuesta.color}</td>
+                  <td>${respuesta.material}</td>
+                  <td>${respuesta.dimensiones}</td>
+                  <td>${respuesta.condicion}</td>
+                  <td>${respuesta.nombre_custodio} ${respuesta.apellido_custodio}</td>
+                  <td>${respuesta.fecha_ingreso}</td>
+                  <td>${respuesta.valor_contable}</td>
+                  <td>${respuesta.nombre_area}</td>
+                  <td>${respuesta.nombre_ubicacion}</td>
+                  <td class="mdl-data-table__cell">
+                      <center>
+                          <button class="btn btn-warning btn-circle element-white editar" data-id="${respuesta.id}">
+                              <i class="fas fa-edit"></i>
+                          </button>
+                          <button class="btn btn-danger btn-circle eliminar" data-id="${respuesta.id}">
+                              <i class="fas fa-trash"></i>
+                          </button>
+                      </center>
+                  </td>
+       
+                  <input type="hidden" class="id_marca" value="${respuesta.id_marca}">
+                  <input type="hidden" class="id_area_per" value="${respuesta.id_area_per}">
+                  <input type="hidden" class="id_ubi_per" value="${respuesta.id_ubi_per}">
+                  <input type="hidden" class="custodio_actual" value="${respuesta.custodio_actual}">
+              `;
+                tr.dataset.area = respuesta.nombre_area;
+                tr.dataset.bloque = respuesta.nombre_bloque;
+                tbody.appendChild(tr);
+              });
+            } else {
+              const tr = document.createElement('tr');
+              const td = document.createElement('td');
+              td.textContent = 'No se encontraron facultades.';
+              td.setAttribute('colspan', '16');
+              tr.appendChild(td);
+              tbody.appendChild(tr);
+            }
+
+            const dataTable = $('#dataTable').DataTable({
+              scrollX: true,  // Permite el desplazamiento horizontal
+              fixedHeader: {
+                  header: true,  // Fija la cabecera
+                  footer: true   // Fija el pie de página
+              },
+              language: {
+                "decimal": "",
+                "emptyTable": "No hay información",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                "infoEmpty": "Mostrando 0 to 0 of 0 entradas",
+                "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+                "infoPostFix": "",
+                "thousands": ",",
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "loadingRecords": "Cargando...",
+                "processing": "Procesando...",
+                "search": "Buscar:",
+                "zeroRecords": "Sin resultados encontrados",
+                "paginate": {
+                  "first": "Primero",
+                  "last": "Último",
+                  "next": "Siguiente",
+                  "previous": "Anterior"
+                }
+              },
+              dom: '<"top"f>rt<"bottom"ip><"clear">',
+              initComplete: function () {
+                // Insertar el campo de búsqueda por bloque antes del campo de búsqueda general
+                $('#dataTable_filter').append('<label style="margin-left: 10px;">Buscar por marcas:<input type="text" id="searchMarcas" class="form-control input-sm" placeholder="Buscar por marcas" style="display: inline-block; width: auto; height: 30px; padding: 2px 5px; margin-left: 5px;"></label>');
+                // Agregar evento de búsqueda al campo de búsqueda por bloque
+                $('#searchMarcas').on('keyup', function () {
+                  dataTable.column(3).search(this.value).draw(); // 2 es el índice de la columna de facultades/bloques
+                });
+
+                $('#dataTable_filter').append('<label style="margin-left: 10px;">Buscar por Área:<input type="text" id="searchArea" class="form-control input-sm" placeholder="Buscar por Área" style="display: inline-block; width: auto; height: 30px; padding: 2px 5px; margin-left: 5px;"></label>');
+                $('#dataTable_filter').append('<label style="margin-left: 10px;">Buscar por Bloques:<input type="text" id="searchBloques" class="form-control input-sm" placeholder="Buscar por Bloques" style="display: inline-block; width: auto; height: 30px; padding: 2px 5px; margin-left: 5px;"></label>');
+
+                // Agregar evento de búsqueda al campo de búsqueda por Área
+                $('#searchArea').on('keyup', function () {
+                  dataTable.draw();
+                });
+
+                // Agregar evento de búsqueda al campo de búsqueda por Bloques
+                $('#searchBloques').on('keyup', function () {
+                  dataTable.draw();
+                });
+              }
+            });
+            $.fn.dataTable.ext.search.push(
+              function (settings, data, dataIndex) {
+                const areaValue = $('#searchArea').val().toLowerCase();
+                const bloqueValue = $('#searchBloques').val().toLowerCase();
+                const row = dataTable.row(dataIndex).node();
+                const rowArea = $(row).data('area').toString().toLowerCase();
+                const rowBloque = $(row).data('bloque').toString().toLowerCase();
+
+                if (
+                  (areaValue === '' || rowArea.includes(areaValue)) &&
+                  (bloqueValue === '' || rowBloque.includes(bloqueValue))
+                ) {
+                  return true;
+                }
+                return false;
+              }
+            );
+
+            // Agregar event listeners a los botones después de cargar la tabla
+            addEventListeners();
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            const tbody = document.querySelector('#dataTable tbody');
             const tr = document.createElement('tr');
             const td = document.createElement('td');
-            td.textContent = 'No se encontraron bienes mobiliarios.';
+            td.textContent = 'Error al cargar los datos.';
             td.setAttribute('colspan', '16');
             tr.appendChild(td);
             tbody.appendChild(tr);
-          }
-
-          $('#dataTable').DataTable({
-            scrollX: true,  // Permite el desplazamiento horizontal
-            fixedHeader: {
-                header: true,  // Fija la cabecera
-                footer: true   // Fija el pie de página
-            },
-            language: {
-              "decimal": "",
-              "emptyTable": "No hay información",
-              "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
-              "infoEmpty": "Mostrando 0 to 0 of 0 entradas",
-              "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-              "infoPostFix": "",
-              "thousands": ",",
-              "lengthMenu": "Mostrar _MENU_ registros por página",
-              "loadingRecords": "Cargando...",
-              "processing": "Procesando...",
-              "search": "Buscar:",
-              "zeroRecords": "Sin resultados encontrados",
-              "paginate": {
-                "first": "Primero",
-                "last": "Último",
-                "next": "Siguiente",
-                "previous": "Anterior"
-              }
-            }
           });
-          addEventListeners();
-        })
-        .catch(error => {
-          console.error('Error:', error);
-          const tbody = document.querySelector('#dataTable tbody');
-          const tr = document.createElement('tr');
-          const td = document.createElement('td');
-          td.textContent = 'Error al cargar los datos.';
-          td.setAttribute('colspan', '16');
-          tr.appendChild(td);
-          tbody.appendChild(tr);
-        });
-    }
+      }
 
     function addEventListeners() {
       id = "";
@@ -816,13 +967,13 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         id_area_per = fila.find('.id_area_per').val();
         id_ubi_per = fila.find('.id_ubi_per').val();
         custodio_actual = fila.find('.custodio_actual').val();
+        
 
         $("#codigoUTAE").val(codigo_uta);
         $("#nombreE").val(nombre);
         $("#modeloE").val(modelo);
         $("#marcaE").val(id_marca);
         $("#areaE").val(id_area_per);
-        $("#ubicacionE").val(id_ubi_per);
         $("#serieE").val(serie);
         $("#colorE").val(color);
         $("#materialE").val(material);
@@ -830,11 +981,38 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         $("#condicionE").val(condicion);
         $("#custodioE").val(custodio_actual);
         $("#valorE").val(valor);
+        $("#ubicacionE").val(id_ubi_per);
+          if (id_area_per) {
+            $.ajax({
+              url: "../../Acciones/CargarUbicaciones.php",
+              type: "GET",
+              data: { area_id: id_area_per },
+              success: function (response) {
+                var ubicaciones = typeof response === 'string' ? JSON.parse(response) : response;
+                if (ubicaciones.codigo === 0) {
+                  $('#ubicacionE').empty();
+                  $('#ubicacionE').append('<option value="">Seleccione una Ubicación</option>');
+                  ubicaciones.dato.forEach(function (ubicacion) {
+                    $('#ubicacionE').append('<option value="' + ubicacion.id + '">' + ubicacion.nombre + '</option>');
+                  });
+                  $("#ubicacionE").val(id_ubi_per);
+                } else {
+                  alert('Error al cargar las ubicaciones: ' + ubicaciones.mensaje);
+                }
+              },
+              error: function () {
+                alert('Error al cargar las ubicaciones');
+              }
+            });
+          } else {
+            $('#ubicacionE').empty();
+            $('#ubicacionE').append('<option value="">Seleccione una Ubicación</option>');
+          }
         $("#modalCrudEditar").modal('show');
       });
 
       $("#formEditar").submit(function (e) {
-        e.preventDefault();
+     /*e.preventDefault(); */
         id;
         codigo_uta = $("#codigoUTAE").val();
         nombre = $("#nombreE").val();
@@ -886,7 +1064,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       });
 
       $("#formEliminar").submit(function (e) {
-        e.preventDefault();
+        /* e.preventDefault(); */
 
         $.ajax({
           url: "../../Acciones/RestBienes_Mobiliarios.php",
