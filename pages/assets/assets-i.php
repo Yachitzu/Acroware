@@ -1426,7 +1426,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           const serie = document.getElementById('serieComponenteE').value;
           const especificaciones = document.getElementById('especificacionComponenteE').value;
           const repotenciado = document.getElementById('repotenciadoComponenteE').value;
-          const id_bien_infor_per = idBien;
+          //const id_bien_infor_per = idBien;
           const codigo_adi_uta = document.getElementById('codigoAdicionalUTAE').value;
           const motivo_repotenciacion = document.getElementById('motivoRepotenciacionE').value;
 
@@ -1444,7 +1444,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 serie,
                 especificaciones,
                 repotenciado,
-                id_bien_infor_per,
+                //id_bien_infor_per,
                 codigo_adi_uta,
                 motivo_repotenciacion
               })

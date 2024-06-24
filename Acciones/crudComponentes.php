@@ -103,13 +103,13 @@ class Actualizar
                 $conectar = Conexion::getInstance()->getConexion();
     
                 // Actualizar los datos del componente
-                $updatesql = "UPDATE componentes SET nombre = :nombre, descripcion = :descripcion, serie = :serie, especificaciones = :especificaciones, id_bien_infor_per = :id_bien_infor_per, repotenciado = :repotenciado WHERE id = :id";
+                $updatesql = "UPDATE componentes SET nombre = :nombre, descripcion = :descripcion, serie = :serie, especificaciones = :especificaciones, repotenciado = :repotenciado WHERE id = :id";
                 $resultado = $conectar->prepare($updatesql);
                 $resultado->bindParam(':nombre', $data["nombre"], PDO::PARAM_STR);
                 $resultado->bindParam(':descripcion', $data["descripcion"], PDO::PARAM_STR);
                 $resultado->bindParam(':serie', $data["serie"], PDO::PARAM_STR);
                 $resultado->bindParam(':especificaciones', $data["especificaciones"], PDO::PARAM_STR);
-                $resultado->bindParam(':id_bien_infor_per', $data["id_bien_infor_per"], PDO::PARAM_STR);
+                //$resultado->bindParam(':id_bien_infor_per', $data["id_bien_infor_per"], PDO::PARAM_STR);
                 $resultado->bindParam(':repotenciado', $data["repotenciado"], PDO::PARAM_STR);
                 $resultado->bindParam(':id', $id, PDO::PARAM_INT);
                 $resultado->execute();
