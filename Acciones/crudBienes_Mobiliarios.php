@@ -12,73 +12,37 @@ class AccionesBienes_mobiliarios
                         areas.nombre AS nombre_area,
                         ubicaciones.nombre AS nombre_ubicacion,
                         usuarios.nombre AS nombre_custodio, 
-                        usuarios.apellido AS apellido_custodio
+                        usuarios.apellido AS apellido_custodio,
+                        bloques.nombre AS nombre_bloque
+                        
                 FROM bienes_mobiliarios
                 LEFT JOIN marcas ON bienes_mobiliarios.id_marca = marcas.id
                 LEFT JOIN areas ON bienes_mobiliarios.id_area_per = areas.id
                 LEFT JOIN ubicaciones ON bienes_mobiliarios.id_ubi_per = ubicaciones.id
                 LEFT JOIN usuarios ON bienes_mobiliarios.custodio_actual = usuarios.id
+                LEFT JOIN bloques ON bienes_mobiliarios.id_blo_per = bloques.id
                 WHERE bienes_mobiliarios.activo = 'si'"
             );
             $consulta->execute();
             $dato = $consulta->fetchAll(PDO::FETCH_ASSOC);
-            $tabla = '';
-    
-            foreach ($dato as $respuesta) {
-                $nombreCompletoCustodio = htmlspecialchars($respuesta['nombre_custodio']) . ' ' . htmlspecialchars($respuesta['apellido_custodio']);
-                $tabla .= '
-                    <tr>
-                        <td>' . htmlspecialchars($respuesta['codigo_uta']) . '</td>
-                        <td>' . htmlspecialchars($respuesta['nombre']) . '</td>
-                        <td>' . htmlspecialchars($respuesta['serie']) . '</td>
-                        <td>' . htmlspecialchars($respuesta['nombre_marca']) . '</td>
-                        <td>' . htmlspecialchars($respuesta['modelo']) . '</td>
-                        <td>' . htmlspecialchars($respuesta['color']) . '</td>
-                        <td>' . htmlspecialchars($respuesta['material']) . '</td>
-                        <td>' . htmlspecialchars($respuesta['dimensiones']) . '</td>
-                        <td>' . htmlspecialchars($respuesta['condicion']) . '</td>
-                        <td>' . $nombreCompletoCustodio . '</td>
-                        <td>' . htmlspecialchars($respuesta['fecha_ingreso']) . '</td>
-                        <td>' . htmlspecialchars($respuesta['valor_contable']) . '</td>
-                        <td>' . htmlspecialchars($respuesta['nombre_area']) . '</td>
-                        <td>' . htmlspecialchars($respuesta['nombre_ubicacion']) . '</td>
-                        <td class="mdl-data-table__cell">
-                            <center>
-                                <button class="btn btn-warning btn-circle element-white editar" data-id="' . htmlspecialchars($respuesta['id']) . '" id="editar">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-danger btn-circle eliminar" data-id="' . htmlspecialchars($respuesta['id']) . '" id="eliminar">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </center>
-                        </td>
-                        <input type="hidden" class="id_marca" value="' . htmlspecialchars($respuesta['id_marca']) . '">
-                        <input type="hidden" class="id_area_per" value="' . htmlspecialchars($respuesta['id_area_per']) . '">
-                        <input type="hidden" class="id_ubi_per" value="' . htmlspecialchars($respuesta['id_ubi_per']) . '">
-                        <input type="hidden" class="custodio_actual" value="' . htmlspecialchars($respuesta['custodio_actual']) . '">
-                    </tr>
-                ';
-            }
-    
-            return [
+
+            return json_encode([
                 'codigo' => 0,
-                'dato' => $tabla,
-            ];
+                'datos' => $dato
+            ]);
         } catch (PDOException $e) {
-            error_log('Error al listar bienes mobiliarios: ' . $e->getMessage());
-            return [
+            error_log('Error al listar bienes informaticos: ' . $e->getMessage());
+            return json_encode([
                 'codigo' => 1,
-                'mensaje' => 'Error al listar bienes mobiliarios: ' . $e->getMessage()
-            ];
+                'mensaje' => 'Error al listar bienes informaticos: ' . $e->getMessage()
+            ]);
         }
     }
-    
-
     public static function listarMarcasInsertar()
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = "SELECT * from marcas where activo = 'si'";
+            $consulta = "SELECT * from marcas where activo = 'si' AND area='mobiliario'";
             $resultado = $conexion->prepare($consulta);
             $resultado->execute();
             $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -103,33 +67,33 @@ class AccionesBienes_mobiliarios
     }
 
     public static function listarUsuariosInsertar()
-{
-    try {
-        $conexion = Conexion::getInstance()->getConexion();
-        $consulta = "SELECT id, nombre, apellido FROM usuarios WHERE activo = 'si'";
-        $resultado = $conexion->prepare($consulta);
-        $resultado->execute();
-        $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
-        $tabla = '';
+    {
+        try {
+            $conexion = Conexion::getInstance()->getConexion();
+            $consulta = "SELECT id, nombre, apellido FROM usuarios WHERE activo = 'si'";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->execute();
+            $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
+            $tabla = '';
 
-        foreach ($dato as $respuesta) {
-            $nombreCompleto = htmlspecialchars($respuesta['nombre']) . ' ' . htmlspecialchars($respuesta['apellido']);
-            $tabla .= '
+            foreach ($dato as $respuesta) {
+                $nombreCompleto = htmlspecialchars($respuesta['nombre']) . ' ' . htmlspecialchars($respuesta['apellido']);
+                $tabla .= '
             <option value="' . htmlspecialchars($respuesta['id']) . '">' . $nombreCompleto . '</option>';
-        }
+            }
 
-        return [
-            'codigo' => 0,
-            'dato' => $tabla,
-        ];
-    } catch (PDOException $e) {
-        error_log('Error al listar usuarios: ' . $e->getMessage());
-        return [
-            'codigo' => 1,
-            'mensaje' => 'Error al listar usuarios: ' . $e->getMessage()
-        ];
+            return [
+                'codigo' => 0,
+                'dato' => $tabla,
+            ];
+        } catch (PDOException $e) {
+            error_log('Error al listar usuarios: ' . $e->getMessage());
+            return [
+                'codigo' => 1,
+                'mensaje' => 'Error al listar usuarios: ' . $e->getMessage()
+            ];
+        }
     }
-}
 
 
     public static function listarAreasInsertar()
@@ -192,8 +156,19 @@ class AccionesBienes_mobiliarios
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = $conexion->prepare("INSERT INTO bienes_mobiliarios(codigo_uta,nombre,serie,id_marca,modelo,color,material,dimensiones,condicion,custodio_actual,valor_contable,id_area_per,id_ubi_per)
-        VALUES (:codigo_uta,:nombre,:serie,:id_marca,:modelo,:color,:material,:dimensiones,:condicion,:custodio_actual,:valor_contable,:id_area_per,:id_ubi_per)");
+            // Obtener el bloque_id desde el área
+            $consultaArea = $conexion->prepare("SELECT id_bloque_per FROM areas WHERE id = :id_area");
+            $consultaArea->bindParam(':id_area', $id_area_per, PDO::PARAM_INT);
+            $consultaArea->execute();
+            $area = $consultaArea->fetch(PDO::FETCH_ASSOC);
+
+            if (!$area) {
+                throw new PDOException("Área no encontrada");
+            }
+
+            $bloque_id = $area['id_bloque_per'];
+            $consulta = $conexion->prepare("INSERT INTO bienes_mobiliarios(codigo_uta,nombre,serie,id_marca,modelo,color,material,dimensiones,condicion,custodio_actual,valor_contable,id_area_per,id_ubi_per,id_blo_per)
+        VALUES (:codigo_uta,:nombre,:serie,:id_marca,:modelo,:color,:material,:dimensiones,:condicion,:custodio_actual,:valor_contable,:id_area_per,:id_ubi_per, :bloqueID)");
             $consulta->bindParam(':codigo_uta', $codigo_uta);
             $consulta->bindParam(':nombre', $nombre);
             $consulta->bindParam(':serie', $serie);
@@ -207,6 +182,7 @@ class AccionesBienes_mobiliarios
             $consulta->bindParam(':valor_contable', $valor);
             $consulta->bindParam(':id_area_per', $id_area_per);
             $consulta->bindParam(':id_ubi_per', $id_ubi_per);
+            $consulta->bindParam(':bloqueID', $bloque_id);
             $consulta->execute();
             return 0;
         } catch (PDOException $e) {
@@ -215,13 +191,24 @@ class AccionesBienes_mobiliarios
         }
     }
 
-    public static function actualizarBienes_mobiliarios($id,$codigo_uta, $nombre, $serie, $id_marca, $modelo, $color, $material, $dimensiones, $condicion, $custodio, $valor, $id_area_per, $id_ubi_per)
+    public static function actualizarBienes_mobiliarios($id, $codigo_uta, $nombre, $serie, $id_marca, $modelo, $color, $material, $dimensiones, $condicion, $custodio, $valor, $id_area_per, $id_ubi_per)
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
+            // Obtener el bloque_id desde el área
+            $consultaArea = $conexion->prepare("SELECT id_bloque_per FROM areas WHERE id = :id_area");
+            $consultaArea->bindParam(':id_area', $id_area_per, PDO::PARAM_INT);
+            $consultaArea->execute();
+            $area = $consultaArea->fetch(PDO::FETCH_ASSOC);
+
+            if (!$area) {
+                throw new PDOException("Área no encontrada");
+            }
+
+            $bloque_id = $area['id_bloque_per'];
             $consulta = $conexion->prepare("UPDATE bienes_mobiliarios SET codigo_uta= :codigo_uta, nombre= :nombre, serie= :serie, id_marca= :id_marca,
         modelo= :modelo, color= :color, material= :material, dimensiones= :dimensiones, condicion= :condicion, custodio_actual= :custodio_actual, valor_contable= :valor_contable, 
-        id_area_per= :id_area_per, id_ubi_per= :id_ubi_per WHERE id= :id");
+        id_area_per= :id_area_per, id_ubi_per= :id_ubi_per, id_blo_per= :bloqueID WHERE id= :id");
             $consulta->bindParam(':id', $id);
             $consulta->bindParam(':codigo_uta', $codigo_uta);
             $consulta->bindParam(':nombre', $nombre);
@@ -236,6 +223,7 @@ class AccionesBienes_mobiliarios
             $consulta->bindParam(':valor_contable', $valor);
             $consulta->bindParam(':id_area_per', $id_area_per);
             $consulta->bindParam(':id_ubi_per', $id_ubi_per);
+            $consulta->bindParam(':bloqueID', $bloque_id);
             $consulta->execute();
             return 0;
         } catch (PDOException $e) {
