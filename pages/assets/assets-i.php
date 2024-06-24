@@ -1475,6 +1475,9 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 break;
               }
             }
+            if (repotenciadoEInput.value === 'si') {
+              repotenciadoEInput.disabled = true;
+            }
             componenteAEditarId = id;
             manejarCampoAdicionales();
 
