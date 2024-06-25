@@ -247,7 +247,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
 
           <div class="container-fluid py-4">
-
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
               <div class="card-header py-3">
@@ -263,7 +262,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                                     Generar Reporte  <i class="fas fa-file-alt"></i>
                                 </button>
                             </div>
-                            <p>Tipo Reporte</p>
                         </div>
                     </div>
                 </div>
@@ -278,7 +276,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                                     Generar Reporte  <i class="fas fa-file-alt"></i>
                                 </button>
                             </div>
-                            <p>Tipo Reporte</p>
                         </div>
                     </div>
                 </div>
@@ -293,59 +290,61 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                                     Generar Reporte  <i class="fas fa-file-alt"></i>
                                 </button>
                             </div>
-                            <p>Tipo Reporte</p>
                         </div>
                     </div>
                 </div>
-            </div>
+                
               </div>
-              <div class="card-body bg-darkwhite">
-                <div class="table-responsive">
-                  <!-- <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%"
-                    cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Tipo Reporte</th>
-                            <th>Extensión</th>
-                            <th>Fecha Generación</th>
-                            <th>Usuario</th>
-                            <th>Acción</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th>Reporte_Bienes01</th>
-                            <th>B. Informaticos</th>
-                            <th>PDF</th>
-                            <th>2024/05/15</th>
-                            <th>Christian</th>
-                            <th>
-                                <center>
-                                    <button class="btn btn-danger btn-circle eliminar" data-id="' . $respuesta['id'] . '" id="eliminar">
-                                        <i class="fas fa-download"></i>
-                                    </button>
-                                </center>
-                            </th>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Tipo Reporte</th>
-                            <th>Extensión</th>
-                            <th>Fecha Generación</th>
-                            <th>Usuario</th>
-                            <th>Acción</th>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-
-                    </tbody>
-                  </table> -->
+              </div>
+              <div class="card-header py-3">
+              <div class="row">
+                <!-- Card 4: Bienes Pcs
+                <div class="col-md-4 stretch-card transparent">
+                    <div class="card card-dark-blue">
+                        <div class="card-body">
+                            <p class="mb-4 font-berthold-small">Bienes Pcs</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="fs-30 mb-2"><i class="ti-desktop"></i> </p>
+                                <button class="btn btn-primary text-bold generar-reporte-pcs" id="generar-reporte-pcs">
+                                    Generar Reporte  <i class="fas fa-file-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                Card 2: Bienes Totales
+                <div class="col-md-4 stretch-card transparent">
+                    <div class="card card-light-danger">
+                        <div class="card-body">
+                            <p class="mb-4 font-berthold-small">Bienes Totales</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="fs-30 mb-2"><i class="ti-panel"></i> </p>
+                                <button class="btn btn-primary text-bold generar-reporte-lab" id="generar-reporte-lab">
+                                    Generar Reporte  <i class="fas fa-file-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <!-- Card 4: QR -->
+                <div class="col-md-4 stretch-card transparent">
+                    <div class="card card-light-blue">
+                        <div class="card-body">
+                            <p class="mb-4 font-berthold-small">Códigos QR</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="fs-30 mb-2"><i class="ti-layers"></i> </p>
+                                <button class="btn btn-primary text-bold generar-reporte-qr" id="generar-reporte-qr">
+                                    Generar Reporte  <i class="fas fa-file-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+              </div>
               </div>
             </div>
+            
 
           </div>
           <!-- /.container-fluid -->
@@ -416,7 +415,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   <div class="form-group col-md-6">
                     <label for="areaC" class="text-bold">Área</label>
                     <select class="form-control" name="areaI" id="areaC" required>
-                      <option value="">Seleccione un Área</option>
                           <option value="any">Todos</option>
                           <?php
                             include_once ("../../Acciones/crudMarcas.php");
@@ -428,7 +426,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                     <div class="form-group col-md-6">
                         <label for="areaC" class="text-bold">Marca</label>
                         <select class="form-control" name="marcaI" id="areaC" required>
-                        <option value="">Seleccione una marca</option>
                         <option value="any">Todos</option>
                           <?php
                           include_once ("../../Acciones/crudMarcas.php");
@@ -492,7 +489,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   <div class="form-group col-md-12">
                     <label for="custodioM" class="text-bold">Custodio</label>
                     <select class="form-control" name="custodioM" id="custodioM" required>
-                      <option value="">Seleccione un Custodio</option>
                       <option value="any">Todos</option>
                       <?php
                           include_once ("../../Acciones/crudMarcas.php");
@@ -506,7 +502,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   <div class="form-group col-md-6">
                     <label for="areaC" class="text-bold">Área</label>
                     <select class="form-control" name="areaM" id="areaC" required>
-                      <option value="">Seleccione un Área</option>
                       <option value="any">Todos</option>
                       <?php
                           include_once ("../../Acciones/crudMarcas.php");
@@ -518,7 +513,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   <div class="form-group col-md-6">
                     <label for="areaC" class="text-bold">Marca</label>
                     <select class="form-control" name="marcaM" id="areaC" required>
-                      <option value="">Seleccione una Marca</option>
                       <option value="any">Todos</option>
                       <?php
                           include_once ("../../Acciones/crudMarcas.php");
@@ -581,11 +575,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   <div class="form-group col-md-6">
                     <label for="areaC" class="text-bold">Tipo Licencia</label>
                     <select class="form-control" name="licenciaSW" id="licenciaSW" required>
-                      <option value="">Seleccione una licencia</option>
                       <option value="any">Todos</option>
-                      <option value="Dominio Público">Dominio Público</option>
-                      <option value="Codigo Abierto">Codigo Abierto</option>
-                      <option value="Suscripción">Suscripción</option>
                       <option value="Propietario">Propietario</option>
                       <option value="Gratuito">Gratuito</option>
                     </select>
@@ -593,7 +583,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   <div class="form-group col-md-6">
                     <label for="activoSW" class="text-bold">Activado</label>
                     <select class="form-control" name="activoSW" id="activoSW" required>
-                      <option value="">Seleccione un estado</option>
                       <option value="any">Todos</option>
                       <option value="si">Si</option>
                       <option value="no">No</option>
@@ -632,7 +621,80 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       </div>
     </div>
   </div>
-  
+
+    <!-- Create Modal-->
+    <div class="modal fade modal-crud" id="modalQr" tabindex="-1" role="dialog"
+    aria-labelledby="modal-register-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h3 class="modal-title text-white" id="modal-register-label">Reportes Etiquetas</h3>
+          <p class="modal">Ingrese los datos del Usuario:</p>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
+        </div>
+        <form class="forms-sample" id="repBInformaticos" method="post" action= "../../Acciones/ReporteQR.php" target="_blank">
+          <div class="modal-body">
+            <div class="grid-margin-modal">
+              <div class="card-body">
+                <p class="card-description">Por favor, complete los siguientes campos para generar un reporte:</p>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="areaQR" class="text-bold">Área</label>
+                    <select class="form-control" name="areaQR" id="areaQR" required>
+                          <option value="any">Todos</option>
+                          <?php
+                            include_once ("../../Acciones/crudMarcas.php");
+                            $areas = Obtener::ObtenerArea();
+                            echo ($areas['dato']);
+                          ?>
+                    </select>
+                  </div>
+                    <!-- <div class="form-group col-md-6">
+                        <label for="areaC" class="text-bold">Marca</label>
+                        <select class="form-control" name="marcaI" id="areaC" required>
+                        <option value="any">Todos</option>
+                          <?php
+                          // include_once ("../../Acciones/crudMarcas.php");
+                          // $marcas = Obtener::ObtenerNombreT();
+                          // echo ($marcas['dato']);
+                          ?>
+                        </select>
+                    </div> -->
+                </div>
+                <!-- <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="fechaInicialI" class="text-bold">Fecha Inicial</label>
+                        <input type="date" class="form-control" name="fechaInicialI" id="fechaInicialI" placeholder="Selecciona una fecha" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="fechaFinalI" class="text-bold">Fecha Final</label>
+                        <input type="date" class="form-control" name="fechaFinalI" id="fechaFinalI" placeholder="Selecciona una fecha" required>
+                    </div>
+                </div> -->
+                <!-- <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label for="tipoI" class="text-bold">Tipo Archivo</label>
+                    <select class="form-control" name="tipoArchivoI" id="tipoI" required>
+                      <option value="">Seleccione un Tipo</option>
+                      <option value="pdf">PDF</option>
+                      <option value="excel">Excel</option>
+                    </select>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-dismiss="modal"
+              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="submit" class="btn-crud btn-primary text-bold" value="Generar Reporte">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
   <!-- plugins:js -->
   <script src="../../resources/vendors/js/vendor.bundle.base.js"></script>
   <!-- endinject -->
