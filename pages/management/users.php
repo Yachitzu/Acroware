@@ -621,6 +621,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
   <!-- Page level custom scripts -->
   <script src="../../resources/js/datatables-demo.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 
@@ -801,14 +802,32 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     } else if (response.status === 409) {
       // Si el estado es 409, mostrar mensaje de error específico
       const errorData = await response.json();
-      alert(errorData.error);
+      Swal.fire({
+                icon: "info",
+                text: errorData.error,
+                confirmButtonText: "Cerrar",
+                confirmButtonColor: "#bd3503", 
+                iconColor: "#bd3503"
+            });
     } else {
       console.error('Error al agregar usuario:', response.statusText);
-      alert("Error al agregar usuario: " + response.statusText);
+      Swal.fire({
+                icon: "info",
+                text: errorData.error,
+                confirmButtonText: "Cerrar",
+                confirmButtonColor: "#bd3503", 
+                iconColor: "#bd3503"
+            });
     }
   } catch (error) {
     console.error('Error al agregar usuario:', error);
-    alert("Error al agregar usuario: " + error.message);
+    Swal.fire({
+                icon: "info",
+                text: errorData.error,
+                confirmButtonText: "Cerrar",
+                confirmButtonColor: "#bd3503", 
+                iconColor: "#bd3503"
+            });
   }
 });
 
@@ -827,7 +846,13 @@ document.getElementById('editarUserForm').addEventListener('submit', async funct
         const correoRepetido = await verificarCorreo.json();
 
         if (correoRepetido.repeated) {
-            alert("No puede usar un correo repetido");
+          Swal.fire({
+                icon: "info",
+                text: "No se puede usar un correo Repetido",
+                confirmButtonText: "Cerrar",
+                confirmButtonColor: "#bd3503", 
+                iconColor: "#bd3503"
+            });
             return;
         }
 
@@ -849,15 +874,33 @@ document.getElementById('editarUserForm').addEventListener('submit', async funct
                 editarModal.hide();
             } else {
                 console.error('Error al editar usuario:', result.message);
-                alert("Error al editar usuario: correo repetido" );
+                Swal.fire({
+                icon: "info",
+                text: "Error al editar usuario: correo repetido",
+                confirmButtonText: "Cerrar",
+                confirmButtonColor: "#bd3503", 
+                iconColor: "#bd3503"
+            });
             }
         } else {
             console.error('Error al editar usuario:', response.statusText);
-            alert("Error al editar usuario: correo repetido" );
+            Swal.fire({
+                icon: "info",
+                text: "Error al editar usuario: correo repetido",
+                confirmButtonText: "Cerrar",
+                confirmButtonColor: "#bd3503", 
+                iconColor: "#bd3503"
+            });
         }
     } catch (error) {
         console.error('Error al editar usuario:', error);
-        alert("Error al editar usuario: correo repetido" );
+        Swal.fire({
+                icon: "info",
+                text: "Error al editar usuario: correo repetido",
+                confirmButtonText: "Cerrar",
+                confirmButtonColor: "#bd3503", 
+                iconColor: "#bd3503"
+            });
     }
 });
 
@@ -892,7 +935,13 @@ document.getElementById('editarUserForm').addEventListener('submit', async funct
 
           } else {
             console.error('Error al eliminar usuario:', responseData.message || response.statusText);
-            alert(responseData.message)
+            Swal.fire({
+                icon: "info",
+                text: responseData.message,
+                confirmButtonText: "Cerrar",
+                confirmButtonColor: "#bd3503", 
+                iconColor: "#bd3503"
+            });
           }
         }
       } catch (error) {
