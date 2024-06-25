@@ -585,15 +585,22 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                     </select>
                   </div>
                 </div>
-                <div class="form-group col-md-12">
-                  <label for="usuario" class="text-bold">Laboratorista Encargado</label>
-                  <select class="form-control" id="usuarioA" required>
-                    <option value="">Seleccione un Laboratorista</option>
-                    <?php
-                    $usuarios = AccionesBienes_Informaticos::listarUsuariosInsertar();
-                    echo ($usuarios['dato']);
-                    ?>
-                  </select>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="usuario" class="text-bold">Laboratorista Encargado</label>
+                    <select class="form-control" id="usuarioA" required>
+                      <option value="">Seleccione un Laboratorista</option>
+                      <?php
+                      $usuarios = AccionesBienes_Informaticos::listarUsuariosInsertar();
+                      echo ($usuarios['dato']);
+                      ?>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="ipA" class="text-bold">Dirección IP</label>
+                    <input type="text" class="form-control" name="ipA" id="ipA" placeholder="Dirección IP" required>
+                    <small id="ipError" class="text-danger"></small>
+                  </div>
                 </div>
               </div>
             </div>
@@ -606,6 +613,47 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       </div>
     </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Seleccionar el campo de entrada de IP
+      const ipInput = document.getElementById('ipA');
+      const ipError = document.getElementById('ipError');
+
+      // Función para validar la dirección IP
+      function validarIP(ip) {
+        // Expresión regular para IPv4
+        const regex =
+          /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+
+        // Verificar si la IP coincide con la expresión regular
+        return regex.test(ip);
+      }
+
+      // Evento de entrada para validar la IP en tiempo real
+      ipInput.addEventListener('input', function() {
+        const ip = ipInput.value.trim();
+        if (ip === '') {
+          ipError.textContent = '';
+        } else if (validarIP(ip)) {
+          ipError.textContent = '';
+        } else {
+          ipError.textContent = 'Ingrese una dirección IP válida';
+        }
+      });
+
+      // Manejar la validación del formulario al enviar
+      const formAgregarBienes = document.getElementById('formAgregarBienes');
+      formAgregarBienes.addEventListener('submit', function(event) {
+        const ip = ipInput.value.trim();
+        if (!validarIP(ip)) {
+          ipError.textContent = 'Ingrese una dirección IP válida';
+          event.preventDefault(); // Evitar que el formulario se envíe si la IP no es válida
+        }
+      });
+    });
+  </script>
+
   <!-- Delete Modal-->
   <div class="modal fade" id="modalCrudEliminarBienes" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
     <div class="modal-dialog">
@@ -704,7 +752,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
                     </select>
                   </div>
-                  <div class="form-group col-md-12">
+                  <div class="form-group col-md-6">
                     <label for="usuario" class="text-bold">Laboratorista Encargado</label>
                     <select class="form-control" id="usuarioE" required>
                       <?php
@@ -712,6 +760,11 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                       echo ($usuarios['dato']);
                       ?>
                     </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="ipE" class="text-bold">Dirección IP</label>
+                    <input type="text" class="form-control" name="ipE" id="ipE" placeholder="Dirección IP" required>
+                    <small id="ipErrorE" class="text-danger"></small>
                   </div>
                 </div>
               </div>
@@ -725,6 +778,46 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       </div>
     </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Seleccionar el campo de entrada de IP
+      const ipInput = document.getElementById('ipE');
+      const ipError = document.getElementById('ipErrorE');
+
+      // Función para validar la dirección IP
+      function validarIP(ip) {
+        // Expresión regular para IPv4
+        const regex =
+          /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+
+        // Verificar si la IP coincide con la expresión regular
+        return regex.test(ip);
+      }
+
+      // Evento de entrada para validar la IP en tiempo real
+      ipInput.addEventListener('input', function() {
+        const ip = ipInput.value.trim();
+        if (ip === '') {
+          ipError.textContent = '';
+        } else if (validarIP(ip)) {
+          ipError.textContent = '';
+        } else {
+          ipError.textContent = 'Ingrese una dirección IP válida';
+        }
+      });
+
+      // Manejar la validación del formulario al enviar
+      const formAgregarBienes = document.getElementById('formAgregarBienes');
+      formAgregarBienes.addEventListener('submit', function(event) {
+        const ip = ipInput.value.trim();
+        if (!validarIP(ip)) {
+          ipError.textContent = 'Ingrese una dirección IP válida';
+          event.preventDefault(); // Evitar que el formulario se envíe si la IP no es válida
+        }
+      });
+    });
+  </script>
 
   <div class="modal fade modal-crud" id="modalCambiarCustodio" tabindex="-1" role="dialog"
     aria-labelledby="modal-register-label" aria-hidden="true">
@@ -1126,6 +1219,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         let modelo = $("#modeloA").val();
         let id_area_per = $("#areaA").val();
         let id_ubi_per = $("#ubicacionA").val();
+        let ip = $("#ipA").val();
         let custodio = $("#usuarioA").val();
         $.ajax({
           url: "../../Acciones/RestBienes_Informaticos.php",
@@ -1138,6 +1232,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             modelo: modelo,
             id_area_per: id_area_per,
             id_ubi_per: id_ubi_per,
+            ip: ip,
             custodio: custodio
           }),
           contentType: "application/json",
@@ -1154,6 +1249,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             $("#modeloA").val("");
             $("#areaA").val("");
             $("#ubicacionA").val("");
+            $("#ipA").val("");
             $("#usuarioA").val("");
             cargarTabla();
           }
@@ -1205,6 +1301,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   <input type="hidden" class="id_area_per" value="${respuesta.id_area_per}">
                   <input type="hidden" class="id_bien" value="${respuesta.id}">
                   <input type="hidden" class="id_ubi_per" value="${respuesta.id_ubi_per}">
+                  <input type="hidden" class="ip" value="${respuesta.ip}">
                   <input type="hidden" class="custodio" value="${respuesta.custodio}">
               `;
                 tr.dataset.area = respuesta.nombre_area;
@@ -1308,6 +1405,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           let serie = fila.find('.serie').val();
           let id_area_per = fila.find('.id_area_per').val();
           let id_ubi_per = fila.find('.id_ubi_per').val();
+          let ip = fila.find('.ip').val();
           let custodio = fila.find('.custodio').val();
 
           $("#codigoUTAE").val(codigo_uta);
@@ -1316,6 +1414,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           $("#marcaE").val(id_marca);
           $("#areaE").val(id_area_per);
           $("#serieE").val(serie);
+          $("#ipE").val(ip);
           $("#usuarioE").val(custodio)
           $("#ubicacionE").val(id_ubi_per);
           if (id_area_per) {
@@ -1358,6 +1457,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           let serie = $("#serieE").val();
           let id_area_per = $("#areaE").val();
           let id_ubi_per = $("#ubicacionE").val();
+          let ip = $("#ipE").val();
           let custodio = $("#usuarioE").val();
           $.ajax({
             url: "../../Acciones/RestBienes_Informaticos.php",
@@ -1371,6 +1471,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               serie: serie,
               id_area_per: id_area_per,
               id_ubi_per: id_ubi_per,
+              ip: ip,
               custodio: custodio
             }),
             contentType: "application/json",
