@@ -1696,6 +1696,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             if (responseData.success) {
               // Si la solicitud es exitosa, recarga la lista de marcas
               await cargarTabla();
+              location.reload();
               // Cierra el modal de eliminación
               $("#modalCrudEliminarComponente").modal('hide');
 
