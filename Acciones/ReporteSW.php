@@ -1,69 +1,87 @@
 <?php
 
-header('Content-Type: application/json');
 $op = $_SERVER["REQUEST_METHOD"];
 if ($op == "POST" && $_POST["tipoArchivoSW"] == "pdf") {
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe PDF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            width: 210mm;
+            margin: 0 auto;
+            padding: 20mm;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            text-align: center;
+            margin: 0;
+            padding: 10px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            page-break-inside: avoid;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 12px;
+            color: #777;
+        }
+        @media print {
+            body {
+                margin: 0;
+            }
+            .container {
+                box-shadow: none;
+                width: 100%;
+                padding: 0;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CODECRAFTERS</h1>
+        <img src="../resources/images/logos/acroware-mini.png" alt="Logo" style="float: right; width: 50px;">
+        <h2>REPORTE DE SOFTWARE</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>NOMBRE</th>
+                    <th>ACTIVO</th>
+                    <th>FECHA DE COMPRA</th>
+                    <th>FECHA DE ACTIVACION</th>
+                </tr>
+            </thead>
+            <tbody>
+<?php
    
-   require_once('fpdf/fpdf.php'); //Llamando a la Libreria TCPDF
-   class PDF extends FPDF
-   {
-      // Cabecera de página
-      function Header()
-      {
-         $this->Image('../resources/images/logos/acroware-mini.png', 270, 5, 20); //logo de la empresa,moverDerecha,moverAbajo,tamañoIMG
-         $this->SetFont('Arial', 'B', 19); //tipo fuente, negrita(B-I-U-BIU), tamañoTexto
-         $this->Cell(95); // Movernos a la derecha
-         $this->SetTextColor(0, 0, 0); //color
-         //creamos una celda o fila
-         $this->Cell(110, 15, utf8_decode('CODECRAFTERS'), 1, 1, 'C', 0); // AnchoCelda,AltoCelda,titulo,borde(1-0),saltoLinea(1-0),posicion(L-C-R),ColorFondo(1-0)
-         $this->Ln(3); // Salto de línea
-         $this->SetTextColor(103); //color
-   
-         /* TITULO DE LA TABLA */
-         //color
-         $this->SetTextColor(228, 100, 0);
-         $this->Cell(100); // mover a la derecha
-         $this->SetFont('Arial', 'B', 15);
-         $this->Cell(100, 10, utf8_decode("REPORTE DE BIENES DE SOFTWARE "), 0, 1, 'C', 0);
-         $this->Ln(7);
-   
-         /* CAMPOS DE LA TABLA */
-         //color
-         $this->SetFillColor(228, 100, 0); //colorFondo
-         $this->SetTextColor(255, 255, 255); //colorTexto
-         $this->SetDrawColor(163, 163, 163); //colorBorde
-         $this->SetFont('Arial', 'B', 11);
-         $this->Cell(30, 10, utf8_decode('NOMBRE'), 1, 0, 'C', 1);
-         $this->Cell(40, 10, utf8_decode('PROVEEDOR'), 1, 0, 'C', 1);
-         $this->Cell(30, 10, utf8_decode('ACTIVO'), 1, 0, 'C', 1);
-         $this->Cell(55, 10, utf8_decode('TIPO DE LICENCIA'), 1, 0, 'C', 1);
-         $this->Cell(55, 10, utf8_decode('FECHA DE COMPRA'), 1, 0, 'C', 1);
-         $this->Cell(55, 10, utf8_decode('FECHA DE ACTIVACIÓN'), 1, 1, 'C', 1);
-      }
-   
-      // Pie de página
-      function Footer()
-      {
-         global $dato;
-         $this->SetY(-15); // Posición: a 1,5 cm del final
-         $this->SetFont('Arial', 'I', 8); //tipo fuente, negrita(B-I-U-BIU), tamañoTexto
-         $this->Cell(0, 10, utf8_decode('Página ') . $this->PageNo() . '/{nb}', 0, 0, 'C'); //pie de pagina(numero de pagina)
-   
-         $this->SetY(-15); // Posición: a 1,5 cm del final
-         $this->SetFont('Arial', 'I', 8); //tipo fuente, cursiva, tamañoTexto
-         $hoy = date('d/m/Y');
-         $this->Cell(540, 10, utf8_decode($hoy), 0, 0, 'C'); // pie de pagina(fecha de pagina)
-      }
-   }
    include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php');
-   
-   $pdf = new PDF();
-   $pdf->AddPage("landscape"); /* aqui entran dos para parametros (horientazion,tamaño)V->portrait H->landscape tamaño (A3.A4.A5.letter.legal) */
-   $pdf->AliasNbPages(); //muestra la pagina / y total de paginas
-   
-   $pdf->SetFont('Arial', '', 12);
-   $pdf->SetDrawColor(163, 163, 163); //colorBorde
-
    $conexion = Conexion::getInstance()->getConexion();
    $licencia = $_POST["licenciaSW"];
    $activo = $_POST["activoSW"];
@@ -102,18 +120,27 @@ if ($op == "POST" && $_POST["tipoArchivoSW"] == "pdf") {
    }
    $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
    foreach ($dato as $respuesta) {
-      /* TABLA */
-      $pdf->Cell(30, 10, utf8_decode($respuesta['nombre_software']), 1, 0, 'C', 0);
-      $pdf->Cell(40, 10, utf8_decode($respuesta['proveedor']), 1, 0, 'C', 0);
-      $pdf->Cell(40, 10, utf8_decode($respuesta['activado']), 1, 0, 'C', 0);
-      $pdf->Cell(40, 10, utf8_decode($respuesta['tipo_licencia']), 1, 0, 'C', 0);
-      $pdf->Cell(85, 10, utf8_decode($respuesta['fecha_adqui']), 1, 0, 'C', 0);
-      $pdf->Cell(40, 10, utf8_decode($respuesta['fecha_activacion']), 1, 1, 'C', 0);
-   }
-   
-   
-   
-   $pdf->Output('ReporteSW.pdf', 'I');//nombreDescarga, Visor(I->visualizar - D->descargar)
+                    echo "<tr>";
+                    echo "<td>" . htmlspecialchars($respuesta['nombre_software']) . "</td>";
+                    echo "<td>" . htmlspecialchars($respuesta['activado']) . "</td>";
+                    echo "<td>" . htmlspecialchars($respuesta['fecha_adqui']) . "</td>";
+                    echo "<td>" . htmlspecialchars($respuesta['fecha_activacion']) . "</td>";
+                    echo "</tr>";
+                }
+            ?> 
+            </tbody>
+        </table>
+        <div class="footer">
+            <p>Informe generado el <span id="date"></span></p>
+        </div>
+    </div>
+    <script>
+        document.getElementById('date').textContent = new Date().toLocaleDateString();
+    </script>
+</body>
+</html>
+
+<?php
 }else if ($op == "POST" && $_POST["tipoArchivoSW"] == "excel") {
 
    header('Content-Type: application/vnd.ms-excel; charset=UTF-8');
