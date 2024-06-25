@@ -56,9 +56,10 @@ class AccionesSoftware
         $resultado = $conexion->prepare($consulta);
         $resultado->bindParam(':nombre', $nombre_software);
         $resultado->execute();
-        if ($resultado->fetch()) {
-            echo ("El software ya existe");
-            return 1;
+        if ($resultado->rowCount() > 0) {
+            http_response_code(409);
+            echo json_encode(['error' => 'Ya existe el software']);
+            exit();
         } else {
             $consulta = $conexion->prepare("INSERT INTO software (nombre_software, activado, tipo_licencia, fecha_adqui, fecha_activacion) values (:nombre_software, :activado, :tipo_licencia, :fecha_adqui, :fecha_activacion)");
             $consulta->bindParam(':nombre_software', $nombre_software);
@@ -79,15 +80,26 @@ class AccionesSoftware
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = $conexion->prepare("UPDATE software  set nombre_software = :nombre_software, activado = :activado, tipo_licencia = :tipo_licencia, fecha_adqui = :fecha_adqui, fecha_activacion = :fecha_activacion where id = :id");
-            $consulta->bindParam(':id', $id);
-            $consulta->bindParam(':nombre_software', $nombre_software);
-            $consulta->bindParam(':tipo_licencia', $tipo_licencia);
-            $consulta->bindParam(':activado', $activado);
-            $consulta->bindParam(':fecha_adqui', $fecha_adqui);
-            $consulta->bindParam(':fecha_activacion', $fecha_activacion);
-            $consulta->execute();
+            $consulta = "SELECT * FROM software where BINARY nombre_software = :nombre and id!=:id";
+            $resultado = $conexion->prepare($consulta);
+            $resultado->bindParam(':nombre', $nombre_software);
+            $resultado->bindParam(':id', $id);
+            $resultado->execute();
+            if ($resultado->rowCount() > 0) {
+                http_response_code(409);
+                echo json_encode(['error' => 'Ya existe el software']);
+                exit();
+            } else {
+                $consulta = $conexion->prepare("UPDATE software  set nombre_software = :nombre_software, activado = :activado, tipo_licencia = :tipo_licencia, fecha_adqui = :fecha_adqui, fecha_activacion = :fecha_activacion where id = :id");
+                $consulta->bindParam(':id', $id);
+                $consulta->bindParam(':nombre_software', $nombre_software);
+                $consulta->bindParam(':tipo_licencia', $tipo_licencia);
+                $consulta->bindParam(':activado', $activado);
+                $consulta->bindParam(':fecha_adqui', $fecha_adqui);
+                $consulta->bindParam(':fecha_activacion', $fecha_activacion);
+                $consulta->execute();
             return 0;
+            }
         } catch (PDOException $e) {
             error_log('Error en actualizar software: ' . $e->getMessage());
             return 2;

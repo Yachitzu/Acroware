@@ -185,6 +185,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.php">Bienes Informáticos</a></li>
                 
+                
                 <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.php">Bienes Mobiliarios</a></li>
               </ul>
             </div>
@@ -360,7 +361,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="Name" class="text-bold">Nombre</label>
-                                <input type="text" class="form-control" id="nombre_softwareA" placeholder="Nombre"  required>
+                                <input type="text" class="form-control" id="nombre_softwareA" placeholder="Nombre" required>
                             </div>
                             <!-- <div class="form-group col-md-6">
                                 <label for="proveedor" class="text-bold">Proveedor</label>
@@ -387,7 +388,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                           <div class="form-group col-md-6">
                               <label for="licencia" class="text-bold">Tipo Licencia</label>
                               <select class="form-control" id="licenciaA" required>
-                                  <option value="">Seleccione un Tipo</option>
                                   <option value="Propietario">Propietario</option>
                                   <option value="Gratuito">Gratuito</option>
                               </select>
@@ -464,7 +464,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                         <div class="form-row">
                           <div class="form-group col-md-12">
                               <label for="Name" class="text-bold">Nombre</label>
-                              <input type="text" class="form-control" id="nombre_softwareE" placeholder="Nombre"  required>
+                              <input type="text" class="form-control" id="nombre_softwareE" placeholder="Nombre" required>
                           </div>
                           <!-- <div class="form-group col-md-6">
                               <label for="Dni" class="text-bold">Proveedor</label>
@@ -491,7 +491,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                           <div class="form-group col-md-6">
                               <label for="licenciaE" class="text-bold">Tipo Licencia</label>
                               <select class="form-control" id="licenciaE" required>
-                                  <option value="">Seleccione un Tipo</option>
                                   <option value="Propietario">Propietario</option>
                                   <option value="Gratuito">Gratuito</option>
                               </select>
@@ -529,13 +528,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         var fecha_activacion = document.getElementById('fecha_activacionA').value;
         var fecha_adqui = document.getElementById('fecha_adquiA').value;
         if (fecha_activacion < fecha_adqui) {
-          Swal.fire({
-                icon: "info",
-                text: "La fecha final no puede ser anterior a la inicial",
-                confirmButtonText: "Cerrar",
-                confirmButtonColor: "#bd3503", 
-                iconColor: "#bd3503"
-            });
+            alert('La fecha final no puede ser anterior a la fecha inicial.');
             document.getElementById('fecha_activacionA').value = '';
         }
         // if (fecha_activacion === fecha_adqui) {
@@ -554,13 +547,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         var fecha_activacion = document.getElementById('fecha_activacionE').value;
         var fecha_adqui = document.getElementById('fecha_adquiE').value;
         if (fecha_activacion < fecha_adqui) {
-          Swal.fire({
-                icon: "info",
-                text: "La fecha final no puede ser anterior a la inicial",
-                confirmButtonText: "Cerrar",
-                confirmButtonColor: "#bd3503", 
-                iconColor: "#bd3503"
-            });
+            alert('La fecha final no puede ser anterior a la fecha inicial.');
             document.getElementById('fecha_activacionE').value = '';
         }
         // if (fecha_activacion === fecha_adqui) {
@@ -576,7 +563,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       $("#formAgregar").submit(function (e) {
         e.preventDefault();
         nombre = $("#nombre_softwareA").val();
-        // proveedor = $("#proveedorA").val();
         activado= null;
         let radios = document.getElementsByName('activoA');
         for (var radio of radios) {
@@ -592,7 +578,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           type: "POST",
           data: JSON.stringify({
             nombre: nombre,
-            // proveedor: proveedor,
             activado: activado,
             tipo_licencia: tipo_licencia,
             fecha_adqui : fecha_adqui,
@@ -603,7 +588,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           error: function (error) {
             Swal.fire({
                 icon: "info",
-                text: "No puede ingresar datos repetidos",
+                text: "Ya existe el software",
                 confirmButtonText: "Cerrar",
                 confirmButtonColor: "#bd3503", 
                 iconColor: "#bd3503"
@@ -612,7 +597,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           complete: function () {
             $("#modalCrudAgregar").modal('hide');
             $("#nombre_softwareA").val("");
-            // $("#proveedorA").val("");
             $("#licenciaA").val("");
             $("#fecha_adquiA").val("");
             $("#fecha_activacionA").val("");
@@ -691,13 +675,11 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         id = $(this).data("id");
         fila = $(this).closest("tr");
         nombre = fila.find('td:eq(0)').text();
-        // proveedor = fila.find('td:eq(1)').text();
-        activado = fila.find('td:eq(2)').text();
-        licencia = fila.find('td:eq(3)').text();
-        fecha_adqui = fila.find('td:eq(4)').text();
-        fecha_activacion = fila.find('td:eq(5)').text();
+        activado = fila.find('td:eq(1)').text();
+        licencia = fila.find('td:eq(2)').text();
+        fecha_adqui = fila.find('td:eq(3)').text();
+        fecha_activacion = fila.find('td:eq(4)').text();
         $("#nombre_softwareE").val(nombre);
-        // $("#proveedorE").val(proveedor);
         if (activado==="Si") {
           document.getElementById("si_activoE").checked = true;
         }else{
@@ -712,7 +694,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       $("#formEditar").submit(function (e) {
         e.preventDefault();
         nombre = $("#nombre_softwareE").val();
-        // proveedor = $("#proveedorE").val();
         activadoE= null;
         let radios = document.getElementsByName('activoE');
         for (var radio of radios) {
@@ -729,7 +710,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         data: JSON.stringify({
           id: id,
           nombre: nombre,
-          // proveedor: proveedor,
           activado: activadoE,
           tipo_licencia: tipo_licencia,
           fecha_adqui: fecha_adqui,
@@ -739,7 +719,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           error: function (error) {
             Swal.fire({
                 icon: "info",
-                text: "No puede ingresar datos repetidos",
+                text: "Ya existe el software",
                 confirmButtonText: "Cerrar",
                 confirmButtonColor: "#bd3503", 
                 iconColor: "#bd3503"
@@ -812,6 +792,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
   <!-- Page level custom scripts -->
   <script src="../../resources/js/datatables-demo.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 
 </html>
