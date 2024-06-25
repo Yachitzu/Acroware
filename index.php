@@ -83,11 +83,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               </a>
             </div>
           </li>
-          <li class="nav-item nav-settings d-none d-lg-flex">
-            <a class="nav-link" href="#">
-              <i class="fa fa-tasks"></i> 
-            </a>
-          </li>
+          
         </ul>
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
           data-toggle="offcanvas">
@@ -98,49 +94,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">
       <!-- partial:partials/_settings-panel.php -->
-
-      <div id="right-sidebar" class="settings-panel">
-        <i class="settings-close ti-close"></i>
-          <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
-              <li class="nav-item">
-                  <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab"
-                    aria-controls="todo-section" aria-expanded="true">Recordatorio</a>
-              </li>
-          </ul>
-          <div class="tab-content" id="setting-content">
-              <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel"
-                aria-labelledby="todo-section">
-                  <div class="add-items d-flex px-3 mb-0">
-                      <form class="form w-100">
-                          <div class="form-group d-flex">
-                              <input type="text" class="form-control todo-list-input" placeholder="Agregar actividad">
-                              <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task">Agregar</button>
-                              <input type="hidden" class="todo-list-input_id" name="usuario_id" value="<?php echo $usuario_id; ?>">
-                          </div>
-                      </form>
-                  </div>
-                  <div class="list-wrapper px-3">
-                      <ul class="d-flex flex-column-reverse todo-list">
-                          <?php if (is_array($recordatorios) && count($recordatorios) > 0): ?>
-                              <?php foreach ($recordatorios as $recordatorio): ?>
-                                  <li data-id="<?php echo $recordatorio['id']; ?>">
-                                      <div class="form-check">
-                                          <label class="form-check-label">
-                                              <input class="checkbox" type="checkbox" <?php echo $recordatorio['estado'] == 'finalizado' ? 'checked' : ''; ?>>
-                                              <?php echo htmlspecialchars($recordatorio['actividad']); ?>
-                                          </label>
-                                      </div>
-                                      <i class="remove ti-close"></i>
-                                  </li>
-                              <?php endforeach; ?>
-                          <?php else: ?>
-                              <li>No se encontraron recordatorios pendientes.</li>
-                          <?php endif; ?>
-                      </ul>
-                  </div>
-              </div>
-          </div>
-      </div>
 
       <!-- partial -->
       <!-- partial:partials/_sidebar.php -->
