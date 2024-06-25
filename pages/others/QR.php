@@ -350,7 +350,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                     <select class="form-control" id="ubicacionE" required>
                     <option value="">Seleccione una Ubicación</option>
                     <?php
-                      $ubicacionesE = AccionesBienes_Informaticos::listarUbicacionesInsertar();
+                      $ubicacionesE = AccionesBienes_Informaticos::listarUbicacionesInsertarQR();
                       echo ($ubicacionesE['dato']);
                       ?>
                     </select>
