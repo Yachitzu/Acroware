@@ -99,7 +99,9 @@ Class Guardar{
             $buscarResultado->execute();
 
             if ($buscarResultado->rowCount() > 0) {
-                echo json_encode(['success' => false, 'message' => 'El usuario ya existe']);
+                http_response_code(409);
+                echo json_encode(['error' => 'Ya existe un usuario con esa cédula o correo']);
+                exit();
             } else {
                 // Si no existe, se procede a insertar el usuario
                 $insertarSql = "INSERT INTO usuarios(nombre, apellido, cedula, email, rol, psswd) VALUES (:nombre, :apellido, :cedula, :email, :rol, :psswd)";
@@ -114,10 +116,10 @@ Class Guardar{
                 echo json_encode(['success' => true]);
             }
         } else {
-            echo json_encode(['success' => false, 'message' => 'Invalid input']);
+            echo json_encode(['error' => false, 'message' => 'Invalid input']);
         }
     } catch (PDOException $e) {
-        echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        echo json_encode(['error' => false, 'message' => $e->getMessage()]);
     }
 }
 }
@@ -136,7 +138,9 @@ class Actualizar{
                 $buscarResultado->execute();
     
                 if ($buscarResultado->rowCount() > 0) {
-                    echo json_encode(['success' => false, 'message' => 'El usuario ya existe']);
+                    http_response_code(409);
+                    echo json_encode(['error' => 'Ya existe un usuario con esa cédula o correo']);
+                    exit();
                 } else {$updatesql = "UPDATE usuarios SET email = :email, rol = :rol WHERE id = :id";
                 $resultado = $conectar->prepare($updatesql);
                 $resultado->bindParam(':email', $data["email"], PDO::PARAM_STR);
@@ -151,10 +155,10 @@ class Actualizar{
                 echo json_encode(['success' => true]);
             }
             } else {
-                echo json_encode(['success' => false, 'message' => 'Invalid input']);
+                echo json_encode(['error' => false, 'message' => 'Invalid input']);
             }
         } catch (PDOException $e) {
-            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            echo json_encode(['error' => false, 'message' => $e->getMessage()]);
         }
     }
     public static function ActualizarContrasena($data){
@@ -187,7 +191,9 @@ class Actualizar{
                 $buscarResultado->bindParam(':id', $data["id"], PDO::PARAM_STR);
                 $buscarResultado->execute();
                 if ($buscarResultado->rowCount() > 0) {
-                    echo json_encode(['success' => false, 'message' => 'El correo electrónico ya está en uso']);
+                    http_response_code(409);
+                    echo json_encode(['error' => 'Ya existe un usuario con esa cédula o correo']);
+                    exit();
                 } else {
                     // Consulta para buscar si ya existe un usuario con la misma cédula
                     $buscarCedulaSql = "SELECT * FROM usuarios WHERE cedula = :cedula AND id!= :id";
@@ -215,10 +221,10 @@ class Actualizar{
                     }
                 }
             } else {
-                echo json_encode(['success' => false, 'message' => 'Invalid input']);
+                echo json_encode(['error' => false, 'message' => 'Invalid input']);
             }
         } catch (PDOException $e) {
-            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            echo json_encode(['error' => false, 'message' => $e->getMessage()]);
         }
     }
 }  

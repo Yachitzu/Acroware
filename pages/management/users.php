@@ -773,40 +773,44 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     }
 
     agregarUserForm.addEventListener('submit', async function (event) {
-      event.preventDefault();
+  event.preventDefault();
 
-      const cedula = document.getElementById('cedulaC').value;
-      const nombre = document.getElementById('nombreC').value;
-      const apellido = document.getElementById('apellidoC').value;
-      const email = document.getElementById('emailC').value;
-      const psswd = document.getElementById('passwordC').value;
-      const rol = document.getElementById('rolC').value;
+  const cedula = document.getElementById('cedulaC').value;
+  const nombre = document.getElementById('nombreC').value;
+  const apellido = document.getElementById('apellidoC').value;
+  const email = document.getElementById('emailC').value;
+  const psswd = document.getElementById('passwordC').value;
+  const rol = document.getElementById('rolC').value;
 
-      try {
-        const response = await fetch(apiBaseUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ cedula, nombre, apellido, email, psswd, rol})
-        });
-
-        if (response.ok) {
-          // Si la solicitud es exitosa, recarga la lista de usuarios
-          fetchUsers();
-          // Limpia los campos del formulario
-          agregarUserForm.reset();
-          // Cierra el modal
-          $('#modalCrudAgregar').modal('hide');
-        } else {
-          console.error('Error al agregar usuario:', response.statusText);
-          alert("Ya existe un usuario con esa cédula/correo");
-        }
-      } catch (error) {
-        console.error('Error al agregar usuario:', error);
-        alert("Ya existe un usuario con esa cédula/correo");
-      }
+  try {
+    const response = await fetch(apiBaseUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ cedula, nombre, apellido, email, psswd, rol })
     });
+
+    if (response.ok) {
+      // Si la solicitud es exitosa, recarga la lista de usuarios
+      fetchUsers();
+      // Limpia los campos del formulario
+      agregarUserForm.reset();
+      // Cierra el modal
+      $('#modalCrudAgregar').modal('hide');
+    } else if (response.status === 409) {
+      // Si el estado es 409, mostrar mensaje de error específico
+      const errorData = await response.json();
+      alert(errorData.error);
+    } else {
+      console.error('Error al agregar usuario:', response.statusText);
+      alert("Error al agregar usuario: " + response.statusText);
+    }
+  } catch (error) {
+    console.error('Error al agregar usuario:', error);
+    alert("Error al agregar usuario: " + error.message);
+  }
+});
 
 
 
@@ -834,18 +838,18 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             await fetchUsers();
             // Cierra el modal de edición
             editarModal.hide();
+          } else if (response.status === 409) {
+            // Si el estado es 409, mostrar mensaje de error específico
+            const errorData = await response.json();
+            alert(errorData.error);
           } else {
-            console.error('Error al editar usuario:', result.message);
-            alert("No puede usar un correo repetido");
+            console.error('Error al agregar usuario:', response.statusText);
+            alert("Error al agregar usuario: " + response.statusText);
           }
-        } else {
-          console.error('Error al editar usuario:', response.statusText);
-          alert("No puede usar un correo repetido");
+        } catch (error) {
+          console.error('Error al agregar usuario:', error);
+          alert("Error al agregar usuario: " + error.message);
         }
-      } catch (error) {
-        console.error('Error al editar usuario:', error);
-        alert("No puede usar un correo repetido");
-      }
     });
 
 
