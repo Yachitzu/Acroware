@@ -185,7 +185,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.php">Bienes Informáticos</a></li>
                 
-                <li class="nav-item"> <a class="nav-link" href="../assets/repowering.php">Repotenciación</a></li>
                 <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.php">Bienes Mobiliarios</a></li>
               </ul>
             </div>
@@ -361,7 +360,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   <div class="form-row">
                             <div class="form-group col-md-12">
                                 <label for="Name" class="text-bold">Nombre</label>
-                                <input type="text" class="form-control" id="nombre_softwareA" placeholder="Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                                <input type="text" class="form-control" id="nombre_softwareA" placeholder="Nombre"  required>
                             </div>
                             <!-- <div class="form-group col-md-6">
                                 <label for="proveedor" class="text-bold">Proveedor</label>
@@ -465,7 +464,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                         <div class="form-row">
                           <div class="form-group col-md-12">
                               <label for="Name" class="text-bold">Nombre</label>
-                              <input type="text" class="form-control" id="nombre_softwareE" placeholder="Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
+                              <input type="text" class="form-control" id="nombre_softwareE" placeholder="Nombre"  required>
                           </div>
                           <!-- <div class="form-group col-md-6">
                               <label for="Dni" class="text-bold">Proveedor</label>
