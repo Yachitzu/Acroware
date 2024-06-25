@@ -18,7 +18,6 @@ class AccionesSoftware
                     <tr>
                         
                         <td ">' . htmlspecialchars($respuesta['nombre_software']) . '</td>
-                        <td ">' . htmlspecialchars($respuesta['proveedor']) . '</td>
                         <td ">' . htmlspecialchars($respuesta['activado']) . '</td>
                         <td ">' . htmlspecialchars($respuesta['tipo_licencia']) . '</td>
                         <td ">' . htmlspecialchars($respuesta['fecha_adqui']) . '</td>
@@ -49,25 +48,23 @@ class AccionesSoftware
         }
     }
 
-    public static function insertarSoftware($nombre_software, $activado, $tipo_licencia, $fecha_adqui, $fecha_activacion)
+    public static function insertarSoftware($nombre_software, $proveedor, $activado, $tipo_licencia, $fecha_adqui, $fecha_activacion)
 {
     try {
         $conexion = Conexion::getInstance()->getConexion();
-        $consulta = "SELECT * FROM software where BINARY nombre_software = :nombre and tipo_licencia = :tipo_licencia and fecha_adqui = :fecha_adqui";
+        $consulta = "SELECT * FROM software where BINARY nombre_software = :nombre and proveedor = :proveedor and tipo_licencia = :tipo_licencia";
         $resultado = $conexion->prepare($consulta);
         $resultado->bindParam(':nombre', $nombre_software);
-        // $resultado->bindParam(':proveedor', $proveedor);
+        $resultado->bindParam(':proveedor', $proveedor);
         $resultado->bindParam(':tipo_licencia', $tipo_licencia);
-        $stmt->bindParam(':fecha_adqui', $fecha_adqui);
         $resultado->execute();
-        if ($resultado->rowCount() > 0) {
-            http_response_code(409);
-            echo json_encode(['error' => 'Ya existe un software con ese nombre, tipo de licencia y fecha de compra']);
-            exit();
+        if ($resultado->fetch()) {
+            echo ("El software ya existe");
+            return 1;
         } else {
-            $consulta = $conexion->prepare("INSERT INTO software (nombre_software, activado, tipo_licencia, fecha_adqui, fecha_activacion) values (:nombre_software, :activado, :tipo_licencia, :fecha_adqui, :fecha_activacion)");
+            $consulta = $conexion->prepare("INSERT INTO software (nombre_software, proveedor, activado, tipo_licencia, fecha_adqui, fecha_activacion) values (:nombre_software, :proveedor, :activado, :tipo_licencia, :fecha_adqui, :fecha_activacion)");
             $consulta->bindParam(':nombre_software', $nombre_software);
-            // $consulta->bindParam(':proveedor', $proveedor);
+            $consulta->bindParam(':proveedor', $proveedor);
             $consulta->bindParam(':tipo_licencia', $tipo_licencia);
             $consulta->bindParam(':activado', $activado);
             $consulta->bindParam(':fecha_adqui', $fecha_adqui);
@@ -81,27 +78,14 @@ class AccionesSoftware
     }
 }
 
-    public static function actualizarSoftware($id, $nombre_software, $activado, $tipo_licencia, $fecha_adqui, $fecha_activacion)
+    public static function actualizarSoftware($id, $nombre_software, $proveedor, $activado, $tipo_licencia, $fecha_adqui, $fecha_activacion)
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
-            $consulta = "SELECT * FROM software where BINARY nombre_software = :nombre and tipo_licencia = :tipo_licencia and fecha_adqui = :fecha_adqui AND id != :id";
-            $resultado = $conexion->prepare($consulta);
-            $resultado->bindParam(':nombre', $nombre_software);
-            // $resultado->bindParam(':proveedor', $proveedor);
-            $resultado->bindParam(':tipo_licencia', $tipo_licencia);
-            $stmt->bindParam(':fecha_adqui', $fecha_adqui);
-            $stmt->bindParam(':id', $id);
-            $resultado->execute();
-            if ($resultado->rowCount() > 0) {
-                http_response_code(409);
-                echo json_encode(['error' => 'Ya existe un software con ese nombre, tipo de licencia y fecha de compra']);
-                exit();
-            } else {
-            $consulta = $conexion->prepare("UPDATE software  set nombre_software = :nombre_software , activado = :activado, tipo_licencia = :tipo_licencia, fecha_adqui = :fecha_adqui, fecha_activacion = :fecha_activacion where id = :id");
+            $consulta = $conexion->prepare("UPDATE software  set nombre_software = :nombre_software, proveedor = :proveedor , activado = :activado, tipo_licencia = :tipo_licencia, fecha_adqui = :fecha_adqui, fecha_activacion = :fecha_activacion where id = :id");
             $consulta->bindParam(':id', $id);
             $consulta->bindParam(':nombre_software', $nombre_software);
-            // $consulta->bindParam(':proveedor', $proveedor);
+            $consulta->bindParam(':proveedor', $proveedor);
             $consulta->bindParam(':tipo_licencia', $tipo_licencia);
             $consulta->bindParam(':activado', $activado);
             $consulta->bindParam(':fecha_adqui', $fecha_adqui);

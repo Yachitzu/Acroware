@@ -185,7 +185,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.php">Bienes Informáticos</a></li>
                 
-                
+                <li class="nav-item"> <a class="nav-link" href="../assets/repowering.php">Repotenciación</a></li>
                 <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.php">Bienes Mobiliarios</a></li>
               </ul>
             </div>
@@ -266,7 +266,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                     <thead>
                     <tr>
                         <th>Nombre</th>
-                        <th>Proovedor</th>
                         <th>Activado</th>
                         <th>Tipo Licencia</th>
                         <th>Fecha Adquisición</th>
@@ -280,7 +279,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                     <tfoot>
                     <tr>
                         <th>Nombre</th>
-                        <th>Proovedor</th>
                         <th>Activado</th>
                         <th>Tipo Licencia</th>
                         <th>Fecha Adquisición</th>
@@ -361,7 +359,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 <p class="card-description">Por favor, complete los siguientes campos para agregar un nuevo software al
                   sistema:</p>
                   <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-12">
                                 <label for="Name" class="text-bold">Nombre</label>
                                 <input type="text" class="form-control" id="nombre_softwareA" placeholder="Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                             </div>
@@ -391,9 +389,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                               <label for="licencia" class="text-bold">Tipo Licencia</label>
                               <select class="form-control" id="licenciaA" required>
                                   <option value="">Seleccione un Tipo</option>
-                                  <option value="Dominio Público">Dominio Público</option>
-                                  <option value="Codigo Abierto">Codigo Abierto</option>
-                                  <option value="Suscripción">Suscripción</option>
                                   <option value="Propietario">Propietario</option>
                                   <option value="Gratuito">Gratuito</option>
                               </select>
@@ -468,7 +463,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                     <div class="card-body">
                         <p class="card-description">Por favor, complete los siguientes campos para editar la información del software seleccionado:</p>
                         <div class="form-row">
-                          <div class="form-group col-md-6">
+                          <div class="form-group col-md-12">
                               <label for="Name" class="text-bold">Nombre</label>
                               <input type="text" class="form-control" id="nombre_softwareE" placeholder="Nombre" oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '');" required>
                           </div>
@@ -568,51 +563,46 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     
     $(document).ready(function () {
       $("#formAgregar").submit(function (e) {
-      e.preventDefault();
-      const nombre = $("#nombre_softwareA").val();
-      let activado = null;
-      let radios = document.getElementsByName('activoA');
-      for (var radio of radios) {
+        e.preventDefault();
+        nombre = $("#nombre_softwareA").val();
+        // proveedor = $("#proveedorA").val();
+        activado= null;
+        let radios = document.getElementsByName('activoA');
+        for (var radio of radios) {
           if (radio.checked) {
-              activado = radio.value;
+            activado = radio.value;
           }
-      }
-      const tipo_licencia = $("#licenciaA").val();
-      const fecha_adqui = $("#fecha_adquiA").val();
-      const fecha_activacion = $("#fecha_activacionA").val();
-
-      $.ajax({
+        }
+        tipo_licencia= $("#licenciaA").val();
+        fecha_adqui= $("#fecha_adquiA").val();
+        fecha_activacion= $("#fecha_activacionA").val();
+        $.ajax({
           url: "../../Acciones/RestSoftware.php",
           type: "POST",
           data: JSON.stringify({
-              nombre: nombre,
-              activado: activado,
-              tipo_licencia: tipo_licencia,
-              fecha_adqui: fecha_adqui,
-              fecha_activacion: fecha_activacion
+            nombre: nombre,
+            // proveedor: proveedor,
+            activado: activado,
+            tipo_licencia: tipo_licencia,
+            fecha_adqui : fecha_adqui,
+            fecha_activacion : fecha_activacion
           }),
           contentType: "application/json",
           cache: false,
-          success: function () {
-              $("#modalCrudAgregar").modal('hide');
-              $("#nombre_softwareA").val("");
-              $("#licenciaA").val("");
-              $("#fecha_adquiA").val("");
-              $("#fecha_activacionA").val("");
-              cargarTabla();
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
           },
-          error: function (xhr) {
-              if (xhr.status === 409) {
-                  const errorData = JSON.parse(xhr.responseText);
-                  alert(errorData.error);
-              } else {
-                  console.error("Error en la solicitud AJAX", xhr);
-                  alert("Error al agregar software: " + xhr.statusText);
-              }
+          complete: function () {
+            $("#modalCrudAgregar").modal('hide');
+            $("#nombre_softwareA").val("");
+            // $("#proveedorA").val("");
+            $("#licenciaA").val("");
+            $("#fecha_adquiA").val("");
+            $("#fecha_activacionA").val("");
+            cargarTabla();
           }
+        });
       });
-  });
-
     });
 
     function cargarTabla() {
@@ -681,68 +671,63 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     function addEventListeners() {
       id = "";
       $(document).on('click', '.editar', function () {
-    id = $(this).data("id");
-    fila = $(this).closest("tr");
-    nombre = fila.find('td:eq(0)').text();
-    activado = fila.find('td:eq(2)').text();
-    licencia = fila.find('td:eq(3)').text();
-    fecha_adqui = fila.find('td:eq(4)').text();
-    fecha_activacion = fila.find('td:eq(5)').text();
-    
-    $("#nombre_softwareE").val(nombre);
-    if (activado === "Si") {
-        document.getElementById("si_activoE").checked = true;
-    } else {
-        document.getElementById("no_activoE").checked = true;
-    }
-    $("#licenciaE").val(licencia);
-    $("#fecha_adquiE").val(fecha_adqui);
-    $("#fecha_activacionE").val(fecha_activacion);
-    $("#modalCrudEditar").modal('show');
-});
-
-$("#formEditar").submit(function (e) {
-    e.preventDefault();
-    const nombre = $("#nombre_softwareE").val();
-    let activadoE = null;
-    let radios = document.getElementsByName('activoE');
-    for (var radio of radios) {
-        if (radio.checked) {
-            activadoE = radio.value;
+        id = $(this).data("id");
+        fila = $(this).closest("tr");
+        nombre = fila.find('td:eq(0)').text();
+        // proveedor = fila.find('td:eq(1)').text();
+        activado = fila.find('td:eq(2)').text();
+        licencia = fila.find('td:eq(3)').text();
+        fecha_adqui = fila.find('td:eq(4)').text();
+        fecha_activacion = fila.find('td:eq(5)').text();
+        $("#nombre_softwareE").val(nombre);
+        // $("#proveedorE").val(proveedor);
+        if (activado==="Si") {
+          document.getElementById("si_activoE").checked = true;
+        }else{
+          document.getElementById("no_activoE").checked = true;
         }
-    }
-    const tipo_licencia = $("#licenciaE").val();
-    const fecha_adqui = $("#fecha_adquiE").val();
-    const fecha_activacion = $("#fecha_activacionE").val();
+        $("#licenciaE").val(licencia);
+        $("#fecha_adquiE").val(fecha_adqui);
+        $("#fecha_activacionE").val(fecha_activacion);
+        $("#modalCrudEditar").modal('show');
+      });
 
-    $.ajax({
+      $("#formEditar").submit(function (e) {
+        e.preventDefault();
+        nombre = $("#nombre_softwareE").val();
+        // proveedor = $("#proveedorE").val();
+        activadoE= null;
+        let radios = document.getElementsByName('activoE');
+        for (var radio of radios) {
+          if (radio.checked) {
+            activadoE = radio.value;
+          }
+        }
+        tipo_licencia= $("#licenciaE").val();
+        fecha_adqui= $("#fecha_adquiE").val();
+        fecha_activacion= $("#fecha_activacionE").val();
+        $.ajax({
         url: "../../Acciones/RestSoftware.php",
         type: "PUT",
         data: JSON.stringify({
-            id: id,
-            nombre: nombre,
-            activado: activadoE,
-            tipo_licencia: tipo_licencia,
-            fecha_adqui: fecha_adqui,
-            fecha_activacion: fecha_activacion
+          id: id,
+          nombre: nombre,
+          // proveedor: proveedor,
+          activado: activadoE,
+          tipo_licencia: tipo_licencia,
+          fecha_adqui: fecha_adqui,
+          fecha_activacion: fecha_activacion
         }),
-        contentType: "application/json",
-        success: function () {
+          contentType: "application/json",
+          error: function (error) {
+            console.error("Error en la solicitud AJAX", error);
+          },
+          complete: function () {
             $("#modalCrudEditar").modal('hide');
             cargarTabla();
-        },
-        error: function (xhr) {
-            if (xhr.status === 409) {
-                const errorData = JSON.parse(xhr.responseText);
-                alert(errorData.error);
-            } else {
-                console.error("Error en la solicitud AJAX", xhr);
-                alert("Error al actualizar software: " + xhr.statusText);
-            }
-        }
-    });
-});
-
+          }
+        });
+      });
 
       $(document).on('click', '.eliminar', function () {
         id = $(this).data("id");

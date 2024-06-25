@@ -814,43 +814,53 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
 
 
-    document.getElementById('editarUserForm').addEventListener('submit', async function (event) {
-      event.preventDefault();
-      // Obtener los valores actualizados del formulario
-      const id = userAEditarId;
-      const email = document.getElementById('emailE').value;
-      const rol = document.getElementById('rolE').value;
+document.getElementById('editarUserForm').addEventListener('submit', async function (event) {
+    event.preventDefault();
+    // Obtener los valores actualizados del formulario
+    const id = userAEditarId;
+    const email = document.getElementById('emailE').value;
+    const rol = document.getElementById('rolE').value;
 
-      try {
+    try {
+        // Verificar si el correo está repetido antes de enviar la solicitud de edición
+        const verificarCorreo = await fetch(apiBaseUrl + `?email=${email}&id=${id}`);
+        const correoRepetido = await verificarCorreo.json();
+
+        if (correoRepetido.repeated) {
+            alert("No puede usar un correo repetido");
+            return;
+        }
+
         // Enviar la solicitud de edición al servidor
         const response = await fetch(apiBaseUrl + `?id=${id}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ email,rol, id })
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, rol, id })
         });
 
         if (response.ok) {
-          const result = await response.json();
-          if (result.success) {
-            // Si la solicitud es exitosa, recarga la lista de usuario
-            await fetchUsers();
-            // Cierra el modal de edición
-            editarModal.hide();
-          } else if (response.status === 409) {
-            // Si el estado es 409, mostrar mensaje de error específico
-            const errorData = await response.json();
-            alert(errorData.error);
-          } else {
-            console.error('Error al agregar usuario:', response.statusText);
-            alert("Error al agregar usuario: " + response.statusText);
-          }
-        } catch (error) {
-          console.error('Error al agregar usuario:', error);
-          alert("Error al agregar usuario: " + error.message);
+            const result = await response.json();
+            if (result.success) {
+                // Si la solicitud es exitosa, recarga la lista de usuario
+                await fetchUsers();
+                // Cierra el modal de edición
+                editarModal.hide();
+            } else {
+                console.error('Error al editar usuario:', result.message);
+                alert("Error al editar usuario: correo repetido" );
+            }
+        } else {
+            console.error('Error al editar usuario:', response.statusText);
+            alert("Error al editar usuario: correo repetido" );
         }
-    });
+    } catch (error) {
+        console.error('Error al editar usuario:', error);
+        alert("Error al editar usuario: correo repetido" );
+    }
+});
+
 
 
     const eliminarUserForm = document.getElementById('eliminarUserForm');
