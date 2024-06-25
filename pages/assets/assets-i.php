@@ -186,7 +186,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="assets-i.php">Bienes Informáticos</a></li>
 
-                <li class="nav-item"> <a class="nav-link" href="repowering.php">Repotenciación</a></li>
+                
                 <li class="nav-item"> <a class="nav-link" href="assets-m.php">Bienes Mobiliarios</a></li>
               </ul>
             </div>
@@ -255,6 +255,12 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                     <i class="fas fa-plus-circle"></i>
                   </span>
                   <span class="text text-white">Agregar Bien</span>
+                </button>
+                <button class="btn-crud btn-secondary btn-icon-split" id="CambiarCustodio">
+                  <span class="icon text-white-50">
+                    <i class="fas fa-plus-circle"></i>
+                  </span>
+                  <span class="text text-white">Cambiar custodio</span>
                 </button>
               </div>
               <div class="card-body bg-darkwhite">
@@ -719,6 +725,61 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       </div>
     </div>
   </div>
+
+  <div class="modal fade modal-crud" id="modalCambiarCustodio" tabindex="-1" role="dialog"
+    aria-labelledby="modal-register-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-primary">
+          <h3 class="modal-title text-white" id="modal-register-label">Cambiar Custodio</h3>
+          <p class="modal">Ingrese los datos del Usuario:</p>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <i class="fas fa-times" class="element-white"></i>
+          </button>
+        </div>
+        <form class="forms-sample" id="formCambiarCustodio">
+          <div class="modal-body">
+            <div class="grid-margin-modal">
+              <div class="card-body">
+                <p class="card-description">Por favor, complete los siguientes campos para realizar el cambio de
+                  custodio agregar</p>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="custodioOrigen" class="text-bold">Custodio de origen</label>
+                    <select class="form-control" id="custodioOrigen" required>
+                      <option value="">Custodio actual</option>
+                      <?php
+                      $usuarios = AccionesBienes_Informaticos::listarUsuariosOrigen();
+                      echo ($usuarios['dato']);
+                      ?>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="custodioDestino" class="text-bold">Custodio de destino</label>
+                    <select class="form-control" id="custodioDestino" required>
+                      <option value="">Custodio destino</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group text-center">
+                  <label for="bienesInformaticos" class="text-bold">Bienes Informáticos</label>
+                  <div id="bienesInformaticos">
+                    <!-- Aquí se cargarán los bienes informáticos -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-dismiss="modal"
+              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="submit" class="btn-crud btn-primary text-bold agregarBien" value="Aceptar">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- CODIGO QR -->
 
   <div class="modal fade" id="modalQR" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
@@ -831,16 +892,13 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   });
                 } else {
                   console.error("Error en la respuesta del servidor:", ubicaciones.mensaje);
-                  alert('Error al cargar las ubicaciones: ' + ubicaciones.mensaje);
                 }
               } catch (error) {
                 console.error("Error al parsear la respuesta JSON:", error);
-                alert('Error al procesar la respuesta del servidor');
               }
             },
             error: function(error) {
               console.error("Error en la solicitud AJAX:", error);
-              alert('Error al cargar las ubicaciones');
             }
           });
         } else {
@@ -871,16 +929,13 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   });
                 } else {
                   console.error("Error en la respuesta del servidor:", ubicaciones.mensaje);
-                  alert('Error al cargar las ubicaciones: ' + ubicaciones.mensaje);
                 }
               } catch (error) {
                 console.error("Error al parsear la respuesta JSON:", error);
-                alert('Error al procesar la respuesta del servidor');
               }
             },
             error: function(error) {
               console.error("Error en la solicitud AJAX:", error);
-              alert('Error al cargar las ubicaciones');
             }
           });
         } else {
@@ -889,6 +944,123 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         }
       });
     });
+  </script>
+
+  <!-- Custodio -->
+  <script>
+    $(document).ready(function () {
+      $('#custodioOrigen').change(function () {
+        var usuario_id = $(this).val();
+        var op = 2;
+        if (usuario_id) {
+          $.ajax({
+            url: "../../Acciones/AccionesExtrasBi.php",
+            type: "GET",
+            data: {
+              usuario_id: usuario_id,
+              op: op
+            },
+            success: function (response) {
+              try {
+                var usuariosDestino = typeof response === 'string' ? JSON.parse(response) : response;
+                console.log("Respuesta parseada: ", usuariosDestino);
+
+                if (usuariosDestino.codigo === 0) {
+                  $('#custodioDestino').empty();
+                  $('#custodioDestino').append('<option value="">Custodio destino</option>');
+                  usuariosDestino.dato.forEach(function (usuariodestino) {
+                    $('#custodioDestino').append('<option value="' + usuariodestino.id + '">' + usuariodestino.nombre + ' ' + usuariodestino.apellido + '</option>');
+                  });
+                } else {
+                  console.error("Error en la respuesta del servidor:", usuariosDestino.mensaje);
+                }
+              } catch (error) {
+                console.error("Error al parsear la respuesta JSON:", error);
+              }
+            },
+            error: function (error) {
+              console.error("Error en la solicitud AJAX:", error);
+            }
+          });
+        } else {
+          $('#custodioDestino').empty();
+          $('#custodioDestino').append('<option value="">Custodio Destino</option>');
+        }
+      });
+
+      $('#custodioOrigen').change(function () {
+        var custodioId = $(this).val();
+        var op = 3;
+        if (custodioId) {
+          $.ajax({
+            url: "../../Acciones/AccionesExtrasBi.php",
+            type: "GET",
+            data: {
+              custodio_id: custodioId,
+              op: op
+            },
+            success: function (response) {
+              try {
+                var bienes = typeof response === 'string' ? JSON.parse(response) : response;
+                if (bienes.codigo === 0) {
+                  $('#bienesInformaticos').empty();
+                  bienes.dato.forEach(function (bien) {
+                    $('#bienesInformaticos').append('<div><input type="checkbox" name="bienes" value="' + bien.id + '"> Nombre: ' + bien.nombre + ' Modelo: ' + bien.modelo + '</div>');
+                  });
+                } else {
+                  console.error("Error en la respuesta del servidor:", bienes.mensaje);
+                }
+              } catch (error) {
+                console.error("Error al parsear la respuesta JSON:", error);
+              }
+            },
+            error: function (error) {
+              console.error("Error en la solicitud AJAX:", error);
+            }
+          });
+        } else {
+          $('#bienesInformaticos').empty();
+        }
+      });
+
+      $("#formCambiarCustodio").submit(function (e) {
+        /* e.preventDefault(); */
+
+        var seleccionados = [];
+        $('#bienesInformaticos input[type="checkbox"]:checked').each(function () {
+          seleccionados.push($(this).val());
+        });
+
+        var custodioDestino = $('#custodioDestino').val();
+
+        if (seleccionados.length > 0 && custodioDestino) {
+          $.ajax({
+            url: "../../Acciones/AccionesExtrasBi.php",
+            type: "PUT",
+            data: JSON.stringify({
+              bienes: seleccionados,
+              custodioDestino: custodioDestino
+            }),
+            contentType: "application/json",
+            success: function (response) {
+              var result = JSON.parse(response);
+              if (result.codigo === 0) {
+              } else {
+              }
+            },
+            error: function (error) {
+              console.error("Error en la solicitud AJAX", error);
+            },
+            complete: function () {
+              $("#modalCambiarCustodio").modal('hide');
+              cargarTabla();  // Asume que cargarTabla() recarga la tabla principal de bienes
+            }
+          });
+        } else {
+        }
+      });
+    });
+
   </script>
 
   <script>
@@ -930,6 +1102,11 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       }
       // Inicializa la tabla pero no la guardes en una variable
       // porque se reconstruirá después de cada carga de datos.
+      /* Cambiar custodio */
+      $("#CambiarCustodio").click(function () {
+        $("#modalCambiarCustodio").modal('show');
+      });
+
       $('#dataTable').DataTable();
 
       // Cargar la tabla cuando se cargue el DOM
@@ -1158,11 +1335,11 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   });
                   $("#ubicacionE").val(id_ubi_per);
                 } else {
-                  alert('Error al cargar las ubicaciones: ' + ubicaciones.mensaje);
                 }
               },
-              error: function() {
-                alert('Error al cargar las ubicaciones');
+
+              error: function () {
+
               }
             });
           } else {
@@ -1342,9 +1519,11 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           const serie = document.getElementById('serieComponente').value;
           const especificaciones = document.getElementById('especificacionComponente').value;
           const repotenciado = document.getElementById('repotenciadoComponente').value;
+
           const id_bien_infor_per = document.getElementById('bienId').value; // Obtener la ID del bien del campo oculto
           const codigo_adi_uta = document.getElementById('codigoAdicionalUTA').value;
           const motivo_repotenciacion = document.getElementById('motivoRepotenciacion').value;
+
           try {
             const response = await fetch('../../Acciones/RestComponentes.php', {
               method: 'POST',
