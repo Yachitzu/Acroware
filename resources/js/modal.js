@@ -37,7 +37,17 @@ $(document).ready(function(){
     $("#generar-reporte-sof").click(function(){
         $("#modalSoft").modal('show');
     });
+    // $("#generar-reporte-pcs").click(function(){
+    //     $("#modalPcs").modal('show');
+    // });
 
+    // $("#generar-reporte-lab").click(function(){
+    //     $("#modalLab").modal('show');
+    // });
+
+    $("#generar-reporte-qr").click(function(){
+        $("#modalQr").modal('show');
+    });
     $("#agregarComponente").click(function(){
         $("#modalCrudAgregarComponente").modal('show');
     });
