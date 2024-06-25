@@ -1,5 +1,5 @@
 <?php
-include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php');
 require 'phpqrcode/qrlib.php';
 class AccionesBienes_Informaticos
 {
@@ -50,7 +50,7 @@ class AccionesBienes_Informaticos
             }
 
             // Ajusta el nombre de la columna a la correcta en tu base de datos
-            $consultaComponentes = $conexion->prepare("SELECT * FROM componentes WHERE id_bien_infor_per = :id AND activo = 'si'");
+            $consultaComponentes = $conexion->prepare("SELECT * FROM componentes WHERE id_bien_infor_per = :id");
             $consultaComponentes->bindParam(':id', $id);
             $consultaComponentes->execute();
             $componentes = $consultaComponentes->fetchAll(PDO::FETCH_ASSOC);
@@ -62,8 +62,9 @@ class AccionesBienes_Informaticos
                     <th>Nombre</th>
                     <th>Descripción</th>
                     <th>Serie</th>
-                    <th>Código UTA</th>
+                    <th>Especificaciones</th>
                     <th>Repotenciado</th>
+                    <th>Activo</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -74,8 +75,9 @@ class AccionesBienes_Informaticos
                 <td>' . htmlspecialchars($componente['nombre']) . '</td>
                 <td>' . htmlspecialchars($componente['descripcion']) . '</td>
                 <td>' . htmlspecialchars($componente['serie']) . '</td>
-                <td>' . htmlspecialchars($componente['codigo_adi_uta']) . '</td>
+                <td>' . htmlspecialchars($componente['especificaciones']) . '</td>
                 <td>' . htmlspecialchars($componente['repotenciado']) . '</td>
+                <td>' . htmlspecialchars($componente['activo']) . '</td>
                 <td>
                     <center>
                         <button class="btn btn-warning btn-circle element-white editarComponente" data-id="' . $componente['id'] . '" data-toggle="modal" onclick="showEditarModalComponente(' . $componente['id'] . ')">
