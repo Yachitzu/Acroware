@@ -530,7 +530,13 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         var fecha_activacion = document.getElementById('fecha_activacionA').value;
         var fecha_adqui = document.getElementById('fecha_adquiA').value;
         if (fecha_activacion < fecha_adqui) {
-            alert('La fecha final no puede ser anterior a la fecha inicial.');
+          Swal.fire({
+                icon: "info",
+                text: "La fecha final no puede ser anterior a la inicial",
+                confirmButtonText: "Cerrar",
+                confirmButtonColor: "#bd3503", 
+                iconColor: "#bd3503"
+            });
             document.getElementById('fecha_activacionA').value = '';
         }
         // if (fecha_activacion === fecha_adqui) {
@@ -549,7 +555,13 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         var fecha_activacion = document.getElementById('fecha_activacionE').value;
         var fecha_adqui = document.getElementById('fecha_adquiE').value;
         if (fecha_activacion < fecha_adqui) {
-            alert('La fecha final no puede ser anterior a la fecha inicial.');
+          Swal.fire({
+                icon: "info",
+                text: "La fecha final no puede ser anterior a la inicial",
+                confirmButtonText: "Cerrar",
+                confirmButtonColor: "#bd3503", 
+                iconColor: "#bd3503"
+            });
             document.getElementById('fecha_activacionE').value = '';
         }
         // if (fecha_activacion === fecha_adqui) {
@@ -590,7 +602,13 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           contentType: "application/json",
           cache: false,
           error: function (error) {
-            console.error("Error en la solicitud AJAX", error);
+            Swal.fire({
+                icon: "info",
+                text: "No puede ingresar datos repetidos",
+                confirmButtonText: "Cerrar",
+                confirmButtonColor: "#bd3503", 
+                iconColor: "#bd3503"
+            });
           },
           complete: function () {
             $("#modalCrudAgregar").modal('hide');
@@ -720,7 +738,13 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         }),
           contentType: "application/json",
           error: function (error) {
-            console.error("Error en la solicitud AJAX", error);
+            Swal.fire({
+                icon: "info",
+                text: "No puede ingresar datos repetidos",
+                confirmButtonText: "Cerrar",
+                confirmButtonColor: "#bd3503", 
+                iconColor: "#bd3503"
+            });
           },
           complete: function () {
             $("#modalCrudEditar").modal('hide');
@@ -788,6 +812,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
   <!-- Page level custom scripts -->
   <script src="../../resources/js/datatables-demo.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
