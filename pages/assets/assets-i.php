@@ -330,6 +330,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 </p>
                 <div class="form-row">
                   <div class="form-group col-md-12">
+                    <input type="hidden" id="bienId" name="bienId" value="">
                     <label for="nombreComponente" class="text-bold">Nombre</label>
                     <input type="text" class="form-control" name="nombreComponente" id="nombreComponente" placeholder="Nombre" required>
                   </div>
@@ -1265,7 +1266,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                                             <div class="col-md-3"><strong>Fecha Ingreso:</strong> ${detalle.fecha_ingreso}</div>
                                             <div class="col-md-3"><img src="../${detalle.qr}" alt="QR" class="image_qr" /></div>
                                         </div>
-                                        <button class="btn-crud btn-primary btn-icon-split btn-add-component " id="agregarComponente" data-toggle="modal" data-target="#modalCrudAgregarComponente"> 
+                                        <button class="btn-crud btn-primary btn-icon-split btn-add-component" data-id="${id}" data-toggle="modal" data-target="#modalCrudAgregarComponente"> 
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-plus-circle"></i>
                                             </span>
@@ -1294,14 +1295,17 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
 
 
+
         const agregarComponenteForm = document.getElementById('agregarComponenteForm');
 
         let componenteAEliminarId = null;
         let componenteAEditarId = null;
         // Event listener for adding components
         $('#dataTable tbody').on('click', '.btn-add-component', function() {
-
+          const bienId = $(this).data('id');
+          console.log('Id bien: ' + bienId);
           $('#modalCrudAgregarComponente').modal('show');
+          $('#bienId').val(bienId); // Asigna la ID del bien al campo oculto en el formulario
         });
 
 
@@ -1338,7 +1342,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           const serie = document.getElementById('serieComponente').value;
           const especificaciones = document.getElementById('especificacionComponente').value;
           const repotenciado = document.getElementById('repotenciadoComponente').value;
-          const id_bien_infor_per = id;
+          const id_bien_infor_per = document.getElementById('bienId').value; // Obtener la ID del bien del campo oculto
           const codigo_adi_uta = document.getElementById('codigoAdicionalUTA').value;
           const motivo_repotenciacion = document.getElementById('motivoRepotenciacion').value;
           try {
