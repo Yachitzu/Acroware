@@ -160,10 +160,10 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="faculty.php">Facultades</a></li>
-                <li class="nav-item"> <a class="nav-link" href="block.php">Bloques</a></li>
-                <li class="nav-item"> <a class="nav-link" href="area.php">Áreas</a></li>
-                <li class="nav-item"> <a class="nav-link" href="location.php">Ubicaciones</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../places/faculty.php">Facultades</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../places/block.php">Bloques</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../places/area.php">Áreas</a></li>
+                <li class="nav-item"> <a class="nav-link" href="../places/location.php">Ubicaciones</a></li>
               </ul>
             </div>
           </li>
@@ -202,13 +202,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             <a class="nav-link" href="../others/report.php">
               <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Reportes</span>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="../others/QR.php">
-              <i class="icon-contract menu-icon"></i>
-              <span class="menu-title">Escaneo QR</span>
             </a>
           </li>
 

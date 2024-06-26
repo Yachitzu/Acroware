@@ -206,12 +206,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="QR.php">
-                <i class="icon-contract menu-icon"></i>
-                <span class="menu-title">Escaneo QR</span>
-                </a>
-            </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="acount.php">
@@ -348,14 +342,19 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   <div class="form-group col-md-6">
                     <label for="ubicacionE" class="text-bold">Ubicación</label>
                     <select class="form-control" id="ubicacionE" required>
-                    <option value="">Seleccione una Ubicación</option>
-                    <?php
-                      $ubicacionesE = AccionesBienes_Informaticos::listarUbicacionesInsertarQR();
-                      echo ($ubicacionesE['dato']);
-                      ?>
+                    
                     </select>
                   </div>
                 </div>
+                <div class="form-group col-md-12">
+                    <label for="usuario" class="text-bold">Laboratorista Encargado</label>
+                    <select class="form-control" id="usuarioE" required>
+                      <?php
+                      $usuarios = AccionesBienes_Informaticos::listarUsuariosInsertar();
+                      echo ($usuarios['dato']);
+                      ?>
+                    </select>
+                  </div>
               </div>
             </div>
           </div>
@@ -395,6 +394,46 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#areaE').change(function() {
+        var areaId = $(this).val();
+        if (areaId) {
+          $.ajax({
+            url: "../../Acciones/CargarUbicaciones.php",
+            type: "GET",
+            data: {
+              area_id: areaId
+            },
+            success: function(response) {
+              try {
+                var ubicaciones = typeof response === 'string' ? JSON.parse(response) : response;
+                console.log("Respuesta parseada: ", ubicaciones);
+
+                if (ubicaciones.codigo === 0) {
+                  $('#ubicacionE').empty();
+                  $('#ubicacionE').append('<option value="">Seleccione una Ubicación</option>');
+                  ubicaciones.dato.forEach(function(ubicacion) {
+                    $('#ubicacionE').append('<option value="' + ubicacion.id + '">' + ubicacion.nombre + '</option>');
+                  });
+                } else {
+                  console.error("Error en la respuesta del servidor:", ubicaciones.mensaje);
+                }
+              } catch (error) {
+                console.error("Error al parsear la respuesta JSON:", error);
+              }
+            },
+            error: function(error) {
+              console.error("Error en la solicitud AJAX:", error);
+            }
+          });
+        } else {
+          $('#ubicacionE').empty();
+          $('#ubicacionE').append('<option value="">Seleccione una Ubicación</option>');
+        }
+      });
+    });
+  </script>
   <script type="text/javascript" charset="utf8"
     src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 
@@ -421,6 +460,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                     let serie = respuesta.serie;
                     let nombre_area = respuesta.id_area_per;
                     let nombre_ubicacion = respuesta.id_ubi_per;
+                    let custodio = respuesta.custodio;
 
                     $("#codigoUTAE").val(codigo_uta);
                     $("#nombreE").val(nombre);
@@ -429,6 +469,35 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                     $("#areaE").val(nombre_area); // Corregido el error en esta línea
                     $("#ubicacionE").val(nombre_ubicacion); // Corregido el error en esta línea
                     $("#serieE").val(serie);
+                    $("#usuarioE").val(custodio);
+                    if (nombre_area) {
+                      $.ajax({
+                        url: "../../Acciones/CargarUbicaciones.php",
+                        type: "GET",
+                        data: {
+                          area_id: nombre_area
+                        },
+                        success: function(response) {
+                          var ubicaciones = typeof response === 'string' ? JSON.parse(response) : response;
+                          if (ubicaciones.codigo === 0) {
+                            $('#ubicacionE').empty();
+                            $('#ubicacionE').append('<option value="">Seleccione una Ubicación</option>');
+                            ubicaciones.dato.forEach(function(ubicacion) {
+                              $('#ubicacionE').append('<option value="' + ubicacion.id + '">' + ubicacion.nombre + '</option>');
+                            });
+                            $("#ubicacionE").val(nombre_ubicacion);
+                          } else {
+                          }
+                        },
+
+                        error: function () {
+
+                        }
+                      });
+                    } else {
+                      $('#ubicacionE').empty();
+                      $('#ubicacionE').append('<option value="">Seleccione una Ubicación</option>');
+                    }
                     $("#modalCrud").modal('show');
                 } else {
                     console.error('Error al obtener el bien informático:', data.mensaje);
@@ -450,7 +519,8 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           let serie = $("#serieE").val();
           let id_area_per = $("#areaE").val();
           let id_ubi_per = $("#ubicacionE").val();
-          let id = $("#idE").val();;
+          let id = $("#idE").val();
+          let custodio = $("#usuarioE").val();
           $.ajax({
             url: "../../Acciones/RestBienes_Informaticos.php",
             type: "PUT",
@@ -462,7 +532,8 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               id_marca: id_marca,
               serie: serie,
               id_area_per: id_area_per,
-              id_ubi_per: id_ubi_per
+              id_ubi_per: id_ubi_per,
+              custodio: custodio
             }),
             contentType: "application/json",
             error: function (error) {

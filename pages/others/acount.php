@@ -202,13 +202,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="QR.php">
-                <i class="icon-contract menu-icon"></i>
-                <span class="menu-title">Escaneo QR</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
                 <a class="nav-link" href="acount.php">
                     <i class="icon-head menu-icon"></i>
                 <span class="menu-title">Cuenta</span>

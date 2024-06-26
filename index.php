@@ -145,7 +145,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="pages/assets/assets-i.php">Bienes Informáticos</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/assets/repowering.php">Repotenciación</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/assets/assets-m.php">Bienes Mobiliarios</a></li>
               </ul>
             </div>
@@ -165,12 +164,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="pages/others/QR.php">
-              <i class="icon-contract menu-icon"></i>
-              <span class="menu-title">Escaneo QR</span>
-            </a>
-          </li>
 
           <li class="nav-item">
             <a class="nav-link" href="pages/others/acount.php">

@@ -206,12 +206,6 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="../others/QR.php">
-              <i class="icon-contract menu-icon"></i>
-              <span class="menu-title">Escaneo QR</span>
-            </a>
-          </li>
 
           <li class="nav-item">
             <a class="nav-link" href="../others/acount.php">
@@ -1246,6 +1240,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             $("#ipA").val("");
             $("#usuarioA").val("");
             cargarTabla();
+            location.reload();
           }
         });
       });
