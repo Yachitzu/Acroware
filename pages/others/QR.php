@@ -359,7 +359,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-bs-dismiss="modal"
+            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal"
               aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold editarBien" id="editarBien" value=" Editar Bien">
           </div>
