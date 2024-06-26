@@ -1,8 +1,16 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php';
 
+/**
+ * Clase para obtener datos de la base de datos.
+ */
 class Obtener
 {
+    /**
+     * Obtiene las marcas con los parámetros enviados por DataTables.
+     * 
+     * @return void
+     */
     public static function ObtenerMarca()
     {
         try {
@@ -16,14 +24,14 @@ class Obtener
             $orderColumnName = isset($_GET['columns'][$orderColumnIndex]['data']) ? $_GET['columns'][$orderColumnIndex]['data'] : 'id';
             $orderDir = isset($_GET['order'][0]['dir']) ? $_GET['order'][0]['dir'] : 'asc';
 
-            
+
             // Construir la consulta SQL con búsqueda y ordenamiento
             $query = "SELECT * FROM marcas WHERE activo = 'si'";
             if (!empty($search)) {
                 $query .= " AND (nombre LIKE '%$search%' OR descripcion LIKE '%$search%' OR pais LIKE '%$search%' OR area LIKE '%$search%')";
             }
             $query .= " ORDER BY " . $orderColumnName . " " . $orderDir . " LIMIT " . $start . ", " . $length;
-            
+
             $resultado = $conectar->prepare($query);
             $resultado->execute();
             $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
@@ -45,6 +53,12 @@ class Obtener
         }
     }
 
+    /**
+     * Obtiene una marca por ID.
+     * 
+     * @param int $id ID de la marca.
+     * @return void
+     */
     public static function ObtenerById($id)
     {
         try {
@@ -60,7 +74,13 @@ class Obtener
         }
     }
 
-    public static function ObtenerNombreT(){
+    /**
+     * Obtiene una lista de marcas en el área tecnológica.
+     * 
+     * @return array Respuesta con código y datos en formato HTML.
+     */
+    public static function ObtenerNombreT()
+    {
         try {
             $conexion = Conexion::getInstance()->getConexion();
             $consulta = "SELECT * FROM marcas where activo='si' and area='tecnologico'";
@@ -87,7 +107,14 @@ class Obtener
             ];
         }
     }
-    public static function ObtenerNombreM(){
+
+    /**
+     * Obtiene una lista de marcas en el área de mobiliario.
+     * 
+     * @return array Respuesta con código y datos en formato HTML.
+     */
+    public static function ObtenerNombreM()
+    {
         try {
             $conexion = Conexion::getInstance()->getConexion();
             $consulta = "SELECT * FROM marcas where activo='si' and area='mobiliario'";
@@ -114,7 +141,14 @@ class Obtener
             ];
         }
     }
-    public static function ObtenerCustodios(){
+
+    /**
+     * Obtiene una lista de custodios.
+     * 
+     * @return array Respuesta con código y datos en formato HTML.
+     */
+    public static function ObtenerCustodios()
+    {
         try {
             $conexion = Conexion::getInstance()->getConexion();
             $consulta = "SELECT * FROM usuarios where activo='si'";
@@ -122,10 +156,10 @@ class Obtener
             $resultado->execute();
             $datos = $resultado->fetchAll(PDO::FETCH_ASSOC);
             $tabla = '';
-    
+
             foreach ($datos as $respuesta) {
-                $tabla.= '
-                    <option value="'. htmlspecialchars($respuesta['id']). '">'. htmlspecialchars($respuesta['nombre']). ' '. htmlspecialchars($respuesta['apellido']) .'</option>
+                $tabla .= '
+                    <option value="' . htmlspecialchars($respuesta['id']) . '">' . htmlspecialchars($respuesta['nombre']) . ' ' . htmlspecialchars($respuesta['apellido']) . '</option>
                 ';
             }
             return [
@@ -133,16 +167,21 @@ class Obtener
                 'dato' => $tabla,
             ];
         } catch (PDOException $e) {
-            error_log('Error al listar usuarios: '. $e->getMessage());
+            error_log('Error al listar usuarios: ' . $e->getMessage());
             return [
                 'codigo' => 1,
-                'ensaje' => 'Error al listar usuarios: '. $e->getMessage()
+                'ensaje' => 'Error al listar usuarios: ' . $e->getMessage()
             ];
         }
     }
 
-    
-    public static function ObtenerArea(){
+    /**
+     * Obtiene una lista de áreas.
+     * 
+     * @return array Respuesta con código y datos en formato HTML.
+     */
+    public static function ObtenerArea()
+    {
         try {
             $conexion = Conexion::getInstance()->getConexion();
             $consulta = "SELECT * FROM areas where activo='si'";
@@ -169,11 +208,18 @@ class Obtener
             ];
         }
     }
-
 }
 
+/**
+ * Clase para guardar datos en la base de datos.
+ */
 class Guardar
 {
+    /**
+     * Guarda una nueva marca en la base de datos.
+     * 
+     * @return void
+     */
     public static function GuardarMarca()
     {
         try {
@@ -198,8 +244,16 @@ class Guardar
     }
 }
 
+/**
+ * @brief Clase Actualizar.
+ */
 class Actualizar
 {
+    /**
+     * @brief Actualiza una marca en la base de datos.
+     *
+     * @param int $id El ID de la marca a actualizar.
+     */
     public static function ActualizarMarca($id)
     {
         try {
@@ -225,8 +279,17 @@ class Actualizar
     }
 }
 
+/**
+ * @brief Clase Eliminar.
+ */
 class Eliminar
 {
+
+     /**
+     * @brief Elimina una marca en la base de datos.
+     *
+     * @param int $id El ID de la marca a eliminar.
+     */
     public static function BorrarMarca($id)
     {
         try {

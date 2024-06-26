@@ -182,7 +182,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="../assets/assets-i.php">Bienes Informáticos</a></li>
 
-                
+
                 <li class="nav-item"> <a class="nav-link" href="../assets/assets-m.php">Bienes Mobiliarios</a></li>
               </ul>
             </div>
@@ -599,6 +599,13 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       }
     });
 
+    /**
+     * @function fetchMarcas
+     * @async
+     * @brief Realiza una solicitud para obtener las marcas desde el servidor y actualiza la tabla.
+     * @returns {Promise<void>}
+     */
+
     async function fetchMarcas() {
       try {
         const response = await fetch(apiBaseUrl, {
@@ -630,6 +637,11 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       }
     }
 
+    /**
+     * @brief Maneja el evento de envío del formulario para agregar una nueva marca.
+     * @param {Event} event - El evento de envío del formulario.
+     * @returns {Promise<void>}
+     */
     agregarMarcaForm.addEventListener('submit', async function(event) {
       event.preventDefault();
 
@@ -667,7 +679,11 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       }
     });
 
-
+    /**
+     * @brief Maneja el evento de envío del formulario para editar una marca.
+     * @param {Event} event - El evento de envío del formulario.
+     * @returns {Promise<void>}
+     */
 
     document.getElementById('editarMarcaForm').addEventListener('submit', async function(event) {
       event.preventDefault();
@@ -715,6 +731,11 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
     const eliminarMarcaForm = document.getElementById('eliminarMarcaForm');
 
+    /**
+     * @brief Maneja el evento de envío del formulario para eliminar una marca.
+     * @param {Event} event - El evento de envío del formulario.
+     * @returns {Promise<void>}
+     */
     eliminarMarcaForm.addEventListener('submit', async function(event) {
       event.preventDefault();
       try {
@@ -744,7 +765,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             console.error('Error al eliminar marca:', responseData.message || response.statusText);
             eliminarModal.hide();
             Swal.fire({
-              
+
               icon: "info",
               text: responseData.message,
               confirmButtonText: "Cerrar",
@@ -758,6 +779,10 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       }
     });
 
+    /**
+     * @param {number} id - El ID de la marca a editar.
+     * @returns {Promise<void>}
+     */
     window.showEditarModal = async function(id) {
       try {
         const response = await fetch(apiBaseUrl + `?id=${id}`);
@@ -793,7 +818,10 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       }
     };
 
-
+    /**
+     * @param {number} id - El ID de la marca a eliminar.
+     * @returns {void}
+     */
     window.showEliminarModal = function(id) {
       marcaAEliminarId = id;
       eliminarModal.show()

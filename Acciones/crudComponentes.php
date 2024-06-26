@@ -1,12 +1,16 @@
 <?php
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php';
-
+/**
+ * Clase para obtener datos de componentes.
+ */
 class Obtener
 {
-    public static function ObtenerComponente()
-    {
-    }
 
+    /**
+     * Obtiene los nombres de todos los componentes.
+     *
+     * @return void
+     */
     public static function ObtenerNombres()
     {
         $conectar = Conexion::getInstance()->getConexion();
@@ -17,6 +21,12 @@ class Obtener
         echo (json_encode($data));
     }
 
+    /**
+     * Obtiene un componente por su ID.
+     *
+     * @param int $id El ID del componente a obtener.
+     * @return void
+     */
     public static function ObtenerById($id)
     {
         try {
@@ -46,8 +56,17 @@ class Obtener
     }
 }
 
+/**
+ * Clase para guardar datos de componentes.
+ */
 class Guardar
 {
+
+    /**
+     * Guarda un nuevo componente en la base de datos.
+     *
+     * @return void
+     */
     public static function GuardarComponente()
     {
         try {
@@ -93,15 +112,26 @@ class Guardar
     }
 }
 
+/**
+ * Clase para actualizar datos de componentes.
+ */
 class Actualizar
 {
-    public static function ActualizarComponente($id){
+
+    /**
+     * Actualiza un componente en la base de datos.
+     *
+     * @param int $id El ID del componente a actualizar.
+     * @return void
+     */
+    public static function ActualizarComponente($id)
+    {
         try {
             $json = file_get_contents('php://input');
             $data = json_decode($json, true);
             if ($data !== null) {
                 $conectar = Conexion::getInstance()->getConexion();
-    
+
                 // Actualizar los datos del componente
                 $updatesql = "UPDATE componentes SET nombre = :nombre, descripcion = :descripcion, serie = :serie, especificaciones = :especificaciones, repotenciado = :repotenciado WHERE id = :id";
                 $resultado = $conectar->prepare($updatesql);
@@ -113,7 +143,7 @@ class Actualizar
                 $resultado->bindParam(':repotenciado', $data["repotenciado"], PDO::PARAM_STR);
                 $resultado->bindParam(':id', $id, PDO::PARAM_INT);
                 $resultado->execute();
-    
+
                 // Actualizar repotenciaciones si los campos están presentes
                 if (!empty($data["codigo_adi_uta"]) && !empty($data["motivo_repotenciacion"])) {
                     $updateRepot = "UPDATE repotenciaciones SET codigo_adi_uta = :codigo_adi_uta, fecha_repotenciacion = NOW(), motivo_repotenciacion = :motivo_repotenciacion WHERE id_componente = :id_componente";
@@ -123,20 +153,28 @@ class Actualizar
                     $resultadoRepot->bindParam(':id_componente', $id, PDO::PARAM_INT);
                     $resultadoRepot->execute();
                 }
-    
+
                 echo json_encode(['success' => true]);
             } else {
                 echo json_encode(['success' => false, 'message' => 'Invalid input']);
             }
         } catch (PDOException $e) {
             echo json_encode(['success' => false, 'message' => $e->getMessage()]);
-        } 
+        }
     }
-    
 }
 
+/**
+ * Clase para eliminar datos de componentes.
+ */
 class Eliminar
 {
+    /**
+     * Borra un componente de la base de datos.
+     *
+     * @param int $id El ID del componente a borrar.
+     * @return void
+     */
 
     public static function BorrarComponente($id)
     {

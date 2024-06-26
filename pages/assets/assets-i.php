@@ -186,7 +186,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="assets-i.php">Bienes Informáticos</a></li>
 
-                
+
                 <li class="nav-item"> <a class="nav-link" href="assets-m.php">Bienes Mobiliarios</a></li>
               </ul>
             </div>
@@ -819,8 +819,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     });
   </script>
 
-  <div class="modal fade modal-crud" id="modalCambiarCustodio" tabindex="-1" role="dialog"
-    aria-labelledby="modal-register-label" aria-hidden="true">
+  <div class="modal fade modal-crud" id="modalCambiarCustodio" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header bg-primary">
@@ -864,8 +863,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </div>
           </div>
           <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-dismiss="modal"
-              aria-label="Close" value="Cancelar" id="cancelButton">
+            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
             <input type="submit" class="btn-crud btn-primary text-bold agregarBien" value="Aceptar">
           </div>
         </form>
@@ -1041,8 +1039,8 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
   <!-- Custodio -->
   <script>
-    $(document).ready(function () {
-      $('#custodioOrigen').change(function () {
+    $(document).ready(function() {
+      $('#custodioOrigen').change(function() {
         var usuario_id = $(this).val();
         var op = 2;
         if (usuario_id) {
@@ -1053,7 +1051,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               usuario_id: usuario_id,
               op: op
             },
-            success: function (response) {
+            success: function(response) {
               try {
                 var usuariosDestino = typeof response === 'string' ? JSON.parse(response) : response;
                 console.log("Respuesta parseada: ", usuariosDestino);
@@ -1061,7 +1059,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 if (usuariosDestino.codigo === 0) {
                   $('#custodioDestino').empty();
                   $('#custodioDestino').append('<option value="">Custodio destino</option>');
-                  usuariosDestino.dato.forEach(function (usuariodestino) {
+                  usuariosDestino.dato.forEach(function(usuariodestino) {
                     $('#custodioDestino').append('<option value="' + usuariodestino.id + '">' + usuariodestino.nombre + ' ' + usuariodestino.apellido + '</option>');
                   });
                 } else {
@@ -1071,7 +1069,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 console.error("Error al parsear la respuesta JSON:", error);
               }
             },
-            error: function (error) {
+            error: function(error) {
               console.error("Error en la solicitud AJAX:", error);
             }
           });
@@ -1081,7 +1079,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         }
       });
 
-      $('#custodioOrigen').change(function () {
+      $('#custodioOrigen').change(function() {
         var custodioId = $(this).val();
         var op = 3;
         if (custodioId) {
@@ -1092,12 +1090,12 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               custodio_id: custodioId,
               op: op
             },
-            success: function (response) {
+            success: function(response) {
               try {
                 var bienes = typeof response === 'string' ? JSON.parse(response) : response;
                 if (bienes.codigo === 0) {
                   $('#bienesInformaticos').empty();
-                  bienes.dato.forEach(function (bien) {
+                  bienes.dato.forEach(function(bien) {
                     $('#bienesInformaticos').append('<div><input type="checkbox" name="bienes" value="' + bien.id + '"> Nombre: ' + bien.nombre + ' Modelo: ' + bien.modelo + '</div>');
                   });
                 } else {
@@ -1107,7 +1105,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 console.error("Error al parsear la respuesta JSON:", error);
               }
             },
-            error: function (error) {
+            error: function(error) {
               console.error("Error en la solicitud AJAX:", error);
             }
           });
@@ -1116,11 +1114,11 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         }
       });
 
-      $("#formCambiarCustodio").submit(function (e) {
+      $("#formCambiarCustodio").submit(function(e) {
         /* e.preventDefault(); */
 
         var seleccionados = [];
-        $('#bienesInformaticos input[type="checkbox"]:checked').each(function () {
+        $('#bienesInformaticos input[type="checkbox"]:checked').each(function() {
           seleccionados.push($(this).val());
         });
 
@@ -1135,25 +1133,21 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               custodioDestino: custodioDestino
             }),
             contentType: "application/json",
-            success: function (response) {
+            success: function(response) {
               var result = JSON.parse(response);
-              if (result.codigo === 0) {
-              } else {
-              }
+              if (result.codigo === 0) {} else {}
             },
-            error: function (error) {
+            error: function(error) {
               console.error("Error en la solicitud AJAX", error);
             },
-            complete: function () {
+            complete: function() {
               $("#modalCambiarCustodio").modal('hide');
-              cargarTabla();  // Asume que cargarTabla() recarga la tabla principal de bienes
+              cargarTabla(); // Asume que cargarTabla() recarga la tabla principal de bienes
             }
           });
-        } else {
-        }
+        } else {}
       });
     });
-
   </script>
 
   <script>
@@ -1196,7 +1190,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
       // Inicializa la tabla pero no la guardes en una variable
       // porque se reconstruirá después de cada carga de datos.
       /* Cambiar custodio */
-      $("#CambiarCustodio").click(function () {
+      $("#CambiarCustodio").click(function() {
         $("#modalCambiarCustodio").modal('show');
       });
 
@@ -1433,11 +1427,10 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                     $('#ubicacionE').append('<option value="' + ubicacion.id + '">' + ubicacion.nombre + '</option>');
                   });
                   $("#ubicacionE").val(id_ubi_per);
-                } else {
-                }
+                } else {}
               },
 
-              error: function () {
+              error: function() {
 
               }
             });
@@ -1510,8 +1503,14 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           });
         });
 
+
         let currentId = null;
-        // Listener para el botón "mas"
+
+        /**
+         * Listener para el botón "más" en la tabla de datos.
+         * @function
+         * @name clickMasButton
+         */
         $('#dataTable tbody').on('click', 'button.mas', function() {
           var btn = $(this);
           var tr = btn.closest('tr');
@@ -1578,6 +1577,8 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
         let componenteAEliminarId = null;
         let componenteAEditarId = null;
+
+
         // Event listener for adding components
         $('#dataTable tbody').on('click', '.btn-add-component', function() {
           const bienId = $(this).data('id');
@@ -1589,7 +1590,11 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
 
         let isSubmitting = false;
-        // Form submission handler for adding components
+        /**
+         * Form submission handler para el formulario de agregar componente.
+         * @function
+         * @name submitAgregarComponenteForm
+         */
         $('#agregarComponenteForm').on('submit', async function(event) {
           event.preventDefault();
 
@@ -1670,9 +1675,11 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         });
 
 
-
-
-
+        /**
+         * Form submission handler para el formulario de editar componente.
+         * @function
+         * @name submitEditarComponenteForm
+         */
         document.getElementById('editarComponenteForm').addEventListener('submit', async function(event) {
           //event.preventDefault();
           var btn = $('button.mas');
@@ -1727,6 +1734,13 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         });
 
 
+        /**
+         * Función para mostrar el modal de edición con los detalles del componente.
+         * @async
+         * @function
+         * @name showEditarModalComponente
+         * @param {number} id - ID del componente a editar.
+         */
         window.showEditarModalComponente = async function(id) {
 
           try {
@@ -1773,6 +1787,11 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         };
       }
 
+      /**
+       * Form submission handler para el formulario de eliminar componente.
+       * @function
+       * @name submitEliminarComponenteForm
+       */
       const eliminarComponenteForm = document.getElementById('eliminarComponenteForm');
 
       eliminarComponenteForm.addEventListener('submit', async function(event) {
@@ -1825,6 +1844,12 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
         }
       });
 
+      /**
+       * Función para mostrar el modal de eliminación de componente.
+       * @function
+       * @name showEliminarModalComponente
+       * @param {number} id - ID del componente a eliminar.
+       */
       window.showEliminarModalComponente = function(id) {
         componenteAEliminarId = id;
         $("#modalCrudEliminarComponente").modal('show');
