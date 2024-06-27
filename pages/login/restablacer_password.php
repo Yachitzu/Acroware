@@ -2,8 +2,8 @@
 include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $token = $_POST['token'];
-    $new_password = $_POST['InputPassword'];
-    $confirm_password = $_POST['ConfirmPassword'];
+    $new_password = $_POST['passwordC'];
+    $confirm_password = $_POST['conPasswordC'];
     if ($new_password !== $confirm_password) {
         header('Location: forgot.php');
     }

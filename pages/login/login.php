@@ -6,18 +6,13 @@ if (session_status() == PHP_SESSION_NONE) {
 revisionLogueo();
 
 if (isset($_SESSION['email'])) {
-    if ($_SESSION['rol'] == 'admin') {
+    if ($_SESSION['rol'] == 'admin'||$_SESSION['rol']=="laboratorista") {
         header('Location: ../../index.php');
         exit;
     } else {
-        if ($_SESSION['rol'] == 'laboratorista') {
-            header('Location: ../../index_Laboratorista.php');
+        if ($_SESSION['rol'] == 'reportero') {
+            header('Location: ../../index_reportero.php');
             exit;
-        } else {
-            if ($_SESSION['rol'] == 'reportero') {
-                header('Location: ../../index_reportero.php');
-                exit;
-            }
         }
     }
 }
@@ -86,15 +81,15 @@ if (isset($_GET['error'])) {
                                                 title="La contraseña debe tener entre 8 y 20 caracteres, al menos una letra mayúscula y un número. No se permiten caracteres especiales."
                                                 oninput="validatePassword(this)" required>
                                         </div>
-                                        
+
                                         <div class="form-group wow fadeIn text-center">
-                                        <?php if ($error): ?>
-                                            <div id="error-message" style="color: red;">
-                                                <?= htmlspecialchars($error) ?>
-                                            </div>
-                                        <?php endif; ?>
+                                            <?php if ($error): ?>
+                                                <div id="error-message" style="color: red;">
+                                                    <?= htmlspecialchars($error) ?>
+                                                </div>
+                                            <?php endif; ?>
                                         </div>
-                                        <button type="submit" 
+                                        <button type="submit"
                                             class="btn btn-primary btn-user btn-block font-weight-semi-bold text-white">
                                             Iniciar Sesión
                                         </button>
