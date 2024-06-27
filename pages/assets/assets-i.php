@@ -2,7 +2,7 @@
 if (session_status() == PHP_SESSION_NONE) {
   session_start();
 }
-if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
+if (!isset($_SESSION['email']) || ($_SESSION['rol'] != 'admin' && $_SESSION['rol'] != 'estudiante')) {
   header('Location: ../login/login.php');
   exit;
 } else {
@@ -44,7 +44,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 </head>
 
 
-<body>
+<body> <input type="hidden" id='rolUser' value="<?php echo  $_SESSION['rol']; ?>" />
   <div class="container-scroller">
     <!-- partial:partials/_navbar.php -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -199,12 +199,12 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </a>
           </li>
 
-          <li class="nav-item">
+          <?php if($_SESSION['rol'] == 'admin') echo '<li class="nav-item">
             <a class="nav-link" href="../others/report.php">
               <i class="icon-paper menu-icon"></i>
-              <span class="menu-title">Reporte</span>
+              <span class="menu-title">Reportes</span>
             </a>
-          </li>
+          </li>'?>
 
 
           <li class="nav-item">
@@ -243,7 +243,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
           <div class="container-fluid py-4">
             <div class="card shadow mb-4">
-              <div class="card-header py-3">
+              <?php if($_SESSION['rol'] == 'admin') echo '<div class="card-header py-3">
                 <button class="btn-crud btn-secondary btn-icon-split" id="AgregarBienes">
                   <span class="icon text-white-50">
                     <i class="fas fa-plus-circle"></i>
@@ -256,7 +256,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   </span>
                   <span class="text text-white">Cambiar custodio</span>
                 </button>
-              </div>
+              </div>' ?>
               <div class="card-body bg-darkwhite">
                 <div class="table-responsive">
                   <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
@@ -1366,6 +1366,12 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 return false;
               }
             );
+            var rolUser = $('#rolUser').val();
+            var table = $('#dataTable').DataTable();
+            if (rolUser === 'estudiante') {
+              const columnCount = table.columns().nodes().length;
+              table.column(columnCount - 1).visible(false);
+            }
 
             // Agregar event listeners a los botones después de cargar la tabla
             addEventListeners();
@@ -1527,26 +1533,30 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 try {
                   response = JSON.parse(response);
                   if (response.codigo === 0) {
+                    var rolUser = $('#rolUser').val();
                     var detalle = response.dato;
                     var detalleHtml = `
-                                    <div class="additional-info">
-                                        <!-- Aquí se incluyen los detalles adicionales -->
-                                        <div class="row info-assets">
-                                            <div class="col-md-3"><strong>Serie:</strong> ${detalle.serie}</div>
-                                            <div class="col-md-3"><strong>Ubicación:</strong> ${detalle.nombre_ubicacion}</div>
-                                            <div class="col-md-3"><strong>Custodio:</strong> ${detalle.nombre_usuario} ${detalle.apellido_usuario}</div>
-                                            <div class="col-md-3"><strong>Fecha Ingreso:</strong> ${detalle.fecha_ingreso}</div>
-                                            <div class="col-md-3"><img src="../${detalle.qr}" alt="QR" class="image_qr" /></div>
-                                        </div>
-                                        <button class="btn-crud btn-primary btn-icon-split btn-add-component" data-id="${id}" data-toggle="modal" data-target="#modalCrudAgregarComponente"> 
-                                            <span class="icon text-white-50">
-                                                <i class="fas fa-plus-circle"></i>
-                                            </span>
-                                            <span class="text text-white">Agregar Componente</span>
-                                        </button>
-                                        ${detalle.componentsTable} <!-- Aquí se incluye la tabla de componentes -->
-                                    </div>
-                                `;
+                            <div class="additional-info">
+                                <!-- Aquí se incluyen los detalles adicionales -->
+                                <div class="row info-assets">
+                                    <div class="col-md-3"><strong>Serie:</strong> ${detalle.serie}</div>
+                                    <div class="col-md-3"><strong>Ubicación:</strong> ${detalle.nombre_ubicacion}</div>
+                                    <div class="col-md-3"><strong>Custodio:</strong> ${detalle.nombre_usuario} ${detalle.apellido_usuario}</div>
+                                    <div class="col-md-3"><strong>Fecha Ingreso:</strong> ${detalle.fecha_ingreso}</div>
+                                    <div class="col-md-3"><img src="../${detalle.qr}" alt="QR" class="image_qr" /></div>
+                                </div>
+                                ${rolUser !== 'estudiante' ? `
+                                    <button class="btn-crud btn-primary btn-icon-split btn-add-component" data-id="${id}" data-toggle="modal" data-target="#modalCrudAgregarComponente"> 
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-plus-circle"></i>
+                                        </span>
+                                        <span class="text text-white">Agregar Componente</span>
+                                    </button>
+                                ` : ''}
+                                ${detalle.componentsTable} <!-- Aquí se incluye la tabla de componentes -->
+                            </div>
+                        `;
+
                     row.child(detalleHtml).show();
                     btn.find('i').removeClass('fa-plus').addClass('fa-minus');
                   } else {

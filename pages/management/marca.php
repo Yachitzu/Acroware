@@ -2,7 +2,7 @@
 if (session_status() == PHP_SESSION_NONE) {
   session_start();
 }
-if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
+if (!isset($_SESSION['email']) || ($_SESSION['rol'] != 'admin' && $_SESSION['rol'] != 'estudiante')) {
   header('Location: ../login/login.php');
   exit;
 } else {
@@ -40,7 +40,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 </head>
 
 
-<body>
+<body> <input type="hidden" id='rolUser' value="<?php echo  $_SESSION['rol']; ?>" />
   <div class="container-scroller">
     <!-- partial:partials/_navbar.php -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -195,12 +195,12 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </a>
           </li>
 
-          <li class="nav-item">
+          <?php if($_SESSION['rol'] == 'admin') echo '<li class="nav-item">
             <a class="nav-link" href="../others/report.php">
               <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Reportes</span>
             </a>
-          </li>
+          </li>'?>
 
           <li class="nav-item">
             <a class="nav-link" href="../others/acount.php">
@@ -239,14 +239,14 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
-              <div class="card-header py-3">
+              <?php if($_SESSION['rol'] == 'admin') echo '<div class="card-header py-3">
                 <button class="btn-crud btn-secondary btn-icon-split" id="agregar">
                   <span class="icon text-white-50">
                     <i class="fas fa-plus-circle"></i>
                   </span>
                   <span class="text text-white">Agregar Marca</span>
                 </button>
-              </div>
+              </div>'?>
               <div class="card-body bg-darkwhite">
                 <div class="table-responsive">
                   <table class="table table-bordered table-hover table-striped" id="dataTable" width="100%" cellspacing="0">
@@ -823,6 +823,24 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
     fetchMarcas();
   });
+</script>
+<script>
+  $(document).ready(function() {
+    // Inicializa la tabla con DataTables
+    var table = $('#dataTable').DataTable();
+
+    // Verifica el valor del input rolUser
+    var rolUser = $('#rolUser').val();
+
+    // Si el rol es "estudiante", elimina la última columna
+    if (rolUser === 'estudiante') {
+        // Obtiene el número de columnas
+        var columnCount = table.columns().nodes().length;
+        
+        // Elimina la última columna
+        table.column(columnCount - 1).visible(false);
+    }
+});
 </script>
 
 </html>

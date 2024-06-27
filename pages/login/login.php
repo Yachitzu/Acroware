@@ -6,7 +6,7 @@ if (session_status() == PHP_SESSION_NONE) {
 revisionLogueo();
 
 if (isset($_SESSION['email'])) {
-    if ($_SESSION['rol'] == 'admin') {
+    if ($_SESSION['rol'] == 'admin' || $_SESSION['rol'] == 'estudiante') {
         header('Location: ../../index.php');
         exit;
     } else {

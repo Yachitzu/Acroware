@@ -2,7 +2,7 @@
 if (session_status() == PHP_SESSION_NONE) {
   session_start();
 }
-if (!isset($_SESSION['email']) || $_SESSION['rol'] != 'admin') {
+if (!isset($_SESSION['email']) || ($_SESSION['rol'] != 'admin' && $_SESSION['rol'] != 'estudiante')) {
   header('Location: pages/login/login.php');
   exit;
 } else {
@@ -158,12 +158,12 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </a>
           </li>
           
-          <li class="nav-item">
+          <?php if($_SESSION['rol'] == 'admin') echo '<li class="nav-item">
             <a class="nav-link" href="pages/others/report.php">
               <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Reporte</span>
             </a>
-          </li>
+          </li>'?>
 
 
           <li class="nav-item">
