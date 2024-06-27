@@ -143,12 +143,12 @@ function obtenerAreasPorBloque($bloqueId) {
         // Obtenemos una instancia de la conexión
         $conexion = Conexion::getInstance()->getConexion();
 
-        // Consulta SQL para obtener los detalles de las áreas correspondientes al bloque seleccionado
+        // Consulta SQL para obtener los detalles de las áreas activas correspondientes al bloque seleccionado
         $queryAreas = "SELECT areas.id, areas.nombre, areas.descripcion, areas.piso, bloques.nombre AS nombre_bloque,
                   (SELECT COUNT(*) FROM ubicaciones WHERE ubicaciones.id_area_per = areas.id) AS total_ubicaciones
                   FROM areas
                   INNER JOIN bloques ON areas.id_bloque_per = bloques.id
-                  WHERE areas.id_bloque_per = :bloqueId";
+                  WHERE areas.id_bloque_per = :bloqueId AND areas.activo = 'si'";
 
         $stmtAreas = $conexion->prepare($queryAreas);
         $stmtAreas->bindParam(':bloqueId', $bloqueId, PDO::PARAM_INT);
@@ -156,7 +156,7 @@ function obtenerAreasPorBloque($bloqueId) {
 
         $areasPorPiso = array();
 
-        // Verificar si se encontraron áreas
+        // Verificar si se encontraron áreas activas
         if ($stmtAreas->rowCount() > 0) {
             // Recorrer los resultados y agregarlos al array $areasPorPiso
             while ($row = $stmtAreas->fetch(PDO::FETCH_ASSOC)) {
@@ -169,14 +169,14 @@ function obtenerAreasPorBloque($bloqueId) {
             }
         }
 
-        // Consulta SQL para obtener la nueva funcionalidad: áreas agrupadas por encargado y piso
+        // Consulta SQL para obtener las áreas activas agrupadas por encargado y piso
         $queryEncargados = "SELECT 
                                 areas.piso, 
                                 usuarios.nombre AS encargado, 
                                 COUNT(*) AS total_areas 
                             FROM areas 
                             JOIN usuarios ON areas.id_usu_encargado = usuarios.id 
-                            WHERE areas.id_bloque_per = :bloqueId 
+                            WHERE areas.id_bloque_per = :bloqueId AND areas.activo = 'si'
                             GROUP BY areas.piso, usuarios.nombre";
 
         $stmtEncargados = $conexion->prepare($queryEncargados);
@@ -219,6 +219,3 @@ if (isset($_GET['bloque'])) {
     $bloqueId = $_GET['bloque'];
     echo obtenerAreasPorBloque($bloqueId);
 }
-
-
-?>

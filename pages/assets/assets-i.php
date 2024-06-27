@@ -512,143 +512,145 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     </div>
   </div>
   <!-- BIENES INFORMÁTICOS -->
-  <!-- Create Modal-->
-  <div class="modal fade modal-crud" id="modalCrudAgregarBienes" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-primary">
-          <h3 class="modal-title text-white" id="modal-register-label">Agregar Bien</h3>
-          <p class="modal">Ingrese los datos del Usuario:</p>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <i class="fas fa-times" class="element-white"></i>
-          </button>
-        </div>
-        <form class="forms-sample" id="formAgregarBienes">
-          <div class="modal-body">
-            <div class="grid-margin-modal">
-              <div class="card-body">
-                <p class="card-description">Por favor, complete los siguientes campos para agregar un nuevo bien al
-                  sistema:</p>
-                <div class="form-row">
-                  <div class="form-group col-md-12">
-                    <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
-                    <input type="text" class="form-control" name="codigoUTAA" id="codigoUTAA" placeholder="Código UTA" required>
-                  </div>
+ <!-- Create Modal-->
+ <div class="modal fade modal-crud" id="modalCrudAgregarBienes" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <h3 class="modal-title text-white" id="modal-register-label">Agregar Bien</h3>
+        <p class="modal">Ingrese los datos del Usuario:</p>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <i class="fas fa-times" class="element-white"></i>
+        </button>
+      </div>
+      <form class="forms-sample" id="formAgregarBienes">
+        <div class="modal-body">
+          <div class="grid-margin-modal">
+            <div class="card-body">
+              <p class="card-description">Por favor, complete los siguientes campos para agregar un nuevo bien al
+                sistema:</p>
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
+                  <input type="text" class="form-control" name="codigoUTAA" id="codigoUTAA" placeholder="Código UTA" required>
                 </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="nombreC" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" name="nombreA" id="nombreA" placeholder="Nombre" required>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="codigoUTAC" class="text-bold">Serie</label>
-                    <input type="text" class="form-control" name="serieA" id="serieA" placeholder="Serie" required>
-                  </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="nombreC" class="text-bold">Nombre</label>
+                  <input type="text" class="form-control" name="nombreA" id="nombreA" placeholder="Nombre" required>
                 </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="facultad" class="text-bold">Marca</label>
-                    <select class="form-control" id="marcaA" required>
-                      <option value="">Seleccione una Marca</option>
-                      <?php
-                      include_once("../../Acciones/crudBienes_Informaticos.php");
-                      $marcas = AccionesBienes_Informaticos::listarMarcasInsertar();
-                      echo ($marcas['dato']);
-                      ?>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="codigoUTAC" class="text-bold">Modelo</label>
-                    <input type="text" class="form-control" name="modeloA" id="modeloA" placeholder="Modelo" required>
-                  </div>
+                <div class="form-group col-md-6">
+                  <label for="codigoUTAC" class="text-bold">Serie</label>
+                  <input type="text" class="form-control" name="serieA" id="serieA" placeholder="Serie" required>
                 </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="facultad" class="text-bold">Areas</label>
-                    <select class="form-control" id="areaA" required>
-                      <option value="">Seleccione una área</option>
-                      <?php
-                      $areas = AccionesBienes_Informaticos::listarAreasInsertar();
-                      echo ($areas['dato']);
-                      ?>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="ubicación" class="text-bold">Ubicación</label>
-                    <select class="form-control" id="ubicacionA" required>
-                      <option value="">Seleccione una Ubicación</option>
-
-                    </select>
-                  </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="facultad" class="text-bold">Marca</label>
+                  <select class="form-control" id="marcaA" required>
+                    <option value="">Seleccione una Marca</option>
+                    <?php
+                    include_once("../../Acciones/crudBienes_Informaticos.php");
+                    $marcas = AccionesBienes_Informaticos::listarMarcasInsertar();
+                    echo ($marcas['dato']);
+                    ?>
+                  </select>
                 </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="usuario" class="text-bold">Custodio</label>
-                    <select class="form-control" id="usuarioA" required>
-                      <option value="">Seleccione un custodio</option>
-                      <?php
-                      $usuarios = AccionesBienes_Informaticos::listarUsuariosInsertar();
-                      echo ($usuarios['dato']);
-                      ?>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="ipA" class="text-bold">Dirección IP</label>
-                    <input type="text" class="form-control" name="ipA" id="ipA" placeholder="Dirección IP" required>
-                    <small id="ipError" class="text-danger"></small>
-                  </div>
+                <div class="form-group col-md-6">
+                  <label for="codigoUTAC" class="text-bold">Modelo</label>
+                  <input type="text" class="form-control" name="modeloA" id="modeloA" placeholder="Modelo" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="facultad" class="text-bold">Áreas</label>
+                  <select class="form-control" id="areaA" required>
+                    <option value="">Seleccione una Área</option>
+                    <?php
+                    $areas = AccionesBienes_Informaticos::listarAreasInsertar();
+                    echo ($areas['dato']);
+                    ?>
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="ubicación" class="text-bold">Ubicación</label>
+                  <select class="form-control" id="ubicacionA" required>
+                    <option value="">Seleccione una Ubicación</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="usuario" class="text-bold">Laboratorista Encargado</label>
+                  <select class="form-control" id="usuarioA" required>
+                    <option value="">Seleccione un Laboratorista</option>
+                    <?php
+                    $usuarios = AccionesBienes_Informaticos::listarUsuariosInsertar();
+                    echo ($usuarios['dato']);
+                    ?>
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="ipA" class="text-bold">Dirección IP</label>
+                  <input type="text" class="form-control" name="ipA" id="ipA" placeholder="Dirección IP" required>
+                  <small id="ipErrorA" class="text-danger"></small>
                 </div>
               </div>
             </div>
           </div>
-          <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold " data-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
-            <input type="submit" class="btn-crud btn-primary text-bold agregarBien" value=" Agregar Bien ">
-          </div>
-        </form>
-      </div>
+        </div>
+        <div class="modal-footer">
+          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButtonA">
+          <button type="submit" class="btn-crud btn-primary text-bold agregarBien">Agregar Bien</button>
+        </div>
+      </form>
     </div>
   </div>
+</div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Seleccionar el campo de entrada de IP
-      const ipInput = document.getElementById('ipA');
-      const ipError = document.getElementById('ipError');
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Seleccionar el campo de entrada de IP y el mensaje de error
+  const ipInputA = document.getElementById('ipA');
+  const ipErrorA = document.getElementById('ipErrorA');
 
-      // Función para validar la dirección IP
-      function validarIP(ip) {
-        // Expresión regular para IPv4
-        const regex =
-          /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+  // Función para validar la dirección IP
+  function validarIPA(ip) {
+    // Expresión regular para IPv4
+    const regex = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
 
-        // Verificar si la IP coincide con la expresión regular
-        return regex.test(ip);
-      }
+    // Verificar si la IP coincide con la expresión regular
+    return regex.test(ip);
+  }
 
-      // Evento de entrada para validar la IP en tiempo real
-      ipInput.addEventListener('input', function() {
-        const ip = ipInput.value.trim();
-        if (ip === '') {
-          ipError.textContent = '';
-        } else if (validarIP(ip)) {
-          ipError.textContent = '';
-        } else {
-          ipError.textContent = 'Ingrese una dirección IP válida';
-        }
-      });
+  // Evento de clic en el botón "Agregar Bien"
+  const agregarBienButton = document.querySelector('.agregarBien');
+  agregarBienButton.addEventListener('click', function(event) {
+    const ipA = ipInputA.value.trim();
+    if (!validarIPA(ipA)) {
+      ipErrorA.textContent = 'Ingrese una dirección IP válida';
+      event.preventDefault(); // Evitar el envío del formulario si la IP no es válida
+    } else {
+      ipErrorA.textContent = '';
+      // Aquí podrías añadir lógica adicional si es necesaria antes de enviar el formulario
+    }
+  });
 
-      // Manejar la validación del formulario al enviar
-      const formAgregarBienes = document.getElementById('formAgregarBienes');
-      formAgregarBienes.addEventListener('submit', function(event) {
-        const ip = ipInput.value.trim();
-        if (!validarIP(ip)) {
-          ipError.textContent = 'Ingrese una dirección IP válida';
-          event.preventDefault(); // Evitar que el formulario se envíe si la IP no es válida
-        }
-      });
-    });
-  </script>
+  // Evento de entrada para validar la IP en tiempo real
+  ipInputA.addEventListener('input', function() {
+    const ipA = ipInputA.value.trim();
+    if (ipA === '') {
+      ipErrorA.textContent = '';
+    } else if (validarIPA(ipA)) {
+      ipErrorA.textContent = '';
+    } else {
+      ipErrorA.textContent = 'Ingrese una dirección IP válida';
+    }
+  });
+
+});
+</script>
 
   <!-- Delete Modal-->
   <div class="modal fade" id="modalCrudEliminarBienes" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
@@ -684,136 +686,138 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
   </div>
 
   <!-- Edit Modal-->
-  <!-- Edit Modal-->
-  <div class="modal fade" id="modalCrudEditarBienes" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-primary">
-          <h3 class="modal-title text-white" id="modal-register-label">Editar Bien</h3>
-          <p class="modal">Ingrese los datos del Usuario:</p>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <i class="fas fa-times" class="element-white"></i>
-          </button>
-        </div>
-        <form class="forms-sample" id="formEditarBienes">
-          <div class="modal-body">
-            <div class="grid-margin-modal">
-              <div class="card-body">
-                <p class="card-description">Por favor, complete los siguientes campos para editar la información del
-                  bien seleccionado:</p>
-                <div class="form-row">
-                  <div class="form-group col-md-12">
-                    <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
-                    <input type="text" class="form-control" name="codigoUTAE" id="codigoUTAE" placeholder="Código UTA" required>
-                  </div>
+<div class="modal fade" id="modalCrudEditarBienes" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <h3 class="modal-title text-white" id="modal-register-label">Editar Bien</h3>
+        <p class="modal">Ingrese los datos del Usuario:</p>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <i class="fas fa-times" class="element-white"></i>
+        </button>
+      </div>
+      <form class="forms-sample" id="formEditarBienes">
+        <div class="modal-body">
+          <div class="grid-margin-modal">
+            <div class="card-body">
+              <p class="card-description">Por favor, complete los siguientes campos para editar la información del
+                bien seleccionado:</p>
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label for="codigoUTAC" class="text-bold">Codigo UTA</label>
+                  <input type="text" class="form-control" name="codigoUTAE" id="codigoUTAE" placeholder="Código UTA" required>
                 </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="nombreC" class="text-bold">Nombre</label>
-                    <input type="text" class="form-control" name="nombreE" id="nombreE" placeholder="Nombre" required>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="codigoUTAC" class="text-bold">Serie</label>
-                    <input type="text" class="form-control" name="serieE" id="serieE" placeholder="Serie" required>
-                  </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="nombreC" class="text-bold">Nombre</label>
+                  <input type="text" class="form-control" name="nombreE" id="nombreE" placeholder="Nombre" required>
                 </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="facultad" class="text-bold">Marca</label>
-                    <select class="form-control" id="marcaE" required>
-                      <?php
-                      $marcasE = AccionesBienes_Informaticos::listarMarcasInsertar();
-                      echo ($marcasE['dato']);
-                      ?>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="codigoUTAC" class="text-bold">Modelo</label>
-                    <input type="text" class="form-control" name="modeloE" id="modeloE" placeholder="Modelo" required>
-                  </div>
+                <div class="form-group col-md-6">
+                  <label for="codigoUTAC" class="text-bold">Serie</label>
+                  <input type="text" class="form-control" name="serieE" id="serieE" placeholder="Serie" required>
                 </div>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
-                    <label for="facultad" class="text-bold">Areas</label>
-                    <select class="form-control" id="areaE" required>
-                      <?php
-                      $areasE = AccionesBienes_Informaticos::listarAreasInsertar();
-                      echo ($areasE['dato']);
-                      ?>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="ubicación" class="text-bold">Ubicación</label>
-                    <select class="form-control" id="ubicacionE" required>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="facultad" class="text-bold">Marca</label>
+                  <select class="form-control" id="marcaE" required>
+                    <?php
+                    $marcasE = AccionesBienes_Informaticos::listarMarcasInsertar();
+                    echo ($marcasE['dato']);
+                    ?>
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="codigoUTAC" class="text-bold">Modelo</label>
+                  <input type="text" class="form-control" name="modeloE" id="modeloE" placeholder="Modelo" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="facultad" class="text-bold">Areas</label>
+                  <select class="form-control" id="areaE" required>
+                    <?php
+                    $areasE = AccionesBienes_Informaticos::listarAreasInsertar();
+                    echo ($areasE['dato']);
+                    ?>
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="ubicación" class="text-bold">Ubicación</label>
+                  <select class="form-control" id="ubicacionE" required>
 
-                    </select>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="usuario" class="text-bold">Custodio Encargado</label>
-                    <select class="form-control" id="usuarioE" required>
-                      <?php
-                      $usuarios = AccionesBienes_Informaticos::listarUsuariosInsertar();
-                      echo ($usuarios['dato']);
-                      ?>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="ipE" class="text-bold">Dirección IP</label>
-                    <input type="text" class="form-control" name="ipE" id="ipE" placeholder="Dirección IP" required>
-                    <small id="ipErrorE" class="text-danger"></small>
-                  </div>
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="usuario" class="text-bold">Laboratorista Encargado</label>
+                  <select class="form-control" id="usuarioE" required>
+                    <?php
+                    $usuarios = AccionesBienes_Informaticos::listarUsuariosInsertar();
+                    echo ($usuarios['dato']);
+                    ?>
+                  </select>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="ipE" class="text-bold">Dirección IP</label>
+                  <input type="text" class="form-control" name="ipE" id="ipE" placeholder="Dirección IP" required>
+                  <small id="ipErrorE" class="text-danger"></small>
                 </div>
               </div>
             </div>
           </div>
-          <div class="modal-footer">
-            <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
-            <input type="submit" class="btn-crud btn-primary text-bold editarBien" value=" Editar Bien">
-          </div>
-        </form>
-      </div>
+        </div>
+        <div class="modal-footer">
+          <input type="button" class="btn-crud btn-secondary text-white text-bold" data-dismiss="modal" aria-label="Close" value="Cancelar" id="cancelButton">
+          <button type="submit" class="btn-crud btn-primary text-bold editarBien">Editar Bien</button>
+        </div>
+      </form>
     </div>
   </div>
+</div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Seleccionar el campo de entrada de IP
-      const ipInput = document.getElementById('ipE');
-      const ipError = document.getElementById('ipErrorE');
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Seleccionar el campo de entrada de IP y el mensaje de error
+  const ipInput = document.getElementById('ipE');
+  const ipError = document.getElementById('ipErrorE');
 
-      // Función para validar la dirección IP
-      function validarIP(ip) {
-        // Expresión regular para IPv4
-        const regex =
-          /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+  // Función para validar la dirección IP
+  function validarIP(ip) {
+    // Expresión regular para IPv4
+    const regex = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
 
-        // Verificar si la IP coincide con la expresión regular
-        return regex.test(ip);
-      }
+    // Verificar si la IP coincide con la expresión regular
+    return regex.test(ip);
+  }
 
-      // Evento de entrada para validar la IP en tiempo real
-      ipInput.addEventListener('input', function() {
-        const ip = ipInput.value.trim();
-        if (ip === '') {
-          ipError.textContent = '';
-        } else if (validarIP(ip)) {
-          ipError.textContent = '';
-        } else {
-          ipError.textContent = 'Ingrese una dirección IP válida';
-        }
-      });
+  // Evento de clic en el botón "Editar Bien"
+  const editarBienButton = document.querySelector('.editarBien');
+  editarBienButton.addEventListener('click', function(event) {
+    const ip = ipInput.value.trim();
+    if (!validarIP(ip)) {
+      ipError.textContent = 'Ingrese una dirección IP válida';
+      event.preventDefault(); // Evitar el envío del formulario si la IP no es válida
+    } else {
+      ipError.textContent = '';
+      // Aquí podrías añadir lógica adicional si es necesaria antes de enviar el formulario
+    }
+  });
 
-      // Manejar la validación del formulario al enviar
-      const formAgregarBienes = document.getElementById('formAgregarBienes');
-      formAgregarBienes.addEventListener('submit', function(event) {
-        const ip = ipInput.value.trim();
-        if (!validarIP(ip)) {
-          ipError.textContent = 'Ingrese una dirección IP válida';
-          event.preventDefault(); // Evitar que el formulario se envíe si la IP no es válida
-        }
-      });
-    });
-  </script>
+  // Evento de entrada para validar la IP en tiempo real
+  ipInput.addEventListener('input', function() {
+    const ip = ipInput.value.trim();
+    if (ip === '') {
+      ipError.textContent = '';
+    } else if (validarIP(ip)) {
+      ipError.textContent = '';
+    } else {
+      ipError.textContent = 'Ingrese una dirección IP válida';
+    }
+  });
+
+});
+</script>
 
   <div class="modal fade modal-crud" id="modalCambiarCustodio" tabindex="-1" role="dialog" aria-labelledby="modal-register-label" aria-hidden="true">
     <div class="modal-dialog">
