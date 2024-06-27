@@ -222,9 +222,9 @@ if ($op == "POST" && $_POST["tipoArchivoI"] == "pdf") {
                     INNER JOIN 
                         marcas m ON bi.id_marca = m.id
                     INNER JOIN 
-                        usuarios usu ON bi.id_marca = usu.id
+                        usuarios usu ON bi.custodio = usu.id
                     INNER JOIN 
-                        bloques b ON bi.id_marca = b.id
+                        bloques b ON bi.id_blo_per = b.id
                     WHERE 
                         (bi.fecha_ingreso >= :fechaIni AND bi.fecha_ingreso <= :fechaFin)";
         $resultado = $conexion->prepare($consulta);
@@ -248,9 +248,9 @@ if ($op == "POST" && $_POST["tipoArchivoI"] == "pdf") {
                     INNER JOIN 
                         marcas m ON bi.id_marca = m.id
                     INNER JOIN 
-                        usuarios usu ON bi.id_marca = usu.id
+                        usuarios usu ON bi.custodio = usu.id
                     INNER JOIN 
-                        bloques b ON bi.id_marca = b.id
+                        bloques b ON bi.id_blo_per = b.id
                     WHERE  
                         id_marca = :marca AND (bi.fecha_ingreso >= :fechaIni AND bi.fecha_ingreso <= :fechaFin)";
         $resultado = $conexion->prepare($consulta);
@@ -275,9 +275,9 @@ if ($op == "POST" && $_POST["tipoArchivoI"] == "pdf") {
                     INNER JOIN 
                         marcas m ON bi.id_marca = m.id
                     INNER JOIN 
-                        usuarios usu ON bi.id_marca = usu.id
+                        usuarios usu ON bi.custodio = usu.id
                     INNER JOIN 
-                        bloques b ON bi.id_marca = b.id
+                        bloques b ON bi.id_blo_per = b.id
                     WHERE 
                         bi.id_area_per = :area AND (bi.fecha_ingreso >= :fechaIni AND bi.fecha_ingreso <= :fechaFin)";
         $resultado = $conexion->prepare($consulta);
@@ -302,9 +302,9 @@ if ($op == "POST" && $_POST["tipoArchivoI"] == "pdf") {
                     INNER JOIN 
                         marcas m ON bi.id_marca = m.id
                     INNER JOIN 
-                        usuarios usu ON bi.id_marca = usu.id
+                        usuarios usu ON bi.custodio = usu.id
                     INNER JOIN 
-                        bloques b ON bi.id_marca = b.id
+                        bloques b ON bi.id_blo_per = b.id
                     WHERE 
                         id_marca = :marca AND bi.id_area_per = :area AND (bi.fecha_ingreso >= :fechaIni AND bi.fecha_ingreso <= :fechaFin)";
         $resultado = $conexion->prepare($consulta);
