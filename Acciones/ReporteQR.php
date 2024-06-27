@@ -85,7 +85,7 @@
                                  INNER JOIN 
                                      areas a ON bi.id_area_per = a.id
                                  INNER JOIN 
-                                     ubicaciones u ON bi.id_ubi_per = u.id";
+                                     bi.activo ='si'";
                      $resultado = $conexion->prepare($consulta);
                      $resultado->execute();
                  }elseif($area != "any") {
@@ -100,7 +100,7 @@
                                  INNER JOIN 
                                      ubicaciones u ON bi.id_ubi_per = u.id
                                  WHERE 
-                                     bi.id_area_per = :area";
+                                     bi.id_area_per = :area and bi.activo ='si'";
                      $resultado = $conexion->prepare($consulta);
                      $resultado->bindParam(':area', $area);
                      $resultado->execute();
@@ -116,7 +116,7 @@
                                  INNER JOIN 
                                      ubicaciones u ON bi.id_ubi_per = u.id
                                  WHERE 
-                                     bi.id_area_per = :area ";
+                                     bi.activo ='si'";
                      $resultado = $conexion->prepare($consulta);
                      $resultado->bindParam(':area', $area);
                      $resultado->execute();
