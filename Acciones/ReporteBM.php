@@ -104,7 +104,7 @@ if ($op == "POST" && $_POST["tipoArchivoBM"] == "pdf") {
                     INNER JOIN 
                         ubicaciones u ON bm.id_ubi_per = u.id
                     WHERE 
-                        (bm.fecha_ingreso >= :fechaIni AND bm.fecha_ingreso <= :fechaFin)";
+                        (bm.fecha_ingreso >= :fechaIni AND bm.fecha_ingreso <= :fechaFin) and bm.activo='si'";
         $resultado = $conexion->prepare($consulta);
         $resultado->bindParam(':fechaIni', $fechaIni);
         $resultado->bindParam(':fechaFin', $fechaFin);
@@ -121,7 +121,7 @@ if ($op == "POST" && $_POST["tipoArchivoBM"] == "pdf") {
                     INNER JOIN 
                         ubicaciones u ON bm.id_ubi_per = u.id
                     WHERE 
-                        bm.id_area_per = :area AND (bm.fecha_ingreso >= :fechaIni AND bm.fecha_ingreso <= :fechaFin)";
+                        bm.id_area_per = :area AND (bm.fecha_ingreso >= :fechaIni AND bm.fecha_ingreso <= :fechaFin) and bm.activo='si'";
         $resultado = $conexion->prepare($consulta);
         $resultado->bindParam(':area', $area);
         $resultado->bindParam(':fechaIni', $fechaIni);
@@ -139,7 +139,7 @@ if ($op == "POST" && $_POST["tipoArchivoBM"] == "pdf") {
                     INNER JOIN 
                         ubicaciones u ON bm.id_ubi_per = u.id
                     WHERE 
-                        bm.id_area_per = :area AND id_marca = :marca AND (bm.fecha_ingreso >= :fechaIni AND bm.fecha_ingreso <= :fechaFin)";
+                        bm.id_area_per = :area AND id_marca = :marca AND (bm.fecha_ingreso >= :fechaIni AND bm.fecha_ingreso <= :fechaFin) and bm.activo='si'";
         $resultado = $conexion->prepare($consulta);
         $resultado->bindParam(':area', $area);
         $resultado->bindParam(':marca', $marca);
@@ -158,7 +158,7 @@ if ($op == "POST" && $_POST["tipoArchivoBM"] == "pdf") {
                     INNER JOIN 
                         ubicaciones u ON bm.id_ubi_per = u.id
                     WHERE 
-                        bm.id_area_per = :area AND custodio_actual = :custodio AND (bm.fecha_ingreso >= :fechaIni AND bm.fecha_ingreso <= :fechaFin)";
+                        bm.id_area_per = :area AND custodio_actual = :custodio AND (bm.fecha_ingreso >= :fechaIni AND bm.fecha_ingreso <= :fechaFin) and bm.activo='si'";
         $resultado = $conexion->prepare($consulta);
         $resultado->bindParam(':area', $area);
         $resultado->bindParam(':custodio', $custodio);
@@ -177,7 +177,7 @@ if ($op == "POST" && $_POST["tipoArchivoBM"] == "pdf") {
                     INNER JOIN 
                         ubicaciones u ON bm.id_ubi_per = u.id
                     WHERE 
-                        id_marca = :marca AND (bm.fecha_ingreso >= :fechaIni AND bm.fecha_ingreso <= :fechaFin)";
+                        id_marca = :marca AND (bm.fecha_ingreso >= :fechaIni AND bm.fecha_ingreso <= :fechaFin) and bm.activo='si'";
         $resultado = $conexion->prepare($consulta);
         $resultado->bindParam(':marca', $marca);
         $resultado->bindParam(':fechaIni', $fechaIni);
@@ -195,7 +195,7 @@ if ($op == "POST" && $_POST["tipoArchivoBM"] == "pdf") {
                     INNER JOIN 
                         ubicaciones u ON bm.id_ubi_per = u.id
                     WHERE 
-                        custodio_actual = :custodio AND AND id_marca = :marca AND (bm.fecha_ingreso >= :fechaIni AND bm.fecha_ingreso <= :fechaFin)";
+                        custodio_actual = :custodio AND AND id_marca = :marca AND (bm.fecha_ingreso >= :fechaIni AND bm.fecha_ingreso <= :fechaFin) and bm.activo='si'";
         $resultado = $conexion->prepare($consulta);
         $resultado->bindParam(':custodio', $custodio);
         $resultado->bindParam(':marca', $marca);
@@ -214,7 +214,7 @@ if ($op == "POST" && $_POST["tipoArchivoBM"] == "pdf") {
                     INNER JOIN 
                         ubicaciones u ON bm.id_ubi_per = u.id
                     WHERE 
-                        custodio_actual = :custodio AND (bm.fecha_ingreso >= :fechaIni AND bm.fecha_ingreso <= :fechaFin)";
+                        custodio_actual = :custodio AND (bm.fecha_ingreso >= :fechaIni AND bm.fecha_ingreso <= :fechaFin) and bm.activo='si'";
         $resultado = $conexion->prepare($consulta);
         $resultado->bindParam(':custodio', $custodio);
         $resultado->bindParam(':fechaIni', $fechaIni);
@@ -232,7 +232,7 @@ if ($op == "POST" && $_POST["tipoArchivoBM"] == "pdf") {
                     INNER JOIN 
                         ubicaciones u ON bm.id_ubi_per = u.id
                     WHERE 
-                        custodio_actual = :custodio AND id_marca = :marca AND bm.id_area_per = :area AND (bm.fecha_ingreso >= :fechaIni AND bm.fecha_ingreso <= :fechaFin)";
+                        custodio_actual = :custodio AND id_marca = :marca AND bm.id_area_per = :area AND (bm.fecha_ingreso >= :fechaIni AND bm.fecha_ingreso <= :fechaFin) and bm.activo='si'";
         $resultado = $conexion->prepare($consulta);
         $resultado->bindParam(':custodio', $custodio);
         $resultado->bindParam(':marca', $marca);
@@ -272,7 +272,7 @@ foreach ($dato as $respuesta) {
     header('Content-Disposition: attachment; filename="ReporteBM.csv"');
  
     $salida = fopen('php://output', 'w');
-    fputcsv($salida, array('Codigo Uta', 'BLD/BCA', 'Nombre' ,'Serie', 'Marca', 'Modelo','Color','Material','Dimensiones','Condicion','Custodio Actual','Fecha de ingreso','Valor Contable','Precio', 'Area', 'Ubicacion',  'Activo'));
+    fputcsv($salida, array('Codigo Uta', 'Nombre' ,'Serie', 'Marca', 'Modelo','Color','Material','Dimensiones','Condicion','Custodio Actual','Fecha de ingreso','Valor Contable', 'Area', 'Ubicacion',  'Activo', 'Bloque'));
     include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php');
  
     $conexion = Conexion::getInstance()->getConexion();
@@ -351,7 +351,9 @@ foreach ($dato as $respuesta) {
                         bm.*,
                         a.nombre as nombre_area,
                         u.nombre as nombre_ubicacion,
-                        m.nombre as nombre_marca
+                        m.nombre as nombre_marca,
+                        CONCAT(usu.nombre, ' ', usu.apellido) as custodio,
+                        b.nombre as nombre_bloque
                     FROM 
                         bienes_mobiliarios bm
                     INNER JOIN 
@@ -360,6 +362,10 @@ foreach ($dato as $respuesta) {
                         ubicaciones u ON bm.id_ubi_per = u.id
                     INNER JOIN 
                         marcas m ON bm.id_marca = m.id
+                    INNER JOIN 
+                        usuarios usu ON bm.custodio_actual = usu.id
+                    INNER JOIN 
+                        bloques b ON bm.id_blo_per = b.id
                     WHERE 
                         bm.id_area_per = :area AND custodio_actual = :custodio AND (bm.fecha_ingreso >= :fechaIni AND bm.fecha_ingreso <= :fechaFin)";
         $resultado = $conexion->prepare($consulta);
@@ -373,7 +379,9 @@ foreach ($dato as $respuesta) {
                         bm.*,
                         a.nombre as nombre_area,
                         u.nombre as nombre_ubicacion,
-                        m.nombre as nombre_marca
+                        m.nombre as nombre_marca,
+                        CONCAT(usu.nombre, ' ', usu.apellido) as custodio,
+                        b.nombre as nombre_bloque
                     FROM 
                         bienes_mobiliarios bm
                     INNER JOIN 
@@ -382,6 +390,10 @@ foreach ($dato as $respuesta) {
                         ubicaciones u ON bm.id_ubi_per = u.id
                     INNER JOIN 
                         marcas m ON bm.id_marca = m.id
+                    INNER JOIN 
+                        usuarios usu ON bm.custodio_actual = usu.id
+                    INNER JOIN 
+                        bloques b ON bm.id_blo_per = b.id
                     WHERE 
                         id_marca = :marca AND (bm.fecha_ingreso >= :fechaIni AND bm.fecha_ingreso <= :fechaFin)";
         $resultado = $conexion->prepare($consulta);
@@ -394,7 +406,9 @@ foreach ($dato as $respuesta) {
                         bm.*,
                         a.nombre as nombre_area,
                         u.nombre as nombre_ubicacion,
-                        m.nombre as nombre_marca
+                        m.nombre as nombre_marca,
+                        CONCAT(usu.nombre, ' ', usu.apellido) as custodio,
+                        b.nombre as nombre_bloque
                     FROM 
                         bienes_mobiliarios bm
                     INNER JOIN 
@@ -403,6 +417,10 @@ foreach ($dato as $respuesta) {
                         ubicaciones u ON bm.id_ubi_per = u.id
                     INNER JOIN 
                         marcas m ON bm.id_marca = m.id
+                    INNER JOIN 
+                        usuarios usu ON bm.custodio_actual = usu.id
+                    INNER JOIN 
+                        bloques b ON bm.id_blo_per = b.id
                     WHERE 
                         custodio_actual = :custodio AND AND id_marca = :marca AND (bm.fecha_ingreso >= :fechaIni AND bm.fecha_ingreso <= :fechaFin)";
         $resultado = $conexion->prepare($consulta);
@@ -416,7 +434,9 @@ foreach ($dato as $respuesta) {
                         bm.*,
                         a.nombre as nombre_area,
                         u.nombre as nombre_ubicacion,
-                        m.nombre as nombre_marca
+                        m.nombre as nombre_marca,
+                        CONCAT(usu.nombre, ' ', usu.apellido) as custodio,
+                        b.nombre as nombre_bloque
                     FROM 
                         bienes_mobiliarios bm
                     INNER JOIN 
@@ -425,6 +445,10 @@ foreach ($dato as $respuesta) {
                         ubicaciones u ON bm.id_ubi_per = u.id
                     INNER JOIN 
                         marcas m ON bm.id_marca = m.id
+                    INNER JOIN 
+                        usuarios usu ON bm.custodio_actual = usu.id
+                    INNER JOIN 
+                        bloques b ON bm.id_blo_per = b.id
                     WHERE 
                         custodio_actual = :custodio AND (bm.fecha_ingreso >= :fechaIni AND bm.fecha_ingreso <= :fechaFin)";
         $resultado = $conexion->prepare($consulta);
@@ -437,7 +461,9 @@ foreach ($dato as $respuesta) {
                         bm.*,
                         a.nombre as nombre_area,
                         u.nombre as nombre_ubicacion,
-                        m.nombre as nombre_marca
+                        m.nombre as nombre_marca,
+                        CONCAT(usu.nombre, ' ', usu.apellido) as custodio,
+                        b.nombre as nombre_bloque
                     FROM 
                         bienes_mobiliarios bm
                     INNER JOIN 
@@ -446,6 +472,10 @@ foreach ($dato as $respuesta) {
                         ubicaciones u ON bm.id_ubi_per = u.id
                     INNER JOIN 
                         marcas m ON bm.id_marca = m.id
+                    INNER JOIN 
+                        usuarios usu ON bm.custodio_actual = usu.id
+                    INNER JOIN 
+                        bloques b ON bm.id_blo_per = b.id
                     WHERE 
                         custodio_actual = :custodio AND id_marca = :marca AND bm.id_area_per = :area AND (bm.fecha_ingreso >= :fechaIni AND bm.fecha_ingreso <= :fechaFin)";
         $resultado = $conexion->prepare($consulta);
@@ -460,7 +490,6 @@ foreach ($dato as $respuesta) {
     $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
     foreach ($dato as $respuesta) {
         fputcsv($salida, array($respuesta['codigo_uta'],
-        $respuesta['bld_o_bca'],
         $respuesta['nombre'],
         $respuesta['serie'],
         $respuesta['nombre_marca'],
@@ -469,13 +498,14 @@ foreach ($dato as $respuesta) {
         $respuesta['material'],
         $respuesta['dimensiones'],
         $respuesta['condicion'],
-        $respuesta['custodio_actual'],
+        $respuesta['custodio'],
         $respuesta['fecha_ingreso'],
         $respuesta['valor_contable'],
         $respuesta['precio'],
         $respuesta['nombre_area'],
         $respuesta['nombre_ubicacion'],
-        $respuesta['activo']));
+        $respuesta['activo'],
+        $respuesta['nombre_bloque']));
     }
 }else{
    echo "aquí no encuentra nada si no envía info";
