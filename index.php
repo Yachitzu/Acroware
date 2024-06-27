@@ -2,7 +2,7 @@
 if (session_status() == PHP_SESSION_NONE) {
   session_start();
 }
-if (!isset($_SESSION['email']) || ($_SESSION['rol'] != 'admin' && $_SESSION['rol'] != 'estudiante')) {
+if (!isset($_SESSION['email']) || (($_SESSION['rol'] != 'admin' && $_SESSION['rol'] != 'laboratorista') && $_SESSION['rol'] != 'estudiante')) {
   header('Location: pages/login/login.php');
   exit;
 } else {
@@ -15,9 +15,9 @@ $bienes = obtenerBienesMobiliariosRecientes();
 
 // Verificar si $bienes es un array
 if (!is_array($bienes)) {
-    echo "Error: No se obtuvo un array.";
-    var_dump($bienes);
-    exit;
+  echo "Error: No se obtuvo un array.";
+  var_dump($bienes);
+  exit;
 }
 
 $usuario_id = $_SESSION['id'];
@@ -67,7 +67,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
           </li>
         </ul>
         <ul class="navbar-nav navbar-nav-right">
-          
+
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
               <img src="resources/images/faces/perfil1.png" alt="profile" />
@@ -83,7 +83,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               </a>
             </div>
           </li>
-          
+
         </ul>
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
           data-toggle="offcanvas">
@@ -106,12 +106,14 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="pages/management/users.php">
-              <i class="icon-head menu-icon"></i>
-              <span class="menu-title">Usuarios</span>
-            </a>
-          </li>
+          <?php if ($_SESSION['rol'] == 'admin' || $_SESSION['rol'] == 'estudiante'): ?>
+            <li class="nav-item">
+              <a class="nav-link" href="pages/management/users.php">
+                <i class="icon-head menu-icon"></i>
+                <span class="menu-title">Usuarios</span>
+              </a>
+            </li>
+          <?php endif; ?>
 
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
@@ -131,7 +133,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
           <li class="nav-item">
             <a class="nav-link" href="pages/management/marca.php">
-                <i class="icon-bar-graph menu-icon"></i>
+              <i class="icon-bar-graph menu-icon"></i>
               <span class="menu-title">Marcas</span>
             </a>
           </li>
@@ -145,7 +147,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="pages/assets/assets-i.php">Bienes Informáticos</a></li>
-                
+
                 <li class="nav-item"> <a class="nav-link" href="pages/assets/assets-m.php">Bienes Mobiliarios</a></li>
               </ul>
             </div>
@@ -185,7 +187,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   <h3 class="font-weight-bold">¡Bienvenido a Acroware!</h3>
                   <h6 class="font-weight-normal mb-0">¡Gestión Inteligente!</h6>
                 </div>
-                
+
               </div>
             </div>
           </div>
@@ -220,12 +222,12 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 </div>
                 <div class="col-md-6 mb-4 stretch-card transparent">
                   <div class="card card-tale">
-                      <div class="card-body">
-                          <!-- Icono de un frasco de laboratorio -->
-                          <p class="mb-4">Número Total </p>
-                          <p class="fs-30 mb-2"><i class="ti-user"></i> <?php echo contarLaboratoristas(); ?></p>
-                          <p>Laboratoristas</p>
-                      </div>
+                    <div class="card-body">
+                      <!-- Icono de un frasco de laboratorio -->
+                      <p class="mb-4">Número Total </p>
+                      <p class="fs-30 mb-2"><i class="ti-user"></i> <?php echo contarLaboratoristas(); ?></p>
+                      <p>Laboratoristas</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -252,32 +254,33 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </div>
           </div>
           <?php
-                // Incluir el archivo de funciones
-                include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/Acciones/recordatorios/procesar_seleccion.php');
+          // Incluir el archivo de funciones
+          include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/Acciones/recordatorios/procesar_seleccion.php');
 
-                // Obtener opciones de facultades
-                $facultades = obtenerFacultades();
-            ?>
+          // Obtener opciones de facultades
+          $facultades = obtenerFacultades();
+          ?>
           <div class="row">
             <div class="col-md-12 grid-margin stretch-card">
               <div class="card position-relative">
                 <div class="card-body">
                   <form id="seleccion-form" method="POST" action="Acciones/recordatorios/procesar_seleccion.php">
-                      <div class="form-row">
-                        <div class="form-group col-md-5">
-                          <select id="facultad" name="facultad" class="form-control" required>
-                            <option value="">Selecciona una facultad</option>
-                            <?php foreach ($facultades as $facultad): ?>
-                              <option value="<?php echo $facultad['id']; ?>"><?php echo htmlspecialchars($facultad['nombre']); ?></option>
-                            <?php endforeach; ?>
-                          </select>
-                        </div>
-                        <div class="form-group col-md-5">
-                          <select id="bloque" name="bloque" class="form-control" required disabled>
-                            <option value="">Selecciona una facultad primero</option>
-                          </select>
-                        </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-5">
+                        <select id="facultad" name="facultad" class="form-control" required>
+                          <option value="">Selecciona una facultad</option>
+                          <?php foreach ($facultades as $facultad): ?>
+                            <option value="<?php echo $facultad['id']; ?>">
+                              <?php echo htmlspecialchars($facultad['nombre']); ?></option>
+                          <?php endforeach; ?>
+                        </select>
                       </div>
+                      <div class="form-group col-md-5">
+                        <select id="bloque" name="bloque" class="form-control" required disabled>
+                          <option value="">Selecciona una facultad primero</option>
+                        </select>
+                      </div>
+                    </div>
                   </form>
                   <div id="detailedReports" class="carousel slide detailed-report-carousel position-static pt-2"
                     data-ride="carousel">
@@ -323,12 +326,12 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                                         <h5 class="font-weight-bold mb-0">0</h5>
                                       </td>
                                     </tr>
-                                    
-                                    
+
+
                                   </table>
                                 </div>
                               </div>
-                              
+
                             </div>
                           </div>
                         </div>
@@ -348,59 +351,59 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </div>
           </div>
           <script>
-              document.getElementById('facultad').addEventListener('change', function() {
-                  var facultadId = this.value;
-                  var bloqueSelect = document.getElementById('bloque');
-                  var button = document.querySelector('button[type="submit"]');
-                  if (facultadId) {
-                      bloqueSelect.innerHTML = '<option value="">Cargando...</option>';
-                      button.disabled = true;
-                      fetch('Acciones/recordatorios/procesar_seleccion.php?accion=obtenerBloques&facultad=' + facultadId)
-                          .then(response => response.json())
-                          .then(data => {
-                              bloqueSelect.innerHTML = '<option value="">Selecciona un bloque</option>';
-                              data.forEach(bloque => {
-                                  var option = document.createElement('option');
-                                  option.value = bloque.id;
-                                  option.textContent = bloque.nombre;
-                                  bloqueSelect.appendChild(option);
-                              });
-                              bloqueSelect.disabled = false;
-                              button.disabled = false;
-                          })
-                          .catch(error => {
-                              console.error('Error al obtener bloques:', error);
-                              bloqueSelect.innerHTML = '<option value="">Error al cargar los bloques</option>';
-                          });
-                  } else {
-                      bloqueSelect.innerHTML = '<option value="">Selecciona una facultad primero</option>';
-                      bloqueSelect.disabled = true;
-                      button.disabled = true;
-                  }
-              });
-              document.getElementById('bloque').addEventListener('change', function() {
-    var bloqueId = this.value;
-    if (bloqueId) {
-        var facultadId = document.getElementById('facultad').value;
-        fetch('Acciones/contador.php?facultad=' + facultadId + '&bloque=' + bloqueId)
-            .then(response => response.json())
-            .then(data => {
-                var carouselItems = document.querySelector('.carousel-inner');
-                carouselItems.innerHTML = '';
+            document.getElementById('facultad').addEventListener('change', function () {
+              var facultadId = this.value;
+              var bloqueSelect = document.getElementById('bloque');
+              var button = document.querySelector('button[type="submit"]');
+              if (facultadId) {
+                bloqueSelect.innerHTML = '<option value="">Cargando...</option>';
+                button.disabled = true;
+                fetch('Acciones/recordatorios/procesar_seleccion.php?accion=obtenerBloques&facultad=' + facultadId)
+                  .then(response => response.json())
+                  .then(data => {
+                    bloqueSelect.innerHTML = '<option value="">Selecciona un bloque</option>';
+                    data.forEach(bloque => {
+                      var option = document.createElement('option');
+                      option.value = bloque.id;
+                      option.textContent = bloque.nombre;
+                      bloqueSelect.appendChild(option);
+                    });
+                    bloqueSelect.disabled = false;
+                    button.disabled = false;
+                  })
+                  .catch(error => {
+                    console.error('Error al obtener bloques:', error);
+                    bloqueSelect.innerHTML = '<option value="">Error al cargar los bloques</option>';
+                  });
+              } else {
+                bloqueSelect.innerHTML = '<option value="">Selecciona una facultad primero</option>';
+                bloqueSelect.disabled = true;
+                button.disabled = true;
+              }
+            });
+            document.getElementById('bloque').addEventListener('change', function () {
+              var bloqueId = this.value;
+              if (bloqueId) {
+                var facultadId = document.getElementById('facultad').value;
+                fetch('Acciones/contador.php?facultad=' + facultadId + '&bloque=' + bloqueId)
+                  .then(response => response.json())
+                  .then(data => {
+                    var carouselItems = document.querySelector('.carousel-inner');
+                    carouselItems.innerHTML = '';
 
-                var areasPorPiso = data.areasPorPiso;
-                var areasPorEncargado = data.areasPorEncargado;
+                    var areasPorPiso = data.areasPorPiso;
+                    var areasPorEncargado = data.areasPorEncargado;
 
-                // Colores para las barras de progreso
-                var colors = ['bg-primary', 'bg-warning', 'bg-danger', 'bg-info'];
-                var colorIndex = 0;
+                    // Colores para las barras de progreso
+                    var colors = ['bg-primary', 'bg-warning', 'bg-danger', 'bg-info'];
+                    var colorIndex = 0;
 
-                Object.keys(areasPorPiso).forEach(piso => {
-                    var areas = areasPorPiso[piso];
-                    var carouselItem = document.createElement('div');
-                    carouselItem.classList.add('carousel-item');
+                    Object.keys(areasPorPiso).forEach(piso => {
+                      var areas = areasPorPiso[piso];
+                      var carouselItem = document.createElement('div');
+                      carouselItem.classList.add('carousel-item');
 
-                    var areasHTML = areas.map(area => {
+                      var areasHTML = areas.map(area => {
                         // Seleccionar color y avanzar el índice
                         var progressBarColor = colors[colorIndex % colors.length];
                         colorIndex++;
@@ -419,9 +422,9 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                                 </td>
                             </tr>
                         `;
-                    }).join('');
+                      }).join('');
 
-                    var innerHTML = `
+                      var innerHTML = `
                         <div class="row">
                             <div class="col-md-12 col-xl-3 d-flex flex-column justify-content-start">
                                 <div class="ml-xl-4 mt-3">
@@ -447,163 +450,166 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                                 </div>
                             </div>
                         </div>`;
-                    carouselItem.innerHTML = innerHTML;
-                    carouselItems.appendChild(carouselItem);
+                      carouselItem.innerHTML = innerHTML;
+                      carouselItems.appendChild(carouselItem);
 
-                    // Inicializar el gráfico si areasPorEncargado[piso] está definido
-                    if (areasPorEncargado[piso]) {
+                      // Inicializar el gráfico si areasPorEncargado[piso] está definido
+                      if (areasPorEncargado[piso]) {
                         var ctx = document.getElementById(`floor-managers-chart-${piso}`).getContext('2d');
                         var floorManagersChart = new Chart(ctx, {
-                            type: 'doughnut',
-                            data: {
-                                labels: areasPorEncargado[piso].map(enc => enc.encargado),
-                                datasets: [{
-                                    data: areasPorEncargado[piso].map(enc => enc.total_areas),
-                                    backgroundColor: ['#4B49AC', '#FFC100', '#248AFD', '#28B463', '#E74C3C'],
-                                    borderColor: 'rgba(0,0,0,0)'
-                                }]
-                            },
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: true,
-                                cutoutPercentage: 78,
-                                elements: {
-                                    arc: {
-                                        borderWidth: 4
-                                    }
-                                },
-                                legend: {
-                                    display: false
-                                },
-                                tooltips: {
-                                    enabled: true
-                                },
-                                legendCallback: function(chart) {
-                                    var text = [];
-                                    chart.data.labels.forEach((label, index) => {
-                                        var value = chart.data.datasets[0].data[index];
-                                        text.push('<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' + chart.data.datasets[0].backgroundColor[index] + '"></div><p class="mb-0">' + label + '</p></div>');
-                                        text.push('<p class="mb-0">' + value + '</p>');
-                                        text.push('</div>');
-                                    });
-                                    return text.join("");
-                                },
-                            },
-                            plugins: [{
-                                beforeDraw: function(chart) {
-                                    var width = chart.chart.width,
-                                        height = chart.chart.height,
-                                        ctx = chart.chart.ctx;
-
-                                    ctx.restore();
-                                    var fontSize = 3.125;
-                                    ctx.font = "500 " + fontSize + "em sans-serif";
-                                    ctx.textBaseline = "middle";
-                                    ctx.fillStyle = "#13381B";
-
-                                    var text = chart.data.datasets[0].data.reduce((a, b) => a + b, 0),
-                                        textX = Math.round((width - ctx.measureText(text).width) / 2),
-                                        textY = height / 2;
-
-                                    ctx.fillText(text, textX, textY);
-                                    ctx.save();
-                                }
+                          type: 'doughnut',
+                          data: {
+                            labels: areasPorEncargado[piso].map(enc => enc.encargado),
+                            datasets: [{
+                              data: areasPorEncargado[piso].map(enc => enc.total_areas),
+                              backgroundColor: ['#4B49AC', '#FFC100', '#248AFD', '#28B463', '#E74C3C'],
+                              borderColor: 'rgba(0,0,0,0)'
                             }]
+                          },
+                          options: {
+                            responsive: true,
+                            maintainAspectRatio: true,
+                            cutoutPercentage: 78,
+                            elements: {
+                              arc: {
+                                borderWidth: 4
+                              }
+                            },
+                            legend: {
+                              display: false
+                            },
+                            tooltips: {
+                              enabled: true
+                            },
+                            legendCallback: function (chart) {
+                              var text = [];
+                              chart.data.labels.forEach((label, index) => {
+                                var value = chart.data.datasets[0].data[index];
+                                text.push('<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' + chart.data.datasets[0].backgroundColor[index] + '"></div><p class="mb-0">' + label + '</p></div>');
+                                text.push('<p class="mb-0">' + value + '</p>');
+                                text.push('</div>');
+                              });
+                              return text.join("");
+                            },
+                          },
+                          plugins: [{
+                            beforeDraw: function (chart) {
+                              var width = chart.chart.width,
+                                height = chart.chart.height,
+                                ctx = chart.chart.ctx;
+
+                              ctx.restore();
+                              var fontSize = 3.125;
+                              ctx.font = "500 " + fontSize + "em sans-serif";
+                              ctx.textBaseline = "middle";
+                              ctx.fillStyle = "#13381B";
+
+                              var text = chart.data.datasets[0].data.reduce((a, b) => a + b, 0),
+                                textX = Math.round((width - ctx.measureText(text).width) / 2),
+                                textY = height / 2;
+
+                              ctx.fillText(text, textX, textY);
+                              ctx.save();
+                            }
+                          }]
                         });
                         document.getElementById(`floor-managers-legend-${piso}`).innerHTML = floorManagersChart.generateLegend();
-                    }
-                });
+                      }
+                    });
 
-                // Marcar el primer elemento como activo
-                carouselItems.querySelector('.carousel-item').classList.add('active');
-            })
-            .catch(error => {
-                console.error('Error al obtener áreas:', error);
-                // Puedes mostrar un mensaje de error en caso de fallo
+                    // Marcar el primer elemento como activo
+                    carouselItems.querySelector('.carousel-item').classList.add('active');
+                  })
+                  .catch(error => {
+                    console.error('Error al obtener áreas:', error);
+                    // Puedes mostrar un mensaje de error en caso de fallo
+                  });
+              } else {
+                // Si no se selecciona ningún bloque, se puede mostrar un mensaje o realizar alguna acción
+              }
             });
-    } else {
-        // Si no se selecciona ningún bloque, se puede mostrar un mensaje o realizar alguna acción
-    }
-});
 
 
           </script>
           <div class="row">
             <div class="col-md-7 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <p class="card-title mb-0">Bienes Agregados Recientemente</p>
-                        <div class="table-responsive">
-                            <table class="table table-striped table-borderless">
-                                <thead>
-                                    <tr>
-                                        <th>Codigo UTA</th>
-                                        <th>Nombre</th>
-                                        <th>Modelo</th>
-                                        <th>Material</th>
-                                        <th>Ubicacion</th>
-                                        <th>Activo</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($bienes as $bien): ?>
-                                        <tr>
-                                            <td><?php echo htmlspecialchars($bien['codigo_uta']); ?></td>
-                                            <td><?php echo htmlspecialchars($bien['nombre']); ?></td>
-                                            <td><?php echo htmlspecialchars($bien['modelo']); ?></td>
-                                            <td><?php echo htmlspecialchars($bien['material']); ?></td>
-                                            <td><?php echo htmlspecialchars($bien['id_ubi_per']); ?></td>
-                                            <td class="font-weight-medium">
-                                                <?php
-                                                    $badge_class = $bien['activo'] === 'si' ? 'badge-success' : 'badge-danger';
-                                                ?>
-                                                <div class="badge <?php echo $badge_class; ?>">
-                                                    <?php echo ucfirst(htmlspecialchars($bien['activo'])); ?>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+              <div class="card">
+                <div class="card-body">
+                  <p class="card-title mb-0">Bienes Agregados Recientemente</p>
+                  <div class="table-responsive">
+                    <table class="table table-striped table-borderless">
+                      <thead>
+                        <tr>
+                          <th>Codigo UTA</th>
+                          <th>Nombre</th>
+                          <th>Modelo</th>
+                          <th>Material</th>
+                          <th>Ubicacion</th>
+                          <th>Activo</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php foreach ($bienes as $bien): ?>
+                          <tr>
+                            <td><?php echo htmlspecialchars($bien['codigo_uta']); ?></td>
+                            <td><?php echo htmlspecialchars($bien['nombre']); ?></td>
+                            <td><?php echo htmlspecialchars($bien['modelo']); ?></td>
+                            <td><?php echo htmlspecialchars($bien['material']); ?></td>
+                            <td><?php echo htmlspecialchars($bien['id_ubi_per']); ?></td>
+                            <td class="font-weight-medium">
+                              <?php
+                              $badge_class = $bien['activo'] === 'si' ? 'badge-success' : 'badge-danger';
+                              ?>
+                              <div class="badge <?php echo $badge_class; ?>">
+                                <?php echo ucfirst(htmlspecialchars($bien['activo'])); ?>
+                              </div>
+                            </td>
+                          </tr>
+                        <?php endforeach; ?>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
+              </div>
             </div>
             <script>
-                var usuarioId = <?php echo $usuario_id; ?>;
+              var usuarioId = <?php echo $usuario_id; ?>;
             </script>
             <div class="col-md-5 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Recordatorio</h4>
-                        <div class="list-wrapper pt-2">
-                            <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
-                                <?php if (is_array($recordatorios) && count($recordatorios) > 0): ?>
-                                    <?php foreach ($recordatorios as $recordatorio): ?>
-                                        <li data-id="<?php echo $recordatorio['id']; ?>">
-                                            <div class="form-check form-check-flat">
-                                                <label class="form-check-label">
-                                                    <input class="checkbox" type="checkbox">
-                                                    <?php echo htmlspecialchars($recordatorio['actividad']); ?>
-                                                </label>
-                                            </div>
-                                            <i class="remove ti-close"></i>
-                                        </li>
-                                    <?php endforeach; ?>
-                                <?php else: ?>
-                                    <li>No se encontraron recordatorios pendientes.</li>
-                                <?php endif; ?>
-                            </ul>
-                        </div>
-                        <div class="add-items d-flex mb-0 mt-2">
-                          <form id="add-todo-form" class="d-flex w-100">
-                            <input type="hidden" class="form-control todo-list-input_id" name="usuario_id" value="<?php echo $usuario_id; ?>">
-                            <input type="text" class="form-control todo-list-input" name="actividad" placeholder="Agregar nueva actividad">
-                            <button type="submit" class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i class="icon-circle-plus"></i></button>
-                          </form>
-                        </div>
-                    </div>
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Recordatorio</h4>
+                  <div class="list-wrapper pt-2">
+                    <ul class="d-flex flex-column-reverse todo-list todo-list-custom">
+                      <?php if (is_array($recordatorios) && count($recordatorios) > 0): ?>
+                        <?php foreach ($recordatorios as $recordatorio): ?>
+                          <li data-id="<?php echo $recordatorio['id']; ?>">
+                            <div class="form-check form-check-flat">
+                              <label class="form-check-label">
+                                <input class="checkbox" type="checkbox">
+                                <?php echo htmlspecialchars($recordatorio['actividad']); ?>
+                              </label>
+                            </div>
+                            <i class="remove ti-close"></i>
+                          </li>
+                        <?php endforeach; ?>
+                      <?php else: ?>
+                        <li>No se encontraron recordatorios pendientes.</li>
+                      <?php endif; ?>
+                    </ul>
+                  </div>
+                  <div class="add-items d-flex mb-0 mt-2">
+                    <form id="add-todo-form" class="d-flex w-100">
+                      <input type="hidden" class="form-control todo-list-input_id" name="usuario_id"
+                        value="<?php echo $usuario_id; ?>">
+                      <input type="text" class="form-control todo-list-input" name="actividad"
+                        placeholder="Agregar nueva actividad">
+                      <button type="submit" class="add btn btn-icon text-primary todo-list-add-btn bg-transparent"><i
+                          class="icon-circle-plus"></i></button>
+                    </form>
+                  </div>
                 </div>
+              </div>
             </div>
 
           </div>

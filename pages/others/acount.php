@@ -2,7 +2,7 @@
 if (session_status() == PHP_SESSION_NONE) {
   session_start();
 }
-if (!isset($_SESSION['email']) || ($_SESSION['rol'] != 'admin' && $_SESSION['rol'] != 'estudiante')) {
+if (!isset($_SESSION['email']) || (($_SESSION['rol'] != 'admin' && $_SESSION['rol'] != 'laboratorista') && $_SESSION['rol'] != 'estudiante')) {
   header('Location: ../login/login.php');
   exit;
 } else {
@@ -141,12 +141,14 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 </a>
             </li>
 
+            <?php if ($_SESSION['rol'] == 'admin' || $_SESSION['rol'] == 'estudiante'): ?>
             <li class="nav-item">
-                <a class="nav-link" href="../management/users.php">
+              <a class="nav-link" href="pages/management/users.php">
                 <i class="icon-head menu-icon"></i>
                 <span class="menu-title">Usuarios</span>
-                </a>
+              </a>
             </li>
+          <?php endif; ?>
 
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
@@ -194,12 +196,12 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 </a>
             </li>
 
-            <li class="nav-item">
+            <?php if($_SESSION['rol'] == 'admin') echo '<li class="nav-item">
                 <a class="nav-link" href="report.php">
                     <i class="icon-paper menu-icon"></i>
                     <span class="menu-title">Reportes</span>
                 </a>
-            </li>
+            </li>'?>
 
             <li class="nav-item">
                 <a class="nav-link" href="acount.php">
