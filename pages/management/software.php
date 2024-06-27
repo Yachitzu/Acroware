@@ -246,7 +246,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
-              <?php if($_SESSION['rol'] == 'admin') echo '<div class="card-header py-3">
+              <?php if($_SESSION['rol'] != 'estudiante') echo '<div class="card-header py-3">
                 <button class="btn-crud btn-secondary btn-icon-split" id="agregar">
                   <span class="icon text-white-50">
                     <i class="fas fa-plus-circle"></i>

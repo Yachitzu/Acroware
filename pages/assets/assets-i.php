@@ -245,7 +245,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
 
           <div class="container-fluid py-4">
             <div class="card shadow mb-4">
-              <?php if($_SESSION['rol'] == 'admin') echo '<div class="card-header py-3">
+              <?php if($_SESSION['rol'] != 'estudiante') echo '<div class="card-header py-3">
                 <button class="btn-crud btn-secondary btn-icon-split" id="AgregarBienes">
                   <span class="icon text-white-50">
                     <i class="fas fa-plus-circle"></i>
