@@ -102,7 +102,7 @@ if ($op == "POST" && $_POST["tipoArchivoI"] == "pdf") {
                                 INNER JOIN 
                                     ubicaciones u ON bi.id_ubi_per = u.id
                                 WHERE 
-                                    (bi.fecha_ingreso >= :fechaIni AND bi.fecha_ingreso <= :fechaFin)";
+                                    (bi.fecha_ingreso >= :fechaIni AND bi.fecha_ingreso <= :fechaFin) and bi.activo='si'";
                     $resultado = $conexion->prepare($consulta);
                     $resultado->bindParam(':fechaIni', $fechaIni);
                     $resultado->bindParam(':fechaFin', $fechaFin);
@@ -119,7 +119,7 @@ if ($op == "POST" && $_POST["tipoArchivoI"] == "pdf") {
                                 INNER JOIN 
                                     ubicaciones u ON bi.id_ubi_per = u.id
                                 WHERE 
-                                    id_marca = :marca AND (bi.fecha_ingreso >= :fechaIni AND bi.fecha_ingreso <= :fechaFin)";
+                                    id_marca = :marca AND (bi.fecha_ingreso >= :fechaIni AND bi.fecha_ingreso <= :fechaFin) and bi.activo='si'";
                     $resultado = $conexion->prepare($consulta);
                     $resultado->bindParam(':marca', $marca);
                     $resultado->bindParam(':fechaIni', $fechaIni);
@@ -137,7 +137,7 @@ if ($op == "POST" && $_POST["tipoArchivoI"] == "pdf") {
                                 INNER JOIN 
                                     ubicaciones u ON bi.id_ubi_per = u.id
                                 WHERE 
-                                    bi.id_area_per = :area AND (bi.fecha_ingreso >= :fechaIni AND bi.fecha_ingreso <= :fechaFin)";
+                                    bi.id_area_per = :area AND (bi.fecha_ingreso >= :fechaIni AND bi.fecha_ingreso <= :fechaFin) and bi.activo='si'";
                     $resultado = $conexion->prepare($consulta);
                     $resultado->bindParam(':area', $area);
                     $resultado->bindParam(':fechaIni', $fechaIni);
@@ -155,7 +155,7 @@ if ($op == "POST" && $_POST["tipoArchivoI"] == "pdf") {
                                 INNER JOIN 
                                     ubicaciones u ON bi.id_ubi_per = u.id
                                 WHERE 
-                                    id_marca = :marca AND bi.id_area_per = :area AND (bi.fecha_ingreso >= :fechaIni AND bi.fecha_ingreso <= :fechaFin)";
+                                    id_marca = :marca AND bi.id_area_per = :area AND (bi.fecha_ingreso >= :fechaIni AND bi.fecha_ingreso <= :fechaFin) and bi.activo='si'";
                     $resultado = $conexion->prepare($consulta);
                     $resultado->bindParam(':marca', $marca);
                     $resultado->bindParam(':area', $area);
@@ -194,7 +194,7 @@ if ($op == "POST" && $_POST["tipoArchivoI"] == "pdf") {
     header('Content-Disposition: attachment; filename="ReporteBI.csv"');
  
     $salida = fopen('php://output', 'w');
-    fputcsv($salida, array('Codigo Uta', 'Nombre', 'Serie', 'Marca', 'Modelo', 'Area', 'Ubicacion', 'IP','Fecha de ingreso', 'Activo'));
+    fputcsv($salida, array('Codigo Uta', 'Nombre', 'Serie', 'Marca', 'Modelo', 'Area', 'Ubicacion', 'IP','Fecha de ingreso', 'Activo', 'Custodio', 'Bloque'));
     include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/patrones/Singleton/Conexion.php');
  
     $conexion = Conexion::getInstance()->getConexion();
@@ -210,7 +210,9 @@ if ($op == "POST" && $_POST["tipoArchivoI"] == "pdf") {
                         bi.*,
                         a.nombre as nombre_area,
                         u.nombre as nombre_ubicacion,
-                        m.nombre as nombre_marca
+                        m.nombre as nombre_marca,
+                        CONCAT(usu.nombre, ' ', usu.apellido) as nombre_completo_custodio,
+                        b.nombre as nombre_bloque
                     FROM 
                         bienes_informaticos bi
                     INNER JOIN 
@@ -219,6 +221,10 @@ if ($op == "POST" && $_POST["tipoArchivoI"] == "pdf") {
                         ubicaciones u ON bi.id_ubi_per = u.id
                     INNER JOIN 
                         marcas m ON bi.id_marca = m.id
+                    INNER JOIN 
+                        usuarios usu ON bi.id_marca = usu.id
+                    INNER JOIN 
+                        bloques b ON bi.id_marca = b.id
                     WHERE 
                         (bi.fecha_ingreso >= :fechaIni AND bi.fecha_ingreso <= :fechaFin)";
         $resultado = $conexion->prepare($consulta);
@@ -230,7 +236,9 @@ if ($op == "POST" && $_POST["tipoArchivoI"] == "pdf") {
                         bi.*,
                         a.nombre as nombre_area,
                         u.nombre as nombre_ubicacion,
-                        m.nombre as nombre_marca
+                        m.nombre as nombre_marca,
+                        CONCAT(usu.nombre, ' ', usu.apellido) as nombre_completo_custodio,
+                        b.nombre as nombre_bloque
                     FROM 
                         bienes_informaticos bi
                     INNER JOIN 
@@ -239,7 +247,11 @@ if ($op == "POST" && $_POST["tipoArchivoI"] == "pdf") {
                         ubicaciones u ON bi.id_ubi_per = u.id
                     INNER JOIN 
                         marcas m ON bi.id_marca = m.id
-                    WHERE 
+                    INNER JOIN 
+                        usuarios usu ON bi.id_marca = usu.id
+                    INNER JOIN 
+                        bloques b ON bi.id_marca = b.id
+                    WHERE  
                         id_marca = :marca AND (bi.fecha_ingreso >= :fechaIni AND bi.fecha_ingreso <= :fechaFin)";
         $resultado = $conexion->prepare($consulta);
         $resultado->bindParam(':marca', $marca);
@@ -251,7 +263,9 @@ if ($op == "POST" && $_POST["tipoArchivoI"] == "pdf") {
                         bi.*,
                         a.nombre as nombre_area,
                         u.nombre as nombre_ubicacion,
-                        m.nombre as nombre_marca
+                        m.nombre as nombre_marca,
+                        CONCAT(usu.nombre, ' ', usu.apellido) as nombre_completo_custodio,
+                        b.nombre as nombre_bloque
                     FROM 
                         bienes_informaticos bi
                     INNER JOIN 
@@ -260,6 +274,10 @@ if ($op == "POST" && $_POST["tipoArchivoI"] == "pdf") {
                         ubicaciones u ON bi.id_ubi_per = u.id
                     INNER JOIN 
                         marcas m ON bi.id_marca = m.id
+                    INNER JOIN 
+                        usuarios usu ON bi.id_marca = usu.id
+                    INNER JOIN 
+                        bloques b ON bi.id_marca = b.id
                     WHERE 
                         bi.id_area_per = :area AND (bi.fecha_ingreso >= :fechaIni AND bi.fecha_ingreso <= :fechaFin)";
         $resultado = $conexion->prepare($consulta);
@@ -272,7 +290,9 @@ if ($op == "POST" && $_POST["tipoArchivoI"] == "pdf") {
                         bi.*,
                         a.nombre as nombre_area,
                         u.nombre as nombre_ubicacion,
-                        m.nombre as nombre_marca
+                        m.nombre as nombre_marca,
+                        CONCAT(usu.nombre, ' ', usu.apellido) as nombre_completo_custodio,
+                        b.nombre as nombre_bloque
                     FROM 
                         bienes_informaticos bi
                     INNER JOIN 
@@ -281,6 +301,10 @@ if ($op == "POST" && $_POST["tipoArchivoI"] == "pdf") {
                         ubicaciones u ON bi.id_ubi_per = u.id
                     INNER JOIN 
                         marcas m ON bi.id_marca = m.id
+                    INNER JOIN 
+                        usuarios usu ON bi.id_marca = usu.id
+                    INNER JOIN 
+                        bloques b ON bi.id_marca = b.id
                     WHERE 
                         id_marca = :marca AND bi.id_area_per = :area AND (bi.fecha_ingreso >= :fechaIni AND bi.fecha_ingreso <= :fechaFin)";
         $resultado = $conexion->prepare($consulta);
@@ -303,7 +327,10 @@ if ($op == "POST" && $_POST["tipoArchivoI"] == "pdf") {
         $respuesta['nombre_ubicacion'],
         $respuesta['ip'],
         $respuesta['fecha_ingreso'],
-        $respuesta['activo']));
+        $respuesta['activo'],
+        $respuesta['nombre_completo_custodio'],
+        $respuesta['nombre_bloque'],
+                              ));
     }
 }else{
    echo "aquí no encuentra nada si no envía info";
