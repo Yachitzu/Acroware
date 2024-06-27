@@ -30,7 +30,7 @@ class AccionesBienes_Informaticos
         }
     }
 
-    public static function obtenerDetalleBienes_Informaticos($id)
+    public static function obtenerDetalleBienes_Informaticos($id,$rol)
     {
         try {
             $conexion = Conexion::getInstance()->getConexion();
@@ -64,9 +64,11 @@ class AccionesBienes_Informaticos
                     <th>Serie</th>
                     <th>Especificaciones</th>
                     <th>Repotenciado</th>
-                    <th>Activo</th>
-                    <th>Acciones</th>
-                </tr>
+                    <th>Activo</th>';
+                    if ($rol !== "estudiante") {
+                        $componentsTable .= '<td>Acciones</td>';
+                    }
+            $componentsTable .='</tr>
             </thead>
             <tbody>';
 
@@ -77,8 +79,9 @@ class AccionesBienes_Informaticos
                 <td>' . htmlspecialchars($componente['serie']) . '</td>
                 <td>' . htmlspecialchars($componente['especificaciones']) . '</td>
                 <td>' . htmlspecialchars($componente['repotenciado']) . '</td>
-                <td>' . htmlspecialchars($componente['activo']) . '</td>
-                <td>
+                <td>' . htmlspecialchars($componente['activo']) . '</td>';
+                if ($rol !== "estudiante") {
+                $componentsTable .='<td>
                     <center>
                         <button class="btn btn-warning btn-circle element-white editarComponente" data-id="' . $componente['id'] . '" data-toggle="modal" onclick="showEditarModalComponente(' . $componente['id'] . ')">
                             <i class="fas fa-edit"></i>
@@ -87,8 +90,8 @@ class AccionesBienes_Informaticos
                             <i class="fas fa-trash"></i>
                         </button>
                     </center>
-                </td>
-            </tr>';
+                </td>';}
+            $componentsTable .='</tr>';
             }
 
             $componentsTable .= '</tbody></table>';
