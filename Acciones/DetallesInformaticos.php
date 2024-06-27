@@ -10,8 +10,9 @@ switch ($op) {
         // Verifica si el parámetro 'id' está presente en la solicitud GET
         if (isset($_GET['id'])) {
             $id = $_GET['id'];
+            $rol = $_GET['rol'];
             // Llama a la función para obtener los detalles del bien informático
-            $resultado = AccionesBienes_Informaticos::obtenerDetalleBienes_Informaticos($id);
+            $resultado = AccionesBienes_Informaticos::obtenerDetalleBienes_Informaticos($id,$rol);
             // Devuelve el resultado en formato JSON
             echo json_encode($resultado);
         } else {

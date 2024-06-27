@@ -1526,7 +1526,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             btn.find('i').removeClass('fa-minus').addClass('fa-plus');
           } else {
             $.ajax({
-              url: '../../Acciones/DetallesInformaticos.php',
+              url: '../../Acciones/DetallesInformaticos.php?rol=estudiante',
               method: 'GET',
               data: {
                 id: id
