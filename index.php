@@ -145,6 +145,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             <div class="collapse" id="auth">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="pages/assets/assets-i.php">Bienes Informáticos</a></li>
+                
                 <li class="nav-item"> <a class="nav-link" href="pages/assets/assets-m.php">Bienes Mobiliarios</a></li>
               </ul>
             </div>
@@ -250,7 +251,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               </div>
             </div>
           </div>
-            <?php
+          <?php
                 // Incluir el archivo de funciones
                 include_once ($_SERVER['DOCUMENT_ROOT'] . '/Acroware/Acciones/recordatorios/procesar_seleccion.php');
 
@@ -377,40 +378,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                       button.disabled = true;
                   }
               });
-
-
-              document.getElementById('facultad').addEventListener('change', function() {
-        var facultadId = this.value;
-        var bloqueSelect = document.getElementById('bloque');
-        var button = document.querySelector('button[type="submit"]');
-        if (facultadId) {
-            bloqueSelect.innerHTML = '<option value="">Cargando...</option>';
-            button.disabled = true;
-            fetch('Acciones/recordatorios/procesar_seleccion.php?accion=obtenerBloques&facultad=' + facultadId)
-                .then(response => response.json())
-                .then(data => {
-                    bloqueSelect.innerHTML = '<option value="">Selecciona un bloque</option>';
-                    data.forEach(bloque => {
-                        var option = document.createElement('option');
-                        option.value = bloque.id;
-                        option.textContent = bloque.nombre;
-                        bloqueSelect.appendChild(option);
-                    });
-                    bloqueSelect.disabled = false;
-                    button.disabled = false;
-                })
-                .catch(error => {
-                    console.error('Error al obtener bloques:', error);
-                    bloqueSelect.innerHTML = '<option value="">Error al cargar los bloques</option>';
-                });
-        } else {
-            bloqueSelect.innerHTML = '<option value="">Selecciona una facultad primero</option>';
-            bloqueSelect.disabled = true;
-            button.disabled = true;
-        }
-    });
-
-    document.getElementById('bloque').addEventListener('change', function() {
+              document.getElementById('bloque').addEventListener('change', function() {
     var bloqueId = this.value;
     if (bloqueId) {
         var facultadId = document.getElementById('facultad').value;
@@ -465,7 +433,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                             </div>
                             <div class="col-md-12 col-xl-9">
                                 <div class="row">
-                                    <div class="col-md-6 border-right">
+                                    <div class="col-md-12 border-right">
                                         <div class="table-responsive mb-3 mb-md-0 mt-3">
                                             <table class="table table-borderless report-table">
                                                 ${areasHTML}
@@ -482,66 +450,68 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                     carouselItem.innerHTML = innerHTML;
                     carouselItems.appendChild(carouselItem);
 
-                    // Inicializar el gráfico
-                    var ctx = document.getElementById(`floor-managers-chart-${piso}`).getContext('2d');
-                    var floorManagersChart = new Chart(ctx, {
-                        type: 'doughnut',
-                        data: {
-                            labels: areasPorEncargado[piso].map(enc => enc.encargado),
-                            datasets: [{
-                                data: areasPorEncargado[piso].map(enc => enc.total_areas),
-                                backgroundColor: ['#4B49AC', '#FFC100', '#248AFD', '#28B463', '#E74C3C'],
-                                borderColor: 'rgba(0,0,0,0)'
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: true,
-                            cutoutPercentage: 78,
-                            elements: {
-                                arc: {
-                                    borderWidth: 4
+                    // Inicializar el gráfico si areasPorEncargado[piso] está definido
+                    if (areasPorEncargado[piso]) {
+                        var ctx = document.getElementById(`floor-managers-chart-${piso}`).getContext('2d');
+                        var floorManagersChart = new Chart(ctx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: areasPorEncargado[piso].map(enc => enc.encargado),
+                                datasets: [{
+                                    data: areasPorEncargado[piso].map(enc => enc.total_areas),
+                                    backgroundColor: ['#4B49AC', '#FFC100', '#248AFD', '#28B463', '#E74C3C'],
+                                    borderColor: 'rgba(0,0,0,0)'
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: true,
+                                cutoutPercentage: 78,
+                                elements: {
+                                    arc: {
+                                        borderWidth: 4
+                                    }
+                                },
+                                legend: {
+                                    display: false
+                                },
+                                tooltips: {
+                                    enabled: true
+                                },
+                                legendCallback: function(chart) {
+                                    var text = [];
+                                    chart.data.labels.forEach((label, index) => {
+                                        var value = chart.data.datasets[0].data[index];
+                                        text.push('<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' + chart.data.datasets[0].backgroundColor[index] + '"></div><p class="mb-0">' + label + '</p></div>');
+                                        text.push('<p class="mb-0">' + value + '</p>');
+                                        text.push('</div>');
+                                    });
+                                    return text.join("");
+                                },
+                            },
+                            plugins: [{
+                                beforeDraw: function(chart) {
+                                    var width = chart.chart.width,
+                                        height = chart.chart.height,
+                                        ctx = chart.chart.ctx;
+
+                                    ctx.restore();
+                                    var fontSize = 3.125;
+                                    ctx.font = "500 " + fontSize + "em sans-serif";
+                                    ctx.textBaseline = "middle";
+                                    ctx.fillStyle = "#13381B";
+
+                                    var text = chart.data.datasets[0].data.reduce((a, b) => a + b, 0),
+                                        textX = Math.round((width - ctx.measureText(text).width) / 2),
+                                        textY = height / 2;
+
+                                    ctx.fillText(text, textX, textY);
+                                    ctx.save();
                                 }
-                            },
-                            legend: {
-                                display: false
-                            },
-                            tooltips: {
-                                enabled: true
-                            },
-                            legendCallback: function(chart) {
-                                var text = [];
-                                chart.data.labels.forEach((label, index) => {
-                                    var value = chart.data.datasets[0].data[index];
-                                    text.push('<div class="d-flex justify-content-between mx-4 mx-xl-5 mt-3"><div class="d-flex align-items-center"><div class="mr-3" style="width:20px; height:20px; border-radius: 50%; background-color: ' + chart.data.datasets[0].backgroundColor[index] + '"></div><p class="mb-0">' + label + '</p></div>');
-                                    text.push('<p class="mb-0">' + value + '</p>');
-                                    text.push('</div>');
-                                });
-                                return text.join("");
-                            },
-                        },
-                        plugins: [{
-                            beforeDraw: function(chart) {
-                                var width = chart.chart.width,
-                                    height = chart.chart.height,
-                                    ctx = chart.chart.ctx;
-
-                                ctx.restore();
-                                var fontSize = 3.125;
-                                ctx.font = "500 " + fontSize + "em sans-serif";
-                                ctx.textBaseline = "middle";
-                                ctx.fillStyle = "#13381B";
-
-                                var text = chart.data.datasets[0].data.reduce((a, b) => a + b, 0),
-                                    textX = Math.round((width - ctx.measureText(text).width) / 2),
-                                    textY = height / 2;
-
-                                ctx.fillText(text, textX, textY);
-                                ctx.save();
-                            }
-                        }]
-                    });
-                    document.getElementById(`floor-managers-legend-${piso}`).innerHTML = floorManagersChart.generateLegend();
+                            }]
+                        });
+                        document.getElementById(`floor-managers-legend-${piso}`).innerHTML = floorManagersChart.generateLegend();
+                    }
                 });
 
                 // Marcar el primer elemento como activo
@@ -556,6 +526,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
     }
 });
 
+
           </script>
           <div class="row">
             <div class="col-md-7 grid-margin stretch-card">
@@ -569,7 +540,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                                         <th>Codigo UTA</th>
                                         <th>Nombre</th>
                                         <th>Modelo</th>
-                                        <th>Marca</th>
+                                        <th>Material</th>
                                         <th>Ubicacion</th>
                                         <th>Activo</th>
                                     </tr>
@@ -580,7 +551,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                                             <td><?php echo htmlspecialchars($bien['codigo_uta']); ?></td>
                                             <td><?php echo htmlspecialchars($bien['nombre']); ?></td>
                                             <td><?php echo htmlspecialchars($bien['modelo']); ?></td>
-                                            <td><?php echo htmlspecialchars($bien['marca']); ?></td>
+                                            <td><?php echo htmlspecialchars($bien['material']); ?></td>
                                             <td><?php echo htmlspecialchars($bien['id_ubi_per']); ?></td>
                                             <td class="font-weight-medium">
                                                 <?php

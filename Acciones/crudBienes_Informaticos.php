@@ -215,33 +215,6 @@ class AccionesBienes_Informaticos
         }
     }
 
-    public static function listarUbicacionesInsertarQR()
-    {
-        try {
-            $conexion = Conexion::getInstance()->getConexion();
-            $consulta = "SELECT * from ubicaciones where activo = 'si'";
-            $resultado = $conexion->prepare($consulta);
-            $resultado->execute();
-            $dato = $resultado->fetchAll(PDO::FETCH_ASSOC);
-            $dato;
-            $tabla = '';
-
-            foreach ($dato as $respuesta) {
-                $tabla .= '
-                <option value="' . htmlspecialchars($respuesta['id']) . '">' . htmlspecialchars($respuesta['nombre']) . '</option>                ';
-            }
-            return [
-                'codigo' => 0,
-                'dato' => $tabla,
-            ];
-        } catch (PDOException $e) {
-            error_log('Error al listar marcas: ' . $e->getMessage());
-            return [
-                'codigo' => 1,
-                'mensaje' => 'Error al listar marcas: ' . $e->getMessage()
-            ];
-        }
-    }
 
     public static function listarUsuariosInsertar()
     {

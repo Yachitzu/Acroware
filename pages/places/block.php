@@ -357,7 +357,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                   <div class="form-group col-md-6">
                     <label for="campus" class="text-bold">Facultad Pertenece</label>
                     <select class="form-control" id="facultadA" required>
-                      <option value="">Seleccione un Campus</option>
+                      <option value="">Seleccione una Facultad</option>
                       <?php
                       include_once ("../../Acciones/crudBloques.php");
                       $facultades = AccionesBloques::listarFacultadesInsertar();

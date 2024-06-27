@@ -252,7 +252,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 </button>
                 <button class="btn-crud btn-secondary btn-icon-split" id="CambiarCustodio">
                   <span class="icon text-white-50">
-                    <i class="fas fa-plus-circle"></i>
+                  <i class="fas fa-exchange-alt"></i>
                   </span>
                   <span class="text text-white">Cambiar custodio</span>
                 </button>
@@ -581,9 +581,9 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-6">
-                    <label for="usuario" class="text-bold">Laboratorista Encargado</label>
+                    <label for="usuario" class="text-bold">Custodio</label>
                     <select class="form-control" id="usuarioA" required>
-                      <option value="">Seleccione un Laboratorista</option>
+                      <option value="">Seleccione un custodio</option>
                       <?php
                       $usuarios = AccionesBienes_Informaticos::listarUsuariosInsertar();
                       echo ($usuarios['dato']);
@@ -747,7 +747,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                     </select>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="usuario" class="text-bold">Laboratorista Encargado</label>
+                    <label for="usuario" class="text-bold">Custodio Encargado</label>
                     <select class="form-control" id="usuarioE" required>
                       <?php
                       $usuarios = AccionesBienes_Informaticos::listarUsuariosInsertar();

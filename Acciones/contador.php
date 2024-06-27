@@ -8,7 +8,7 @@ function contarLaboratoristas() {
         $conexion = Conexion::getInstance()->getConexion();
         
         // Consulta para contar el número de laboratoristas
-        $query = "SELECT COUNT(*) as total FROM usuarios WHERE rol = 'laboratorista'";
+        $query = "SELECT COUNT(*) as total FROM usuarios WHERE rol = 'laboratorista' AND activo = 'si'";
         $stmt = $conexion->prepare($query);
         $stmt->execute();
         
@@ -30,7 +30,7 @@ function contarSoftware() {
         $conexion = Conexion::getInstance()->getConexion();
         
         // Consulta para contar el número de software
-        $query = "SELECT COUNT(*) as total FROM software";
+        $query = "SELECT COUNT(*) as total FROM software WHERE activado = 'si'";
         $stmt = $conexion->prepare($query);
         $stmt->execute();
         
@@ -52,7 +52,7 @@ function contarComponentes() {
         $conexion = Conexion::getInstance()->getConexion();
         
         // Consulta para contar el número de componentes
-        $query = "SELECT COUNT(*) as total FROM componentes";
+        $query = "SELECT COUNT(*) as total FROM componentes WHERE activo = 'si'";
         $stmt = $conexion->prepare($query);
         $stmt->execute();
         
@@ -74,7 +74,7 @@ function contarBienesInformaticos() {
         $conexion = Conexion::getInstance()->getConexion();
         
         // Consulta para contar el número de bienes informáticos
-        $query = "SELECT COUNT(*) as total FROM bienes_informaticos";
+        $query = "SELECT COUNT(*) as total FROM bienes_informaticos WHERE activo = 'si'";
         $stmt = $conexion->prepare($query);
         $stmt->execute();
         
@@ -96,8 +96,8 @@ function obtenerBienesMobiliariosRecientes() {
         $conexion = Conexion::getInstance()->getConexion();
 
         // Consulta para obtener los últimos 7 registros de bienes mobiliarios
-        $query = "SELECT codigo_uta, nombre, modelo, marca, id_ubi_per, activo 
-                  FROM bienes_mobiliarios 
+        $query = "SELECT codigo_uta, nombre, modelo, material, id_ubi_per, activo 
+                  FROM bienes_mobiliarios
                   ORDER BY fecha_ingreso DESC 
                   LIMIT 7";
         $stmt = $conexion->prepare($query);
@@ -160,8 +160,8 @@ function obtenerAreasPorBloque($bloqueId) {
         if ($stmtAreas->rowCount() > 0) {
             // Recorrer los resultados y agregarlos al array $areasPorPiso
             while ($row = $stmtAreas->fetch(PDO::FETCH_ASSOC)) {
-                // Convertir el número del piso en su equivalente textual
-                $nombre_piso = convertirNumeroAPiso($row['piso']);
+                // Usar el valor de piso directamente
+                $nombre_piso = $row['piso'];
                 if (!isset($areasPorPiso[$nombre_piso])) {
                     $areasPorPiso[$nombre_piso] = array();
                 }
@@ -187,7 +187,7 @@ function obtenerAreasPorBloque($bloqueId) {
 
         // Recorrer los resultados y agregarlos al array $areasPorEncargado
         while ($row = $stmtEncargados->fetch(PDO::FETCH_ASSOC)) {
-            $piso = convertirNumeroAPiso($row['piso']);
+            $piso = $row['piso'];
             $encargado = $row['encargado'];
             $total_areas = $row['total_areas'];
 
@@ -211,26 +211,6 @@ function obtenerAreasPorBloque($bloqueId) {
 
         // Retornar un array vacío para evitar errores
         return json_encode([]);
-    }
-}
-
-// Función para convertir el número de piso a nombre de piso
-function convertirNumeroAPiso($numeroPiso) {
-    switch ($numeroPiso) {
-        case 0:
-            return 'Planta Baja';
-        case 1:
-            return 'Primer Piso';
-        case 2:
-            return 'Segundo Piso';
-        case 3:
-            return 'Tercer Piso';
-        case 4:
-            return 'Cuarto Piso';
-        case 5:
-            return 'Quinto Piso';
-        default:
-            return 'Piso Desconocido';
     }
 }
 

@@ -254,7 +254,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 </button>
                 <button class="btn-crud btn-secondary btn-icon-split" id="CambiarCustodio">
                   <span class="icon text-white-50">
-                    <i class="fas fa-plus-circle"></i>
+                  <i class="fas fa-exchange-alt"></i>
                   </span>
                   <span class="text text-white">Cambiar custodio</span>
                 </button>

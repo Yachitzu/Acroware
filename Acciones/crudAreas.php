@@ -120,16 +120,7 @@ class AccionesAreas
                 echo ("El área ya existe.");
                 return 1;
             } else {
-                /* $bloques = $conexion->prepare("SELECT id FROM bloques WHERE nombre= :nombre_bloque");
-                $bloques->bindParam(':nombre_bloque', $id_bloque_per);
-                $bloques->execute();
-                $dato_bloque = $bloques->fetch(PDO::FETCH_ASSOC);
-
-                $usuario = $conexion->prepare("SELECT id FROM usuarios WHERE nombre= :nombre_usuario");
-                $usuario->bindParam(':nombre_usuario', $id_usu_encargado);
-                $usuario->execute();
-                $dato_usuario = $usuario->fetch(PDO::FETCH_ASSOC); */
-
+                
                 $consulta = $conexion->prepare("UPDATE areas SET nombre= :nombre, descripcion= :descripcion, piso= :piso, id_bloque_per= :id_bloque_per WHERE id=:id");
                 $consulta->bindParam(":id", $id);
                 $consulta->bindParam(":nombre", $nombre);
@@ -143,7 +134,6 @@ class AccionesAreas
             error_log('Error en actualizarAreas: ' . $e->getMessage());
             return 2;
         }
-
     }
 
     public static function eliminarArea($id)
