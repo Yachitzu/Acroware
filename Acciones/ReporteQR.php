@@ -63,6 +63,8 @@
                 <tr>
                     <th>ID</th>
                     <th>CÓDIGO UTA</th>
+                    <th>ÁREA</th>
+                    <th>UBICACIÓN</th>
                     <th>QR</th>
                 </tr>
             </thead>
@@ -125,6 +127,8 @@
                     echo "<tr>";
                     echo "<td>" . htmlspecialchars($respuesta['id']) . "</td>";
                     echo "<td>" . htmlspecialchars($respuesta['codigo_uta']) . "</td>";
+                    echo "<td>" . htmlspecialchars($respuesta['nombre_area']) . "</td>";
+                    echo "<td>" . htmlspecialchars($respuesta['nombre_ubicacion']) . "</td>";
                     echo "<td><img src='" . htmlspecialchars($respuesta['qr']) . "' alt='QR Code' style='width: 100px;'></td>";
                     echo "</tr>";
                 }
