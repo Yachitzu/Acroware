@@ -293,41 +293,12 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
               </div>
               <div class="card-header py-3">
               <div class="row">
-                <!-- Card 4: Bienes Pcs
-                <div class="col-md-4 stretch-card transparent">
-                    <div class="card card-dark-blue">
-                        <div class="card-body">
-                            <p class="mb-4 font-berthold-small">Bienes Pcs</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <p class="fs-30 mb-2"><i class="ti-desktop"></i> </p>
-                                <button class="btn btn-primary text-bold generar-reporte-pcs" id="generar-reporte-pcs">
-                                    Generar Reporte  <i class="fas fa-file-alt"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                Card 2: Bienes Totales
-                <div class="col-md-4 stretch-card transparent">
-                    <div class="card card-light-danger">
-                        <div class="card-body">
-                            <p class="mb-4 font-berthold-small">Bienes Totales</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <p class="fs-30 mb-2"><i class="ti-panel"></i> </p>
-                                <button class="btn btn-primary text-bold generar-reporte-lab" id="generar-reporte-lab">
-                                    Generar Reporte  <i class="fas fa-file-alt"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-                <!-- Card 4: QR -->
-                <div class="col-md-4 stretch-card transparent">
+              <div class="col-md-4 stretch-card transparent">
                     <div class="card card-light-blue">
                         <div class="card-body">
                             <p class="mb-4 font-berthold-small">Códigos QR</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <p class="fs-30 mb-2"><i class="ti-layers"></i> </p>
+                                <p class="fs-30 mb-2"><i class="fas fa-qrcode"></i> </p>
                                 <button class="btn btn-primary text-bold generar-reporte-qr" id="generar-reporte-qr">
                                     Generar Reporte  <i class="fas fa-file-alt"></i>
                                 </button>
