@@ -85,6 +85,8 @@
                                  INNER JOIN 
                                      areas a ON bi.id_area_per = a.id
                                  INNER JOIN 
+                                     ubicaciones u ON bi.id_ubi_per = u.id
+                                 WHERE
                                      bi.activo ='si'";
                      $resultado = $conexion->prepare($consulta);
                      $resultado->execute();
