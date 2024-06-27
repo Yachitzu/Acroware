@@ -141,7 +141,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
                 </a>
             </li>
 
-            <?php if ($_SESSION['rol'] == 'admin' || $_SESSION['rol'] == 'estudiante'): ?>
+            <?php if ($_SESSION['rol'] == 'admin'): ?>
             <li class="nav-item">
               <a class="nav-link" href="../management/users.php">
                 <i class="icon-head menu-icon"></i>

@@ -146,7 +146,7 @@ $recordatorios = obtenerRecordatoriosPendientes($usuario_id);
             </a>
           </li>
 
-          <?php if ($_SESSION['rol'] == 'admin' || $_SESSION['rol'] == 'estudiante'): ?>
+          <?php if ($_SESSION['rol'] == 'admin'): ?>
             <li class="nav-item">
               <a class="nav-link" href="../management/users.php">
                 <i class="icon-head menu-icon"></i>
@@ -1565,6 +1565,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     row.child(detalleHtml).show();
                     btn.find('i').removeClass('fa-plus').addClass('fa-minus');
+                    var rolUser = $('#rolUser').val();
+                    var table = $('#componentesTable').DataTable();
+                    if (rolUser === 'estudiante') {
+                      const columnCount = table.columns().nodes().length;
+                      table.column(columnCount - 1).visible(false);
+                    }
                   } else {
                     console.error('Error al obtener detalles del bien informático:', response.mensaje);
                   }

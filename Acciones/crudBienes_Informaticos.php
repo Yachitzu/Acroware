@@ -56,7 +56,7 @@ class AccionesBienes_Informaticos
             $componentes = $consultaComponentes->fetchAll(PDO::FETCH_ASSOC);
 
             // Formatear los componentes en una tabla
-            $componentsTable = '<table class="table">
+            $componentsTable = '<table class="table" id="componentesTable">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -64,11 +64,9 @@ class AccionesBienes_Informaticos
                     <th>Serie</th>
                     <th>Especificaciones</th>
                     <th>Repotenciado</th>
-                    <th>Activo</th>';
-                    if ($rol !== "estudiante") {
-                        $componentsTable .= '<td>Acciones</td>';
-                    }
-            $componentsTable .='</tr>
+                    <th>Activo</th>
+                    <td>Acciones</td>
+                   </tr>
             </thead>
             <tbody>';
 
@@ -79,9 +77,8 @@ class AccionesBienes_Informaticos
                 <td>' . htmlspecialchars($componente['serie']) . '</td>
                 <td>' . htmlspecialchars($componente['especificaciones']) . '</td>
                 <td>' . htmlspecialchars($componente['repotenciado']) . '</td>
-                <td>' . htmlspecialchars($componente['activo']) . '</td>';
-                if ($rol !== "estudiante") {
-                $componentsTable .='<td>
+                <td>' . htmlspecialchars($componente['activo']) . '</td>
+                <td>
                     <center>
                         <button class="btn btn-warning btn-circle element-white editarComponente" data-id="' . $componente['id'] . '" data-toggle="modal" onclick="showEditarModalComponente(' . $componente['id'] . ')">
                             <i class="fas fa-edit"></i>
@@ -90,8 +87,8 @@ class AccionesBienes_Informaticos
                             <i class="fas fa-trash"></i>
                         </button>
                     </center>
-                </td>';}
-            $componentsTable .='</tr>';
+                </td>
+            </tr>';
             }
 
             $componentsTable .= '</tbody></table>';
