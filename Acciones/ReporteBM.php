@@ -288,7 +288,9 @@ foreach ($dato as $respuesta) {
                         bm.*,
                         a.nombre as nombre_area,
                         u.nombre as nombre_ubicacion,
-                        m.nombre as nombre_marca
+                        m.nombre as nombre_marca,
+                        CONCAT(usu.nombre, ' ', usu.apellido) as custodio,
+                        b.nombre as nombre_bloque
                     FROM 
                         bienes_mobiliarios bm
                     INNER JOIN 
@@ -297,6 +299,10 @@ foreach ($dato as $respuesta) {
                         ubicaciones u ON bm.id_ubi_per = u.id
                     INNER JOIN 
                         marcas m ON bm.id_marca = m.id
+                    INNER JOIN 
+                        usuarios usu ON bm.custodio_actual = usu.id
+                    INNER JOIN 
+                        bloques b ON bm.id_blo_per = b.id
                     WHERE 
                         (bm.fecha_ingreso >= :fechaIni AND bm.fecha_ingreso <= :fechaFin)";
         $resultado = $conexion->prepare($consulta);
@@ -308,7 +314,9 @@ foreach ($dato as $respuesta) {
                         bm.*,
                         a.nombre as nombre_area,
                         u.nombre as nombre_ubicacion,
-                        m.nombre as nombre_marca
+                        m.nombre as nombre_marca,
+                        CONCAT(usu.nombre, ' ', usu.apellido) as custodio,
+                        b.nombre as nombre_bloque
                     FROM 
                         bienes_mobiliarios bm
                     INNER JOIN 
@@ -317,6 +325,10 @@ foreach ($dato as $respuesta) {
                         ubicaciones u ON bm.id_ubi_per = u.id
                     INNER JOIN 
                         marcas m ON bm.id_marca = m.id
+                    INNER JOIN 
+                        usuarios usu ON bm.custodio_actual = usu.id
+                    INNER JOIN 
+                        bloques b ON bm.id_blo_per = b.id
                     WHERE 
                         bm.id_area_per = :area AND (bm.fecha_ingreso >= :fechaIni AND bm.fecha_ingreso <= :fechaFin)";
         $resultado = $conexion->prepare($consulta);
@@ -329,7 +341,9 @@ foreach ($dato as $respuesta) {
                         bm.*,
                         a.nombre as nombre_area,
                         u.nombre as nombre_ubicacion,
-                        m.nombre as nombre_marca
+                        m.nombre as nombre_marca,
+                        CONCAT(usu.nombre, ' ', usu.apellido) as custodio,
+                        b.nombre as nombre_bloque
                     FROM 
                         bienes_mobiliarios bm
                     INNER JOIN 
@@ -338,6 +352,10 @@ foreach ($dato as $respuesta) {
                         ubicaciones u ON bm.id_ubi_per = u.id
                     INNER JOIN 
                         marcas m ON bm.id_marca = m.id
+                    INNER JOIN 
+                        usuarios usu ON bm.custodio_actual = usu.id
+                    INNER JOIN 
+                        bloques b ON bm.id_blo_per = b.id
                     WHERE 
                         bm.id_area_per = :area AND id_marca = :marca AND (bm.fecha_ingreso >= :fechaIni AND bm.fecha_ingreso <= :fechaFin)";
         $resultado = $conexion->prepare($consulta);
@@ -501,7 +519,6 @@ foreach ($dato as $respuesta) {
         $respuesta['custodio'],
         $respuesta['fecha_ingreso'],
         $respuesta['valor_contable'],
-        $respuesta['precio'],
         $respuesta['nombre_area'],
         $respuesta['nombre_ubicacion'],
         $respuesta['activo'],
