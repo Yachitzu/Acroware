@@ -33,7 +33,7 @@ if ($consulta->rowCount() === 0) {
     <link rel="stylesheet" href="../../resources/css/vertical-layout-light/style.css">
     <!-- endinject -->
     <link rel="shortcut icon"
-        href="../../resources/images/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" />
+        href="../../resources/images/logos/Australian_STEM_Video_Game_Challenge-removebg-preview5.png" />
 </head>
 
 
@@ -61,8 +61,8 @@ if ($consulta->rowCount() === 0) {
                                         <input type="hidden" name="token"
                                             value="<?php echo htmlspecialchars($_GET['token']); ?>" required>
                                         <div class="form-group wow fadeIn">
-                                            <input type="password" name="InputPassword"
-                                                class="form-control form-control-user" id="InputPassword"
+                                            <input type="password" name="passwordC"
+                                                class="form-control form-control-user" id="passwordC"
                                                 placeholder="Nueva contraseña"
                                                 pattern="^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$"
                                                 title="La contraseña debe tener entre 8 y 20 caracteres, al menos una letra mayúscula y un número. No se permiten caracteres especiales."
@@ -71,7 +71,7 @@ if ($consulta->rowCount() === 0) {
 
                                         <div class="form-group wow fadeIn">
                                             <input type="password" name="ConfirmPassword"
-                                                class="form-control form-control-user" id="ConfirmPassword"
+                                                class="form-control form-control-user" id="conPasswordC"
                                                 placeholder="Repetir contraseña"
                                                 pattern="^(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,20}$"
                                                 title="La contraseña debe tener entre 8 y 20 caracteres, al menos una letra mayúscula y un número. No se permiten caracteres especiales."
